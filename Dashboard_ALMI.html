@@ -1110,9 +1110,9 @@ section h2 em {
     </div>
 
     <div style="margin-top:16px; font-family:'Poppins',sans-serif; font-size:10px; color:var(--ink-faint); letter-spacing:0.1em;">
-      TOTAL INVERSION MENSUAL: <span style="color:var(--accent);">$7,200,000 COP</span> &nbsp;|&nbsp;
-      META: 75% &nbsp;|&nbsp; GOOGLE: 25% &nbsp;|&nbsp;
-      PRESUPUESTO DIARIO EQUIV: <span style="color:var(--ink-dim);">$240,000 COP</span>
+      TOTAL INVERSION MENSUAL: <span id="campTotalInversion" style="color:var(--accent);">$7,200,000 COP</span> &nbsp;|&nbsp;
+      META: <span id="campPctMeta">75%</span> &nbsp;|&nbsp; GOOGLE: <span id="campPctGoogle">25%</span> &nbsp;|&nbsp;
+      PRESUPUESTO DIARIO EQUIV: <span id="campPresupuestoDia" style="color:var(--ink-dim);">$240,000 COP</span>
     </div>
   </section>
 
@@ -1453,10 +1453,34 @@ function initStatusSelects(){
   });
 }
 
+/* ── TOTALES DE LA TABLA DE ESTRATEGIA ── */
+function updateCampaignTotals(){
+  var tbody = document.getElementById('campTbody');
+  if(!tbody) return;
+  var totalGeneral = 0, totalMeta = 0, totalGoogle = 0;
+  Array.from(tbody.querySelectorAll('tr')).forEach(function(r){
+    var plataforma = r.cells[1].textContent.trim();
+    var monto = parseFloat(r.cells[3].textContent.replace(/[^0-9.-]/g,'')) || 0;
+    totalGeneral += monto;
+    if(/meta/i.test(plataforma)) totalMeta += monto;
+    else if(/google/i.test(plataforma)) totalGoogle += monto;
+  });
+  var fmtCOP = function(n){ return '$' + Math.round(n).toLocaleString('en-US') + ' COP'; };
+  var elTotal = document.getElementById('campTotalInversion');
+  var elMeta = document.getElementById('campPctMeta');
+  var elGoogle = document.getElementById('campPctGoogle');
+  var elDia = document.getElementById('campPresupuestoDia');
+  if(elTotal) elTotal.textContent = fmtCOP(totalGeneral);
+  if(elDia) elDia.textContent = fmtCOP(totalGeneral / 30);
+  if(elMeta) elMeta.textContent = (totalGeneral ? Math.round(totalMeta/totalGeneral*100) : 0) + '%';
+  if(elGoogle) elGoogle.textContent = (totalGeneral ? Math.round(totalGoogle/totalGeneral*100) : 0) + '%';
+}
+
 /* ── BOOT ── */
 function boot(){
   try { drawBar(); } catch(e){ console.error('bar',e); }
   try { initStatusSelects(); } catch(e){ console.error('status',e); }
+  try { updateCampaignTotals(); } catch(e){ console.error('totals',e); }
 }
 
 // Bar chart re-draw on resize
