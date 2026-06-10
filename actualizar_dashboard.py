@@ -248,6 +248,9 @@ def main():
     html = re.sub(r'\d+(\.\d+)?% de sesiones', f'{pct_inicio}% de sesiones', html, count=1)
     html = re.sub(r'\d+(\.\d+)?% tasa conversion', f'{pct_conv}% tasa conversion', html, count=1)
 
+    # Frase de cierre: "Teniamos X sesiones..."
+    html = re.sub(r'(Teniamos )\d+( sesiones y no sabiamos)', rf'\g<1>{sessions}\g<2>', html, count=1)
+
     # --- Funnel stages ---
     base = funnel_values[0] if funnel_values[0] else 1
     for i, (label, event) in enumerate(FUNNEL_EVENTS):
