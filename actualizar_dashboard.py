@@ -61,7 +61,7 @@ EXTRA_EVENTS = [
 
 # Eventos para el grafico "Eventos por frecuencia" (nombre GA4, etiqueta amigable)
 CHART_EVENTS = [
-    ("worker_classification_selected", "Seleccion tipo de trabajador"),
+    ("step_two", "Seleccion tipo de trabajador"),
     ("calculate_credit_clicked",       "Calcular credito"),
     ("loan_quote_calculated",          "Cotizacion calculada"),
     ("whatsapp_support_clicked",       "Contacto WhatsApp"),
