@@ -2,11 +2,42 @@
   "_instrucciones": "Actualiza estos numeros manualmente cada semana copiandolos de Meta Ads Manager y Google Ads. Luego ejecuta ejecutar_actualizacion.bat",
   "periodo": "Ultimos 7 dias",
   "meta_ads": {
-    "inversion": 0,
-    "impresiones": 0,
-    "clics": 0,
-    "resultados": 0,
-    "costo_por_resultado": 0
+    "inversion": 1820433,
+    "impresiones": 282101,
+    "clics": 7518,
+    "resultados": 465,
+    "costo_por_resultado": 3915,
+    "inversion_prev": 872202,
+    "impresiones_prev": 141755,
+    "clics_prev": 4378,
+    "resultados_prev": 470,
+    "costo_por_resultado_prev": 1856,
+    "meses": [
+      {
+        "inversion": 2075263,
+        "impresiones": 323235,
+        "clics": 8583,
+        "resultados": 636,
+        "costo_por_resultado": 3263,
+        "label": "Jun 2026"
+      },
+      {
+        "inversion": 3144334,
+        "impresiones": 363975,
+        "clics": 15763,
+        "resultados": 2495,
+        "costo_por_resultado": 1260,
+        "label": "May 2026"
+      },
+      {
+        "inversion": 2480744,
+        "impresiones": 242109,
+        "clics": 12475,
+        "resultados": 2431,
+        "costo_por_resultado": 1020,
+        "label": "Abr 2026"
+      }
+    ]
   },
   "google_ads": {
     "inversion": 161616,

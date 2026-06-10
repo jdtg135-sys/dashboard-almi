@@ -528,6 +528,52 @@ def main():
 
         print("Comparativas mensuales de Google Ads actualizadas")
 
+        # --- Meta Ads: comparativa mensual y acumulado 3 meses ---
+        m_meses = m.get("meses", [])
+        if len(m_meses) >= 2:
+            mcm, mpm = m_meses[0], m_meses[1]
+            m_monthly_rows = [
+                comp_row_simple_global("Inversion", mcm["inversion"], mpm["inversion"], formatter=fmt_money),
+                comp_row_simple_global("Impresiones", mcm["impresiones"], mpm["impresiones"]),
+                comp_row_simple_global("Clics", mcm["clics"], mpm["clics"]),
+                comp_row_simple_global("Resultados", mcm["resultados"], mpm["resultados"]),
+                comp_row_simple_global("Costo x resultado", mcm["costo_por_resultado"], mpm["costo_por_resultado"], invertir=True, formatter=fmt_money),
+            ]
+            new_m_monthly = "\n          ".join(m_monthly_rows)
+        else:
+            new_m_monthly = '<tr><td colspan="4">Sin datos suficientes</td></tr>'
+
+        m_monthly_pattern = re.compile(
+            r'(<!-- META_ADS_MENSUAL_START -->)(?:(?!<!-- META_ADS_MENSUAL_END -->).)*(<!-- META_ADS_MENSUAL_END -->)',
+            re.DOTALL,
+        )
+        html = m_monthly_pattern.sub(lambda mo: mo.group(1) + "\n          " + new_m_monthly + "\n          " + mo.group(2), html, count=1)
+
+        if m_meses:
+            m_3m_rows = []
+            for md in m_meses:
+                m_3m_rows.append(
+                    "<tr>"
+                    f"<td>{md['label']}</td>"
+                    f"<td>{fmt_money(md['inversion'])}</td>"
+                    f"<td>{fmt_num(md['impresiones'])}</td>"
+                    f"<td>{fmt_num(md['clics'])}</td>"
+                    f"<td>{fmt_num(md['resultados'])}</td>"
+                    f"<td>{fmt_money(md['costo_por_resultado'])}</td>"
+                    "</tr>"
+                )
+            new_m_3m = "\n          ".join(m_3m_rows)
+        else:
+            new_m_3m = '<tr><td colspan="6">Sin datos suficientes</td></tr>'
+
+        m_3m_pattern = re.compile(
+            r'(<!-- META_ADS_3M_START -->)(?:(?!<!-- META_ADS_3M_END -->).)*(<!-- META_ADS_3M_END -->)',
+            re.DOTALL,
+        )
+        html = m_3m_pattern.sub(lambda mo: mo.group(1) + "\n          " + new_m_3m + "\n          " + mo.group(2), html, count=1)
+
+        print("Comparativas mensuales de Meta Ads actualizadas")
+
         # --- Comparativa semana actual vs anterior ---
         def comparativa_row(label, curr, prev, invertir=False, formatter=fmt_num):
             if prev is None:

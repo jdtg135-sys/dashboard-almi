@@ -1,5 +1,6 @@
 oauth_credentials.json
 token.json
 token_ads.json
+meta_credentials.json
 __pycache__/
 *.pyc
