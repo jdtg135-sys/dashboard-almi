@@ -19,6 +19,7 @@ import os
 import re
 import json
 import datetime
+import calendar
 
 from google.analytics.data_v1beta import BetaAnalyticsDataClient
 from google.analytics.data_v1beta.types import (
@@ -41,6 +42,8 @@ SCOPES = ["https://www.googleapis.com/auth/analytics.readonly"]
 # Rango de fechas a consultar (ajustar segun necesidad)
 DATE_RANGE = DateRange(start_date="7daysAgo", end_date="today")
 PREV_DATE_RANGE = DateRange(start_date="14daysAgo", end_date="8daysAgo")
+
+MESES_ES = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"]
 
 # Eventos del cotizador que conforman el embudo (en orden)
 FUNNEL_EVENTS = [
@@ -503,8 +506,96 @@ def main():
 
         print("Comparativa semanal actualizada")
 
+    # --- Comparativas mensuales (mes calendario) ---
+    def month_range(months_back):
+        """Devuelve (inicio, fin, etiqueta) del mes calendario `months_back` meses atras (0 = mes actual)."""
+        today = datetime.date.today()
+        y, mo = today.year, today.month
+        for _ in range(months_back):
+            mo -= 1
+            if mo == 0:
+                mo, y = 12, y - 1
+        start = datetime.date(y, mo, 1)
+        if months_back == 0:
+            end = today
+        else:
+            end = datetime.date(y, mo, calendar.monthrange(y, mo)[1])
+        return start, end, f"{MESES_ES[mo - 1]} {y}"
+
+    month_data = []
+    for mb in range(3):
+        m_start, m_end, m_label = month_range(mb)
+        m_dr = DateRange(start_date=m_start.isoformat(), end_date=m_end.isoformat())
+        m_sessions = fetch_sessions(client, m_dr)
+        m_counts = fetch_event_counts(client, all_event_names, m_dr)
+        month_data.append({
+            "label": m_label,
+            "sessions": m_sessions,
+            "starts": m_counts[FUNNEL_EVENTS[0][1]],
+            "solicitudes": m_counts[FUNNEL_EVENTS[-1][1]],
+            "pre_aprob": m_counts["pre_approval_accepted"],
+            "errores": m_counts["form_validation_error"],
+        })
+
+    print("\n=== Comparativa mensual (mes calendario) ===")
+    for md in month_data:
+        print(f"  {md['label']}: sesiones={md['sessions']}, inicios={md['starts']}, "
+              f"solicitudes={md['solicitudes']}, preaprob={md['pre_aprob']}, errores={md['errores']}")
+
+    cm, pm = month_data[0], month_data[1]
+
+    def comp_row_simple(label, curr, prev, invertir=False, formatter=fmt_num):
+        txt, css = fmt_pct_change(curr, prev)
+        if invertir:
+            css = {"delta-up": "delta-down", "delta-down": "delta-up"}.get(css, css)
+        return (
+            "<tr>"
+            f"<td>{label}</td>"
+            f"<td>{formatter(curr)}</td>"
+            f"<td>{formatter(prev)}</td>"
+            f'<td class="{css}">{txt}</td>'
+            "</tr>"
+        )
+
+    monthly_rows = [
+        comp_row_simple("Sesiones", cm["sessions"], pm["sessions"]),
+        comp_row_simple("Iniciaron cotizacion", cm["starts"], pm["starts"]),
+        comp_row_simple("Solicitudes enviadas", cm["solicitudes"], pm["solicitudes"]),
+        comp_row_simple("Pre-aprobaciones", cm["pre_aprob"], pm["pre_aprob"]),
+        comp_row_simple("Errores formulario", cm["errores"], pm["errores"], invertir=True),
+    ]
+    new_monthly_rows = "\n          ".join(monthly_rows)
+
+    monthly_pattern = re.compile(
+        r'(<!-- COMPARATIVA_MENSUAL_START -->)(?:(?!<!-- COMPARATIVA_MENSUAL_END -->).)*(<!-- COMPARATIVA_MENSUAL_END -->)',
+        re.DOTALL,
+    )
+    html = monthly_pattern.sub(lambda mo: mo.group(1) + "\n          " + new_monthly_rows + "\n          " + mo.group(2), html, count=1)
+
+    # --- Tabla acumulada ultimos 3 meses ---
+    acumulado_rows = []
+    for md in month_data:
+        acumulado_rows.append(
+            "<tr>"
+            f"<td>{md['label']}</td>"
+            f"<td>{fmt_num(md['sessions'])}</td>"
+            f"<td>{fmt_num(md['starts'])}</td>"
+            f"<td>{fmt_num(md['solicitudes'])}</td>"
+            f"<td>{fmt_num(md['pre_aprob'])}</td>"
+            f"<td>{fmt_num(md['errores'])}</td>"
+            "</tr>"
+        )
+    new_acumulado_rows = "\n          ".join(acumulado_rows)
+
+    acumulado_pattern = re.compile(
+        r'(<!-- ACUMULADO_3M_START -->)(?:(?!<!-- ACUMULADO_3M_END -->).)*(<!-- ACUMULADO_3M_END -->)',
+        re.DOTALL,
+    )
+    html = acumulado_pattern.sub(lambda mo: mo.group(1) + "\n          " + new_acumulado_rows + "\n          " + mo.group(2), html, count=1)
+
+    print("Comparativas mensuales actualizadas")
+
     # Fecha del periodo medido
-    MESES_ES = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"]
     hoy = datetime.date.today()
     hace_7 = hoy - datetime.timedelta(days=7)
 
