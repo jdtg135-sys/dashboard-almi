@@ -163,6 +163,20 @@ def fmt_pct_change(curr, prev):
     return "0%", "delta-neutral"
 
 
+def comp_row_simple_global(label, curr, prev, invertir=False, formatter=fmt_num):
+    txt, css = fmt_pct_change(curr, prev)
+    if invertir:
+        css = {"delta-up": "delta-down", "delta-down": "delta-up"}.get(css, css)
+    return (
+        "<tr>"
+        f"<td>{label}</td>"
+        f"<td>{formatter(curr)}</td>"
+        f"<td>{formatter(prev)}</td>"
+        f'<td class="{css}">{txt}</td>'
+        "</tr>"
+    )
+
+
 def replace_stat(html, target_value, new_value):
     """Reemplaza data-target="X" -> data-target="new_value" (primera ocurrencia)."""
     pattern = r'data-target="' + re.escape(str(target_value)) + r'"'
@@ -468,6 +482,52 @@ def main():
 
         print("\nInversion en medios pagados actualizada desde ads_data.json")
 
+        # --- Google Ads: comparativa mensual y acumulado 3 meses ---
+        g_meses = g.get("meses", [])
+        if len(g_meses) >= 2:
+            gcm, gpm = g_meses[0], g_meses[1]
+            g_monthly_rows = [
+                comp_row_simple_global("Inversion", gcm["inversion"], gpm["inversion"], formatter=fmt_money),
+                comp_row_simple_global("Impresiones", gcm["impresiones"], gpm["impresiones"]),
+                comp_row_simple_global("Clics", gcm["clics"], gpm["clics"]),
+                comp_row_simple_global("Conversiones", gcm["conversiones"], gpm["conversiones"]),
+                comp_row_simple_global("Costo x conversion", gcm["costo_por_conversion"], gpm["costo_por_conversion"], invertir=True, formatter=fmt_money),
+            ]
+            new_g_monthly = "\n          ".join(g_monthly_rows)
+        else:
+            new_g_monthly = '<tr><td colspan="4">Sin datos suficientes</td></tr>'
+
+        g_monthly_pattern = re.compile(
+            r'(<!-- GOOGLE_ADS_MENSUAL_START -->)(?:(?!<!-- GOOGLE_ADS_MENSUAL_END -->).)*(<!-- GOOGLE_ADS_MENSUAL_END -->)',
+            re.DOTALL,
+        )
+        html = g_monthly_pattern.sub(lambda mo: mo.group(1) + "\n          " + new_g_monthly + "\n          " + mo.group(2), html, count=1)
+
+        if g_meses:
+            g_3m_rows = []
+            for md in g_meses:
+                g_3m_rows.append(
+                    "<tr>"
+                    f"<td>{md['label']}</td>"
+                    f"<td>{fmt_money(md['inversion'])}</td>"
+                    f"<td>{fmt_num(md['impresiones'])}</td>"
+                    f"<td>{fmt_num(md['clics'])}</td>"
+                    f"<td>{fmt_num(md['conversiones'])}</td>"
+                    f"<td>{fmt_money(md['costo_por_conversion'])}</td>"
+                    "</tr>"
+                )
+            new_g_3m = "\n          ".join(g_3m_rows)
+        else:
+            new_g_3m = '<tr><td colspan="6">Sin datos suficientes</td></tr>'
+
+        g_3m_pattern = re.compile(
+            r'(<!-- GOOGLE_ADS_3M_START -->)(?:(?!<!-- GOOGLE_ADS_3M_END -->).)*(<!-- GOOGLE_ADS_3M_END -->)',
+            re.DOTALL,
+        )
+        html = g_3m_pattern.sub(lambda mo: mo.group(1) + "\n          " + new_g_3m + "\n          " + mo.group(2), html, count=1)
+
+        print("Comparativas mensuales de Google Ads actualizadas")
+
         # --- Comparativa semana actual vs anterior ---
         def comparativa_row(label, curr, prev, invertir=False, formatter=fmt_num):
             if prev is None:
@@ -543,19 +603,7 @@ def main():
               f"solicitudes={md['solicitudes']}, preaprob={md['pre_aprob']}, errores={md['errores']}")
 
     cm, pm = month_data[0], month_data[1]
-
-    def comp_row_simple(label, curr, prev, invertir=False, formatter=fmt_num):
-        txt, css = fmt_pct_change(curr, prev)
-        if invertir:
-            css = {"delta-up": "delta-down", "delta-down": "delta-up"}.get(css, css)
-        return (
-            "<tr>"
-            f"<td>{label}</td>"
-            f"<td>{formatter(curr)}</td>"
-            f"<td>{formatter(prev)}</td>"
-            f'<td class="{css}">{txt}</td>'
-            "</tr>"
-        )
+    comp_row_simple = comp_row_simple_global
 
     monthly_rows = [
         comp_row_simple("Sesiones", cm["sessions"], pm["sessions"]),

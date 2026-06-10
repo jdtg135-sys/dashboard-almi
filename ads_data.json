@@ -42,6 +42,32 @@
     "impresiones_prev": 1536,
     "clics_prev": 307,
     "conversiones_prev": 142.0,
-    "costo_por_conversion_prev": 1411.36
+    "costo_por_conversion_prev": 1411.36,
+    "meses": [
+      {
+        "label": "Jun 2026",
+        "inversion": 202522,
+        "impresiones": 1489,
+        "clics": 331,
+        "conversiones": 364.9,
+        "costo_por_conversion": 554.94
+      },
+      {
+        "label": "May 2026",
+        "inversion": 609065,
+        "impresiones": 6132,
+        "clics": 1153,
+        "conversiones": 513.0,
+        "costo_por_conversion": 1187.25
+      },
+      {
+        "label": "Abr 2026",
+        "inversion": 150213,
+        "impresiones": 1042,
+        "clics": 311,
+        "conversiones": 36.0,
+        "costo_por_conversion": 4166.82
+      }
+    ]
   }
 }
