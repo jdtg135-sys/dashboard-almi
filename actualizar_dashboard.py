@@ -247,6 +247,22 @@ def main():
             html,
         )
 
+    # Abandono entre etapas (funnel-connector)
+    for i in range(len(funnel_values) - 1):
+        a, b = funnel_values[i], funnel_values[i + 1]
+        drop_users = a - b
+        drop_pct = round(drop_users / a * 100, 1) if a else 0
+        drop_pct_str = str(int(drop_pct)) if drop_pct == int(drop_pct) else str(drop_pct)
+        connector_pattern = re.compile(
+            r'(<div class="f-label">' + re.escape(FUNNEL_EVENTS[i][0]) + r'</div>.*?</div>\s*'
+            r'<div class="funnel-connector">\s*<div class="drop-label">↓ abandono )[\d.]+%( — )\d+( usuarios</div>)',
+            re.DOTALL,
+        )
+        html = connector_pattern.sub(
+            lambda m, p=drop_pct_str, u=drop_users: f'{m.group(1)}{p}%{m.group(2)}{u}{m.group(3)}',
+            html,
+        )
+
     # Conversion total (paso 1 -> paso 6)
     conv_total = round(funnel_values[-1] / base * 100, 1) if base else 0
     html = re.sub(r'(<div class="fsumm-num">)[\d.]+%(</div>\s*<div class="fsumm-label">Conversion total)', rf'\g<1>{conv_total}%\g<2>', html)
