@@ -1,0 +1,47 @@
+{
+  "_instrucciones": "Actualiza estos numeros manualmente cada semana copiandolos de Meta Ads Manager y Google Ads. Luego ejecuta ejecutar_actualizacion.bat",
+  "periodo": "Ultimos 7 dias",
+  "meta_ads": {
+    "inversion": 0,
+    "impresiones": 0,
+    "clics": 0,
+    "resultados": 0,
+    "costo_por_resultado": 0
+  },
+  "google_ads": {
+    "inversion": 153694,
+    "impresiones": 1124,
+    "clics": 258,
+    "conversiones": 321.4,
+    "costo_por_conversion": 478.14,
+    "campanas": [
+      {
+        "nombre": "Búsqueda - Mayo 2026",
+        "estado": "Enabled",
+        "tipo": "Busqueda",
+        "impresiones": 1124,
+        "clics": 258,
+        "ctr": 22.95,
+        "cpc_promedio": 595.71,
+        "presupuesto_dia": 20000,
+        "gasto": 153694,
+        "conversiones": 321.4,
+        "costo_por_conversion": 478.14,
+        "prev": {
+          "impresiones": 1419,
+          "clics": 273,
+          "ctr": 19.24,
+          "cpc_promedio": 688.05,
+          "gasto": 187838,
+          "conversiones": 89.5,
+          "costo_por_conversion": 2098.82
+        }
+      }
+    ],
+    "inversion_prev": 187838,
+    "impresiones_prev": 1419,
+    "clics_prev": 273,
+    "conversiones_prev": 89.5,
+    "costo_por_conversion_prev": 2098.82
+  }
+}

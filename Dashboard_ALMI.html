@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard ALMI Financiera</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,900&display=swap" rel="stylesheet">
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<style>
+:root {
+  --bg-0: #04111F;
+  --bg-1: #071A2E;
+  --bg-2: #0E2A45;
+  --ink: #f4f8fb;
+  --ink-dim: #9fb3c8;
+  --ink-faint: #56697d;
+  --accent: #29C7F8;
+  --accent-2: #DCF829;
+  --accent-3: #29C7F8;
+  --green: #10b981;
+  --red: #ef4444;
+  --amber: #f59e0b;
+  --grid: rgba(255,255,255,0.04);
+  --border: rgba(255,255,255,0.08);
+  --glass-bg: rgba(14,42,69,0.45);
+  --glass-bg-strong: rgba(14,42,69,0.62);
+  --glass-border: rgba(41,199,248,0.16);
+  --glass-border-hover: rgba(41,199,248,0.30);
+  --glass-blur: blur(28px) saturate(140%);
+  --glass-blur-strong: blur(40px) saturate(160%);
+  --glass-shadow: 0 8px 32px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+html{scroll-behavior:smooth;}
+
+body {
+  background: var(--bg-0);
+  color: var(--ink);
+  font-family: 'Poppins',sans-serif;
+  font-weight: 400;
+  font-size: 17px;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content:''; position:fixed; inset:0;
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 0%, rgba(41,199,248,0.14), transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 100%, rgba(220,248,41,0.08), transparent 60%),
+    radial-gradient(ellipse 40% 30% at 50% 50%, rgba(41,199,248,0.06), transparent 70%);
+  pointer-events:none; z-index:0;
+}
+
+body::after {
+  content:''; position:fixed; inset:0;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:80px 80px;
+  pointer-events:none; z-index:0;
+  mask-image:radial-gradient(ellipse at center, black 30%, transparent 80%);
+}
+
+.scroll-progress {
+  position:fixed; top:0; left:0;
+  height:2px; width:0%;
+  background:linear-gradient(90deg, var(--accent), var(--accent-2));
+  z-index:200;
+  box-shadow:0 0 10px rgba(41,199,248,0.6);
+  transition:width 120ms linear;
+}
+
+.scroll-meter {
+  position:fixed; top:16px; right:20px;
+  z-index:150;
+  font-family:'Poppins',sans-serif;
+  font-size:10px; color:var(--ink-dim);
+  letter-spacing:0.2em;
+  padding:8px 14px;
+  background:var(--glass-bg-strong);
+  border:1px solid var(--glass-border);
+  backdrop-filter:var(--glass-blur);
+  opacity:0; transition:opacity 400ms;
+}
+.scroll-meter.show{opacity:1;}
+
+.container {
+  position:relative; z-index:1;
+  max-width:1400px; margin:0 auto;
+  padding:60px 40px 100px;
+}
+
+/* EYEBROW */
+.eyebrow {
+  font-family:'Poppins',sans-serif;
+  font-size:11px; font-weight:400;
+  letter-spacing:0.24em; text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:24px;
+  display:flex; align-items:center; gap:12px;
+}
+.eyebrow::before{content:''; width:32px; height:1px; background:var(--accent);}
+
+/* HERO */
+.hero { padding:80px 0 60px; }
+.hero h1 {
+  font-family:'Poppins',sans-serif; font-weight:300;
+  font-size:clamp(42px,6vw,80px);
+  line-height:0.95; letter-spacing:-0.03em;
+  margin-bottom:28px;
+}
+.hero h1 em {
+  font-style:italic; font-weight:900;
+  background:linear-gradient(135deg, var(--accent), var(--accent-2));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.hero-sub {
+  font-size:20px; color:#c7d2dd; line-height:1.7;
+  max-width:680px;
+}
+.hero-meta {
+  margin-top:32px;
+  display:flex; gap:24px; flex-wrap:wrap;
+}
+.hero-badge {
+  font-family:'Poppins',sans-serif;
+  font-size:10px; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--ink-faint);
+  padding:8px 16px;
+  border:1px solid var(--glass-border);
+  background:var(--glass-bg);
+  backdrop-filter:var(--glass-blur);
+}
+.hero-badge span{color:var(--accent-3);}
+
+/* SECTION */
+section { margin-bottom:100px; }
+section h2 {
+  font-family:'Poppins',sans-serif; font-weight:300;
+  font-size:clamp(28px,3vw,42px);
+  letter-spacing:-0.02em; margin-bottom:8px;
+}
+section h2 em {
+  font-style:italic; font-weight:900;
+  background:linear-gradient(135deg, var(--accent-3), var(--accent-2));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.section-sub {
+  font-family:'Poppins',sans-serif;
+  font-size:11px; color:var(--ink-faint);
+  text-transform:uppercase; letter-spacing:0.14em;
+  margin-bottom:36px;
+}
+
+/* STATS ROW */
+.stats-row {
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:1px;
+  background:var(--glass-border);
+  border:1px solid var(--glass-border);
+  backdrop-filter:var(--glass-blur);
+  box-shadow:var(--glass-shadow);
+  margin-bottom:60px;
+}
+.stat { background:var(--glass-bg); padding:32px 24px; }
+.stat-number {
+  font-family:'Poppins',sans-serif; font-weight:300;
+  font-size:clamp(36px,3.5vw,52px); line-height:1;
+  letter-spacing:-0.03em;
+  background:linear-gradient(135deg,#fff,var(--accent));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.stat-label {
+  font-family:'Poppins',sans-serif;
+  font-size:10px; color:var(--ink-faint);
+  text-transform:uppercase; letter-spacing:0.18em;
+  margin-top:12px;
+}
+.stat-delta {
+  font-family:'Poppins',sans-serif;
+  font-size:11px; margin-top:6px;
+}
+.delta-up{color:var(--green);}
+.delta-down{color:var(--red);}
+.delta-neutral{color:var(--ink-faint);}
+
+/* FUNNEL */
+.funnel-wrap {
+  background:var(--glass-bg);
+  border:1px solid var(--glass-border);
+  backdrop-filter:var(--glass-blur);
+  box-shadow:var(--glass-shadow);
+  padding:40px 36px;
+}
+.funnel-title {
+  font-family:'Poppins',sans-serif;
+  font-size:10px; color:var(--ink-faint);
+  text-transform:uppercase; letter-spacing:0.18em;
+  margin-bottom:32px;
+}
+.funnel-stage {
+  display:grid;
+  grid-template-columns:200px 1fr 80px 60px;
+  align-items:center; gap:16px;
+  margin-bottom:10px;
+}
+.funnel-stage .f-label {
+  font-family:'Poppins',sans-serif;
+  font-size:10px; color:var(--ink-dim);
+  text-transform:uppercase; letter-spacing:0.1em;
+}
+.f-bar-wrap {
+  background:rgba(255,255,255,0.03);
+  height:22px; position:relative;
+  border:1px solid var(--border);
+}
+.f-bar {
+  height:100%; width:0%;
+  background:linear-gradient(90deg,var(--accent-3),var(--accent-2));
+  transition:width 1200ms cubic-bezier(0.2,0.8,0.2,1);
+  position:relative;
+}
+.f-bar::after {
+  content:''; position:absolute; right:0; top:0; bottom:0;
+  width:2px; background:rgba(255,255,255,0.4);
+}
+.f-value {
+  font-family:'Poppins',sans-serif;
+  font-size:13px; font-weight:600;
+  color:var(--ink); text-align:right;
+}
+.f-rate {
+  font-family:'Poppins',sans-serif;
+  font-size:11px; color:var(--accent);
+  text-align:right;
+}
+.funnel-connector {
+  display:flex; align-items:center; gap:12px;
+  padding:4px 0 4px 200px;
+  margin-bottom:4px;
+}
+.funnel-connector .drop-label {
+  font-family:'Poppins',sans-serif;
+  font-size:9px; color:var(--red);
+  letter-spacing:0.1em; text-transform:uppercase;
+}
+.funnel-summary {
+  margin-top:32px;
+  padding-top:24px;
+  border-top:1px solid var(--border);
+  display:grid; grid-template-columns:repeat(4,1fr); gap:24px;
+}
+.fsumm-item {
+  font-family:'Poppins',sans-serif;
+}
+.fsumm-num {
+  font-family:'Poppins',sans-serif; font-weight:300;
+  font-size:32px; letter-spacing:-0.02em;
+  color:var(--accent-3);
+}
+.fsumm-label {
+  font-size:10px; color:var(--ink-faint);
+  text-transform:uppercase; letter-spacing:0.14em;
+  margin-top:6px;
+}
+
+/* CHART */
+.chart-wrapper {
+  position:relative;
+  background:var(--glass-bg);
+  border:1px solid var(--glass-border);
+  border-radius:2px;
+  padding:36px 28px 24px;
+  backdrop-filter:var(--glass-blur);
+  box-shadow:var(--glass-shadow);
+}
+.chart-title {
+  font-family:'Poppins',sans-serif; font-weight:400;
+  font-size:26px; letter-spacing:-0.02em; margin-bottom:4px;
+}
+.chart-sub {
+  font-family:'Poppins',sans-serif;
+  font-size:11px; color:var(--ink-faint);
+  letter-spacing:0.1em; text-transform:uppercase;
+  margin-bottom:28px;
+}
+
+/* TABLE */
+.comp-table {
+  background:var(--glass-bg);
+  border:1px solid var(--glass-border);
+  backdrop-filter:var(--glass-blur);
+  overflow-x:auto;
+}
+.comp-table table { width:100%; border-collapse:collapse; }
+.comp-table thead th {
+  padding:18px 14px;
+  color:var(--ink-faint);
+  font-family:'Poppins',sans-serif;
+  font-size:10px; font-weight:600;
+  text-transform:uppercase; letter-spacing:0.14em;
+  cursor:pointer; user-select:none;
+  border-bottom:1px solid var(--border);
+  text-align:left;
+}
+.comp-table thead th:hover{color:var(--ink);}
+.comp-table thead th.sort-asc::after{content:' ↑'; color:var(--accent);}
+.comp-table thead th.sort-desc::after{content:' ↓'; color:var(--accent);}
+.comp-table tbody td {
+  padding:16px 14px;
+  font-family:'Poppins',sans-serif;
+  font-size:11px; color:var(--ink-dim);
+  border-bottom:1px solid rgba(255,255,255,0.03);
+}
+.comp-table tbody tr:hover td{background:rgba(255,255,255,0.02);}
+.comp-table tbody td.delta-up{color:var(--green); font-weight:600;}
+.comp-table tbody td.delta-down{color:var(--red); font-weight:600;}
+.comp-table tbody td .status-badge {
+  font-size:9px; padding:3px 8px;
+  text-transform:uppercase; letter-spacing:0.1em;
+}
+.badge-pending{border:1px solid var(--amber); color:var(--amber);}
+.badge-active{border:1px solid var(--green); color:var(--green);}
+.badge-paused{border:1px solid var(--ink-faint); color:var(--ink-faint);}
+
+/* INSIGHTS */
+.insights {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:24px;
+}
+.ads-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:24px;
+  margin-top:32px;
+}
+.ads-card {
+  background:var(--glass-bg);
+  backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-border);
+  border-left:2px solid var(--accent-2);
+  padding:28px;
+}
+.ads-platform {
+  font-family:'Poppins',sans-serif;
+  font-size:13px; letter-spacing:0.15em;
+  text-transform:uppercase; color:var(--accent-2);
+  margin-bottom:20px;
+}
+.ads-row {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:10px 0;
+  border-bottom:1px solid var(--border);
+  font-size:16px; color:#c7d2dd;
+}
+.ads-row:last-child{border-bottom:none;}
+.ads-row strong{color:var(--ink); font-weight:600; font-size:17px;}
+.ads-row-val{display:flex; flex-direction:column; align-items:flex-end; gap:2px;}
+.ads-delta{
+  font-family:'Poppins',sans-serif;
+  font-size:10px; letter-spacing:0.05em;
+}
+.ads-delta:empty{display:none;}
+.ads-table-wrap {
+  margin-top:24px;
+  background:var(--glass-bg);
+  backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-border);
+  border-left:2px solid var(--accent);
+  padding:24px;
+  overflow-x:auto;
+}
+.ads-table {
+  width:100%;
+  border-collapse:collapse;
+  font-family:'Poppins',sans-serif;
+  font-size:13px;
+  white-space:nowrap;
+}
+.ads-table th {
+  text-align:left;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  color:var(--accent-2);
+  font-weight:600;
+  padding:10px 14px;
+  border-bottom:1px solid var(--glass-border);
+}
+.ads-table td {
+  padding:10px 14px;
+  border-bottom:1px solid var(--border);
+  color:#c7d2dd;
+}
+.ads-table tr:last-child td{border-bottom:none;}
+.ads-table td:first-child{color:var(--ink); font-weight:600;}
+.campaign-prev-row td{color:var(--ink-faint); font-style:italic; font-size:11px; font-weight:400 !important;}
+.insight {
+  background:var(--glass-bg);
+  backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-border);
+  border-left:2px solid var(--accent);
+  padding:32px 28px;
+}
+.insight:nth-child(2){border-left-color:var(--accent-3);}
+.insight:nth-child(3){border-left-color:var(--green);}
+.insight-tag {
+  font-family:'Poppins',sans-serif;
+  font-size:9px; letter-spacing:0.2em;
+  text-transform:uppercase; color:var(--accent);
+  margin-bottom:16px;
+}
+.insight:nth-child(2) .insight-tag{color:var(--accent-3);}
+.insight:nth-child(3) .insight-tag{color:var(--green);}
+.insight h3 {
+  font-family:'Poppins',sans-serif; font-weight:500;
+  font-size:20px; letter-spacing:-0.02em;
+  line-height:1.2; margin-bottom:12px;
+}
+.insight h3 em {
+  font-style:italic; font-weight:900;
+}
+.insight p {
+  font-size:16px; color:#c7d2dd; line-height:1.7;
+}
+
+/* ACTION PLAN */
+.actions { display:flex; flex-direction:column; gap:12px; }
+.action {
+  display:grid;
+  grid-template-columns:56px 1fr auto;
+  gap:24px; align-items:start;
+  padding:26px 28px;
+  background:var(--glass-bg);
+  border:1px solid var(--glass-border);
+  border-left:2px solid var(--accent);
+  backdrop-filter:var(--glass-blur);
+  transition:transform 300ms;
+}
+.action:hover{transform:translateX(4px);}
+.action.high{border-left-color:var(--red);}
+.action.mid{border-left-color:var(--amber);}
+.action.low{border-left-color:var(--accent-3);}
+.action-num {
+  font-family:'Poppins',sans-serif;
+  font-size:48px; font-weight:300;
+  letter-spacing:-0.03em; opacity:0.35;
+  line-height:1;
+}
+.action-body h4 {
+  font-family:'Poppins',sans-serif; font-weight:400;
+  font-size:18px; letter-spacing:-0.01em;
+  margin-bottom:8px;
+}
+.action-body h4 em{font-style:italic; font-weight:900;}
+.action-body p {
+  font-size:16px; color:#c7d2dd;
+  line-height:1.7; margin-bottom:10px;
+}
+.action-how {
+  font-family:'Poppins',sans-serif;
+  font-size:10px; color:var(--ink-faint);
+  text-transform:uppercase; letter-spacing:0.12em;
+  padding:8px 12px;
+  background:rgba(255,255,255,0.02);
+  border:1px solid var(--border);
+  line-height:1.7;
+}
+.action-how strong{color:var(--ink-dim);}
+.action-meta {
+  display:flex; flex-direction:column;
+  gap:8px; align-items:flex-end;
+  min-width:100px;
+}
+.action-meta .impact {
+  padding:5px 10px;
+  border:1px solid var(--glass-border);
+  font-family:'Poppins',sans-serif;
+  font-size:10px; text-align:center;
+  color:var(--ink-dim);
+}
+.action-meta .urgency {
+  font-family:'Poppins',sans-serif;
+  font-size:10px; letter-spacing:0.2em;
+  text-transform:uppercase;
+}
+.urgency.hoy{color:var(--red);}
+.urgency.semana{color:var(--amber);}
+.urgency.mes{color:var(--accent-3);}
+
+/* CLOSING */
+.closing {
+  padding:80px 40px;
+  text-align:center;
+  background:radial-gradient(ellipse at center, rgba(255,107,0,0.10), transparent 70%);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  margin-top:60px;
+}
+.closing-quote {
+  font-family:'Poppins',sans-serif;
+  font-style:italic; font-weight:300;
+  font-size:clamp(22px,3vw,38px);
+  line-height:1.35; max-width:900px;
+  margin:0 auto 28px;
+  color:var(--ink-dim);
+}
+.closing-quote em{
+  font-weight:900;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+}
+.closing-attr {
+  font-family:'Poppins',sans-serif;
+  font-size:10px; color:var(--ink-faint);
+  letter-spacing:0.2em; text-transform:uppercase;
+}
+
+/* DIVIDER */
+.divider {
+  height:1px; background:var(--border);
+  margin:80px 0;
+}
+
+/* REVEAL */
+.reveal {
+  opacity:0; transform:translateY(24px);
+  transition:opacity 600ms, transform 600ms;
+}
+.reveal.in { opacity:1; transform:translateY(0); }
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .stats-row{grid-template-columns:repeat(2,1fr);}
+  .funnel-summary{grid-template-columns:repeat(2,1fr);}
+  .funnel-stage{grid-template-columns:140px 1fr 60px 50px;}
+  .action{grid-template-columns:40px 1fr; }
+  .action-meta{display:none;}
+  .container{padding:40px 20px 80px;}
+}
+@media(max-width:768px){
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .funnel-stage{grid-template-columns:120px 1fr 50px;}
+  .funnel-stage .f-rate{display:none;}
+  .hero h1{font-size:36px;}
+  .insights{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProg"></div>
+<div class="scroll-meter" id="scrollMeter">0%</div>
+
+<div class="container">
+
+  <!-- HERO -->
+  <section class="hero reveal" id="s-hero">
+    <div class="eyebrow">ALMI Financiera — Cotizador Web</div>
+    <h1>Los datos<br>no mienten.<br><em>El funnel tampoco.</em></h1>
+    <p class="hero-sub">
+      Medicion en tiempo real del cotizador digital. Desde el primer clic hasta la solicitud enviada — cada paso visible, cada abandono identificado, cada oportunidad cuantificada.
+    </p>
+    <div class="hero-meta">
+      <div class="hero-badge">Periodo: <span>8 — 9 Jun 2026</span></div>
+      <div class="hero-badge">GA4: <span>G-P7VJMS45LD</span></div>
+      <div class="hero-badge">GTM: <span>GTM-MTTNB98P</span></div>
+      <div class="hero-badge">Meta Pixel: <span>1749544856232374</span></div>
+    </div>
+  </section>
+
+  <!-- SCORECARD -->
+  <section id="s-stats">
+    <div class="eyebrow">KPIs Clave</div>
+    <h2>El pulso del<br><em>negocio digital</em></h2>
+    <p class="section-sub">48 horas desde implementacion — primer periodo medido</p>
+
+    <div class="stats-row reveal">
+      <div class="stat">
+        <div class="stat-number" data-target="10663">0</div>
+        <div class="stat-label">Sesiones</div>
+        <div class="stat-delta delta-neutral">— primer periodo</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number" data-target="3002">0</div>
+        <div class="stat-label">Iniciaron cotizacion</div>
+        <div class="stat-delta delta-neutral">28.2% de sesiones</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number" data-target="82">0</div>
+        <div class="stat-label">Solicitudes enviadas</div>
+        <div class="stat-delta delta-up">0.8% tasa conversion</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number" data-target="115">0</div>
+        <div class="stat-label">Pre-aprobaciones</div>
+        <div class="stat-delta delta-up">↑ 140% vs solicitudes</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number" data-target="105">0</div>
+        <div class="stat-label">Errores formulario</div>
+        <div class="stat-delta delta-down">Friccion detectada</div>
+      </div>
+    </div>
+
+    <div class="ads-table-wrap reveal" style="margin-top:32px;">
+      <div class="ads-platform">Comparativa — semana actual vs semana anterior</div>
+      <table class="ads-table">
+        <thead>
+          <tr>
+            <th>Metrica</th>
+            <th>Semana actual</th>
+            <th>Semana anterior</th>
+            <th>Variacion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- COMPARATIVA_SEMANAL_START -->
+          <tr><td>Sesiones</td><td>10.663</td><td>3.541</td><td class="delta-up">+201.1%</td></tr>
+          <tr><td>Iniciaron cotizacion</td><td>3.002</td><td>338</td><td class="delta-up">+788.2%</td></tr>
+          <tr><td>Solicitudes enviadas</td><td>82</td><td>0</td><td class="delta-up">+100%</td></tr>
+          <tr><td>Pre-aprobaciones</td><td>115</td><td>0</td><td class="delta-up">+100%</td></tr>
+          <tr><td>Errores formulario</td><td>105</td><td>0</td><td class="delta-down">+100%</td></tr>
+          <tr><td>Inversion Google Ads</td><td>$153.694 COP</td><td>$187.838 COP</td><td class="delta-down">-18.2%</td></tr>
+          <tr><td>Conversiones Google Ads</td><td>321</td><td>90</td><td class="delta-up">+259.1%</td></tr>
+          <tr><td>Inversion Meta Ads</td><td>$0 COP</td><td>—</td><td class="delta-neutral">—</td></tr>
+          <!-- COMPARATIVA_SEMANAL_END -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- FUNNEL -->
+  <section id="s-funnel">
+    <div class="eyebrow">Embudo de Conversion</div>
+    <h2>Donde se gana<br><em>y donde se pierde</em></h2>
+    <p class="section-sub">6 pasos medidos — datos reales GA4 — ultimo periodo disponible</p>
+
+    <div class="funnel-wrap reveal" id="funnelWrap">
+      <div class="funnel-title">COTIZADOR ALMI FINANCIERA — FLUJO COMPLETO</div>
+
+      <div class="funnel-stage">
+        <div class="f-label">1. Tipo de trabajador</div>
+        <div class="f-bar-wrap"><div class="f-bar" data-pct="100.0" style="background:linear-gradient(90deg,#29C7F8,#DCF829)"></div></div>
+        <div class="f-value">3002</div>
+        <div class="f-rate">100.0%</div>
+      </div>
+      <div class="funnel-connector">
+        <div class="drop-label">↓ abandono 66.5% — 113 usuarios</div>
+      </div>
+      <div class="funnel-stage">
+        <div class="f-label">2. Datos de empresa</div>
+        <div class="f-bar-wrap"><div class="f-bar" data-pct="27.9" style="background:linear-gradient(90deg,#29C7F8,#DCF829)"></div></div>
+        <div class="f-value">837</div>
+        <div class="f-rate">27.9%</div>
+      </div>
+      <div class="funnel-connector">
+        <div class="drop-label">↓ abandono 47.4% — 27 usuarios</div>
+      </div>
+      <div class="funnel-stage">
+        <div class="f-label">3. Cotizacion calculada</div>
+        <div class="f-bar-wrap"><div class="f-bar" data-pct="9.9" style="background:linear-gradient(90deg,#29C7F8,#DCF829)"></div></div>
+        <div class="f-value">297</div>
+        <div class="f-rate">9.9%</div>
+      </div>
+      <div class="funnel-connector">
+        <div class="drop-label">↓ abandono 43.3% — 13 usuarios</div>
+      </div>
+      <div class="funnel-stage">
+        <div class="f-label">4. Pre aprobacion</div>
+        <div class="f-bar-wrap"><div class="f-bar" data-pct="3.8" style="background:linear-gradient(90deg,#29C7F8,#DCF829)"></div></div>
+        <div class="f-value">115</div>
+        <div class="f-rate">3.8%</div>
+      </div>
+      <div class="funnel-connector">
+        <div class="drop-label">↓ abandono 41.2% — 7 usuarios</div>
+      </div>
+      <div class="funnel-stage">
+        <div class="f-label">5. Solicitud iniciada</div>
+        <div class="f-bar-wrap"><div class="f-bar" data-pct="3.0" style="background:linear-gradient(90deg,#f59e0b,#29C7F8)"></div></div>
+        <div class="f-value">89</div>
+        <div class="f-rate">3.0%</div>
+      </div>
+      <div class="funnel-connector">
+        <div class="drop-label">↓ abandono 40% — 4 usuarios</div>
+      </div>
+      <div class="funnel-stage">
+        <div class="f-label">6. Solicitud enviada</div>
+        <div class="f-bar-wrap"><div class="f-bar" data-pct="2.7" style="background:linear-gradient(90deg,#10b981,#29C7F8)"></div></div>
+        <div class="f-value">82</div>
+        <div class="f-rate">2.7%</div>
+      </div>
+
+      <div class="funnel-summary">
+        <div class="fsumm-item">
+          <div class="fsumm-num">2.7%</div>
+          <div class="fsumm-label">Conversion total inicio → solicitud</div>
+        </div>
+        <div class="fsumm-item">
+          <div class="fsumm-num" style="color:var(--red)">66.5%</div>
+          <div class="fsumm-label">Mayor abandono: paso 1→2 (datos empresa)</div>
+        </div>
+        <div class="fsumm-item">
+          <div class="fsumm-num" style="color:var(--amber)">105</div>
+          <div class="fsumm-label">Errores de formulario detectados</div>
+        </div>
+        <div class="fsumm-item">
+          <div class="fsumm-num" style="color:var(--red)">11</div>
+          <div class="fsumm-label">Fallos al enviar solicitud (loan_request_failure)</div>
+        </div>
+      </div>
+
+      <div class="ads-table-wrap reveal" style="margin-top:32px;">
+        <div class="funnel-title">Desglose de errores de formulario y solicitud — ultimos 7 dias</div>
+        <table class="ads-table">
+          <thead>
+            <tr>
+              <th>Tipo de error</th>
+              <th>Ocurrencias</th>
+              <th>% del total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- ERROR_BREAKDOWN_START -->
+          <tr><td>Company not selected</td><td>55</td><td>47.4%</td></tr>
+          <tr><td>Invalid date</td><td>15</td><td>12.9%</td></tr>
+          <tr><td>Customer info incomplete or invalid</td><td>12</td><td>10.3%</td></tr>
+          <tr><td>No fue posible conectar con el servicio en este momento. Verifica tu conexión o inténtalo más tarde.</td><td>11</td><td>9.5%</td></tr>
+          <tr><td>Salary below minimum</td><td>9</td><td>7.8%</td></tr>
+          <tr><td>Account number invalid or mismatch</td><td>8</td><td>6.9%</td></tr>
+          <tr><td>Bank not selected</td><td>3</td><td>2.6%</td></tr>
+          <tr><td>Terms not accepted</td><td>3</td><td>2.6%</td></tr>
+          <!-- ERROR_BREAKDOWN_END -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADS INVESTMENT -->
+  <section id="s-ads">
+    <div class="eyebrow">Inversion en Medios Pagados</div>
+    <h2>Lo que <em>invertimos</em><br>vs lo que generamos</h2>
+    <p class="section-sub">Meta Ads y Google Ads — ultimos 7 dias (actualizacion manual)</p>
+
+    <div class="ads-grid reveal">
+      <div class="ads-card">
+        <div class="ads-platform">Meta Ads</div>
+        <div class="ads-row" data-id="meta-inversion"><span>Inversion</span><div class="ads-row-val"><strong>$0 COP</strong><small class="ads-delta delta-neutral" data-delta="meta-inversion-delta"></small></div></div>
+        <div class="ads-row" data-id="meta-impresiones"><span>Impresiones</span><div class="ads-row-val"><strong>0</strong><small class="ads-delta delta-neutral" data-delta="meta-impresiones-delta"></small></div></div>
+        <div class="ads-row" data-id="meta-clics"><span>Clics</span><div class="ads-row-val"><strong>0</strong><small class="ads-delta delta-neutral" data-delta="meta-clics-delta"></small></div></div>
+        <div class="ads-row" data-id="meta-resultados"><span>Resultados</span><div class="ads-row-val"><strong>0</strong><small class="ads-delta delta-neutral" data-delta="meta-resultados-delta"></small></div></div>
+        <div class="ads-row" data-id="meta-costo"><span>Costo por resultado</span><div class="ads-row-val"><strong>$0 COP</strong><small class="ads-delta delta-neutral" data-delta="meta-costo-delta"></small></div></div>
+      </div>
+      <div class="ads-card">
+        <div class="ads-platform">Google Ads</div>
+        <div class="ads-row" data-id="google-inversion"><span>Inversion</span><div class="ads-row-val"><strong>$153.694 COP</strong><small class="ads-delta delta-up" data-delta="google-inversion-delta">-18.2% vs sem. anterior</small></div></div>
+        <div class="ads-row" data-id="google-impresiones"><span>Impresiones</span><div class="ads-row-val"><strong>1.124</strong><small class="ads-delta delta-down" data-delta="google-impresiones-delta">-20.8% vs sem. anterior</small></div></div>
+        <div class="ads-row" data-id="google-clics"><span>Clics</span><div class="ads-row-val"><strong>258</strong><small class="ads-delta delta-down" data-delta="google-clics-delta">-5.5% vs sem. anterior</small></div></div>
+        <div class="ads-row" data-id="google-conversiones"><span>Conversiones</span><div class="ads-row-val"><strong>321</strong><small class="ads-delta delta-up" data-delta="google-conversiones-delta">+259.1% vs sem. anterior</small></div></div>
+        <div class="ads-row" data-id="google-costo"><span>Costo por conversion</span><div class="ads-row-val"><strong>$478 COP</strong><small class="ads-delta delta-up" data-delta="google-costo-delta">-77.2% vs sem. anterior</small></div></div>
+      </div>
+    </div>
+    <div class="ads-table-wrap reveal">
+      <div class="ads-platform">Google Ads — Campañas activas</div>
+      <table class="ads-table">
+        <thead>
+          <tr>
+            <th>Campaña</th>
+            <th>Estado</th>
+            <th>Tipo</th>
+            <th>Impresiones</th>
+            <th>Clics</th>
+            <th>CTR</th>
+            <th>CPC prom.</th>
+            <th>Presupuesto/dia</th>
+            <th>Gasto</th>
+            <th>Conversiones</th>
+            <th>Costo x conversion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- GOOGLE_ADS_CAMPAIGNS_START -->
+          <tr><td>Búsqueda - Mayo 2026</td><td>Enabled</td><td>Busqueda</td><td>1.124</td><td>258</td><td>22.95%</td><td>$596 COP</td><td>$20.000 COP</td><td>$153.694 COP</td><td>321</td><td>$478 COP</td></tr>
+          <tr class="campaign-prev-row"><td>↳ Sem. anterior</td><td></td><td></td><td>1.419</td><td>273</td><td>19.24%</td><td>$688 COP</td><td></td><td>$187.838 COP</td><td>90</td><td>$2.099 COP</td></tr>
+          <!-- GOOGLE_ADS_CAMPAIGNS_END -->
+        </tbody>
+      </table>
+    </div>
+
+    <p class="section-sub" style="margin-top:16px;">
+      Para actualizar estos datos: edita <code>ads_data.json</code> con los valores de Meta Ads Manager
+      y Google Ads, y ejecuta <code>ejecutar_actualizacion.bat</code>.
+    </p>
+  </section>
+
+  <!-- EVENTS CHART -->
+  <section id="s-events">
+    <div class="eyebrow">Actividad del Cotizador</div>
+    <h2>Eventos por<br><em>frecuencia</em></h2>
+    <p class="section-sub">Top eventos del cotizador — GA4 — periodo 02 Jun - 09 Jun</p>
+
+    <div class="chart-wrapper reveal">
+      <div class="chart-title">Distribucion de eventos clave</div>
+      <div class="chart-sub">Conteo acumulado — 48 horas de medicion</div>
+      <div id="barChart" style="width:100%;"></div>
+    </div>
+  </section>
+
+  <!-- CAMPAIGNS TABLE -->
+  <section id="s-campaigns">
+    <div class="eyebrow">Estado de Campanas</div>
+    <h2>La estrategia<br><em>en marcha</em></h2>
+    <p class="section-sub">Estructura aprobada — pendiente de lanzamiento</p>
+
+    <div class="comp-table reveal" id="campaignTable">
+      <table>
+        <thead>
+          <tr>
+            <th onclick="sortTable(0)">Campana</th>
+            <th onclick="sortTable(1)">Plataforma</th>
+            <th onclick="sortTable(2)">Audiencia</th>
+            <th onclick="sortTable(3)">Presupuesto / mes</th>
+            <th onclick="sortTable(4)">Objetivo</th>
+            <th onclick="sortTable(5)">Estado</th>
+          </tr>
+        </thead>
+        <tbody id="campTbody">
+          <tr>
+            <td>C1 — Convenios por sectores</td>
+            <td>Meta Ads</td>
+            <td>Empleados sector privado (convenios)</td>
+            <td>$1,800,000 COP</td>
+            <td>Leads</td>
+            <td><span class="status-badge badge-pending">Pendiente</span></td>
+          </tr>
+          <tr>
+            <td>C2 — Privado general</td>
+            <td>Meta Ads</td>
+            <td>Empleados sin convenio especifico</td>
+            <td>$1,200,000 COP</td>
+            <td>Leads</td>
+            <td><span class="status-badge badge-pending">Pendiente</span></td>
+          </tr>
+          <tr>
+            <td>C3 — Reportados / Aprobacion rapida</td>
+            <td>Meta Ads</td>
+            <td>Personas con historial crediticio</td>
+            <td>$1,600,000 COP</td>
+            <td>Leads</td>
+            <td><span class="status-badge badge-pending">Pendiente</span></td>
+          </tr>
+          <tr>
+            <td>C4 — Retargeting</td>
+            <td>Meta Ads</td>
+            <td>Visitantes cotizador sin conversion</td>
+            <td>$800,000 COP</td>
+            <td>Conversion</td>
+            <td><span class="status-badge badge-pending">Pendiente</span></td>
+          </tr>
+          <tr>
+            <td>C5 — Google Libranza</td>
+            <td>Google Ads</td>
+            <td>Intencion: credito libranza</td>
+            <td>$1,200,000 COP</td>
+            <td>Leads</td>
+            <td><span class="status-badge badge-pending">Pendiente</span></td>
+          </tr>
+          <tr>
+            <td>C6 — Google Reportados</td>
+            <td>Google Ads</td>
+            <td>Intencion: credito con deudas</td>
+            <td>$600,000 COP</td>
+            <td>Leads</td>
+            <td><span class="status-badge badge-pending">Pendiente</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top:16px; font-family:'Poppins',sans-serif; font-size:10px; color:var(--ink-faint); letter-spacing:0.1em;">
+      TOTAL INVERSION MENSUAL: <span style="color:var(--accent);">$7,200,000 COP</span> &nbsp;|&nbsp;
+      META: 75% &nbsp;|&nbsp; GOOGLE: 25% &nbsp;|&nbsp;
+      PRESUPUESTO DIARIO EQUIV: <span style="color:var(--ink-dim);">$240,000 COP</span>
+    </div>
+  </section>
+
+  <!-- INSIGHTS -->
+  <section id="s-insights">
+    <div class="eyebrow">Lecciones del dato</div>
+    <h2>Lo que los<br><em>numeros dicen</em></h2>
+    <p class="section-sub">3 insights calculados — no genericos</p>
+
+    <div class="insights">
+      <!-- INSIGHT_1_START -->
+      <div class="insight reveal">
+        <div class="insight-tag">Friccion critica</div>
+        <h3>El <em>72.1%</em> abandona entre &quot;Tipo de trabajador&quot; y &quot;Datos de empresa&quot;</h3>
+        <p>De 3002 usuarios en el paso &quot;Tipo de trabajador&quot;, solo 837 llegan a &quot;Datos de empresa&quot; (27.9% de continuidad). Este es el mayor punto de fuga del funnel en el periodo medido — superar este paso deberia ser la prioridad de optimizacion numero 1.</p>
+      </div>
+      <!-- INSIGHT_1_END -->
+      <!-- INSIGHT_2_START -->
+      <div class="insight reveal">
+        <div class="insight-tag">Oportunidad de recuperacion</div>
+        <h3><em>33 usuarios</em> llegaron a pre-aprobacion pero no enviaron</h3>
+        <p>115 pre-aprobaciones vs 82 solicitudes enviadas = 33 usuarios que recibieron luz verde pero no completaron. Son el segmento de mayor intencion de compra disponible. Una campana de retargeting especifica para este segmento puede recuperar parte de estas solicitudes en las proximas semanas.</p>
+      </div>
+      <!-- INSIGHT_2_END -->
+      <!-- INSIGHT_3_START -->
+      <div class="insight reveal">
+        <div class="insight-tag">Senal de calidad</div>
+        <h3>El <em>38.7%</em> de quienes calculan llegan a pre-aprobacion</h3>
+        <p>Paso 3 -> Paso 4: 297 cotizaciones calculadas, 115 pre-aprobadas = 38.7% de conversion. Esta tasa es baja y sugiere revisar los criterios de pre-aprobacion o la calidad del trafico que llega a este paso.</p>
+      </div>
+      <!-- INSIGHT_3_END -->
+    </div>
+  </section>
+
+  <!-- ACTION PLAN -->
+  <section id="s-actions">
+    <div class="eyebrow">Plan de accion</div>
+    <h2>Lo que se hace<br><em>manana</em></h2>
+    <p class="section-sub">5 movimientos ordenados por urgencia</p>
+
+    <div class="actions">
+      <div class="action high reveal">
+        <div class="action-num">1</div>
+        <div class="action-body">
+          <h4>Implementar <em>dataLayer</em> faltante en el cotizador</h4>
+          <p>El cotizador no envia 3 eventos criticos al dataLayer: company_selected, terms_accepted, y los parametros de valor del evento loan_request_success. Esto impide medir con precision el paso 2, el paso de terminos y el valor real de cada conversion.</p>
+          <div class="action-how">
+            <strong>COMO:</strong> Enviar documento tecnico "Ajustes_Desarrollador_Cotizador.pdf" al equipo de desarrollo. Tres implementaciones de dataLayer.push() con parametros exactos documentados. Estimado: 2 horas de desarrollo.
+          </div>
+        </div>
+        <div class="action-meta">
+          <div class="impact">Precision medicion +90%</div>
+          <div class="urgency hoy">HOY</div>
+        </div>
+      </div>
+
+      <div class="action high reveal">
+        <div class="action-num">2</div>
+        <div class="action-body">
+          <h4>Lanzar <em>C4 — Retargeting</em> inmediatamente</h4>
+          <p>Ya hay audiencia calificada: visitantes del cotizador que no convirtieron, y pre-aprobados que no enviaron solicitud. No requiere esperar aprobacion de las otras 5 campanas — puede activarse hoy con el pixel ya instalado y funcionando.</p>
+          <div class="action-how">
+            <strong>COMO:</strong> Crear audiencia personalizada en Meta Ads con visitantes de cotizador.almifinanciera.com ultimos 30 dias. Excluir evento purchase. Presupuesto $800,000 COP/mes. Creativo: testimonio + urgencia de aprobacion rapida.
+          </div>
+        </div>
+        <div class="action-meta">
+          <div class="impact">+5-8 leads/semana</div>
+          <div class="urgency hoy">HOY</div>
+        </div>
+      </div>
+
+      <div class="action mid reveal">
+        <div class="action-num">3</div>
+        <div class="action-body">
+          <h4>Investigar abandono en <em>paso 1→2</em> del cotizador</h4>
+          <p>El 66.5% de abandono en el paso de datos de empresa es anomalo. Antes de lanzar trafico masivo hay que entender si el problema es la UX del formulario, la lista de empresas disponibles, o la solicitud de datos sensibles como salario. Una decision de inversion sin esto es dinero desperdiciado.</p>
+          <div class="action-how">
+            <strong>COMO:</strong> Instalar Hotjar o Microsoft Clarity en cotizador.almifinanciera.com. Revisar grabaciones de sesion en el paso 2. Identificar si hay errores de UI o campos que generan abandono. Tiempo: 1 dia de observacion.
+          </div>
+        </div>
+        <div class="action-meta">
+          <div class="impact">-66% abandono potencial</div>
+          <div class="urgency semana">ESTA SEMANA</div>
+        </div>
+      </div>
+
+      <div class="action mid reveal">
+        <div class="action-num">4</div>
+        <div class="action-body">
+          <h4>Lanzar campanas <em>C1, C2, C3</em> — Meta Ads</h4>
+          <p>Las 3 campanas de Meta estan disenadas, con creativos definidos y estructura CBO lista. Solo requieren aprobacion final. El periodo de aprendizaje de Meta necesita minimo 50 eventos de conversion por campana — cuanto antes empiecen a correr, antes sale del aprendizaje.</p>
+          <div class="action-how">
+            <strong>COMO:</strong> Crear campanas en Meta Ads Business Manager segun propuesta Junio 2026. Configurar CBO con los 3 ad sets por sectores para C1. Presupuesto inicial: $4,600,000 COP entre las 3 campanas. Activar conversion event: purchase.
+          </div>
+        </div>
+        <div class="action-meta">
+          <div class="impact">$4.6M COP activo</div>
+          <div class="urgency semana">ESTA SEMANA</div>
+        </div>
+      </div>
+
+      <div class="action low reveal">
+        <div class="action-num">5</div>
+        <div class="action-body">
+          <h4>Activar <em>Google Ads</em> C5 y C6 — Libranza y Reportados</h4>
+          <p>Las campanas de Google Search capturan intencion activa de busqueda — son el complemento ideal de Meta (que opera en intencion pasiva). Con el cross-domain tracking configurado, las conversiones se atribuyen correctamente a Google Ads via el Conversion Linker ya instalado.</p>
+          <div class="action-how">
+            <strong>COMO:</strong> Crear campanas en Google Ads (ID: 414-381-9923). C5 keywords: "credito libranza", "prestamo nomina". C6 keywords: "credito con deudas", "prestamo reportado". Conversion action: AW-18096678342/KUU6CN-77qscEMbLlbVD. Presupuesto: $1,800,000 COP entre ambas.
+          </div>
+        </div>
+        <div class="action-meta">
+          <div class="impact">Intencion activa capturada</div>
+          <div class="urgency mes">ESTE MES</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <div class="closing reveal">
+    <p class="closing-quote">
+      "Teniamos 864 sesiones y no sabiamos cuantas llegaban al final.<br>
+      Ahora sabemos que son <em>6.</em> Ahi empieza el trabajo real."
+    </p>
+    <div class="closing-attr">Dashboard ALMI Financiera &nbsp;·&nbsp; Jun 2026 &nbsp;·&nbsp; Datos: GA4 + Meta Pixel + Google Ads</div>
+  </div>
+
+</div><!-- /container -->
+
+<script>
+(function(){
+'use strict';
+
+var DATA_EVENTS = [
+  {name:'worker_classification_selected', label:'Seleccion tipo de trabajador', val:484},
+  {name:'calculate_credit_clicked', label:'Calcular credito', val:297},
+  {name:'loan_quote_calculated', label:'Cotizacion calculada', val:138},
+  {name:'whatsapp_support_clicked', label:'Contacto WhatsApp', val:62},
+  {name:'pre_approval_accepted', label:'Pre-aprobacion', val:115},
+  {name:'purchase', label:'Solicitud enviada', val:82},
+  {name:'loan_request_initiated', label:'Solicitud iniciada', val:89},
+  {name:'form_validation_error', label:'Error formulario', val:105}
+];
+
+/* ── SCROLL PROGRESS ── */
+var prog = document.getElementById('scrollProg');
+var meter = document.getElementById('scrollMeter');
+var ticking = false;
+function onScroll(){
+  if(ticking) return;
+  ticking = true;
+  requestAnimationFrame(function(){
+    var st = window.scrollY;
+    var sh = document.documentElement.scrollHeight - window.innerHeight;
+    var pct = sh > 0 ? Math.round(st/sh*100) : 0;
+    prog.style.width = pct + '%';
+    meter.textContent = pct + '%';
+    if(st > 100) meter.classList.add('show');
+    else meter.classList.remove('show');
+    ticking = false;
+  });
+}
+window.addEventListener('scroll', onScroll, {passive:true});
+
+/* ── REVEAL ── */
+var revealEls = document.querySelectorAll('.reveal');
+var obs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if(e.isIntersecting) e.target.classList.add('in'); });
+}, {threshold:0.08});
+revealEls.forEach(function(el){ obs.observe(el); });
+setTimeout(function(){
+  document.querySelectorAll('.reveal:not(.in)').forEach(function(el){ el.classList.add('in'); });
+}, 1500);
+
+/* ── COUNTER UP ── */
+function counterUp(el){
+  var target = parseInt(el.dataset.target,10);
+  var start = 0; var dur = 1400;
+  var t0 = null;
+  function step(ts){
+    if(!t0) t0=ts;
+    var p = Math.min((ts-t0)/dur,1);
+    var ease = 1-Math.pow(1-p,3);
+    el.textContent = Math.round(ease*target).toLocaleString('es-CO');
+    if(p<1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+var statObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      counterUp(e.target);
+      statObs.unobserve(e.target);
+    }
+  });
+},{threshold:0.3});
+document.querySelectorAll('.stat-number[data-target]').forEach(function(el){ statObs.observe(el); });
+
+/* ── FUNNEL BARS ── */
+var funnelObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(!e.isIntersecting) return;
+    var bars = e.target.querySelectorAll('.f-bar');
+    bars.forEach(function(b,i){
+      setTimeout(function(){ b.style.width = b.dataset.pct+'%'; }, i*120);
+    });
+    funnelObs.unobserve(e.target);
+  });
+},{threshold:0.2});
+var fw = document.getElementById('funnelWrap');
+if(fw) funnelObs.observe(fw);
+
+/* ── BAR CHART (D3) ── */
+function drawBar(){
+  var wrap = document.getElementById('barChart');
+  if(!wrap) return;
+  var W = wrap.clientWidth || 900;
+  var sorted = DATA_EVENTS.slice().sort(function(a,b){ return b.val-a.val; });
+  var H = sorted.length * 46 + 40;
+  var margin = {top:10,right:60,bottom:20,left:240};
+  var iW = W - margin.left - margin.right;
+  var iH = H - margin.top - margin.bottom;
+
+  d3.select(wrap).selectAll('*').remove();
+  var svg = d3.select(wrap).append('svg')
+    .attr('width',W).attr('height',H);
+
+  // Glow filter
+  var defs = svg.append('defs');
+  var filter = defs.append('filter').attr('id','glow-bar')
+    .attr('x','-50%').attr('y','-50%').attr('width','200%').attr('height','200%');
+  filter.append('feGaussianBlur').attr('stdDeviation','3').attr('result','blur');
+  var merge = filter.append('feMerge');
+  merge.append('feMergeNode').attr('in','blur');
+  merge.append('feMergeNode').attr('in','SourceGraphic');
+
+  var g = svg.append('g').attr('transform','translate('+margin.left+','+margin.top+')');
+
+  var y = d3.scaleBand().domain(sorted.map(function(d){return d.label;}))
+    .range([0,iH]).padding(0.28);
+  var x = d3.scaleLinear().domain([0,d3.max(sorted,function(d){return d.val;})]).nice()
+    .range([0,iW]);
+
+  // Grid
+  g.append('g').attr('class','grid')
+    .call(d3.axisBottom(x).tickSize(iH).tickFormat(''))
+    .selectAll('line')
+    .style('stroke','rgba(255,255,255,0.04)')
+    .style('stroke-dasharray','2 4');
+  g.select('.grid .domain').remove();
+
+  // Y axis (labels)
+  g.append('g')
+    .call(d3.axisLeft(y).tickSize(0))
+    .selectAll('text')
+    .style('fill','#c7d2dd')
+    .style('font-family','Poppins,sans-serif')
+    .style('font-size','13px');
+  g.select('.domain').remove();
+
+  // X axis (values)
+  g.append('g').attr('transform','translate(0,'+iH+')')
+    .call(d3.axisBottom(x).ticks(5).tickFormat(d3.format('d')))
+    .selectAll('text').style('fill','#c7d2dd')
+    .style('font-family','Poppins,sans-serif').style('font-size','12px');
+  g.select('.domain').remove();
+
+  // Bars
+  var colorScale = d3.scaleOrdinal()
+    .domain(sorted.map(function(d){return d.label;}))
+    .range(['#29C7F8','#DCF829','#29C7F8','#10b981','#f59e0b','#ef4444','#29C7F8','#DCF829']);
+
+  var barEnter = g.selectAll('.bar').data(sorted).enter();
+  barEnter.append('rect').attr('class','bar')
+    .attr('x',0).attr('y',function(d){return y(d.label);})
+    .attr('width',0).attr('height',y.bandwidth())
+    .attr('fill',function(d){return colorScale(d.label);})
+    .attr('opacity',0.8)
+    .attr('filter','url(#glow-bar)')
+    .transition().duration(900).delay(function(_,i){return i*80;})
+    .ease(d3.easeCubicOut)
+    .attr('width',function(d){return x(d.val);});
+
+  // Value labels
+  barEnter.append('text')
+    .attr('x',function(d){return x(d.val)+8;})
+    .attr('y',function(d){return y(d.label)+y.bandwidth()/2;})
+    .attr('text-anchor','start')
+    .attr('dominant-baseline','middle')
+    .style('font-family','Poppins,sans-serif').style('font-size','14px')
+    .style('font-weight','600').style('fill',function(d){return colorScale(d.label);})
+    .style('opacity',0)
+    .text(function(d){return d.val;})
+    .transition().duration(900).delay(function(_,i){return i*80+400;})
+    .style('opacity',1);
+}
+
+/* ── SORT TABLE ── */
+var sortDir = {};
+window.sortTable = function(col){
+  var tbody = document.getElementById('campTbody');
+  if(!tbody) return;
+  var rows = Array.from(tbody.querySelectorAll('tr'));
+  sortDir[col] = !sortDir[col];
+  rows.sort(function(a,b){
+    var av = a.cells[col].textContent.trim();
+    var bv = b.cells[col].textContent.trim();
+    var an = parseFloat(av.replace(/[^0-9.-]/g,'')); var bn = parseFloat(bv.replace(/[^0-9.-]/g,''));
+    if(!isNaN(an)&&!isNaN(bn)) return sortDir[col]? an-bn : bn-an;
+    return sortDir[col]? av.localeCompare(bv,'es') : bv.localeCompare(av,'es');
+  });
+  rows.forEach(function(r){ tbody.appendChild(r); });
+  document.querySelectorAll('.comp-table thead th').forEach(function(th,i){
+    th.classList.remove('sort-asc','sort-desc');
+    if(i===col) th.classList.add(sortDir[col]?'sort-asc':'sort-desc');
+  });
+};
+
+/* ── BOOT ── */
+function boot(){
+  try { drawBar(); } catch(e){ console.error('bar',e); }
+}
+
+// Bar chart re-draw on resize
+var resizeTimer;
+window.addEventListener('resize',function(){
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(function(){ try{drawBar();}catch(e){} },300);
+});
+
+// Chart auto-play on viewport
+var chartObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if(e.isIntersecting){ try{drawBar();}catch(e2){} chartObs.disconnect(); } });
+},{threshold:0.2});
+var cw = document.getElementById('barChart');
+if(cw) chartObs.observe(cw);
+
+if(document.readyState==='loading')
+  document.addEventListener('DOMContentLoaded',boot);
+else boot();
+
+})();
+</script>
+</body>
+</html>
