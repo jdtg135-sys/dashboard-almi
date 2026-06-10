@@ -504,10 +504,27 @@ def main():
         print("Comparativa semanal actualizada")
 
     # Fecha del periodo medido
+    MESES_ES = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"]
     hoy = datetime.date.today()
     hace_7 = hoy - datetime.timedelta(days=7)
-    nuevo_periodo = f"{hace_7.strftime('%d %b')} - {hoy.strftime('%d %b')}"
-    html = re.sub(r'periodo \d{1,2}-\d{1,2} jun', f'periodo {nuevo_periodo}', html)
+
+    def fmt_dia_mes(d):
+        return f"{d.day} {MESES_ES[d.month - 1]}"
+
+    # section-sub: "periodo 02 Jun - 09 Jun"
+    nuevo_periodo = f"{hace_7.strftime('%d')} {MESES_ES[hace_7.month - 1]} - {hoy.strftime('%d')} {MESES_ES[hoy.month - 1]}"
+    html = re.sub(r'periodo \d{1,2} \w{3} - \d{1,2} \w{3}', f'periodo {nuevo_periodo}', html)
+
+    # hero-badge: "Periodo: <span>8 — 9 Jun 2026</span>"
+    if hace_7.month == hoy.month:
+        badge_periodo = f"{hace_7.day} — {fmt_dia_mes(hoy)} {hoy.year}"
+    else:
+        badge_periodo = f"{fmt_dia_mes(hace_7)} — {fmt_dia_mes(hoy)} {hoy.year}"
+    html = re.sub(
+        r'(Periodo: <span>)[^<]*(</span>)',
+        rf'\g<1>{badge_periodo}\g<2>',
+        html,
+    )
 
     with open(DASHBOARD_FILE, "w", encoding="utf-8") as f:
         f.write(html)
