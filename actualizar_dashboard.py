@@ -528,6 +528,51 @@ def main():
 
         print("Comparativas mensuales de Google Ads actualizadas")
 
+        # --- Meta Ads: tabla de campanas (ultimos 7 dias) ---
+        m_campanas = m.get("campanas", [])
+        if m_campanas:
+            m_camp_rows = []
+            for c in m_campanas:
+                m_camp_rows.append(
+                    "<tr>"
+                    f"<td>{c['nombre']}</td>"
+                    f"<td>{c['estado']}</td>"
+                    f"<td>{fmt_num(c['impresiones'])}</td>"
+                    f"<td>{fmt_num(c['clics'])}</td>"
+                    f"<td>{c['ctr']}%</td>"
+                    f"<td>{fmt_money(c['cpc_promedio'])}</td>"
+                    f"<td>{fmt_money(c['presupuesto_dia'])}</td>"
+                    f"<td>{fmt_money(c['gasto'])}</td>"
+                    f"<td>{fmt_num(c['resultados'])}</td>"
+                    f"<td>{fmt_money(c['costo_por_resultado'])}</td>"
+                    "</tr>"
+                )
+                prev = c.get("prev")
+                if prev:
+                    m_camp_rows.append(
+                        '<tr class="campaign-prev-row">'
+                        '<td>↳ Sem. anterior</td>'
+                        "<td></td>"
+                        f"<td>{fmt_num(prev['impresiones'])}</td>"
+                        f"<td>{fmt_num(prev['clics'])}</td>"
+                        f"<td>{prev['ctr']}%</td>"
+                        f"<td>{fmt_money(prev['cpc_promedio'])}</td>"
+                        "<td></td>"
+                        f"<td>{fmt_money(prev['gasto'])}</td>"
+                        f"<td>{fmt_num(prev['resultados'])}</td>"
+                        f"<td>{fmt_money(prev['costo_por_resultado'])}</td>"
+                        "</tr>"
+                    )
+            new_m_camp = "\n          ".join(m_camp_rows)
+        else:
+            new_m_camp = '<tr><td colspan="10">Sin campanas con actividad en el periodo</td></tr>'
+
+        m_camp_pattern = re.compile(
+            r'(<!-- META_ADS_CAMPAIGNS_START -->)(?:(?!<!-- META_ADS_CAMPAIGNS_END -->).)*(<!-- META_ADS_CAMPAIGNS_END -->)',
+            re.DOTALL,
+        )
+        html = m_camp_pattern.sub(lambda mo: mo.group(1) + "\n          " + new_m_camp + "\n          " + mo.group(2), html, count=1)
+
         # --- Meta Ads: comparativa mensual y acumulado 3 meses ---
         m_meses = m.get("meses", [])
         if len(m_meses) >= 2:

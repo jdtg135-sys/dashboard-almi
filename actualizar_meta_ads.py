@@ -62,6 +62,74 @@ def fetch_insights(account_id, token, since, until):
     }
 
 
+def fetch_campaign_insights(account_id, token, since, until):
+    """Devuelve dict {campaign_id: {nombre, gasto, impresiones, clics, ctr, cpc_promedio, resultados, costo_por_resultado}}
+    para todas las campanas con actividad en el rango (incluye pausadas/deshabilitadas)."""
+    url = f"{GRAPH_URL}/{account_id}/insights"
+    params = {
+        "level": "campaign",
+        "fields": "campaign_id,campaign_name,spend,impressions,clicks,actions",
+        "time_range": json.dumps({"since": since, "until": until}),
+        "limit": 200,
+        "access_token": token,
+    }
+    out = {}
+    while True:
+        response = requests.get(url, params=params)
+        response.raise_for_status()
+        data = response.json()
+        for row in data.get("data", []):
+            spend = float(row.get("spend", 0))
+            impresiones = int(row.get("impressions", 0))
+            clics = int(row.get("clicks", 0))
+            resultados = 0
+            for action in row.get("actions", []):
+                if action.get("action_type") == "lead":
+                    resultados = int(float(action.get("value", 0)))
+                    break
+            out[row["campaign_id"]] = {
+                "nombre": row.get("campaign_name", ""),
+                "gasto": round(spend),
+                "impresiones": impresiones,
+                "clics": clics,
+                "ctr": round(clics / impresiones * 100, 2) if impresiones else 0,
+                "cpc_promedio": round(spend / clics, 2) if clics else 0,
+                "resultados": resultados,
+                "costo_por_resultado": round(spend / resultados) if resultados else 0,
+            }
+        next_url = data.get("paging", {}).get("next")
+        if not next_url:
+            break
+        url, params = next_url, None
+    return out
+
+
+def fetch_campaign_info(account_id, token):
+    """Devuelve dict {campaign_id: {estado, presupuesto_dia}} para todas las campanas de la cuenta."""
+    url = f"{GRAPH_URL}/{account_id}/campaigns"
+    params = {
+        "fields": "id,name,effective_status,daily_budget",
+        "limit": 200,
+        "access_token": token,
+    }
+    out = {}
+    while True:
+        response = requests.get(url, params=params)
+        response.raise_for_status()
+        data = response.json()
+        for row in data.get("data", []):
+            daily_budget = row.get("daily_budget")
+            out[row["id"]] = {
+                "estado": row.get("effective_status", "").title(),
+                "presupuesto_dia": round(int(daily_budget) / 100) if daily_budget else 0,
+            }
+        next_url = data.get("paging", {}).get("next")
+        if not next_url:
+            break
+        url, params = next_url, None
+    return out
+
+
 def month_range(months_back, today):
     y, mo = today.year, today.month
     for _ in range(months_back):
@@ -102,6 +170,40 @@ def main():
     print(f"Inversion: ${prev['inversion']:,.0f}")
     print(f"Resultados (leads): {prev['resultados']}")
 
+    # --- Campanas (ultimos 7 dias, incluye pausadas/deshabilitadas) ---
+    actual_camp = fetch_campaign_insights(
+        account_id, token,
+        (hoy - datetime.timedelta(days=7)).isoformat(), hoy.isoformat(),
+    )
+    prev_camp = fetch_campaign_insights(
+        account_id, token,
+        (hoy - datetime.timedelta(days=14)).isoformat(),
+        (hoy - datetime.timedelta(days=8)).isoformat(),
+    )
+    info_camp = fetch_campaign_info(account_id, token)
+
+    campaigns = []
+    for cid, c in actual_camp.items():
+        info = info_camp.get(cid, {})
+        campaigns.append({
+            "nombre": c["nombre"],
+            "estado": info.get("estado", ""),
+            "presupuesto_dia": info.get("presupuesto_dia", 0),
+            "impresiones": c["impresiones"],
+            "clics": c["clics"],
+            "ctr": c["ctr"],
+            "cpc_promedio": c["cpc_promedio"],
+            "gasto": c["gasto"],
+            "resultados": c["resultados"],
+            "costo_por_resultado": c["costo_por_resultado"],
+            "prev": prev_camp.get(cid),
+        })
+    campaigns.sort(key=lambda c: c["gasto"], reverse=True)
+
+    print(f"\nCampanas Meta Ads (ultimos 7 dias): {len(campaigns)}")
+    for c in campaigns:
+        print(f"  - {c['nombre']} ({c['estado']}): gasto ${c['gasto']:,.0f}, {c['resultados']} resultados")
+
     # --- Comparativas mensuales (mes calendario) ---
     meses = []
     for mb in range(3):
@@ -133,6 +235,7 @@ def main():
         "clics_prev": prev["clics"],
         "resultados_prev": prev["resultados"],
         "costo_por_resultado_prev": prev["costo_por_resultado"],
+        "campanas": campaigns,
         "meses": meses,
     }
 
