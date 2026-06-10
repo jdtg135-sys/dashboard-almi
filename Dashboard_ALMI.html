@@ -328,6 +328,22 @@ section h2 em {
 .badge-active{border:1px solid var(--green); color:var(--green);}
 .badge-paused{border:1px solid var(--ink-faint); color:var(--ink-faint);}
 
+.status-select {
+  font-family:'Poppins',sans-serif;
+  font-size:9px; padding:3px 22px 3px 8px;
+  text-transform:uppercase; letter-spacing:0.1em;
+  background-color:transparent;
+  border-radius:0;
+  cursor:pointer;
+  appearance:none; -webkit-appearance:none; -moz-appearance:none;
+  background-repeat:no-repeat; background-position:right 6px center;
+  background-size:8px 8px;
+}
+.status-select.badge-pending{border:1px solid var(--amber); color:var(--amber); background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath fill='%23f59e0b' d='M1 3l4 4 4-4z'/%3E%3C/svg%3E");}
+.status-select.badge-active{border:1px solid var(--green); color:var(--green); background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath fill='%2310b981' d='M1 3l4 4 4-4z'/%3E%3C/svg%3E");}
+.status-select.badge-paused{border:1px solid var(--ink-faint); color:var(--ink-faint); background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10'%3E%3Cpath fill='%2356697d' d='M1 3l4 4 4-4z'/%3E%3C/svg%3E");}
+.status-select option{background:var(--bg-1); color:var(--ink);}
+
 /* INSIGHTS */
 .insights {
   display:grid;
@@ -1011,7 +1027,13 @@ section h2 em {
             <td>Empleados sector privado (convenios)</td>
             <td>$1,800,000 COP</td>
             <td>Leads</td>
-            <td><span class="status-badge badge-pending">Pendiente</span></td>
+            <td>
+              <select class="status-select badge-pending" data-camp="C1">
+                <option value="pending">Pendiente</option>
+                <option value="active">Activa</option>
+                <option value="paused">Pausada</option>
+              </select>
+            </td>
           </tr>
           <tr>
             <td>C2 — Privado general</td>
@@ -1019,7 +1041,13 @@ section h2 em {
             <td>Empleados sin convenio especifico</td>
             <td>$1,200,000 COP</td>
             <td>Leads</td>
-            <td><span class="status-badge badge-pending">Pendiente</span></td>
+            <td>
+              <select class="status-select badge-pending" data-camp="C2">
+                <option value="pending">Pendiente</option>
+                <option value="active">Activa</option>
+                <option value="paused">Pausada</option>
+              </select>
+            </td>
           </tr>
           <tr>
             <td>C3 — Reportados / Aprobacion rapida</td>
@@ -1027,7 +1055,13 @@ section h2 em {
             <td>Personas con historial crediticio</td>
             <td>$1,600,000 COP</td>
             <td>Leads</td>
-            <td><span class="status-badge badge-pending">Pendiente</span></td>
+            <td>
+              <select class="status-select badge-pending" data-camp="C3">
+                <option value="pending">Pendiente</option>
+                <option value="active">Activa</option>
+                <option value="paused">Pausada</option>
+              </select>
+            </td>
           </tr>
           <tr>
             <td>C4 — Retargeting</td>
@@ -1035,7 +1069,13 @@ section h2 em {
             <td>Visitantes cotizador sin conversion</td>
             <td>$800,000 COP</td>
             <td>Conversion</td>
-            <td><span class="status-badge badge-pending">Pendiente</span></td>
+            <td>
+              <select class="status-select badge-pending" data-camp="C4">
+                <option value="pending">Pendiente</option>
+                <option value="active">Activa</option>
+                <option value="paused">Pausada</option>
+              </select>
+            </td>
           </tr>
           <tr>
             <td>C5 — Google Libranza</td>
@@ -1043,7 +1083,13 @@ section h2 em {
             <td>Intencion: credito libranza</td>
             <td>$1,200,000 COP</td>
             <td>Leads</td>
-            <td><span class="status-badge badge-pending">Pendiente</span></td>
+            <td>
+              <select class="status-select badge-pending" data-camp="C5">
+                <option value="pending">Pendiente</option>
+                <option value="active">Activa</option>
+                <option value="paused">Pausada</option>
+              </select>
+            </td>
           </tr>
           <tr>
             <td>C6 — Google Reportados</td>
@@ -1051,7 +1097,13 @@ section h2 em {
             <td>Intencion: credito con deudas</td>
             <td>$600,000 COP</td>
             <td>Leads</td>
-            <td><span class="status-badge badge-pending">Pendiente</span></td>
+            <td>
+              <select class="status-select badge-pending" data-camp="C6">
+                <option value="pending">Pendiente</option>
+                <option value="active">Activa</option>
+                <option value="paused">Pausada</option>
+              </select>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -1379,9 +1431,32 @@ window.sortTable = function(col){
   });
 };
 
+/* ── ESTADO DE CAMPANAS (checklist) ── */
+var STATUS_KEY = 'almi_campaign_status';
+var STATUS_CLASS = {pending:'badge-pending', active:'badge-active', paused:'badge-paused'};
+function initStatusSelects(){
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(STATUS_KEY)) || {}; } catch(e){}
+  document.querySelectorAll('.status-select').forEach(function(sel){
+    var camp = sel.getAttribute('data-camp');
+    if(saved[camp]) sel.value = saved[camp];
+    sel.classList.remove('badge-pending','badge-active','badge-paused');
+    sel.classList.add(STATUS_CLASS[sel.value] || 'badge-pending');
+    sel.addEventListener('change', function(){
+      sel.classList.remove('badge-pending','badge-active','badge-paused');
+      sel.classList.add(STATUS_CLASS[sel.value] || 'badge-pending');
+      var current = {};
+      try { current = JSON.parse(localStorage.getItem(STATUS_KEY)) || {}; } catch(e){}
+      current[camp] = sel.value;
+      localStorage.setItem(STATUS_KEY, JSON.stringify(current));
+    });
+  });
+}
+
 /* ── BOOT ── */
 function boot(){
   try { drawBar(); } catch(e){ console.error('bar',e); }
+  try { initStatusSelects(); } catch(e){ console.error('status',e); }
 }
 
 // Bar chart re-draw on resize
