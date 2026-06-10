@@ -9,39 +9,39 @@
     "costo_por_resultado": 0
   },
   "google_ads": {
-    "inversion": 153694,
-    "impresiones": 1124,
-    "clics": 258,
-    "conversiones": 321.4,
-    "costo_por_conversion": 478.14,
+    "inversion": 161616,
+    "impresiones": 1125,
+    "clics": 246,
+    "conversiones": 279.0,
+    "costo_por_conversion": 579.34,
     "campanas": [
       {
         "nombre": "Búsqueda - Mayo 2026",
         "estado": "Enabled",
         "tipo": "Busqueda",
-        "impresiones": 1124,
-        "clics": 258,
-        "ctr": 22.95,
-        "cpc_promedio": 595.71,
+        "impresiones": 1125,
+        "clics": 246,
+        "ctr": 21.87,
+        "cpc_promedio": 656.98,
         "presupuesto_dia": 20000,
-        "gasto": 153694,
-        "conversiones": 321.4,
-        "costo_por_conversion": 478.14,
+        "gasto": 161616,
+        "conversiones": 279.0,
+        "costo_por_conversion": 579.34,
         "prev": {
-          "impresiones": 1419,
-          "clics": 273,
-          "ctr": 19.24,
-          "cpc_promedio": 688.05,
-          "gasto": 187838,
-          "conversiones": 89.5,
-          "costo_por_conversion": 2098.82
+          "impresiones": 1536,
+          "clics": 307,
+          "ctr": 19.99,
+          "cpc_promedio": 652.7,
+          "gasto": 200380,
+          "conversiones": 142.0,
+          "costo_por_conversion": 1411.36
         }
       }
     ],
-    "inversion_prev": 187838,
-    "impresiones_prev": 1419,
-    "clics_prev": 273,
-    "conversiones_prev": 89.5,
-    "costo_por_conversion_prev": 2098.82
+    "inversion_prev": 200380,
+    "impresiones_prev": 1536,
+    "clics_prev": 307,
+    "conversiones_prev": 142.0,
+    "costo_por_conversion_prev": 1411.36
   }
 }
