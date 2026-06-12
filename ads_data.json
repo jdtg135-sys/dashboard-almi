@@ -220,6 +220,28 @@
     "costo_por_conversion": 692.44,
     "campanas": [
       {
+        "nombre": "Búsqueda - Mayo 2026",
+        "estado": "Enabled",
+        "tipo": "Busqueda",
+        "impresiones": 901,
+        "clics": 204,
+        "ctr": 22.64,
+        "cpc_promedio": 695.68,
+        "presupuesto_dia": 20000,
+        "gasto": 141919,
+        "conversiones": 205.0,
+        "costo_por_conversion": 692.44,
+        "prev": {
+          "impresiones": 1210,
+          "clics": 248,
+          "ctr": 20.5,
+          "cpc_promedio": 590.14,
+          "gasto": 146355,
+          "conversiones": 198.6,
+          "costo_por_conversion": 736.99
+        }
+      },
+      {
         "nombre": "C6 - Búsqueda - Reportados - Jun2026",
         "estado": "Enabled",
         "tipo": "Busqueda",
