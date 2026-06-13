@@ -92,6 +92,52 @@ def get_credentials():
     return creds
 
 
+def fetch_users_for_event(client, event_names, date_range=DATE_RANGE):
+    """Devuelve activeUsers que dispararon CUALQUIERA de los eventos dados (union)."""
+    request = RunReportRequest(
+        property=f"properties/{PROPERTY_ID}",
+        metrics=[Metric(name="activeUsers")],
+        date_ranges=[date_range],
+        dimension_filter=FilterExpression(
+            filter=Filter(
+                field_name="eventName",
+                in_list_filter=Filter.InListFilter(values=list(event_names)),
+            )
+        ),
+    )
+    response = client.run_report(request)
+    if response.rows:
+        return int(response.rows[0].metric_values[0].value)
+    return 0
+
+
+def fetch_funnel_users(client, funnel_events, date_range=DATE_RANGE):
+    """Devuelve lista de activeUsers por etapa del funnel, monotonamente decreciente
+    (cada etapa se limita al minimo entre su propio valor y el de la etapa anterior,
+    ya que un funnel lineal no puede crecer)."""
+    raw = []
+    for label, event in funnel_events:
+        if label.startswith("2."):
+            # Paso 2 (Datos de empresa): "company_selected" es el evento correcto pero
+            # se implemento recientemente; se incluye tambien "calculate_credit_clicked"
+            # (usado como proxy temporal) para no perder usuarios que ya pasaron por ahi.
+            val = fetch_users_for_event(client, [event, "calculate_credit_clicked"], date_range)
+        else:
+            val = fetch_users_for_event(client, [event], date_range)
+        raw.append(val)
+
+    # Solo se limitan los pasos 2 y 3 (problema conocido: calculate_credit_clicked
+    # se dispara mas veces que usuarios reales que seleccionan empresa). Los pasos
+    # 4-7 se dejan con su valor real, aunque algun paso recien instrumentado
+    # (ej. terms_accepted) pueda tener un conteo temporalmente bajo por ser
+    # implementacion reciente con datos de pocos dias.
+    capped = list(raw)
+    for i in (1, 2):
+        if i < len(capped):
+            capped[i] = min(capped[i], capped[i - 1])
+    return capped
+
+
 def fetch_event_counts(client, event_names, date_range=DATE_RANGE):
     """Devuelve un dict {event_name: total_count} para los eventos dados."""
     request = RunReportRequest(
@@ -224,7 +270,7 @@ def main():
     all_event_names = [e for _, e in FUNNEL_EVENTS] + EXTRA_EVENTS + [e for e, _ in CHART_EVENTS]
     counts = fetch_event_counts(client, all_event_names)
 
-    funnel_values = [counts[event] for _, event in FUNNEL_EVENTS]
+    funnel_values = fetch_funnel_users(client, FUNNEL_EVENTS)
     solicitudes = funnel_values[-1]  # purchase / step 6
     pre_aprobaciones = counts["pre_approval_accepted"]
     errores_form = counts["form_validation_error"]
@@ -246,7 +292,7 @@ def main():
     # --- Datos de la semana anterior (para comparativa) ---
     sessions_prev = fetch_sessions(client, PREV_DATE_RANGE)
     counts_prev = fetch_event_counts(client, all_event_names, PREV_DATE_RANGE)
-    funnel_values_prev = [counts_prev[event] for _, event in FUNNEL_EVENTS]
+    funnel_values_prev = fetch_funnel_users(client, FUNNEL_EVENTS, PREV_DATE_RANGE)
     solicitudes_prev = funnel_values_prev[-1]
     pre_aprobaciones_prev = counts_prev["pre_approval_accepted"]
     errores_form_prev = counts_prev["form_validation_error"]
@@ -308,7 +354,7 @@ def main():
         drop_pct_str = str(int(drop_pct)) if drop_pct == int(drop_pct) else str(drop_pct)
         connector_pattern = re.compile(
             r'(<div class="f-label">' + re.escape(FUNNEL_EVENTS[i][0]) + r'</div>.*?</div>\s*'
-            r'<div class="funnel-connector">\s*<div class="drop-label">↓ abandono )[\d.]+%( — )\d+( usuarios</div>)',
+            r'<div class="funnel-connector">\s*<div class="drop-label">↓ abandono )-?[\d.]+%( — )-?\d+( usuarios</div>)',
             re.DOTALL,
         )
         html = connector_pattern.sub(
