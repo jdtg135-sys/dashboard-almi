@@ -141,6 +141,36 @@ def fetch_sessions(client, date_range=DATE_RANGE):
     return 0
 
 
+def fetch_daily_errors(client, date_range):
+    """Devuelve lista [(fecha 'YYYY-MM-DD', conteo), ...] de form_validation_error por dia."""
+    request = RunReportRequest(
+        property=f"properties/{PROPERTY_ID}",
+        dimensions=[Dimension(name="date")],
+        metrics=[Metric(name="eventCount")],
+        date_ranges=[date_range],
+        dimension_filter=FilterExpression(
+            filter=Filter(
+                field_name="eventName",
+                string_filter=Filter.StringFilter(value="form_validation_error"),
+            )
+        ),
+        order_bys=[OrderBy(dimension=OrderBy.DimensionOrderBy(dimension_name="date"))],
+    )
+    response = client.run_report(request)
+    counts = {row.dimension_values[0].value: int(row.metric_values[0].value) for row in response.rows}
+
+    result = []
+    start = date_range.start_date
+    end = date_range.end_date
+    cur = datetime.datetime.strptime(start, "%Y-%m-%d").date()
+    last = datetime.datetime.strptime(end, "%Y-%m-%d").date()
+    while cur <= last:
+        key = cur.strftime("%Y%m%d")
+        result.append((cur.strftime("%Y-%m-%d"), counts.get(key, 0)))
+        cur += datetime.timedelta(days=1)
+    return result
+
+
 def fmt_money(v):
     return f"${v:,.0f} COP".replace(",", ".")
 
@@ -757,6 +787,30 @@ def main():
         r'(Periodo: <span>)[^<]*(</span>)',
         rf'\g<1>{badge_periodo}\g<2>',
         html,
+    )
+
+    # Grafico de errores diarios: solo mes en curso (1 al dia actual)
+    inicio_mes = hoy.replace(day=1)
+    daily_errors = fetch_daily_errors(client, DateRange(
+        start_date=inicio_mes.strftime("%Y-%m-%d"), end_date=hoy.strftime("%Y-%m-%d")
+    ))
+    items = [f"{{date:'{d}', val:{v}}}" for d, v in daily_errors]
+    lines = []
+    for i in range(0, len(items), 3):
+        lines.append("  " + " ".join(x + "," if j != len(items) - 1 else x
+                                       for j, x in enumerate(items[i:i + 3], start=i)))
+    daily_errors_block = (
+        "/* DAILY_ERRORS_START */\n"
+        "var DATA_DAILY_ERRORS = [\n"
+        + "\n".join(lines) + "\n"
+        "];\n"
+        "/* DAILY_ERRORS_END */"
+    )
+    html = re.sub(
+        r"/\* DAILY_ERRORS_START \*/.*?/\* DAILY_ERRORS_END \*/",
+        daily_errors_block,
+        html,
+        flags=re.S,
     )
 
     with open(DASHBOARD_FILE, "w", encoding="utf-8") as f:
