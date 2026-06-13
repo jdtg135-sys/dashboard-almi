@@ -47,8 +47,8 @@ MESES_ES = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","D
 
 # Eventos del cotizador que conforman el embudo (en orden)
 FUNNEL_EVENTS = [
-    ("1. Tipo de trabajador",   "step_one"),
-    ("2. Datos de empresa",     "step_two"),
+    ("1. Tipo de trabajador",   "worker_classification_selected"),
+    ("2. Datos de empresa",     "company_selected"),
     ("3. Cotizacion calculada", "calculate_credit_clicked"),
     ("4. Pre aprobacion",       "pre_approval_accepted"),
     ("5. Solicitud iniciada",   "loan_request_initiated"),
@@ -64,7 +64,8 @@ EXTRA_EVENTS = [
 
 # Eventos para el grafico "Eventos por frecuencia" (nombre GA4, etiqueta amigable)
 CHART_EVENTS = [
-    ("step_two", "Seleccion tipo de trabajador"),
+    ("worker_classification_selected", "Tipo de trabajador"),
+    ("company_selected", "Datos de empresa"),
     ("calculate_credit_clicked",       "Calcular credito"),
     ("loan_quote_calculated",          "Cotizacion calculada"),
     ("whatsapp_support_clicked",       "Contacto WhatsApp"),
