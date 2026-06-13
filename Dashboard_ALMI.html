@@ -1357,6 +1357,7 @@ function drawBar(){
   var iH = H - margin.top - margin.bottom;
 
   d3.select(wrap).selectAll('*').remove();
+  d3.select(wrap).style('position','relative');
   var svg = d3.select(wrap).append('svg')
     .attr('width',W).attr('height',H);
 
@@ -1444,6 +1445,7 @@ function drawDailyBarChart(elId, rawData, color, glowId, gradId){
   var iH = H - margin.top - margin.bottom;
 
   d3.select(wrap).selectAll('*').remove();
+  d3.select(wrap).style('position','relative');
   var svg = d3.select(wrap).append('svg')
     .attr('width',W).attr('height',H);
 
@@ -1489,6 +1491,21 @@ function drawDailyBarChart(elId, rawData, color, glowId, gradId){
     .style('font-family','Poppins,sans-serif').style('font-size','12px');
   g.selectAll('.tick line').remove();
 
+  // Tooltip
+  var tooltip = d3.select(wrap).append('div')
+    .attr('class','daily-tooltip')
+    .style('position','absolute')
+    .style('pointer-events','none')
+    .style('background','rgba(15,23,42,0.95)')
+    .style('border','1px solid rgba(255,255,255,0.1)')
+    .style('border-radius','6px')
+    .style('padding','6px 10px')
+    .style('font-family','Poppins,sans-serif')
+    .style('font-size','12px')
+    .style('color','#fff')
+    .style('opacity',0)
+    .style('z-index',10);
+
   // Bars
   g.selectAll('.bar-daily').data(data).enter().append('rect')
     .attr('class','bar-daily')
@@ -1499,6 +1516,21 @@ function drawDailyBarChart(elId, rawData, color, glowId, gradId){
     .attr('rx',3)
     .attr('fill','url(#'+gradId+')')
     .attr('filter','url(#'+glowId+')')
+    .style('cursor','pointer')
+    .on('mouseenter',function(event,d){
+      d3.select(this).attr('opacity',0.7);
+      tooltip.html(d3.timeFormat('%d %b')(d.date)+': <strong>'+d.val+'</strong>')
+        .style('opacity',1);
+    })
+    .on('mousemove',function(event){
+      var rect = wrap.getBoundingClientRect();
+      tooltip.style('left',(event.clientX - rect.left + 10)+'px')
+        .style('top',(event.clientY - rect.top - 30)+'px');
+    })
+    .on('mouseleave',function(){
+      d3.select(this).attr('opacity',1);
+      tooltip.style('opacity',0);
+    })
     .transition().duration(800).delay(function(_,i){return i*30;}).ease(d3.easeCubicOut)
     .attr('y',function(d){return y(d.val);})
     .attr('height',function(d){return iH - y(d.val);});
