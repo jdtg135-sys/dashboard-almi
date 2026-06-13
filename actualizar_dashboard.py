@@ -152,7 +152,7 @@ def fetch_event_counts(client, event_names, date_range=DATE_RANGE):
 
 
 def fetch_error_breakdown(client, date_range=DATE_RANGE, limit=8,
-                           event_names=("form_validation_error", "loan_request_failure")):
+                           event_names=("form_validation_error",)):
     """Devuelve lista [(mensaje_error, conteo), ...] ordenada de mayor a menor."""
     request = RunReportRequest(
         property=f"properties/{PROPERTY_ID}",
@@ -189,8 +189,8 @@ def fetch_sessions(client, date_range=DATE_RANGE):
     return 0
 
 
-def fetch_daily_errors(client, date_range):
-    """Devuelve lista [(fecha 'YYYY-MM-DD', conteo), ...] de form_validation_error por dia."""
+def fetch_daily_errors(client, date_range, event_name="form_validation_error"):
+    """Devuelve lista [(fecha 'YYYY-MM-DD', conteo), ...] del evento dado por dia."""
     request = RunReportRequest(
         property=f"properties/{PROPERTY_ID}",
         dimensions=[Dimension(name="date")],
@@ -199,7 +199,7 @@ def fetch_daily_errors(client, date_range):
         dimension_filter=FilterExpression(
             filter=Filter(
                 field_name="eventName",
-                string_filter=Filter.StringFilter(value="form_validation_error"),
+                string_filter=Filter.StringFilter(value=event_name),
             )
         ),
         order_bys=[OrderBy(dimension=OrderBy.DimensionOrderBy(dimension_name="date"))],
@@ -858,6 +858,29 @@ def main():
     html = re.sub(
         r"/\* DAILY_ERRORS_START \*/.*?/\* DAILY_ERRORS_END \*/",
         daily_errors_block,
+        html,
+        flags=re.S,
+    )
+
+    # Grafico de fallos al enviar solicitud (loan_request_failure) por dia: solo mes en curso
+    daily_failures = fetch_daily_errors(client, DateRange(
+        start_date=inicio_mes.strftime("%Y-%m-%d"), end_date=hoy.strftime("%Y-%m-%d")
+    ), event_name="loan_request_failure")
+    items = [f"{{date:'{d}', val:{v}}}" for d, v in daily_failures]
+    lines = []
+    for i in range(0, len(items), 3):
+        lines.append("  " + " ".join(x + "," if j != len(items) - 1 else x
+                                       for j, x in enumerate(items[i:i + 3], start=i)))
+    daily_failures_block = (
+        "/* DAILY_FAILURES_START */\n"
+        "var DATA_DAILY_FAILURES = [\n"
+        + "\n".join(lines) + "\n"
+        "];\n"
+        "/* DAILY_FAILURES_END */"
+    )
+    html = re.sub(
+        r"/\* DAILY_FAILURES_START \*/.*?/\* DAILY_FAILURES_END \*/",
+        daily_failures_block,
         html,
         flags=re.S,
     )

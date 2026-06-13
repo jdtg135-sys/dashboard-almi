@@ -798,13 +798,12 @@ section h2 em {
           </thead>
           <tbody>
             <!-- ERROR_BREAKDOWN_START -->
-          <tr><td>Account number invalid or mismatch</td><td>231</td><td>29.3%</td></tr>
-          <tr><td>Company not selected</td><td>159</td><td>20.2%</td></tr>
-          <tr><td>Customer info incomplete or invalid</td><td>146</td><td>18.5%</td></tr>
-          <tr><td>Invalid date</td><td>113</td><td>14.3%</td></tr>
-          <tr><td>No fue posible conectar con el servicio en este momento. Verifica tu conexión o inténtalo más tarde.</td><td>58</td><td>7.4%</td></tr>
-          <tr><td>Salary below minimum</td><td>44</td><td>5.6%</td></tr>
-          <tr><td>Terms not accepted</td><td>33</td><td>4.2%</td></tr>
+          <tr><td>Account number invalid or mismatch</td><td>231</td><td>31.6%</td></tr>
+          <tr><td>Company not selected</td><td>159</td><td>21.8%</td></tr>
+          <tr><td>Customer info incomplete or invalid</td><td>146</td><td>20.0%</td></tr>
+          <tr><td>Invalid date</td><td>113</td><td>15.5%</td></tr>
+          <tr><td>Salary below minimum</td><td>44</td><td>6.0%</td></tr>
+          <tr><td>Terms not accepted</td><td>33</td><td>4.5%</td></tr>
           <tr><td>Bank not selected</td><td>4</td><td>0.5%</td></tr>
           <!-- ERROR_BREAKDOWN_END -->
           </tbody>
@@ -813,8 +812,14 @@ section h2 em {
 
       <div class="chart-wrapper reveal" style="margin-top:32px;">
         <div class="chart-title">Errores por dia</div>
-        <div class="chart-sub">Errores de formulario detectados — ultimos 30 dias</div>
+        <div class="chart-sub">Errores de formulario detectados — mes en curso</div>
         <div id="dailyErrorsChart" style="width:100%;"></div>
+      </div>
+
+      <div class="chart-wrapper reveal" style="margin-top:32px;">
+        <div class="chart-title">Fallos al enviar solicitud por dia</div>
+        <div class="chart-sub">loan_request_failure — mes en curso (en seguimiento con equipo de desarrollo)</div>
+        <div id="dailyFailuresChart" style="width:100%;"></div>
       </div>
     </div>
   </section>
@@ -1262,6 +1267,16 @@ var DATA_DAILY_ERRORS = [
 ];
 /* DAILY_ERRORS_END */
 
+/* DAILY_FAILURES_START */
+var DATA_DAILY_FAILURES = [
+  {date:'2026-06-01', val:0}, {date:'2026-06-02', val:0}, {date:'2026-06-03', val:0},
+  {date:'2026-06-04', val:0}, {date:'2026-06-05', val:0}, {date:'2026-06-06', val:0},
+  {date:'2026-06-07', val:0}, {date:'2026-06-08', val:4}, {date:'2026-06-09', val:7},
+  {date:'2026-06-10', val:19}, {date:'2026-06-11', val:2}, {date:'2026-06-12', val:18},
+  {date:'2026-06-13', val:8}
+];
+/* DAILY_FAILURES_END */
+
 /* ── SCROLL PROGRESS ── */
 var prog = document.getElementById('scrollProg');
 var meter = document.getElementById('scrollMeter');
@@ -1415,11 +1430,11 @@ function drawBar(){
     .style('opacity',1);
 }
 
-/* ── DAILY ERRORS CHART (D3) ── */
-function drawDailyErrors(){
-  var wrap = document.getElementById('dailyErrorsChart');
+/* ── DAILY BAR CHART (D3, generico) ── */
+function drawDailyBarChart(elId, rawData, color, glowId, gradId){
+  var wrap = document.getElementById(elId);
   if(!wrap) return;
-  var data = DATA_DAILY_ERRORS.map(function(d){
+  var data = rawData.map(function(d){
     return {date:new Date(d.date+'T00:00:00'), val:d.val};
   });
   var W = wrap.clientWidth || 900;
@@ -1434,7 +1449,7 @@ function drawDailyErrors(){
 
   // Glow filter
   var defs = svg.append('defs');
-  var filter = defs.append('filter').attr('id','glow-daily')
+  var filter = defs.append('filter').attr('id',glowId)
     .attr('x','-50%').attr('y','-50%').attr('width','200%').attr('height','200%');
   filter.append('feGaussianBlur').attr('stdDeviation','3').attr('result','blur');
   var merge = filter.append('feMerge');
@@ -1442,15 +1457,15 @@ function drawDailyErrors(){
   merge.append('feMergeNode').attr('in','SourceGraphic');
 
   // Bar gradient
-  var grad = defs.append('linearGradient').attr('id','grad-daily')
+  var grad = defs.append('linearGradient').attr('id',gradId)
     .attr('x1','0').attr('y1','0').attr('x2','0').attr('y2','1');
-  grad.append('stop').attr('offset','0%').attr('stop-color','#f59e0b').attr('stop-opacity',0.9);
-  grad.append('stop').attr('offset','100%').attr('stop-color','#f59e0b').attr('stop-opacity',0.35);
+  grad.append('stop').attr('offset','0%').attr('stop-color',color).attr('stop-opacity',0.9);
+  grad.append('stop').attr('offset','100%').attr('stop-color',color).attr('stop-opacity',0.35);
 
   var g = svg.append('g').attr('transform','translate('+margin.left+','+margin.top+')');
 
   var x = d3.scaleBand().domain(data.map(function(d){return d.date;})).range([0,iW]).padding(0.3);
-  var y = d3.scaleLinear().domain([0,d3.max(data,function(d){return d.val;})]).nice().range([iH,0]);
+  var y = d3.scaleLinear().domain([0,d3.max(data,function(d){return d.val;}) || 1]).nice().range([iH,0]);
 
   // Grid
   g.append('g').attr('class','grid')
@@ -1482,11 +1497,17 @@ function drawDailyErrors(){
     .attr('y',iH)
     .attr('height',0)
     .attr('rx',3)
-    .attr('fill','url(#grad-daily)')
-    .attr('filter','url(#glow-daily)')
+    .attr('fill','url(#'+gradId+')')
+    .attr('filter','url(#'+glowId+')')
     .transition().duration(800).delay(function(_,i){return i*30;}).ease(d3.easeCubicOut)
     .attr('y',function(d){return y(d.val);})
     .attr('height',function(d){return iH - y(d.val);});
+}
+function drawDailyErrors(){
+  drawDailyBarChart('dailyErrorsChart', DATA_DAILY_ERRORS, '#f59e0b', 'glow-daily', 'grad-daily');
+}
+function drawDailyFailures(){
+  drawDailyBarChart('dailyFailuresChart', DATA_DAILY_FAILURES, '#ef4444', 'glow-daily-fail', 'grad-daily-fail');
 }
 
 /* ── SORT TABLE ── */
@@ -1567,7 +1588,7 @@ function boot(){
 var resizeTimer;
 window.addEventListener('resize',function(){
   clearTimeout(resizeTimer);
-  resizeTimer = setTimeout(function(){ try{drawBar();}catch(e){} try{drawDailyErrors();}catch(e){} },300);
+  resizeTimer = setTimeout(function(){ try{drawBar();}catch(e){} try{drawDailyErrors();}catch(e){} try{drawDailyFailures();}catch(e){} },300);
 });
 
 // Chart auto-play on viewport
@@ -1582,6 +1603,12 @@ var dailyErrObs = new IntersectionObserver(function(entries){
 },{threshold:0.2});
 var dew = document.getElementById('dailyErrorsChart');
 if(dew) dailyErrObs.observe(dew);
+
+var dailyFailObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if(e.isIntersecting){ try{drawDailyFailures();}catch(e2){} dailyFailObs.disconnect(); } });
+},{threshold:0.2});
+var dfw = document.getElementById('dailyFailuresChart');
+if(dfw) dailyFailObs.observe(dfw);
 
 if(document.readyState==='loading')
   document.addEventListener('DOMContentLoaded',boot);
