@@ -1175,29 +1175,14 @@ section h2 em {
   <section id="s-actions">
     <div class="eyebrow">Plan de accion</div>
     <h2>Lo que se hace<br><em>manana</em></h2>
-    <p class="section-sub">5 movimientos ordenados por urgencia</p>
+    <p class="section-sub">3 movimientos ordenados por urgencia</p>
 
     <div class="actions">
       <div class="action high reveal">
         <div class="action-num">1</div>
         <div class="action-body">
-          <h4>Implementar <em>dataLayer</em> faltante en el cotizador</h4>
-          <p>El cotizador no envia 3 eventos criticos al dataLayer: company_selected, terms_accepted, y los parametros de valor del evento loan_request_success. Esto impide medir con precision el paso 2, el paso de terminos y el valor real de cada conversion.</p>
-          <div class="action-how">
-            <strong>COMO:</strong> Enviar documento tecnico "Ajustes_Desarrollador_Cotizador.pdf" al equipo de desarrollo. Tres implementaciones de dataLayer.push() con parametros exactos documentados. Estimado: 2 horas de desarrollo.
-          </div>
-        </div>
-        <div class="action-meta">
-          <div class="impact">Precision medicion +90%</div>
-          <div class="urgency hoy">HOY</div>
-        </div>
-      </div>
-
-      <div class="action high reveal">
-        <div class="action-num">2</div>
-        <div class="action-body">
           <h4>Lanzar <em>C4 — Retargeting</em> inmediatamente</h4>
-          <p>Ya hay audiencia calificada: visitantes del cotizador que no convirtieron, y pre-aprobados que no enviaron solicitud. No requiere esperar aprobacion de las otras 5 campanas — puede activarse hoy con el pixel ya instalado y funcionando.</p>
+          <p>Ya hay audiencia calificada: visitantes del cotizador que no convirtieron, y pre-aprobados que no enviaron solicitud. No requiere esperar aprobacion de las otras campanas — puede activarse hoy con el pixel ya instalado y funcionando.</p>
           <div class="action-how">
             <strong>COMO:</strong> Crear audiencia personalizada en Meta Ads con visitantes de cotizador.almifinanciera.com ultimos 30 dias. Excluir evento purchase. Presupuesto $800,000 COP/mes. Creativo: testimonio + urgencia de aprobacion rapida.
           </div>
@@ -1209,7 +1194,7 @@ section h2 em {
       </div>
 
       <div class="action mid reveal">
-        <div class="action-num">3</div>
+        <div class="action-num">2</div>
         <div class="action-body">
           <h4>Investigar abandono en <em>paso 1→2</em> del cotizador</h4>
           <p>El 66.5% de abandono en el paso de datos de empresa es anomalo. Antes de lanzar trafico masivo hay que entender si el problema es la UX del formulario, la lista de empresas disponibles, o la solicitud de datos sensibles como salario. Una decision de inversion sin esto es dinero desperdiciado.</p>
@@ -1224,32 +1209,17 @@ section h2 em {
       </div>
 
       <div class="action mid reveal">
-        <div class="action-num">4</div>
+        <div class="action-num">3</div>
         <div class="action-body">
-          <h4>Lanzar campanas <em>C1, C2, C3</em> — Meta Ads</h4>
-          <p>Las 3 campanas de Meta estan disenadas, con creativos definidos y estructura CBO lista. Solo requieren aprobacion final. El periodo de aprendizaje de Meta necesita minimo 50 eventos de conversion por campana — cuanto antes empiecen a correr, antes sale del aprendizaje.</p>
+          <h4>Lanzar campanas <em>C2 y C3</em> — Meta Ads</h4>
+          <p>C1 ya esta activa. Faltan C2 y C3, disenadas con creativos definidos y estructura CBO lista. Solo requieren aprobacion final. El periodo de aprendizaje de Meta necesita minimo 50 eventos de conversion por campana — cuanto antes empiecen a correr, antes sale del aprendizaje.</p>
           <div class="action-how">
-            <strong>COMO:</strong> Crear campanas en Meta Ads Business Manager segun propuesta Junio 2026. Configurar CBO con los 3 ad sets por sectores para C1. Presupuesto inicial: $4,600,000 COP entre las 3 campanas. Activar conversion event: purchase.
+            <strong>COMO:</strong> Crear campanas en Meta Ads Business Manager segun propuesta Junio 2026. Configurar CBO con los ad sets por sectores. Presupuesto inicial entre las 2 campanas. Activar conversion event: purchase.
           </div>
         </div>
         <div class="action-meta">
-          <div class="impact">$4.6M COP activo</div>
+          <div class="impact">Cobertura completa estrategia</div>
           <div class="urgency semana">ESTA SEMANA</div>
-        </div>
-      </div>
-
-      <div class="action low reveal">
-        <div class="action-num">5</div>
-        <div class="action-body">
-          <h4>Activar <em>Google Ads</em> C5 y C6 — Libranza y Reportados</h4>
-          <p>Las campanas de Google Search capturan intencion activa de busqueda — son el complemento ideal de Meta (que opera en intencion pasiva). Con el cross-domain tracking configurado, las conversiones se atribuyen correctamente a Google Ads via el Conversion Linker ya instalado.</p>
-          <div class="action-how">
-            <strong>COMO:</strong> Crear campanas en Google Ads (ID: 414-381-9923). C5 keywords: "credito libranza", "prestamo nomina". C6 keywords: "credito con deudas", "prestamo reportado". Conversion action: AW-18096678342/KUU6CN-77qscEMbLlbVD. Presupuesto: $1,800,000 COP entre ambas.
-          </div>
-        </div>
-        <div class="action-meta">
-          <div class="impact">Intencion activa capturada</div>
-          <div class="urgency mes">ESTE MES</div>
         </div>
       </div>
     </div>
