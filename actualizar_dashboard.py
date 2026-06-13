@@ -51,8 +51,9 @@ FUNNEL_EVENTS = [
     ("2. Datos de empresa",     "company_selected"),
     ("3. Cotizacion calculada", "calculate_credit_clicked"),
     ("4. Pre aprobacion",       "pre_approval_accepted"),
-    ("5. Solicitud iniciada",   "loan_request_initiated"),
-    ("6. Solicitud enviada",    "purchase"),
+    ("5. Terminos aceptados",   "terms_accepted"),
+    ("6. Solicitud iniciada",   "loan_request_initiated"),
+    ("7. Solicitud enviada",    "purchase"),
 ]
 
 # Eventos extra para los KPIs / chart

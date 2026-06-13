@@ -4,3 +4,7 @@ token_ads.json
 meta_credentials.json
 __pycache__/
 *.pyc
+almi-dashboard-credentials.json
+TOKEN APP read_ad almi.txt
+token de API ALMI FINANCIERA.txt
+*.json.bak
