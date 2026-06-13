@@ -286,6 +286,7 @@ def main():
     for i, (label, event) in enumerate(FUNNEL_EVENTS):
         val = funnel_values[i]
         pct = round(val / base * 100, 1)
+        bar_pct = min(pct, 100.0)
 
         # f-value (numero del paso) - reemplazar el bloque de esa etapa
         stage_pattern = re.compile(
@@ -293,7 +294,7 @@ def main():
             re.DOTALL,
         )
         html = stage_pattern.sub(
-            lambda m, pct=pct, val=val: f'{m.group(1)}{pct}{m.group(2)}{val}{m.group(3)}{pct}%{m.group(4)}',
+            lambda m, bar_pct=bar_pct, pct=pct, val=val: f'{m.group(1)}{bar_pct}{m.group(2)}{val}{m.group(3)}{pct}%{m.group(4)}',
             html,
         )
 
