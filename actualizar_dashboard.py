@@ -42,6 +42,7 @@ SCOPES = ["https://www.googleapis.com/auth/analytics.readonly"]
 # Rango de fechas a consultar (ajustar segun necesidad)
 DATE_RANGE = DateRange(start_date="7daysAgo", end_date="today")
 PREV_DATE_RANGE = DateRange(start_date="14daysAgo", end_date="8daysAgo")
+ACCUM_DATE_RANGE = DateRange(start_date="2026-06-08", end_date="today")
 
 MESES_ES = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"]
 
@@ -289,6 +290,22 @@ def main():
     for msg, cnt in error_breakdown:
         print(f"  - {msg}: {cnt}")
 
+    # --- Acumulado desde implementacion (2026-06-08) ---
+    sessions_accum = fetch_sessions(client, ACCUM_DATE_RANGE)
+    counts_accum = fetch_event_counts(client, all_event_names, ACCUM_DATE_RANGE)
+    funnel_accum = fetch_funnel_users(client, FUNNEL_EVENTS, ACCUM_DATE_RANGE)
+    solicitudes_accum = funnel_accum[-1]
+    pre_aprobaciones_accum = counts_accum["pre_approval_accepted"]
+    errores_accum = counts_accum["form_validation_error"]
+    cotizador_starts_accum = funnel_accum[0]
+
+    print("\n=== Acumulado desde implementacion (2026-06-08) ===")
+    print(f"Sesiones: {sessions_accum}")
+    print(f"Iniciaron cotizacion: {cotizador_starts_accum}")
+    print(f"Solicitudes enviadas: {solicitudes_accum}")
+    print(f"Pre-aprobaciones: {pre_aprobaciones_accum}")
+    print(f"Errores formulario: {errores_accum}")
+
     # --- Datos de la semana anterior (para comparativa) ---
     sessions_prev = fetch_sessions(client, PREV_DATE_RANGE)
     counts_prev = fetch_event_counts(client, all_event_names, PREV_DATE_RANGE)
@@ -314,15 +331,15 @@ def main():
                    + re.escape(label) + r')')
         return re.sub(pattern, rf'\g<1>{new_value}\g<2>', html, count=1)
 
-    html = replace_stat_by_label(html, "Sesiones", sessions)
-    html = replace_stat_by_label(html, "Iniciaron cotizacion", cotizador_starts)
-    html = replace_stat_by_label(html, "Solicitudes enviadas", solicitudes)
-    html = replace_stat_by_label(html, "Pre-aprobaciones", pre_aprobaciones)
-    html = replace_stat_by_label(html, "Errores formulario", errores_form)
+    html = replace_stat_by_label(html, "Sesiones", sessions_accum)
+    html = replace_stat_by_label(html, "Iniciaron cotizacion", cotizador_starts_accum)
+    html = replace_stat_by_label(html, "Solicitudes enviadas", solicitudes_accum)
+    html = replace_stat_by_label(html, "Pre-aprobaciones", pre_aprobaciones_accum)
+    html = replace_stat_by_label(html, "Errores formulario", errores_accum)
 
-    # Conversion % de sesiones que inician cotizacion
-    pct_inicio = round(cotizador_starts / sessions * 100, 1) if sessions else 0
-    pct_conv = round(solicitudes / sessions * 100, 1) if sessions else 0
+    # Conversion % de sesiones que inician cotizacion (acumulado)
+    pct_inicio = round(cotizador_starts_accum / sessions_accum * 100, 1) if sessions_accum else 0
+    pct_conv = round(solicitudes_accum / sessions_accum * 100, 1) if sessions_accum else 0
     html = re.sub(r'\d+(\.\d+)?% de sesiones', f'{pct_inicio}% de sesiones', html, count=1)
     html = re.sub(r'\d+(\.\d+)?% tasa conversion', f'{pct_conv}% tasa conversion', html, count=1)
 
