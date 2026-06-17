@@ -902,6 +902,33 @@ def main():
         flags=re.S,
     )
 
+    # Grafico agrupado cotizaciones vs solicitudes por dia: solo mes en curso
+    daily_starts = dict(fetch_daily_errors(client, DateRange(
+        start_date=inicio_mes.strftime("%Y-%m-%d"), end_date=hoy.strftime("%Y-%m-%d")
+    ), event_name="worker_classification_selected"))
+    daily_subs = dict(fetch_daily_errors(client, DateRange(
+        start_date=inicio_mes.strftime("%Y-%m-%d"), end_date=hoy.strftime("%Y-%m-%d")
+    ), event_name="purchase"))
+    all_dates = sorted(set(daily_starts) | set(daily_subs))
+    funnel_items = [f"{{date:'{d}', starts:{daily_starts.get(d,0)}, subs:{daily_subs.get(d,0)}}}" for d in all_dates]
+    lines = []
+    for i in range(0, len(funnel_items), 3):
+        lines.append("  " + " ".join(x + "," if j != len(funnel_items) - 1 else x
+                                      for j, x in enumerate(funnel_items[i:i + 3], start=i)))
+    daily_funnel_block = (
+        "/* DAILY_FUNNEL_START */\n"
+        "var DATA_DAILY_FUNNEL = [\n"
+        + "\n".join(lines) + "\n"
+        "];\n"
+        "/* DAILY_FUNNEL_END */"
+    )
+    html = re.sub(
+        r"/\* DAILY_FUNNEL_START \*/.*?/\* DAILY_FUNNEL_END \*/",
+        daily_funnel_block,
+        html,
+        flags=re.S,
+    )
+
     with open(DASHBOARD_FILE, "w", encoding="utf-8") as f:
         f.write(html)
 
