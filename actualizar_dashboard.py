@@ -346,14 +346,13 @@ def main():
     # Frase de cierre: "Teniamos X sesiones..."
     html = re.sub(r'(Teniamos )\d+( sesiones y no sabiamos)', rf'\g<1>{sessions}\g<2>', html, count=1)
 
-    # --- Funnel stages ---
-    base = funnel_values[0] if funnel_values[0] else 1
+    # --- Funnel stages (acumulado desde implementacion) ---
+    base = funnel_accum[0] if funnel_accum[0] else 1
     for i, (label, event) in enumerate(FUNNEL_EVENTS):
-        val = funnel_values[i]
+        val = funnel_accum[i]
         pct = round(val / base * 100, 1)
         bar_pct = min(pct, 100.0)
 
-        # f-value (numero del paso) - reemplazar el bloque de esa etapa
         stage_pattern = re.compile(
             r'(<div class="f-label">' + re.escape(label) + r'</div>.*?data-pct=")[\d.]+("[^>]*></div></div>\s*<div class="f-value">)\d+(</div>\s*<div class="f-rate">)[\d.]+%(</div>)',
             re.DOTALL,
@@ -363,9 +362,9 @@ def main():
             html,
         )
 
-    # Abandono entre etapas (funnel-connector)
-    for i in range(len(funnel_values) - 1):
-        a, b = funnel_values[i], funnel_values[i + 1]
+    # Abandono entre etapas (funnel-connector, acumulado)
+    for i in range(len(funnel_accum) - 1):
+        a, b = funnel_accum[i], funnel_accum[i + 1]
         drop_users = a - b
         drop_pct = round(drop_users / a * 100, 1) if a else 0
         drop_pct_str = str(int(drop_pct)) if drop_pct == int(drop_pct) else str(drop_pct)
@@ -379,20 +378,21 @@ def main():
             html,
         )
 
-    # Conversion total (paso 1 -> paso 6)
-    conv_total = round(funnel_values[-1] / base * 100, 1) if base else 0
+    # Conversion total (paso 1 -> paso final, acumulado)
+    conv_total = round(funnel_accum[-1] / base * 100, 1) if base else 0
     html = re.sub(r'(<div class="fsumm-num">)[\d.]+%(</div>\s*<div class="fsumm-label">Conversion total)', rf'\g<1>{conv_total}%\g<2>', html)
 
-    # Errores de formulario (resumen del funnel)
+    # Errores y fallos (acumulado)
     html = re.sub(
         r'(<div class="fsumm-num" style="color:var\(--amber\)">)\d+(</div>\s*<div class="fsumm-label">Errores de formulario)',
-        rf'\g<1>{errores_form}\g<2>',
+        rf'\g<1>{errores_accum}\g<2>',
         html,
     )
 
+    fallos_accum = counts_accum["loan_request_failure"]
     html = re.sub(
         r'(<div class="fsumm-num" style="color:var\(--red\)">)\d+(</div>\s*<div class="fsumm-label">Fallos al enviar solicitud)',
-        rf'\g<1>{fallos_solicitud}\g<2>',
+        rf'\g<1>{fallos_accum}\g<2>',
         html,
     )
 
@@ -428,32 +428,32 @@ def main():
         )
         return pattern.sub(lambda m: m.group(1) + tag + m.group(2) + h3 + m.group(3) + p + m.group(4), html, count=1)
 
-    # Insight 1: mayor caida del funnel (entre dos pasos consecutivos)
+    # Insight 1: mayor caida del funnel (acumulado)
     drops = []
-    for i in range(len(funnel_values) - 1):
-        a, b = funnel_values[i], funnel_values[i + 1]
+    for i in range(len(funnel_accum) - 1):
+        a, b = funnel_accum[i], funnel_accum[i + 1]
         if a > 0:
             drops.append((round((a - b) / a * 100, 1), i))
     if drops:
         drop_pct, idx = max(drops)
         label_a = FUNNEL_EVENTS[idx][0].split(". ", 1)[1]
         label_b = FUNNEL_EVENTS[idx + 1][0].split(". ", 1)[1]
-        a, b = funnel_values[idx], funnel_values[idx + 1]
+        a, b = funnel_accum[idx], funnel_accum[idx + 1]
         html = replace_insight(
             html, 1, "Friccion critica",
             f'El <em>{drop_pct}%</em> abandona entre &quot;{label_a}&quot; y &quot;{label_b}&quot;',
             f'De {a} usuarios en el paso &quot;{label_a}&quot;, solo {b} llegan a &quot;{label_b}&quot; '
             f'({round(b / a * 100, 1) if a else 0}% de continuidad). Este es el mayor punto de fuga del '
-            f'funnel en el periodo medido — superar este paso deberia ser la prioridad de optimizacion '
+            f'funnel acumulado — superar este paso deberia ser la prioridad de optimizacion '
             f'numero 1.'
         )
 
-    # Insight 2: oportunidad de recuperacion (pre-aprobados que no enviaron solicitud)
-    recuperables = max(pre_aprobaciones - solicitudes, 0)
+    # Insight 2: oportunidad de recuperacion (acumulado)
+    recuperables = max(pre_aprobaciones_accum - solicitudes_accum, 0)
     html = replace_insight(
         html, 2, "Oportunidad de recuperacion",
         f'<em>{recuperables} usuarios</em> llegaron a pre-aprobacion pero no enviaron',
-        f'{pre_aprobaciones} pre-aprobaciones vs {solicitudes} solicitudes enviadas = {recuperables} usuarios '
+        f'{pre_aprobaciones_accum} pre-aprobaciones vs {solicitudes_accum} solicitudes enviadas = {recuperables} usuarios '
         f'que recibieron luz verde pero no completaron. Son el segmento de mayor intencion de compra '
         f'disponible. Una campana de retargeting especifica para este segmento puede recuperar parte de '
         f'estas solicitudes en las proximas semanas.'
