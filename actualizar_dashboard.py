@@ -51,8 +51,8 @@ FUNNEL_EVENTS = [
     ("1. Tipo de trabajador",   "worker_classification_selected"),
     ("2. Datos de empresa",     "company_selected"),
     ("3. Cotizacion calculada", "calculate_credit_clicked"),
-    ("4. Pre aprobacion",       "pre_approval_accepted"),
-    ("5. Terminos aceptados",   "terms_accepted"),
+    ("4. Terminos aceptados",   "terms_accepted"),
+    ("5. Pre aprobacion",       "pre_approval_accepted"),
     ("6. Solicitud iniciada",   "loan_request_initiated"),
     ("7. Solicitud enviada",    "purchase"),
 ]
@@ -459,15 +459,16 @@ def main():
         f'estas solicitudes en las proximas semanas.'
     )
 
-    # Insight 3: tasa de conversion entre "Cotizacion calculada" -> "Pre aprobacion"
+    # Insight 3: tasa de conversion entre "Cotizacion calculada" -> "Pre aprobacion" (paso 5)
     idx_calc = next(i for i, (l, _) in enumerate(FUNNEL_EVENTS) if l.startswith("3."))
+    idx_pre = next(i for i, (l, _) in enumerate(FUNNEL_EVENTS) if l.startswith("5."))
     calc_val = funnel_values[idx_calc]
-    pre_val = funnel_values[idx_calc + 1]
+    pre_val = funnel_values[idx_pre]
     pct_calidad = round(pre_val / calc_val * 100, 1) if calc_val else 0
     html = replace_insight(
         html, 3, "Senal de calidad",
         f'El <em>{pct_calidad}%</em> de quienes calculan llegan a pre-aprobacion',
-        f'Paso 3 -> Paso 4: {calc_val} cotizaciones calculadas, {pre_val} pre-aprobadas = {pct_calidad}% de '
+        f'Paso 3 -> Paso 5: {calc_val} cotizaciones calculadas, {pre_val} pre-aprobadas = {pct_calidad}% de '
         f'conversion. {"Esto indica que el perfil de usuario que llega a calcular es de alta calidad y cumple criterios de aprobacion. El problema no es la calidad del trafico sino la perdida en los pasos iniciales del funnel." if pct_calidad >= 40 else "Esta tasa es baja y sugiere revisar los criterios de pre-aprobacion o la calidad del trafico que llega a este paso."}'
     )
 
