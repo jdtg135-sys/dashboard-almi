@@ -2,11 +2,11 @@
   "_instrucciones": "Actualiza estos numeros manualmente cada semana copiandolos de Meta Ads Manager y Google Ads. Luego ejecuta ejecutar_actualizacion.bat",
   "periodo": "Ultimos 7 dias",
   "meta_ads": {
-    "inversion": 1843588,
-    "impresiones": 154769,
-    "clics": 7189,
-    "resultados": 902,
-    "costo_por_resultado": 2044,
+    "inversion": 1973306,
+    "impresiones": 166800,
+    "clics": 7576,
+    "resultados": 964,
+    "costo_por_resultado": 2047,
     "inversion_prev": 1993172,
     "impresiones_prev": 423893,
     "clics_prev": 10098,
@@ -15,15 +15,15 @@
     "campanas": [
       {
         "nombre": "C7 - Concurso mundialista",
-        "estado": "Active",
+        "estado": "Paused",
         "presupuesto_dia": 1160,
-        "impresiones": 81357,
-        "clics": 3560,
+        "impresiones": 81379,
+        "clics": 3564,
         "ctr": 4.38,
-        "cpc_promedio": 226.51,
-        "gasto": 806391,
-        "resultados": 230,
-        "costo_por_resultado": 3506,
+        "cpc_promedio": 226.29,
+        "gasto": 806502,
+        "resultados": 231,
+        "costo_por_resultado": 3491,
         "prev": {
           "nombre": "C7 - Concurso mundialista",
           "gasto": 363633,
@@ -38,14 +38,14 @@
       {
         "nombre": "Campaña de formulario Copia 06/05/2026",
         "estado": "Active",
-        "presupuesto_dia": 900,
-        "impresiones": 39283,
-        "clics": 2176,
-        "ctr": 5.54,
-        "cpc_promedio": 296.04,
-        "gasto": 644179,
-        "resultados": 508,
-        "costo_por_resultado": 1268,
+        "presupuesto_dia": 100,
+        "impresiones": 43060,
+        "clics": 2356,
+        "ctr": 5.47,
+        "cpc_promedio": 294.04,
+        "gasto": 692766,
+        "resultados": 546,
+        "costo_por_resultado": 1269,
         "prev": {
           "nombre": "Campaña de formulario Copia 06/05/2026",
           "gasto": 623843,
@@ -61,13 +61,13 @@
         "nombre": "C1 - Convenio por Sectores - Jun2026",
         "estado": "Active",
         "presupuesto_dia": 600,
-        "impresiones": 34129,
-        "clics": 1453,
-        "ctr": 4.26,
-        "cpc_promedio": 270.49,
-        "gasto": 393018,
-        "resultados": 164,
-        "costo_por_resultado": 2396,
+        "impresiones": 39590,
+        "clics": 1563,
+        "ctr": 3.95,
+        "cpc_promedio": 281.91,
+        "gasto": 440627,
+        "resultados": 177,
+        "costo_por_resultado": 2489,
         "prev": {
           "nombre": "C1 - Convenio por Sectores - Jun2026",
           "gasto": 219305,
@@ -78,6 +78,19 @@
           "resultados": 43,
           "costo_por_resultado": 5100
         }
+      },
+      {
+        "nombre": "C2 - Empleados sector privado frío",
+        "estado": "Active",
+        "presupuesto_dia": 600,
+        "impresiones": 2771,
+        "clics": 93,
+        "ctr": 3.36,
+        "cpc_promedio": 359.26,
+        "gasto": 33411,
+        "resultados": 10,
+        "costo_por_resultado": 3341,
+        "prev": null
       },
       {
         "nombre": "C7 - Concurso mundialista - Conversión personalizada",
@@ -104,11 +117,11 @@
     ],
     "meses": [
       {
-        "inversion": 5257742,
-        "impresiones": 787278,
-        "clics": 22963,
-        "resultados": 1976,
-        "costo_por_resultado": 2661,
+        "inversion": 5387460,
+        "impresiones": 799309,
+        "clics": 23350,
+        "resultados": 2038,
+        "costo_por_resultado": 2644,
         "label": "Jun 2026"
       },
       {
@@ -189,11 +202,11 @@
     "meses": [
       {
         "label": "Jun 2026",
-        "inversion": 810932,
-        "impresiones": 3421,
-        "clics": 792,
+        "inversion": 813336,
+        "impresiones": 3438,
+        "clics": 799,
         "conversiones": 407.9,
-        "costo_por_conversion": 1987.85
+        "costo_por_conversion": 1993.74
       },
       {
         "label": "May 2026",
