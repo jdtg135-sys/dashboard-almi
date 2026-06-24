@@ -29,6 +29,7 @@ from google.analytics.data_v1beta.types import (
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.oauth2.credentials import Credentials
 from google.auth.transport.requests import Request
+from google.auth.exceptions import RefreshError
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CLIENT_SECRET_FILE = os.path.join(BASE_DIR, "oauth_credentials.json")
@@ -83,9 +84,15 @@ def get_credentials():
     if os.path.exists(TOKEN_FILE):
         creds = Credentials.from_authorized_user_file(TOKEN_FILE, SCOPES)
     if not creds or not creds.valid:
+        refreshed = False
         if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
+            try:
+                creds.refresh(Request())
+                refreshed = True
+            except RefreshError:
+                # token revocado/expirado sin posibilidad de refresco: re-autorizar
+                creds = None
+        if not refreshed:
             flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRET_FILE, SCOPES)
             creds = flow.run_local_server(port=0)
         with open(TOKEN_FILE, "w") as f:
