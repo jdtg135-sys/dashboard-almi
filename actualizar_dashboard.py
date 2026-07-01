@@ -19,6 +19,7 @@ import os
 import re
 import json
 import datetime
+from datetime import timedelta
 import calendar
 
 from google.analytics.data_v1beta import BetaAnalyticsDataClient
@@ -863,10 +864,10 @@ def main():
         html,
     )
 
-    # Grafico de errores diarios: solo mes en curso (1 al dia actual)
-    inicio_mes = hoy.replace(day=1)
+    # Grafico de errores diarios: ultimos 30 dias
+    inicio_30d = hoy - timedelta(days=29)
     daily_errors = fetch_daily_errors(client, DateRange(
-        start_date=inicio_mes.strftime("%Y-%m-%d"), end_date=hoy.strftime("%Y-%m-%d")
+        start_date=inicio_30d.strftime("%Y-%m-%d"), end_date=hoy.strftime("%Y-%m-%d")
     ))
     items = [f"{{date:'{d}', val:{v}}}" for d, v in daily_errors]
     lines = []
@@ -887,9 +888,9 @@ def main():
         flags=re.S,
     )
 
-    # Grafico de fallos al enviar solicitud (loan_request_failure) por dia: solo mes en curso
+    # Grafico de fallos al enviar solicitud (loan_request_failure) por dia: ultimos 30 dias
     daily_failures = fetch_daily_errors(client, DateRange(
-        start_date=inicio_mes.strftime("%Y-%m-%d"), end_date=hoy.strftime("%Y-%m-%d")
+        start_date=inicio_30d.strftime("%Y-%m-%d"), end_date=hoy.strftime("%Y-%m-%d")
     ), event_name="loan_request_failure")
     items = [f"{{date:'{d}', val:{v}}}" for d, v in daily_failures]
     lines = []
@@ -910,12 +911,12 @@ def main():
         flags=re.S,
     )
 
-    # Grafico agrupado cotizaciones vs solicitudes por dia: solo mes en curso
+    # Grafico agrupado cotizaciones vs solicitudes por dia: ultimos 30 dias
     daily_starts = dict(fetch_daily_errors(client, DateRange(
-        start_date=inicio_mes.strftime("%Y-%m-%d"), end_date=hoy.strftime("%Y-%m-%d")
+        start_date=inicio_30d.strftime("%Y-%m-%d"), end_date=hoy.strftime("%Y-%m-%d")
     ), event_name="worker_classification_selected"))
     daily_subs = dict(fetch_daily_errors(client, DateRange(
-        start_date=inicio_mes.strftime("%Y-%m-%d"), end_date=hoy.strftime("%Y-%m-%d")
+        start_date=inicio_30d.strftime("%Y-%m-%d"), end_date=hoy.strftime("%Y-%m-%d")
     ), event_name="purchase"))
     all_dates = sorted(set(daily_starts) | set(daily_subs))
     funnel_items = [f"{{date:'{d}', starts:{daily_starts.get(d,0)}, subs:{daily_subs.get(d,0)}}}" for d in all_dates]

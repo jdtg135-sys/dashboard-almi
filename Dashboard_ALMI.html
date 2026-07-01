@@ -637,7 +637,7 @@ section h2 em {
         </thead>
         <tbody>
           <!-- COMPARATIVA_SEMANAL_START -->
-          <tr><td>Sesiones</td><td>7.229</td><td>4.942</td><td class="delta-up">+46.3%</td></tr>
+          <tr><td>Sesiones</td><td>7.239</td><td>4.942</td><td class="delta-up">+46.5%</td></tr>
           <tr><td>Iniciaron cotizacion</td><td>2.209</td><td>838</td><td class="delta-up">+163.6%</td></tr>
           <tr><td>Solicitudes enviadas</td><td>643</td><td>205</td><td class="delta-up">+213.7%</td></tr>
           <tr><td>Pre-aprobaciones</td><td>1.688</td><td>431</td><td class="delta-up">+291.6%</td></tr>
@@ -813,19 +813,19 @@ section h2 em {
 
       <div class="chart-wrapper reveal" style="margin-top:32px;">
         <div class="chart-title">Cotizaciones y solicitudes por dia</div>
-        <div class="chart-sub">Iniciaron cotizacion vs Solicitudes enviadas — mes en curso</div>
+        <div class="chart-sub">Iniciaron cotizacion vs Solicitudes enviadas — ultimos 30 dias</div>
         <div id="dailyFunnelChart" style="width:100%;"></div>
       </div>
 
       <div class="chart-wrapper reveal" style="margin-top:32px;">
         <div class="chart-title">Errores por dia</div>
-        <div class="chart-sub">Errores de formulario detectados — mes en curso</div>
+        <div class="chart-sub">Errores de formulario detectados — ultimos 30 dias</div>
         <div id="dailyErrorsChart" style="width:100%;"></div>
       </div>
 
       <div class="chart-wrapper reveal" style="margin-top:32px;">
         <div class="chart-title">Fallos al enviar solicitud por dia</div>
-        <div class="chart-sub">loan_request_failure — mes en curso (en seguimiento con equipo de desarrollo)</div>
+        <div class="chart-sub">loan_request_failure — ultimos 30 dias (en seguimiento con equipo de desarrollo)</div>
         <div id="dailyFailuresChart" style="width:100%;"></div>
       </div>
     </div>
@@ -1231,7 +1231,7 @@ section h2 em {
   <!-- CLOSING -->
   <div class="closing reveal">
     <p class="closing-quote">
-      "Teniamos 7229 sesiones y no sabiamos cuantas llegaban al final.<br>
+      "Teniamos 7239 sesiones y no sabiamos cuantas llegaban al final.<br>
       Ahora sabemos que son <em>6.</em> Ahi empieza el trabajo real."
     </p>
     <div class="closing-attr">Dashboard ALMI Financiera &nbsp;·&nbsp; Jun 2026 &nbsp;·&nbsp; Datos: GA4 + Meta Pixel + Google Ads</div>
@@ -1257,19 +1257,46 @@ var DATA_EVENTS = [
 
 /* DAILY_ERRORS_START */
 var DATA_DAILY_ERRORS = [
-  {date:'2026-07-01', val:0}
+  {date:'2026-06-02', val:0}, {date:'2026-06-03', val:0}, {date:'2026-06-04', val:0},
+  {date:'2026-06-05', val:0}, {date:'2026-06-06', val:0}, {date:'2026-06-07', val:0},
+  {date:'2026-06-08', val:7}, {date:'2026-06-09', val:103}, {date:'2026-06-10', val:215},
+  {date:'2026-06-11', val:129}, {date:'2026-06-12', val:253}, {date:'2026-06-13', val:53},
+  {date:'2026-06-14', val:175}, {date:'2026-06-15', val:208}, {date:'2026-06-16', val:217},
+  {date:'2026-06-17', val:90}, {date:'2026-06-18', val:1}, {date:'2026-06-19', val:0},
+  {date:'2026-06-20', val:0}, {date:'2026-06-21', val:0}, {date:'2026-06-22', val:22},
+  {date:'2026-06-23', val:232}, {date:'2026-06-24', val:160}, {date:'2026-06-25', val:330},
+  {date:'2026-06-26', val:374}, {date:'2026-06-27', val:149}, {date:'2026-06-28', val:172},
+  {date:'2026-06-29', val:128}, {date:'2026-06-30', val:126}, {date:'2026-07-01', val:0}
 ];
 /* DAILY_ERRORS_END */
 
 /* DAILY_FAILURES_START */
 var DATA_DAILY_FAILURES = [
-  {date:'2026-07-01', val:0}
+  {date:'2026-06-02', val:0}, {date:'2026-06-03', val:0}, {date:'2026-06-04', val:0},
+  {date:'2026-06-05', val:0}, {date:'2026-06-06', val:0}, {date:'2026-06-07', val:0},
+  {date:'2026-06-08', val:4}, {date:'2026-06-09', val:7}, {date:'2026-06-10', val:19},
+  {date:'2026-06-11', val:2}, {date:'2026-06-12', val:18}, {date:'2026-06-13', val:10},
+  {date:'2026-06-14', val:8}, {date:'2026-06-15', val:32}, {date:'2026-06-16', val:43},
+  {date:'2026-06-17', val:20}, {date:'2026-06-18', val:0}, {date:'2026-06-19', val:0},
+  {date:'2026-06-20', val:0}, {date:'2026-06-21', val:0}, {date:'2026-06-22', val:4},
+  {date:'2026-06-23', val:54}, {date:'2026-06-24', val:22}, {date:'2026-06-25', val:10},
+  {date:'2026-06-26', val:18}, {date:'2026-06-27', val:10}, {date:'2026-06-28', val:18},
+  {date:'2026-06-29', val:12}, {date:'2026-06-30', val:16}, {date:'2026-07-01', val:0}
 ];
 /* DAILY_FAILURES_END */
 
 /* DAILY_FUNNEL_START */
 var DATA_DAILY_FUNNEL = [
-  {date:'2026-07-01', starts:1, subs:0}
+  {date:'2026-06-02', starts:0, subs:0}, {date:'2026-06-03', starts:0, subs:0}, {date:'2026-06-04', starts:0, subs:0},
+  {date:'2026-06-05', starts:0, subs:0}, {date:'2026-06-06', starts:0, subs:0}, {date:'2026-06-07', starts:0, subs:0},
+  {date:'2026-06-08', starts:40, subs:11}, {date:'2026-06-09', starts:514, subs:85}, {date:'2026-06-10', starts:554, subs:76},
+  {date:'2026-06-11', starts:344, subs:43}, {date:'2026-06-12', starts:627, subs:78}, {date:'2026-06-13', starts:392, subs:65},
+  {date:'2026-06-14', starts:492, subs:91}, {date:'2026-06-15', starts:583, subs:123}, {date:'2026-06-16', starts:698, subs:130},
+  {date:'2026-06-17', starts:634, subs:112}, {date:'2026-06-18', starts:2, subs:1}, {date:'2026-06-19', starts:1, subs:0},
+  {date:'2026-06-20', starts:0, subs:0}, {date:'2026-06-21', starts:0, subs:0}, {date:'2026-06-22', starts:70, subs:6},
+  {date:'2026-06-23', starts:892, subs:89}, {date:'2026-06-24', starts:1036, subs:109}, {date:'2026-06-25', starts:1004, subs:97},
+  {date:'2026-06-26', starts:1010, subs:112}, {date:'2026-06-27', starts:620, subs:82}, {date:'2026-06-28', starts:748, subs:88},
+  {date:'2026-06-29', starts:778, subs:87}, {date:'2026-06-30', starts:690, subs:68}, {date:'2026-07-01', starts:1, subs:0}
 ];
 /* DAILY_FUNNEL_END */
 
