@@ -42,7 +42,13 @@ PROPERTY_ID = "522022877"
 SCOPES = ["https://www.googleapis.com/auth/analytics.readonly"]
 
 # Rango de fechas a consultar (ajustar segun necesidad)
-DATE_RANGE = DateRange(start_date="7daysAgo", end_date="today")
+#
+# Las dos ventanas semanales tienen que medir la MISMA cantidad de dias, si no
+# los porcentajes de variacion salen inflados. En GA4 "7daysAgo" a "today" son
+# 8 dias (incluye hoy, que ademas esta incompleto) mientras la ventana previa
+# eran 7: la comparativa semanal comparaba 8 contra 7. Ahora ambas son de 7
+# dias completos, terminando ayer, igual que las de Meta y Google Ads.
+DATE_RANGE = DateRange(start_date="7daysAgo", end_date="yesterday")
 PREV_DATE_RANGE = DateRange(start_date="14daysAgo", end_date="8daysAgo")
 ACCUM_DATE_RANGE = DateRange(start_date="2026-06-08", end_date="today")
 
@@ -120,36 +126,43 @@ def fetch_users_for_event(client, event_names, date_range=DATE_RANGE):
     return 0
 
 
-def fetch_funnel_users(client, funnel_events, date_range=DATE_RANGE):
-    """Devuelve lista de activeUsers por etapa del funnel, monotonamente decreciente
-    (cada etapa se limita al minimo entre su propio valor y el de la etapa anterior,
-    ya que un funnel lineal no puede crecer)."""
-    raw = []
-    for label, event in funnel_events:
-        if label.startswith("2."):
-            # Paso 2 (Datos de empresa): "company_selected" es el evento correcto pero
-            # se implemento recientemente; se incluye tambien "calculate_credit_clicked"
-            # (usado como proxy temporal) para no perder usuarios que ya pasaron por ahi.
-            val = fetch_users_for_event(client, [event, "calculate_credit_clicked"], date_range)
-        else:
-            val = fetch_users_for_event(client, [event], date_range)
-        raw.append(val)
+def aplicar_tope_monotono(valores):
+    """Limita cada paso al minimo entre su valor y el del paso anterior.
 
-    # Se limita CADA paso al minimo entre su valor y el del paso anterior.
-    #
-    # Antes solo se limitaban los pasos 2 y 3, y los pasos 4-7 quedaban sin tope.
-    # Eso producia un embudo imposible: terms_accepted (15.803) salia por encima
-    # de calculate_credit_clicked (15.577) y el dashboard mostraba un "abandono
-    # de -1.5%", es decir mas gente aceptando terminos que calculando cotizacion.
-    #
-    # La causa de fondo es que GA4 cuenta activeUsers por evento de forma
-    # independiente: no es un embudo secuencial real (no dice "usuarios que
-    # hicieron el paso 1 Y el paso 2"). Mientras se instrumenta un embudo
-    # secuencial de verdad, el tope monotono evita mostrar un dato imposible.
-    capped = list(raw)
+    Antes el tope solo se aplicaba a los pasos 2 y 3, y los pasos 4-7 quedaban
+    libres. Eso producia un embudo imposible: terms_accepted (15.803) salia por
+    encima de calculate_credit_clicked (15.577) y el dashboard mostraba un
+    "abandono de -1.5%", es decir mas gente aceptando terminos que calculando.
+
+    La causa de fondo es que GA4 cuenta activeUsers por evento de forma
+    independiente: no es un embudo secuencial real (no dice "usuarios que
+    hicieron el paso 1 Y el paso 2"). Mientras se instrumenta un embudo
+    secuencial de verdad, el tope evita mostrar un dato imposible.
+
+    Vive en su propia funcion porque el embudo se calcula por dos caminos
+    (fetch_funnel_users y fetch_funnel_users_fast) y si las reglas divergieran,
+    el embudo estatico y el del filtro mostrarian numeros distintos.
+    """
+    capped = list(valores)
     for i in range(1, len(capped)):
         capped[i] = min(capped[i], capped[i - 1])
     return capped
+
+
+def fetch_funnel_users(client, funnel_events, date_range=DATE_RANGE):
+    """activeUsers por etapa del funnel, monotonamente decreciente.
+
+    Delega en fetch_funnel_users_fast para que exista UNA sola forma de calcular
+    el embudo.
+
+    Antes esta funcion pedia cada evento por separado (una llamada por paso) y
+    la del filtro los pedia con la dimension eventName (dos llamadas en total).
+    Las dos consultas son validas, pero GA4 aproxima los conteos de usuarios
+    unicos y cada camino daba un resultado ligeramente distinto: en el acumulado
+    diferian 1-2 usuarios en los pasos 3, 4 y 5. Poco, pero suficiente para que
+    el embudo estatico y el preset "Acumulado" no cuadraran entre si.
+    """
+    return fetch_funnel_users_fast(client, funnel_events, date_range)
 
 
 def fetch_event_counts(client, event_names, date_range=DATE_RANGE):
@@ -234,11 +247,7 @@ def fetch_funnel_users_fast(client, funnel_events, date_range):
         else:
             raw.append(por_evento.get(event, 0))
 
-    # Mismo tope monotono que fetch_funnel_users: un embudo no puede crecer.
-    capped = list(raw)
-    for i in range(1, len(capped)):
-        capped[i] = min(capped[i], capped[i - 1])
-    return capped
+    return aplicar_tope_monotono(raw)
 
 
 def fetch_error_breakdown_diario(client, date_range, limit=200,
@@ -591,8 +600,15 @@ def main():
     html = re.sub(r'\d+(\.\d+)?% de sesiones', f'{pct_inicio}% de sesiones', html, count=1)
     html = re.sub(r'\d+(\.\d+)?% tasa conversion', f'{pct_conv}% tasa conversion', html, count=1)
 
-    # Frase de cierre: "Teniamos X sesiones..."
+    # Frase de cierre. Antes solo se actualizaba el numero de sesiones y el
+    # "Ahora sabemos que son X" quedaba fijo en 6, un valor viejo que no
+    # correspondia a nada: con 12.730 sesiones las solicitudes eran 1.282.
     html = re.sub(r'(Teniamos )\d+( sesiones y no sabiamos)', rf'\g<1>{sessions}\g<2>', html, count=1)
+    html = re.sub(r'(Ahora sabemos que son <em>)\d+(\.</em>)',
+                  rf'\g<1>{funnel_values[-1]}\g<2>', html, count=1)
+    html = re.sub(r'(<span id="closingFecha">)[^<]*(</span>)',
+                  rf'\g<1>{MESES_ES[datetime.date.today().month - 1]} '
+                  rf'{datetime.date.today().year}\g<2>', html, count=1)
 
     # --- Funnel stages (acumulado desde implementacion) ---
     base = funnel_accum[0] if funnel_accum[0] else 1
@@ -719,21 +735,35 @@ def main():
         )
 
     # Insight 2: oportunidad de recuperacion (acumulado)
-    recuperables = max(pre_aprobaciones_accum - solicitudes_accum, 0)
+    #
+    # Antes esto restaba counts_accum["pre_approval_accepted"] (eventCount) menos
+    # funnel_accum[-1] (activeUsers): eventos menos personas. Daba ~14.350
+    # "usuarios recuperables", una cifra que no significaba nada y que ademas
+    # contradecia el embudo mostrado justo arriba. Ahora ambos lados salen del
+    # mismo embudo, asi que la resta si son personas.
+    idx_pre_ins = next(i for i, (l, _) in enumerate(FUNNEL_EVENTS) if l.startswith("5."))
+    preap_users = funnel_accum[idx_pre_ins]
+    enviadas_users = funnel_accum[-1]
+    recuperables = max(preap_users - enviadas_users, 0)
     html = replace_insight(
         html, 2, "Oportunidad de recuperacion",
         f'<em>{recuperables} usuarios</em> llegaron a pre-aprobacion pero no enviaron',
-        f'{pre_aprobaciones_accum} pre-aprobaciones vs {solicitudes_accum} solicitudes enviadas = {recuperables} usuarios '
-        f'que recibieron luz verde pero no completaron. Son el segmento de mayor intencion de compra '
-        f'disponible. Una campana de retargeting especifica para este segmento puede recuperar parte de '
-        f'estas solicitudes en las proximas semanas.'
+        f'{preap_users} usuarios recibieron pre-aprobacion y {enviadas_users} enviaron la solicitud: '
+        f'{recuperables} quedaron con luz verde sin completar. Son el segmento con mayor intencion '
+        f'de compra disponible, y una campana de retargeting dirigida solo a ellos puede recuperar '
+        f'parte de esas solicitudes.'
     )
 
     # Insight 3: tasa de conversion entre "Cotizacion calculada" -> "Pre aprobacion" (paso 5)
+    #
+    # Usa funnel_accum, no funnel_values: los insights 1 y 2 hablan del acumulado
+    # y este salia de la ventana de 7 dias. Los tres aparecen juntos bajo el mismo
+    # titulo, asi que mezclar periodos hacia que el porcentaje no cuadrara con el
+    # embudo de arriba (decia 72.3% cuando el acumulado daba 70.1%).
     idx_calc = next(i for i, (l, _) in enumerate(FUNNEL_EVENTS) if l.startswith("3."))
     idx_pre = next(i for i, (l, _) in enumerate(FUNNEL_EVENTS) if l.startswith("5."))
-    calc_val = funnel_values[idx_calc]
-    pre_val = funnel_values[idx_pre]
+    calc_val = funnel_accum[idx_calc]
+    pre_val = funnel_accum[idx_pre]
     pct_calidad = round(pre_val / calc_val * 100, 1) if calc_val else 0
     html = replace_insight(
         html, 3, "Senal de calidad",
