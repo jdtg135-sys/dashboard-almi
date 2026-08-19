@@ -8,3 +8,5 @@ almi-dashboard-credentials.json
 TOKEN APP read_ad almi.txt
 token de API ALMI FINANCIERA.txt
 *.json.bak
+google_ads_config.json
+_backup_*/

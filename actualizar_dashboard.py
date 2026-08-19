@@ -135,15 +135,20 @@ def fetch_funnel_users(client, funnel_events, date_range=DATE_RANGE):
             val = fetch_users_for_event(client, [event], date_range)
         raw.append(val)
 
-    # Solo se limitan los pasos 2 y 3 (problema conocido: calculate_credit_clicked
-    # se dispara mas veces que usuarios reales que seleccionan empresa). Los pasos
-    # 4-7 se dejan con su valor real, aunque algun paso recien instrumentado
-    # (ej. terms_accepted) pueda tener un conteo temporalmente bajo por ser
-    # implementacion reciente con datos de pocos dias.
+    # Se limita CADA paso al minimo entre su valor y el del paso anterior.
+    #
+    # Antes solo se limitaban los pasos 2 y 3, y los pasos 4-7 quedaban sin tope.
+    # Eso producia un embudo imposible: terms_accepted (15.803) salia por encima
+    # de calculate_credit_clicked (15.577) y el dashboard mostraba un "abandono
+    # de -1.5%", es decir mas gente aceptando terminos que calculando cotizacion.
+    #
+    # La causa de fondo es que GA4 cuenta activeUsers por evento de forma
+    # independiente: no es un embudo secuencial real (no dice "usuarios que
+    # hicieron el paso 1 Y el paso 2"). Mientras se instrumenta un embudo
+    # secuencial de verdad, el tope monotono evita mostrar un dato imposible.
     capped = list(raw)
-    for i in (1, 2):
-        if i < len(capped):
-            capped[i] = min(capped[i], capped[i - 1])
+    for i in range(1, len(capped)):
+        capped[i] = min(capped[i], capped[i - 1])
     return capped
 
 
@@ -184,6 +189,183 @@ def fetch_error_breakdown(client, date_range=DATE_RANGE, limit=8,
         count = int(row.metric_values[0].value)
         result.append((msg, count))
     return result
+
+
+def fetch_users_by_event(client, event_names, date_range):
+    """activeUsers por cada evento, en UNA sola llamada.
+
+    Equivale a llamar fetch_users_for_event una vez por evento, pero pidiendo
+    la dimension eventName. Se usa para armar los rangos del filtro sin
+    disparar 7 llamadas por rango.
+    """
+    request = RunReportRequest(
+        property=f"properties/{PROPERTY_ID}",
+        dimensions=[Dimension(name="eventName")],
+        metrics=[Metric(name="activeUsers")],
+        date_ranges=[date_range],
+        dimension_filter=FilterExpression(
+            filter=Filter(
+                field_name="eventName",
+                in_list_filter=Filter.InListFilter(values=list(event_names)),
+            )
+        ),
+    )
+    response = client.run_report(request)
+    out = {row.dimension_values[0].value: int(row.metric_values[0].value)
+           for row in response.rows}
+    return {name: out.get(name, 0) for name in event_names}
+
+
+def fetch_funnel_users_fast(client, funnel_events, date_range):
+    """Igual que fetch_funnel_users pero con 2 llamadas en vez de 7.
+
+    La union del paso 2 (company_selected + calculate_credit_clicked) necesita
+    su propia llamada porque activeUsers deduplica: la union de dos eventos no
+    es la suma de sus usuarios.
+    """
+    nombres = [ev for _, ev in funnel_events]
+    por_evento = fetch_users_by_event(client, nombres, date_range)
+
+    raw = []
+    for label, event in funnel_events:
+        if label.startswith("2."):
+            raw.append(fetch_users_for_event(
+                client, [event, "calculate_credit_clicked"], date_range))
+        else:
+            raw.append(por_evento.get(event, 0))
+
+    # Mismo tope monotono que fetch_funnel_users: un embudo no puede crecer.
+    capped = list(raw)
+    for i in range(1, len(capped)):
+        capped[i] = min(capped[i], capped[i - 1])
+    return capped
+
+
+def fetch_error_breakdown_diario(client, date_range, limit=200,
+                                 event_names=("form_validation_error",)):
+    """Errores por (fecha, mensaje). eventCount es aditivo, asi que el navegador
+    puede sumar cualquier subrango sin volver a consultar."""
+    request = RunReportRequest(
+        property=f"properties/{PROPERTY_ID}",
+        dimensions=[Dimension(name="date"),
+                    Dimension(name="customEvent:error_message")],
+        metrics=[Metric(name="eventCount")],
+        date_ranges=[date_range],
+        dimension_filter=FilterExpression(
+            filter=Filter(
+                field_name="eventName",
+                in_list_filter=Filter.InListFilter(values=list(event_names)),
+            )
+        ),
+        limit=100000,
+    )
+    response = client.run_report(request)
+    filas = []
+    for row in response.rows:
+        f = row.dimension_values[0].value          # YYYYMMDD
+        msg = row.dimension_values[1].value or "(sin especificar)"
+        filas.append({
+            "fecha": f"{f[0:4]}-{f[4:6]}-{f[6:8]}",
+            "msg": msg,
+            "n": int(row.metric_values[0].value),
+        })
+    return filas
+
+
+def fetch_serie_diaria_eventos(client, date_range, event_names):
+    """eventCount por (fecha, evento) para los graficos diarios y los KPIs
+    aditivos. Una sola llamada cubre todo el historial."""
+    request = RunReportRequest(
+        property=f"properties/{PROPERTY_ID}",
+        dimensions=[Dimension(name="date"), Dimension(name="eventName")],
+        metrics=[Metric(name="eventCount")],
+        date_ranges=[date_range],
+        dimension_filter=FilterExpression(
+            filter=Filter(
+                field_name="eventName",
+                in_list_filter=Filter.InListFilter(values=list(event_names)),
+            )
+        ),
+        limit=100000,
+    )
+    response = client.run_report(request)
+    filas = []
+    for row in response.rows:
+        f = row.dimension_values[0].value
+        filas.append({
+            "fecha": f"{f[0:4]}-{f[4:6]}-{f[6:8]}",
+            "ev": row.dimension_values[1].value,
+            "n": int(row.metric_values[0].value),
+        })
+    return filas
+
+
+def fetch_sesiones_diarias(client, date_range):
+    """Sesiones por dia. sessions es practicamente aditiva (desvio medido
+    < 1%), asi que sirve para recortar por rango en el navegador."""
+    request = RunReportRequest(
+        property=f"properties/{PROPERTY_ID}",
+        dimensions=[Dimension(name="date")],
+        metrics=[Metric(name="sessions")],
+        date_ranges=[date_range],
+        limit=100000,
+    )
+    response = client.run_report(request)
+    out = {}
+    for row in response.rows:
+        f = row.dimension_values[0].value
+        out[f"{f[0:4]}-{f[4:6]}-{f[6:8]}"] = int(row.metric_values[0].value)
+    return out
+
+
+def rangos_preset(hoy, inicio_datos):
+    """Define los rangos que ofrece el filtro.
+
+    Se pre-descarga cada uno por separado en vez de sumar dias porque el embudo
+    usa activeUsers, que esta deduplicada: sumar dias sobrecuenta (+16% medido
+    a 30 dias). Con rangos fijos los usuarios unicos quedan exactos.
+    """
+    ayer = hoy - timedelta(days=1)
+    presets = []
+
+    for n in (7, 14, 30, 90):
+        presets.append({
+            "id": str(n),
+            "label": f"{n} dias",
+            "desde": (ayer - timedelta(days=n - 1)).isoformat(),
+            "hasta": ayer.isoformat(),
+        })
+
+    ini_mes = hoy.replace(day=1)
+    presets.append({
+        "id": "mes",
+        "label": "Mes actual",
+        "desde": ini_mes.isoformat(),
+        "hasta": hoy.isoformat(),
+    })
+
+    fin_mes_ant = ini_mes - timedelta(days=1)
+    presets.append({
+        "id": "mes-1",
+        "label": "Mes anterior",
+        "desde": fin_mes_ant.replace(day=1).isoformat(),
+        "hasta": fin_mes_ant.isoformat(),
+    })
+
+    presets.append({
+        "id": "acum",
+        "label": "Acumulado",
+        "desde": inicio_datos,
+        "hasta": hoy.isoformat(),
+    })
+
+    # Un rango que empiece antes de que existieran los datos daria un total
+    # incompleto leido como real.
+    for p in presets:
+        p["recortado"] = p["desde"] < inicio_datos
+        if p["recortado"]:
+            p["desde"] = inicio_datos
+    return presets
 
 
 def fetch_sessions(client, date_range=DATE_RANGE):
@@ -270,6 +452,61 @@ def replace_stat(html, target_value, new_value):
     return re.sub(pattern, f'data-target="{new_value}"', html, count=1)
 
 
+def construir_rangos(client, hoy, all_event_names):
+    """Arma la estructura que consume el filtro global del dashboard.
+
+    Estrategia mixta, decidida por como se comporta cada metrica en GA4:
+
+      - activeUsers (embudo) NO es aditiva: esta deduplicada por rango, asi que
+        sumar dias sobrecuenta (medido: +6.6% a 7 dias, +16.1% a 30). Por eso
+        cada preset se descarga como su propio rango y queda exacto.
+
+      - eventCount y sessions SI son aditivas (desvio medido 0.0% y -0.7%).
+        Se bajan una sola vez como serie diaria y el navegador las recorta.
+    """
+    inicio_datos = ACCUM_DATE_RANGE.start_date
+    presets = rangos_preset(hoy, inicio_datos)
+
+    print("\n=== Descargando rangos del filtro global ===")
+    datos = {}
+    for p in presets:
+        dr = DateRange(start_date=p["desde"], end_date=p["hasta"])
+        embudo = fetch_funnel_users_fast(client, FUNNEL_EVENTS, dr)
+        sesiones = fetch_sessions(client, dr)
+        datos[p["id"]] = {
+            "desde": p["desde"],
+            "hasta": p["hasta"],
+            "label": p["label"],
+            "recortado": p["recortado"],
+            "sesiones": sesiones,
+            "embudo": embudo,
+        }
+        aviso = "  (recortado al inicio de datos)" if p["recortado"] else ""
+        print(f"  {p['label']:<14} {p['desde']} -> {p['hasta']}  "
+              f"sesiones={sesiones:>7,}  paso1={embudo[0]:>7,}  "
+              f"paso7={embudo[-1]:>6,}{aviso}")
+
+    rango_total = DateRange(start_date=inicio_datos, end_date=hoy.isoformat())
+    print("  descargando series diarias (eventos, errores, sesiones)...")
+    serie_eventos = fetch_serie_diaria_eventos(client, rango_total, all_event_names)
+    serie_errores = fetch_error_breakdown_diario(
+        client, rango_total, event_names=("form_validation_error",))
+    serie_sesiones = fetch_sesiones_diarias(client, rango_total)
+    print(f"  series: {len(serie_eventos)} filas evento-dia, "
+          f"{len(serie_errores)} filas error-dia, {len(serie_sesiones)} dias de sesiones")
+
+    return {
+        "presets": [{"id": p["id"], "label": p["label"],
+                     "desde": p["desde"], "hasta": p["hasta"]} for p in presets],
+        "porRango": datos,
+        "pasos": [label for label, _ in FUNNEL_EVENTS],
+        "serieEventos": serie_eventos,
+        "serieErrores": serie_errores,
+        "serieSesiones": serie_sesiones,
+        "inicioDatos": inicio_datos,
+    }
+
+
 def main():
     creds = get_credentials()
     client = BetaAnalyticsDataClient(credentials=creds)
@@ -293,7 +530,10 @@ def main():
     print(f"Errores formulario [form_validation_error]: {errores_form}")
     print(f"Fallos al enviar solicitud [loan_request_failure]: {fallos_solicitud}")
 
-    error_breakdown = fetch_error_breakdown(client)
+    # Mismo rango que el contador "Errores de formulario" del resumen del embudo.
+    # Antes el desglose salia a 7 dias (~2.809 errores) mientras el resumen mostraba
+    # el acumulado (~20.236): el lector veia dos cifras que no cuadraban entre si.
+    error_breakdown = fetch_error_breakdown(client, ACCUM_DATE_RANGE)
     print("\n=== Desglose de errores de formulario ===")
     for msg, cnt in error_breakdown:
         print(f"  - {msg}: {cnt}")
@@ -389,6 +629,28 @@ def main():
     # Conversion total (paso 1 -> paso final, acumulado)
     conv_total = round(funnel_accum[-1] / base * 100, 1) if base else 0
     html = re.sub(r'(<div class="fsumm-num">)[\d.]+%(</div>\s*<div class="fsumm-label">Conversion total)', rf'\g<1>{conv_total}%\g<2>', html)
+
+    # Mayor abandono: se calcula desde el embudo real en vez de dejarlo fijo.
+    # Estaba hardcodeado en "66.5% — paso 1->2 (datos empresa)" cuando el paso
+    # 1->2 real era 29.4% y la mayor caida estaba en otro paso. El numero no
+    # correspondia a ningun dato de la tabla y contradecia la seccion de Insights.
+    peor_i, peor_pct = 0, 0.0
+    for i in range(len(funnel_accum) - 1):
+        a, b = funnel_accum[i], funnel_accum[i + 1]
+        pct = (a - b) / a * 100 if a else 0
+        if pct > peor_pct:
+            peor_i, peor_pct = i, pct
+    peor_pct = round(peor_pct, 1)
+    # "1. Tipo de trabajador" -> "Tipo de trabajador"
+    origen = FUNNEL_EVENTS[peor_i][0].split(". ", 1)[-1]
+    destino = FUNNEL_EVENTS[peor_i + 1][0].split(". ", 1)[-1]
+    peor_label = f"Mayor abandono: paso {peor_i + 1}&#8594;{peor_i + 2} ({origen} &#8594; {destino})"
+    html = re.sub(
+        r'(<div class="fsumm-num" style="color:var\(--red\)">)[\d.]+%(</div>\s*<div class="fsumm-label">)'
+        r'Mayor abandono[^<]*(</div>)',
+        rf'\g<1>{peor_pct}%\g<2>{peor_label}\g<3>',
+        html,
+    )
 
     # Errores y fallos (acumulado)
     html = re.sub(
@@ -489,6 +751,23 @@ def main():
     new_data_events = "var DATA_EVENTS = [\n" + ",\n".join(chart_lines) + "\n];"
     html = re.sub(r'var DATA_EVENTS = \[.*?\];', new_data_events, html, count=1, flags=re.DOTALL)
 
+    # --- Rangos del filtro global (embudo, KPIs, errores, graficos) ---
+    rangos = construir_rangos(client, datetime.date.today(), all_event_names)
+    nuevo_rangos = (
+        "/* DATA_RANGOS_START */\n"
+        "var DATA_RANGOS = "
+        + json.dumps(rangos, ensure_ascii=False, separators=(",", ":"))
+        + ";\n"
+        "/* DATA_RANGOS_END */"
+    )
+    html, n_rangos = re.subn(
+        r"/\* DATA_RANGOS_START \*/.*?/\* DATA_RANGOS_END \*/",
+        lambda _: nuevo_rangos,
+        html, count=1, flags=re.DOTALL,
+    )
+    if not n_rangos:
+        print("  AVISO: no se encontro el bloque DATA_RANGOS en el HTML")
+
     # --- Inversion en Medios Pagados (datos manuales desde ads_data.json) ---
     if os.path.exists(ADS_DATA_FILE):
         with open(ADS_DATA_FILE, "r", encoding="utf-8") as f:
@@ -496,6 +775,50 @@ def main():
 
         m = ads.get("meta_ads", {})
         g = ads.get("google_ads", {})
+
+        # --- Serie diaria para el filtro de rango de fechas del dashboard ---
+        # El HTML agrega estos dias en el navegador, asi que el filtro funciona
+        # sin volver a llamar a ninguna API. Los presupuestos y tipos van en
+        # diccionarios aparte porque son atributos de la campana, no del dia.
+        data_diario = {
+            "periodo_desde": ads.get("periodo_desde", ""),
+            "periodo_hasta": ads.get("periodo_hasta", ""),
+            "actualizado": ads.get("actualizado", ""),
+            "meta": {
+                "diario": m.get("diario", []),
+                "diario_campanas": m.get("diario_campanas", []),
+                "presupuestos": {
+                    c["nombre"]: c.get("presupuesto_dia", 0)
+                    for c in m.get("campanas", [])
+                },
+            },
+            "google": {
+                "diario": g.get("diario", []),
+                "diario_campanas": g.get("diario_campanas", []),
+                "presupuestos": {
+                    c["nombre"]: c.get("presupuesto_dia", 0)
+                    for c in g.get("campanas", [])
+                },
+                "tipos": {
+                    c["nombre"]: c.get("tipo", "")
+                    for c in g.get("campanas", [])
+                },
+            },
+        }
+        nuevo_diario = (
+            "/* DATA_DIARIO_START */\n"
+            "var DATA_DIARIO = "
+            + json.dumps(data_diario, ensure_ascii=False, separators=(",", ":"))
+            + ";\n"
+            "/* DATA_DIARIO_END */"
+        )
+        html = re.sub(
+            r"/\* DATA_DIARIO_START \*/.*?/\* DATA_DIARIO_END \*/",
+            lambda _: nuevo_diario,
+            html, count=1, flags=re.DOTALL,
+        )
+        print(f"  Serie diaria inyectada: {len(data_diario['meta']['diario'])} dias Meta, "
+              f"{len(data_diario['google']['diario'])} dias Google")
 
         def replace_ads_row(html, data_id, value, is_money=False):
             new_val = fmt_money(value) if is_money else fmt_num(value)
@@ -864,10 +1187,14 @@ def main():
         html,
     )
 
-    # Grafico de errores diarios: ultimos 30 dias
-    inicio_30d = hoy - timedelta(days=29)
+    # Los tres graficos diarios se bajan sobre TODO el historial, no sobre una
+    # ventana fija de 30 dias. Antes, al elegir un rango anterior en el filtro,
+    # el grafico se recortaba a la interseccion con esos 30 dias y mostraba
+    # apenas unos pocos dias mientras el titulo seguia diciendo "ultimos 30".
+    inicio_series = datetime.datetime.strptime(
+        ACCUM_DATE_RANGE.start_date, "%Y-%m-%d").date()
     daily_errors = fetch_daily_errors(client, DateRange(
-        start_date=inicio_30d.strftime("%Y-%m-%d"), end_date=hoy.strftime("%Y-%m-%d")
+        start_date=inicio_series.strftime("%Y-%m-%d"), end_date=hoy.strftime("%Y-%m-%d")
     ))
     items = [f"{{date:'{d}', val:{v}}}" for d, v in daily_errors]
     lines = []
@@ -890,7 +1217,7 @@ def main():
 
     # Grafico de fallos al enviar solicitud (loan_request_failure) por dia: ultimos 30 dias
     daily_failures = fetch_daily_errors(client, DateRange(
-        start_date=inicio_30d.strftime("%Y-%m-%d"), end_date=hoy.strftime("%Y-%m-%d")
+        start_date=inicio_series.strftime("%Y-%m-%d"), end_date=hoy.strftime("%Y-%m-%d")
     ), event_name="loan_request_failure")
     items = [f"{{date:'{d}', val:{v}}}" for d, v in daily_failures]
     lines = []
@@ -913,10 +1240,10 @@ def main():
 
     # Grafico agrupado cotizaciones vs solicitudes por dia: ultimos 30 dias
     daily_starts = dict(fetch_daily_errors(client, DateRange(
-        start_date=inicio_30d.strftime("%Y-%m-%d"), end_date=hoy.strftime("%Y-%m-%d")
+        start_date=inicio_series.strftime("%Y-%m-%d"), end_date=hoy.strftime("%Y-%m-%d")
     ), event_name="worker_classification_selected"))
     daily_subs = dict(fetch_daily_errors(client, DateRange(
-        start_date=inicio_30d.strftime("%Y-%m-%d"), end_date=hoy.strftime("%Y-%m-%d")
+        start_date=inicio_series.strftime("%Y-%m-%d"), end_date=hoy.strftime("%Y-%m-%d")
     ), event_name="purchase"))
     all_dates = sorted(set(daily_starts) | set(daily_subs))
     funnel_items = [f"{{date:'{d}', starts:{daily_starts.get(d,0)}, subs:{daily_subs.get(d,0)}}}" for d in all_dates]

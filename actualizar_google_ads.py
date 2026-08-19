@@ -22,6 +22,7 @@ from google.ads.googleads.client import GoogleAdsClient
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.oauth2.credentials import Credentials
 from google.auth.transport.requests import Request
+from google.auth.exceptions import RefreshError
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CLIENT_SECRET_FILE = os.path.join(BASE_DIR, "oauth_credentials.json")
@@ -30,9 +31,46 @@ ADS_DATA_FILE = os.path.join(BASE_DIR, "ads_data.json")
 
 SCOPES = ["https://www.googleapis.com/auth/adwords"]
 
-DEVELOPER_TOKEN = "yk14eXtwdxWbjpU3S8Ue4w"
-LOGIN_CUSTOMER_ID = "2836788094"   # MCC
-CUSTOMER_ID = "4143819923"         # Cuenta ALMI Financiera
+# Cuantos dias hacia atras se descarga la serie diaria del filtro de fechas.
+DIAS_SERIE = 180
+
+# Credenciales de Google Ads.
+#
+# Antes estaban escritas aqui mismo, y este archivo se publica en un repositorio
+# publico: el developer token quedaba a la vista de cualquiera. Ahora se leen de
+# google_ads_config.json, que esta en .gitignore junto al resto de secretos.
+#
+# Si el archivo no existe, crearlo al lado de este script con esta forma:
+#   {
+#     "developer_token": "...",
+#     "login_customer_id": "...",   // cuenta MCC
+#     "customer_id": "..."          // cuenta del cliente
+#   }
+GOOGLE_ADS_CONFIG_FILE = os.path.join(BASE_DIR, "google_ads_config.json")
+
+
+def cargar_config_ads():
+    if not os.path.exists(GOOGLE_ADS_CONFIG_FILE):
+        raise SystemExit(
+            f"Falta {os.path.basename(GOOGLE_ADS_CONFIG_FILE)}.\n"
+            "Crealo al lado de este script con las claves: "
+            "developer_token, login_customer_id, customer_id."
+        )
+    with open(GOOGLE_ADS_CONFIG_FILE, "r", encoding="utf-8") as f:
+        cfg = json.load(f)
+    faltan = [k for k in ("developer_token", "login_customer_id", "customer_id")
+              if not cfg.get(k)]
+    if faltan:
+        raise SystemExit(
+            f"{os.path.basename(GOOGLE_ADS_CONFIG_FILE)} no tiene: {', '.join(faltan)}"
+        )
+    return cfg
+
+
+_ads_cfg = cargar_config_ads()
+DEVELOPER_TOKEN = _ads_cfg["developer_token"]
+LOGIN_CUSTOMER_ID = _ads_cfg["login_customer_id"]   # MCC
+CUSTOMER_ID = _ads_cfg["customer_id"]               # Cuenta del cliente
 
 
 def get_credentials():
@@ -40,9 +78,14 @@ def get_credentials():
     if os.path.exists(TOKEN_FILE):
         creds = Credentials.from_authorized_user_file(TOKEN_FILE, SCOPES)
     if not creds or not creds.valid:
+        refreshed = False
         if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
-        else:
+            try:
+                creds.refresh(Request())
+                refreshed = True
+            except RefreshError:
+                creds = None
+        if not refreshed:
             flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRET_FILE, SCOPES)
             creds = flow.run_local_server(port=0)
         with open(TOKEN_FILE, "w") as f:
@@ -65,14 +108,22 @@ def main():
     client = GoogleAdsClient.load_from_dict(config)
     ga_service = client.get_service("GoogleAdsService")
 
-    query = """
+    # Ventanas explicitas de 7 dias completos, iguales a las de Meta, para que
+    # ambos paneles del dashboard midan exactamente el mismo periodo.
+    hoy = datetime.date.today()
+    act_desde = (hoy - datetime.timedelta(days=7)).isoformat()
+    act_hasta = (hoy - datetime.timedelta(days=1)).isoformat()
+    prev_start = (hoy - datetime.timedelta(days=14)).isoformat()
+    prev_end = (hoy - datetime.timedelta(days=8)).isoformat()
+
+    query = f"""
         SELECT
           metrics.cost_micros,
           metrics.impressions,
           metrics.clicks,
           metrics.conversions
         FROM customer
-        WHERE segments.date DURING LAST_7_DAYS
+        WHERE segments.date BETWEEN '{act_desde}' AND '{act_hasta}'
     """
 
     response = ga_service.search_stream(customer_id=CUSTOMER_ID, query=query)
@@ -92,7 +143,7 @@ def main():
     inversion = cost_micros / 1_000_000
     costo_por_conversion = round(inversion / conversions, 2) if conversions else 0
 
-    print("=== Google Ads (ultimos 7 dias) ===")
+    print(f"=== Google Ads (7 dias completos: {act_desde} a {act_hasta}) ===")
     print(f"Inversion: ${inversion:,.0f}")
     print(f"Impresiones: {impressions}")
     print(f"Clics: {clicks}")
@@ -100,10 +151,6 @@ def main():
     print(f"Costo por conversion: ${costo_por_conversion:,.0f}")
 
     # --- Totales de la semana anterior (para comparativa) ---
-    hoy = datetime.date.today()
-    prev_start = (hoy - datetime.timedelta(days=14)).isoformat()
-    prev_end = (hoy - datetime.timedelta(days=8)).isoformat()
-
     prev_query = f"""
         SELECT
           metrics.cost_micros,
@@ -137,7 +184,7 @@ def main():
     print(f"Conversiones: {conversions_prev}")
 
     # --- Campanas activas (ultimos 7 dias) ---
-    campaign_query = """
+    campaign_query = f"""
         SELECT
           campaign.name,
           campaign.status,
@@ -151,7 +198,7 @@ def main():
           metrics.conversions,
           metrics.cost_per_conversion
         FROM campaign
-        WHERE segments.date DURING LAST_7_DAYS
+        WHERE segments.date BETWEEN '{act_desde}' AND '{act_hasta}'
           AND campaign.status = 'ENABLED'
         ORDER BY metrics.cost_micros DESC
     """
@@ -267,12 +314,75 @@ def main():
         print(f"  {md['label']}: inversion=${md['inversion']:,.0f}, impresiones={md['impresiones']}, "
               f"clics={md['clics']}, conversiones={md['conversiones']}, costo_x_conv=${md['costo_por_conversion']:,.0f}")
 
+    # --- Serie diaria (alimenta el filtro de fechas del dashboard) ---
+    # El HTML agrega estos dias segun el rango que elija el usuario, sin volver
+    # a llamar la API. Subir DIAS_SERIE permite consultar rangos mas antiguos.
+    serie_desde = (hoy - datetime.timedelta(days=DIAS_SERIE)).isoformat()
+
+    diario_query = f"""
+        SELECT
+          segments.date,
+          metrics.cost_micros,
+          metrics.impressions,
+          metrics.clicks,
+          metrics.conversions
+        FROM customer
+        WHERE segments.date BETWEEN '{serie_desde}' AND '{hoy.isoformat()}'
+        ORDER BY segments.date
+    """
+    diario = []
+    for batch in ga_service.search_stream(customer_id=CUSTOMER_ID, query=diario_query):
+        for row in batch.results:
+            diario.append({
+                "fecha": row.segments.date,
+                "inversion": round(row.metrics.cost_micros / 1_000_000),
+                "impresiones": row.metrics.impressions,
+                "clics": row.metrics.clicks,
+                "conversiones": round(row.metrics.conversions, 1),
+            })
+
+    diario_camp_query = f"""
+        SELECT
+          segments.date,
+          campaign.name,
+          metrics.cost_micros,
+          metrics.impressions,
+          metrics.clicks,
+          metrics.conversions
+        FROM campaign
+        WHERE segments.date BETWEEN '{serie_desde}' AND '{hoy.isoformat()}'
+        ORDER BY segments.date
+    """
+    diario_camp = []
+    for batch in ga_service.search_stream(customer_id=CUSTOMER_ID, query=diario_camp_query):
+        for row in batch.results:
+            diario_camp.append({
+                "fecha": row.segments.date,
+                "campana": row.campaign.name,
+                "inversion": round(row.metrics.cost_micros / 1_000_000),
+                "impresiones": row.metrics.impressions,
+                "clics": row.metrics.clicks,
+                "conversiones": round(row.metrics.conversions, 1),
+            })
+
+    print(f"\n=== Serie diaria Google ({DIAS_SERIE} dias) ===")
+    print(f"  {len(diario)} dias con datos, {len(diario_camp)} filas por campana")
+    if diario:
+        print(f"  rango: {diario[0]['fecha']} -> {diario[-1]['fecha']}")
+
     # --- Actualizar ads_data.json ---
     if os.path.exists(ADS_DATA_FILE):
         with open(ADS_DATA_FILE, "r", encoding="utf-8") as f:
             ads = json.load(f)
     else:
         ads = {}
+
+    ads["periodo"] = "7 dias completos"
+    ads["periodo_desde"] = act_desde
+    ads["periodo_hasta"] = act_hasta
+    ads["periodo_prev_desde"] = prev_start
+    ads["periodo_prev_hasta"] = prev_end
+    ads["actualizado"] = datetime.datetime.now().isoformat(timespec="seconds")
 
     ads.setdefault("meta_ads", {
         "inversion": 0, "impresiones": 0, "clics": 0,
@@ -291,6 +401,8 @@ def main():
         "conversiones_prev": round(conversions_prev, 1),
         "costo_por_conversion_prev": round(inversion_prev / conversions_prev, 2) if conversions_prev else 0,
         "meses": meses,
+        "diario": diario,
+        "diario_campanas": diario_camp,
     }
 
     with open(ADS_DATA_FILE, "w", encoding="utf-8") as f:

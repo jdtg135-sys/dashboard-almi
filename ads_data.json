@@ -5898,7 +5898,7 @@
         "inversion": 30904,
         "impresiones": 1909,
         "clics": 154,
-        "resultados": 27
+        "resultados": 28
       },
       {
         "fecha": "2026-08-19",
@@ -5971,7 +5971,7 @@
       {
         "label": "Ago 2026",
         "inversion": 688874,
-        "impresiones": 5252,
+        "impresiones": 5257,
         "clics": 1037,
         "conversiones": 227.0,
         "costo_por_conversion": 3034.69
@@ -6830,7 +6830,7 @@
       {
         "fecha": "2026-08-19",
         "inversion": 5608,
-        "impresiones": 58,
+        "impresiones": 63,
         "clics": 14,
         "conversiones": 0.0
       }
@@ -8328,7 +8328,7 @@
         "fecha": "2026-08-19",
         "campana": "C6 - Búsqueda - Reportados - Jun2026",
         "inversion": 3858,
-        "impresiones": 39,
+        "impresiones": 43,
         "clics": 9,
         "conversiones": 0.0
       },
@@ -8336,7 +8336,7 @@
         "fecha": "2026-08-19",
         "campana": "C5 - Búsqueda - Libranza Nómina - Jun2026",
         "inversion": 1750,
-        "impresiones": 19,
+        "impresiones": 20,
         "clics": 5,
         "conversiones": 0.0
       }
@@ -8346,5 +8346,5 @@
   "periodo_hasta": "2026-08-18",
   "periodo_prev_desde": "2026-08-05",
   "periodo_prev_hasta": "2026-08-11",
-  "actualizado": "2026-08-19T11:25:47"
+  "actualizado": "2026-08-19T11:46:37"
 }
