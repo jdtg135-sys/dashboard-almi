@@ -126,9 +126,9 @@
     ],
     "meses": [
       {
-        "inversion": 6474627,
-        "impresiones": 590702,
-        "clics": 32915,
+        "inversion": 6475648,
+        "impresiones": 590765,
+        "clics": 32921,
         "resultados": 3736,
         "costo_por_resultado": 1733,
         "label": "Ago 2026"
@@ -1413,9 +1413,9 @@
       },
       {
         "fecha": "2026-08-26",
-        "inversion": 134398,
-        "impresiones": 13221,
-        "clics": 727,
+        "inversion": 135419,
+        "impresiones": 13284,
+        "clics": 733,
         "resultados": 78
       }
     ],
@@ -6095,40 +6095,40 @@
       {
         "fecha": "2026-08-26",
         "campana": "C1 - Convenio por Sectores - Jun2026",
-        "inversion": 28059,
-        "impresiones": 2871,
-        "clics": 144,
+        "inversion": 28178,
+        "impresiones": 2887,
+        "clics": 145,
         "resultados": 16
       },
       {
         "fecha": "2026-08-26",
         "campana": "C2 - Empleados sector privado",
-        "inversion": 45820,
-        "impresiones": 5842,
-        "clics": 294,
+        "inversion": 46105,
+        "impresiones": 5866,
+        "clics": 297,
         "resultados": 30
       },
       {
         "fecha": "2026-08-26",
         "campana": "C3 - Reportados",
-        "inversion": 9994,
-        "impresiones": 798,
+        "inversion": 10023,
+        "impresiones": 801,
         "clics": 24,
         "resultados": 2
       },
       {
         "fecha": "2026-08-26",
         "campana": "C4 - Retargeting caliente",
-        "inversion": 42872,
-        "impresiones": 3110,
-        "clics": 219,
+        "inversion": 43432,
+        "impresiones": 3125,
+        "clics": 221,
         "resultados": 22
       },
       {
         "fecha": "2026-08-26",
         "campana": "Campaña de formulario Copia 06/05/2026",
-        "inversion": 7653,
-        "impresiones": 600,
+        "inversion": 7681,
+        "impresiones": 605,
         "clics": 46,
         "resultados": 8
       }
@@ -8731,5 +8731,5 @@
   "periodo_hasta": "2026-08-25",
   "periodo_prev_desde": "2026-08-12",
   "periodo_prev_hasta": "2026-08-18",
-  "actualizado": "2026-08-26T15:14:49"
+  "actualizado": "2026-08-26T15:18:35"
 }
