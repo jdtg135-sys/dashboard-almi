@@ -2,9 +2,9 @@
   "_instrucciones": "Actualiza estos numeros manualmente cada semana copiandolos de Meta Ads Manager y Google Ads. Luego ejecuta ejecutar_actualizacion.bat",
   "periodo": "7 dias completos",
   "meta_ads": {
-    "inversion": 1800886,
-    "impresiones": 177202,
-    "clics": 9922,
+    "inversion": 1801180,
+    "impresiones": 177230,
+    "clics": 9923,
     "resultados": 1024,
     "costo_por_resultado": 1759,
     "inversion_prev": 1766170,
@@ -17,13 +17,13 @@
         "nombre": "C4 - Retargeting caliente",
         "estado": "Active",
         "presupuesto_dia": 80000,
-        "impresiones": 37457,
-        "clics": 2820,
+        "impresiones": 37462,
+        "clics": 2821,
         "ctr": 7.53,
-        "cpc_promedio": 208.7,
-        "gasto": 588523,
+        "cpc_promedio": 208.65,
+        "gasto": 588592,
         "resultados": 330,
-        "costo_por_resultado": 1783,
+        "costo_por_resultado": 1784,
         "prev": {
           "nombre": "C4 - Retargeting caliente",
           "gasto": 556578,
@@ -39,11 +39,11 @@
         "nombre": "C2 - Empleados sector privado",
         "estado": "Active",
         "presupuesto_dia": 80000,
-        "impresiones": 84120,
+        "impresiones": 84132,
         "clics": 4329,
         "ctr": 5.15,
-        "cpc_promedio": 130.14,
-        "gasto": 563394,
+        "cpc_promedio": 130.16,
+        "gasto": 563482,
         "resultados": 364,
         "costo_por_resultado": 1548,
         "prev": {
@@ -61,13 +61,13 @@
         "nombre": "C1 - Convenio por Sectores - Jun2026",
         "estado": "Active",
         "presupuesto_dia": 60000,
-        "impresiones": 38937,
+        "impresiones": 38948,
         "clics": 2078,
         "ctr": 5.34,
-        "cpc_promedio": 203.9,
-        "gasto": 423705,
+        "cpc_promedio": 203.97,
+        "gasto": 423842,
         "resultados": 228,
-        "costo_por_resultado": 1858,
+        "costo_por_resultado": 1859,
         "prev": {
           "nombre": "C1 - Convenio por Sectores - Jun2026",
           "gasto": 427363,
@@ -126,11 +126,11 @@
     ],
     "meses": [
       {
-        "inversion": 6414119,
-        "impresiones": 585096,
-        "clics": 32615,
-        "resultados": 3703,
-        "costo_por_resultado": 1732,
+        "inversion": 6474627,
+        "impresiones": 590702,
+        "clics": 32915,
+        "resultados": 3736,
+        "costo_por_resultado": 1733,
         "label": "Ago 2026"
       },
       {
@@ -1406,17 +1406,17 @@
       },
       {
         "fecha": "2026-08-25",
-        "inversion": 284850,
-        "impresiones": 27938,
-        "clics": 1549,
+        "inversion": 285144,
+        "impresiones": 27966,
+        "clics": 1550,
         "resultados": 157
       },
       {
         "fecha": "2026-08-26",
-        "inversion": 74184,
-        "impresiones": 7643,
-        "clics": 428,
-        "resultados": 45
+        "inversion": 134398,
+        "impresiones": 13221,
+        "clics": 727,
+        "resultados": 78
       }
     ],
     "diario_campanas": [
@@ -6055,16 +6055,16 @@
       {
         "fecha": "2026-08-25",
         "campana": "C1 - Convenio por Sectores - Jun2026",
-        "inversion": 64668,
-        "impresiones": 6766,
+        "inversion": 64805,
+        "impresiones": 6777,
         "clics": 343,
         "resultados": 33
       },
       {
         "fecha": "2026-08-25",
         "campana": "C2 - Empleados sector privado",
-        "inversion": 99547,
-        "impresiones": 13030,
+        "inversion": 99635,
+        "impresiones": 13042,
         "clics": 705,
         "resultados": 60
       },
@@ -6079,9 +6079,9 @@
       {
         "fecha": "2026-08-25",
         "campana": "C4 - Retargeting caliente",
-        "inversion": 87652,
-        "impresiones": 5571,
-        "clics": 394,
+        "inversion": 87721,
+        "impresiones": 5576,
+        "clics": 395,
         "resultados": 45
       },
       {
@@ -6095,42 +6095,42 @@
       {
         "fecha": "2026-08-26",
         "campana": "C1 - Convenio por Sectores - Jun2026",
-        "inversion": 15728,
-        "impresiones": 1684,
-        "clics": 93,
-        "resultados": 5
+        "inversion": 28059,
+        "impresiones": 2871,
+        "clics": 144,
+        "resultados": 16
       },
       {
         "fecha": "2026-08-26",
         "campana": "C2 - Empleados sector privado",
-        "inversion": 27012,
-        "impresiones": 3534,
-        "clics": 176,
-        "resultados": 17
+        "inversion": 45820,
+        "impresiones": 5842,
+        "clics": 294,
+        "resultados": 30
       },
       {
         "fecha": "2026-08-26",
         "campana": "C3 - Reportados",
-        "inversion": 4809,
-        "impresiones": 441,
-        "clics": 18,
+        "inversion": 9994,
+        "impresiones": 798,
+        "clics": 24,
         "resultados": 2
       },
       {
         "fecha": "2026-08-26",
         "campana": "C4 - Retargeting caliente",
-        "inversion": 22647,
-        "impresiones": 1651,
-        "clics": 120,
-        "resultados": 17
+        "inversion": 42872,
+        "impresiones": 3110,
+        "clics": 219,
+        "resultados": 22
       },
       {
         "fecha": "2026-08-26",
         "campana": "Campaña de formulario Copia 06/05/2026",
-        "inversion": 3988,
-        "impresiones": 333,
-        "clics": 21,
-        "resultados": 4
+        "inversion": 7653,
+        "impresiones": 600,
+        "clics": 46,
+        "resultados": 8
       }
     ]
   },
@@ -6138,8 +6138,8 @@
     "inversion": 422780,
     "impresiones": 3372,
     "clics": 791,
-    "conversiones": 183.5,
-    "costo_por_conversion": 2303.98,
+    "conversiones": 190.0,
+    "costo_por_conversion": 2225.16,
     "campanas": [
       {
         "nombre": "C6 - Búsqueda - Reportados - Jun2026",
@@ -6151,8 +6151,8 @@
         "cpc_promedio": 552.03,
         "presupuesto_dia": 65000,
         "gasto": 280430,
-        "conversiones": 129.5,
-        "costo_por_conversion": 2165.49,
+        "conversiones": 130.5,
+        "costo_por_conversion": 2148.89,
         "prev": {
           "impresiones": 444,
           "clics": 100,
@@ -6173,8 +6173,8 @@
         "cpc_promedio": 503.0,
         "presupuesto_dia": 65000,
         "gasto": 142350,
-        "conversiones": 54.0,
-        "costo_por_conversion": 2636.1,
+        "conversiones": 59.5,
+        "costo_por_conversion": 2392.43,
         "prev": {
           "impresiones": 403,
           "clics": 89,
@@ -6194,11 +6194,11 @@
     "meses": [
       {
         "label": "Ago 2026",
-        "inversion": 1134162,
-        "impresiones": 8874,
-        "clics": 1867,
-        "conversiones": 414.5,
-        "costo_por_conversion": 2736.22
+        "inversion": 1157522,
+        "impresiones": 9079,
+        "clics": 1910,
+        "conversiones": 430.0,
+        "costo_por_conversion": 2691.91
       },
       {
         "label": "Jul 2026",
@@ -7098,14 +7098,14 @@
         "inversion": 121913,
         "impresiones": 936,
         "clics": 212,
-        "conversiones": 44.5
+        "conversiones": 50.0
       },
       {
         "fecha": "2026-08-26",
-        "inversion": 28754,
-        "impresiones": 309,
-        "clics": 54,
-        "conversiones": 2.0
+        "inversion": 51476,
+        "impresiones": 513,
+        "clics": 96,
+        "conversiones": 11.0
       }
     ],
     "diario_campanas": [
@@ -8707,23 +8707,23 @@
         "inversion": 39194,
         "impresiones": 397,
         "clics": 70,
-        "conversiones": 15.5
+        "conversiones": 21.0
       },
       {
         "fecha": "2026-08-26",
         "campana": "C6 - Búsqueda - Reportados - Jun2026",
-        "inversion": 17937,
-        "impresiones": 142,
-        "clics": 35,
-        "conversiones": 1.0
+        "inversion": 29643,
+        "impresiones": 241,
+        "clics": 57,
+        "conversiones": 8.0
       },
       {
         "fecha": "2026-08-26",
         "campana": "C5 - Búsqueda - Libranza Nómina - Jun2026",
-        "inversion": 10817,
-        "impresiones": 167,
-        "clics": 19,
-        "conversiones": 1.0
+        "inversion": 21833,
+        "impresiones": 272,
+        "clics": 39,
+        "conversiones": 3.0
       }
     ]
   },
@@ -8731,5 +8731,5 @@
   "periodo_hasta": "2026-08-25",
   "periodo_prev_desde": "2026-08-12",
   "periodo_prev_hasta": "2026-08-18",
-  "actualizado": "2026-08-26T10:32:52"
+  "actualizado": "2026-08-26T15:14:49"
 }
