@@ -38,7 +38,22 @@ TOKEN_FILE = os.path.join(BASE_DIR, "token.json")
 DASHBOARD_FILE = os.path.join(BASE_DIR, "Dashboard_ALMI.html")
 ADS_DATA_FILE = os.path.join(BASE_DIR, "ads_data.json")
 
-PROPERTY_ID = "522022877"
+# ---------------------------------------------------------------------------
+# CORTE AL COTIZADOR NUEVO
+#
+# El 1-oct-2026 el cotizador Next.js reemplaza al anterior en la MISMA url
+# (cotizador.almifinanciera.com), con contenedor GTM-5GSLND8N y una propiedad
+# GA4 nueva. Cambian los nombres de casi todos los eventos, asi que el embudo
+# y los graficos tienen que cambiar junto con el PROPERTY_ID.
+#
+# Para hacer el corte: poner COTIZADOR = "nuevo". Nada mas.
+#
+# El historico queda partido: hasta el 30-sep-2026 vive en la propiedad
+# 522022877 y no se migra (GA4 no permite mover datos entre propiedades).
+# Para consultarlo, volver a poner COTIZADOR = "viejo".
+# ---------------------------------------------------------------------------
+COTIZADOR = "viejo"      # "viejo" | "nuevo"
+
 SCOPES = ["https://www.googleapis.com/auth/analytics.readonly"]
 
 # Rango de fechas a consultar (ajustar segun necesidad)
@@ -50,40 +65,93 @@ SCOPES = ["https://www.googleapis.com/auth/analytics.readonly"]
 # dias completos, terminando ayer, igual que las de Meta y Google Ads.
 DATE_RANGE = DateRange(start_date="7daysAgo", end_date="yesterday")
 PREV_DATE_RANGE = DateRange(start_date="14daysAgo", end_date="8daysAgo")
-ACCUM_DATE_RANGE = DateRange(start_date="2026-06-08", end_date="today")
+ACCUM_DATE_RANGE = DateRange(
+    start_date="2026-06-08" if COTIZADOR == "viejo" else "2026-10-01",
+    end_date="today",
+)
 
 MESES_ES = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"]
 
-# Eventos del cotizador que conforman el embudo (en orden)
-FUNNEL_EVENTS = [
-    ("1. Tipo de trabajador",   "worker_classification_selected"),
-    ("2. Datos de empresa",     "company_selected"),
-    ("3. Cotizacion calculada", "calculate_credit_clicked"),
-    ("4. Terminos aceptados",   "terms_accepted"),
-    ("5. Pre aprobacion",       "pre_approval_accepted"),
-    ("6. Solicitud iniciada",   "loan_request_initiated"),
-    ("7. Solicitud enviada",    "purchase"),
-]
+if COTIZADOR == "viejo":
+    PROPERTY_ID = "522022877"
 
-# Eventos extra para los KPIs / chart
-EXTRA_EVENTS = [
-    "form_validation_error",
-    "loan_request_success",
-    "loan_request_failure",
-]
+    # Eventos del cotizador que conforman el embudo (en orden)
+    FUNNEL_EVENTS = [
+        ("1. Tipo de trabajador",   "worker_classification_selected"),
+        ("2. Datos de empresa",     "company_selected"),
+        ("3. Cotizacion calculada", "calculate_credit_clicked"),
+        ("4. Terminos aceptados",   "terms_accepted"),
+        ("5. Pre aprobacion",       "pre_approval_accepted"),
+        ("6. Solicitud iniciada",   "loan_request_initiated"),
+        ("7. Solicitud enviada",    "purchase"),
+    ]
 
-# Eventos para el grafico "Eventos por frecuencia" (nombre GA4, etiqueta amigable)
-CHART_EVENTS = [
-    ("worker_classification_selected", "Tipo de trabajador"),
-    ("company_selected", "Datos de empresa"),
-    ("calculate_credit_clicked",       "Calcular credito"),
-    ("loan_quote_calculated",          "Cotizacion calculada"),
-    ("whatsapp_support_clicked",       "Contacto WhatsApp"),
-    ("pre_approval_accepted",          "Pre-aprobacion"),
-    ("purchase",                       "Solicitud enviada"),
-    ("loan_request_initiated",         "Solicitud iniciada"),
-    ("form_validation_error",          "Error formulario"),
-]
+    # Eventos extra para los KPIs / chart
+    EXTRA_EVENTS = [
+        "form_validation_error",
+        "loan_request_success",
+        "loan_request_failure",
+    ]
+
+    # Eventos para el grafico "Eventos por frecuencia" (nombre GA4, etiqueta amigable)
+    CHART_EVENTS = [
+        ("worker_classification_selected", "Tipo de trabajador"),
+        ("company_selected", "Datos de empresa"),
+        ("calculate_credit_clicked",       "Calcular credito"),
+        ("loan_quote_calculated",          "Cotizacion calculada"),
+        ("whatsapp_support_clicked",       "Contacto WhatsApp"),
+        ("pre_approval_accepted",          "Pre-aprobacion"),
+        ("purchase",                       "Solicitud enviada"),
+        ("loan_request_initiated",         "Solicitud iniciada"),
+        ("form_validation_error",          "Error formulario"),
+    ]
+
+    # Nombres que usan los graficos diarios
+    EVENTO_ERROR_FORM = "form_validation_error"
+    EVENTO_FALLO = "loan_request_failure"
+    EVENTO_INICIO = "worker_classification_selected"
+    EVENTO_CONVERSION = "purchase"
+
+else:
+    # Propiedad "ALMI Financiera Cotizador nuevo"
+    PROPERTY_ID = "554405139"
+
+    # El wizard nuevo tiene 5 pantallas (datos/monto/contacto/cuenta/resumen).
+    # Desaparecen worker_classification_selected y terms_accepted; el embudo se
+    # rearma con los eventos que si existen, manteniendo 7 pasos.
+    FUNNEL_EVENTS = [
+        ("1. Empresa seleccionada",  "company_selected"),
+        ("2. Cotizacion solicitada", "calculate_credit_clicked"),
+        ("3. Cotizacion calculada",  "loan_quote_calculated"),
+        ("4. Pre aprobacion",        "pre_approval_accepted"),
+        ("5. Datos personales",      "personal_info_submitted"),
+        ("6. Datos bancarios",       "bank_info_submitted"),
+        ("7. Solicitud creada",      "loan_request_created"),
+    ]
+
+    EXTRA_EVENTS = [
+        "form_error",
+        "loan_request_submitted",
+        "loan_request_error",
+    ]
+
+    CHART_EVENTS = [
+        ("company_selected",         "Datos de empresa"),
+        ("calculate_credit_clicked", "Calcular credito"),
+        ("loan_quote_calculated",    "Cotizacion calculada"),
+        ("pre_approval_accepted",    "Pre-aprobacion"),
+        ("personal_info_submitted",  "Datos personales"),
+        ("otp_verified",             "OTP verificado"),
+        ("bank_info_submitted",      "Datos bancarios"),
+        ("loan_request_created",     "Solicitud creada"),
+        ("whatsapp_clicked",         "Contacto WhatsApp"),
+        ("form_error",               "Error formulario"),
+    ]
+
+    EVENTO_ERROR_FORM = "form_error"
+    EVENTO_FALLO = "loan_request_error"
+    EVENTO_INICIO = "company_selected"
+    EVENTO_CONVERSION = "loan_request_created"
 
 
 def get_credentials():
@@ -179,7 +247,7 @@ def fetch_event_counts(client, event_names, date_range=DATE_RANGE):
 
 
 def fetch_error_breakdown(client, date_range=DATE_RANGE, limit=8,
-                           event_names=("form_validation_error",)):
+                           event_names=(EVENTO_ERROR_FORM,)):
     """Devuelve lista [(mensaje_error, conteo), ...] ordenada de mayor a menor."""
     request = RunReportRequest(
         property=f"properties/{PROPERTY_ID}",
@@ -251,7 +319,7 @@ def fetch_funnel_users_fast(client, funnel_events, date_range):
 
 
 def fetch_error_breakdown_diario(client, date_range, limit=200,
-                                 event_names=("form_validation_error",)):
+                                 event_names=(EVENTO_ERROR_FORM,)):
     """Errores por (fecha, mensaje). eventCount es aditivo, asi que el navegador
     puede sumar cualquier subrango sin volver a consultar."""
     request = RunReportRequest(
@@ -389,7 +457,7 @@ def fetch_sessions(client, date_range=DATE_RANGE):
     return 0
 
 
-def fetch_daily_errors(client, date_range, event_name="form_validation_error"):
+def fetch_daily_errors(client, date_range, event_name=EVENTO_ERROR_FORM):
     """Devuelve lista [(fecha 'YYYY-MM-DD', conteo), ...] del evento dado por dia."""
     request = RunReportRequest(
         property=f"properties/{PROPERTY_ID}",
@@ -499,7 +567,7 @@ def construir_rangos(client, hoy, all_event_names):
     print("  descargando series diarias (eventos, errores, sesiones)...")
     serie_eventos = fetch_serie_diaria_eventos(client, rango_total, all_event_names)
     serie_errores = fetch_error_breakdown_diario(
-        client, rango_total, event_names=("form_validation_error",))
+        client, rango_total, event_names=(EVENTO_ERROR_FORM,))
     serie_sesiones = fetch_sesiones_diarias(client, rango_total)
     print(f"  series: {len(serie_eventos)} filas evento-dia, "
           f"{len(serie_errores)} filas error-dia, {len(serie_sesiones)} dias de sesiones")
@@ -528,8 +596,8 @@ def main():
     funnel_values = fetch_funnel_users(client, FUNNEL_EVENTS)
     solicitudes = funnel_values[-1]  # purchase / step 6
     pre_aprobaciones = counts["pre_approval_accepted"]
-    errores_form = counts["form_validation_error"]
-    fallos_solicitud = counts["loan_request_failure"]
+    errores_form = counts[EVENTO_ERROR_FORM]
+    fallos_solicitud = counts[EVENTO_FALLO]
     cotizador_starts = funnel_values[0]
 
     print("=== Datos obtenidos de GA4 (ultimos 7 dias) ===")
@@ -553,7 +621,7 @@ def main():
     funnel_accum = fetch_funnel_users(client, FUNNEL_EVENTS, ACCUM_DATE_RANGE)
     solicitudes_accum = funnel_accum[-1]
     pre_aprobaciones_accum = counts_accum["pre_approval_accepted"]
-    errores_accum = counts_accum["form_validation_error"]
+    errores_accum = counts_accum[EVENTO_ERROR_FORM]
     cotizador_starts_accum = funnel_accum[0]
 
     print("\n=== Acumulado desde implementacion (2026-06-08) ===")
@@ -569,7 +637,7 @@ def main():
     funnel_values_prev = fetch_funnel_users(client, FUNNEL_EVENTS, PREV_DATE_RANGE)
     solicitudes_prev = funnel_values_prev[-1]
     pre_aprobaciones_prev = counts_prev["pre_approval_accepted"]
-    errores_form_prev = counts_prev["form_validation_error"]
+    errores_form_prev = counts_prev[EVENTO_ERROR_FORM]
     cotizador_starts_prev = funnel_values_prev[0]
 
     print("\n=== Semana anterior (comparativa) ===")
@@ -675,7 +743,7 @@ def main():
         html,
     )
 
-    fallos_accum = counts_accum["loan_request_failure"]
+    fallos_accum = counts_accum[EVENTO_FALLO]
     html = re.sub(
         r'(<div class="fsumm-num" style="color:var\(--red\)">)\d+(</div>\s*<div class="fsumm-label">Fallos al enviar solicitud)',
         rf'\g<1>{fallos_accum}\g<2>',
@@ -1146,7 +1214,7 @@ def main():
             "starts": m_counts[FUNNEL_EVENTS[0][1]],
             "solicitudes": m_counts[FUNNEL_EVENTS[-1][1]],
             "pre_aprob": m_counts["pre_approval_accepted"],
-            "errores": m_counts["form_validation_error"],
+            "errores": m_counts[EVENTO_ERROR_FORM],
         })
 
     print("\n=== Comparativa mensual (mes calendario) ===")
@@ -1248,7 +1316,7 @@ def main():
     # Grafico de fallos al enviar solicitud (loan_request_failure) por dia: ultimos 30 dias
     daily_failures = fetch_daily_errors(client, DateRange(
         start_date=inicio_series.strftime("%Y-%m-%d"), end_date=hoy.strftime("%Y-%m-%d")
-    ), event_name="loan_request_failure")
+    ), event_name=EVENTO_FALLO)
     items = [f"{{date:'{d}', val:{v}}}" for d, v in daily_failures]
     lines = []
     for i in range(0, len(items), 3):
@@ -1271,10 +1339,10 @@ def main():
     # Grafico agrupado cotizaciones vs solicitudes por dia: ultimos 30 dias
     daily_starts = dict(fetch_daily_errors(client, DateRange(
         start_date=inicio_series.strftime("%Y-%m-%d"), end_date=hoy.strftime("%Y-%m-%d")
-    ), event_name="worker_classification_selected"))
+    ), event_name=EVENTO_INICIO))
     daily_subs = dict(fetch_daily_errors(client, DateRange(
         start_date=inicio_series.strftime("%Y-%m-%d"), end_date=hoy.strftime("%Y-%m-%d")
-    ), event_name="purchase"))
+    ), event_name=EVENTO_CONVERSION))
     all_dates = sorted(set(daily_starts) | set(daily_subs))
     funnel_items = [f"{{date:'{d}', starts:{daily_starts.get(d,0)}, subs:{daily_subs.get(d,0)}}}" for d in all_dates]
     lines = []

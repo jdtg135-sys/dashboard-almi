@@ -10,3 +10,7 @@ token de API ALMI FINANCIERA.txt
 *.json.bak
 google_ads_config.json
 _backup_*/
+
+# credenciales agregadas 30-sep-2026
+token_admin.json
+meta_credentials_backup*.json
