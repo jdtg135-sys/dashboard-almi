@@ -52,7 +52,7 @@ ADS_DATA_FILE = os.path.join(BASE_DIR, "ads_data.json")
 # 522022877 y no se migra (GA4 no permite mover datos entre propiedades).
 # Para consultarlo, volver a poner COTIZADOR = "viejo".
 # ---------------------------------------------------------------------------
-COTIZADOR = "viejo"      # "viejo" | "nuevo"
+COTIZADOR = "nuevo"      # "viejo" | "nuevo"
 
 SCOPES = ["https://www.googleapis.com/auth/analytics.readonly"]
 
@@ -439,7 +439,11 @@ def rangos_preset(hoy, inicio_datos):
     # Un rango que empiece antes de que existieran los datos daria un total
     # incompleto leido como real.
     for p in presets:
-        p["recortado"] = p["desde"] < inicio_datos
+        # Si el rango COMPLETO es anterior al inicio de datos no hay nada que
+        # consultar: pedirlo a la API da un rango invertido y falla. Pasa al
+        # estrenar propiedad, con presets como "Mes anterior".
+        p["vacio"] = p["hasta"] < inicio_datos
+        p["recortado"] = (not p["vacio"]) and p["desde"] < inicio_datos
         if p["recortado"]:
             p["desde"] = inicio_datos
     return presets
@@ -547,9 +551,14 @@ def construir_rangos(client, hoy, all_event_names):
     print("\n=== Descargando rangos del filtro global ===")
     datos = {}
     for p in presets:
-        dr = DateRange(start_date=p["desde"], end_date=p["hasta"])
-        embudo = fetch_funnel_users_fast(client, FUNNEL_EVENTS, dr)
-        sesiones = fetch_sessions(client, dr)
+        if p.get("vacio"):
+            # rango anterior al inicio de datos: no se consulta, va en ceros
+            embudo = [0] * len(FUNNEL_EVENTS)
+            sesiones = 0
+        else:
+            dr = DateRange(start_date=p["desde"], end_date=p["hasta"])
+            embudo = fetch_funnel_users_fast(client, FUNNEL_EVENTS, dr)
+            sesiones = fetch_sessions(client, dr)
         datos[p["id"]] = {
             "desde": p["desde"],
             "hasta": p["hasta"],
@@ -558,7 +567,7 @@ def construir_rangos(client, hoy, all_event_names):
             "sesiones": sesiones,
             "embudo": embudo,
         }
-        aviso = "  (recortado al inicio de datos)" if p["recortado"] else ""
+        aviso = ("  (sin datos: anterior al inicio)" if p.get("vacio") else ("  (recortado al inicio de datos)" if p["recortado"] else ""))
         print(f"  {p['label']:<14} {p['desde']} -> {p['hasta']}  "
               f"sesiones={sesiones:>7,}  paso1={embudo[0]:>7,}  "
               f"paso7={embudo[-1]:>6,}{aviso}")
