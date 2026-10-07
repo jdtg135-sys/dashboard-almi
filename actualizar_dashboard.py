@@ -460,6 +460,39 @@ def fetch_error_breakdown_diario(client, date_range, limit=200,
     return filas
 
 
+def fetch_serie_usuarios_diaria(client, date_range, event_names):
+    """activeUsers por (fecha, evento) para los pasos del embudo.
+
+    Sirve para que un rango personalizado no tenga que mostrar eventCount. Sumar
+    dias sobrecuenta a quien vuelve en varios dias (medido: +6,6% a 7 dias,
+    +16% a 30), asi que el tablero marca ese numero como aproximado. Es mucho
+    mas cercano que eventCount, que llegaba a multiplicar por 7.
+    """
+    request = RunReportRequest(
+        property=f"properties/{PROPERTY_ID}",
+        dimensions=[Dimension(name="date"), Dimension(name="eventName")],
+        metrics=[Metric(name="activeUsers")],
+        date_ranges=[date_range],
+        dimension_filter=FilterExpression(
+            filter=Filter(
+                field_name="eventName",
+                in_list_filter=Filter.InListFilter(values=list(event_names)),
+            )
+        ),
+        limit=100000,
+    )
+    response = client.run_report(request)
+    filas = []
+    for row in response.rows:
+        f = row.dimension_values[0].value
+        filas.append({
+            "fecha": f"{f[0:4]}-{f[4:6]}-{f[6:8]}",
+            "ev": row.dimension_values[1].value,
+            "n": int(row.metric_values[0].value),
+        })
+    return filas
+
+
 def fetch_serie_diaria_eventos(client, date_range, event_names):
     """eventCount por (fecha, evento) para los graficos diarios y los KPIs
     aditivos. Una sola llamada cubre todo el historial."""
@@ -706,6 +739,8 @@ def construir_rangos(client, hoy, all_event_names):
     serie_errores = fetch_error_breakdown_diario(
         client, rango_total, event_names=tuple(EVENTOS_ERROR + EVENTOS_DUPLICADO))
     serie_sesiones = fetch_sesiones_diarias(client, rango_total)
+    serie_usuarios = fetch_serie_usuarios_diaria(
+        client, rango_total, [e for _, e in FUNNEL_EVENTS])
     print(f"  series: {len(serie_eventos)} filas evento-dia, "
           f"{len(serie_errores)} filas error-dia, {len(serie_sesiones)} dias de sesiones")
 
@@ -717,6 +752,7 @@ def construir_rangos(client, hoy, all_event_names):
         "serieEventos": serie_eventos,
         "serieErrores": serie_errores,
         "serieSesiones": serie_sesiones,
+        "serieUsuarios": serie_usuarios,
         "inicioDatos": inicio_datos,
     }
 
@@ -803,11 +839,26 @@ def main():
     html = replace_stat_by_label(html, "Pre-aprobaciones", pre_aprobaciones_accum)
     html = replace_stat_by_label(html, "Errores tecnicos", errores_accum)
 
-    # Conversion % de sesiones que inician cotizacion (acumulado)
+    # Subtitulos de las tarjetas. La conversion se mide contra quien INICIO,
+    # no contra las sesiones: una sesion que nunca entra al cotizador no es una
+    # conversion perdida del formulario.
     pct_inicio = round(cotizador_starts_accum / sessions_accum * 100, 1) if sessions_accum else 0
     pct_conv = round(solicitudes_accum / sessions_accum * 100, 1) if sessions_accum else 0
-    html = re.sub(r'\d+(\.\d+)?% de sesiones', f'{pct_inicio}% de sesiones', html, count=1)
-    html = re.sub(r'\d+(\.\d+)?% tasa conversion', f'{pct_conv}% tasa conversion', html, count=1)
+    pct_conv_inicio = (round(solicitudes_accum / cotizador_starts_accum * 100, 1)
+                       if cotizador_starts_accum else 0)
+    pct_preap = (round(pre_aprobaciones_accum / cotizador_starts_accum * 100, 1)
+                 if cotizador_starts_accum else 0)
+    html = re.sub(r'<div class="stat-delta[^"]*" data-kpi-sub="sesiones">[^<]*</div>',
+                  '<div class="stat-delta delta-neutral" data-kpi-sub="sesiones">'
+                  'sesiones del periodo</div>', html, count=1)
+    html = re.sub(r'(data-kpi-sub="inicios">)[^<]*(</div>)',
+                  rf'\g<1>{pct_inicio}% de las sesiones\g<2>', html, count=1)
+    html = re.sub(r'(data-kpi-sub="preaprobaciones">)[^<]*(</div>)',
+                  rf'\g<1>{pct_preap}% de los que inician\g<2>', html, count=1)
+    html = re.sub(r'(data-kpi-sub="solicitudes">)[^<]*(</div>)',
+                  rf'\g<1>{pct_conv_inicio}% de los que inician\g<2>', html, count=1)
+    html = re.sub(r'(data-kpi-sub="errores">)[^<]*(</div>)',
+                  r'\g<1>ocurrencias en el periodo\g<2>', html, count=1)
 
     # Frase de cierre. Antes solo se actualizaba el numero de sesiones y el
     # "Ahora sabemos que son X" quedaba fijo en 6, un valor viejo que no
@@ -937,6 +988,7 @@ def main():
         f"var EV_ERROR    = {json.dumps(EVENTOS_ERROR)};",
         f"var EV_FALLO    = {json.dumps(EVENTO_FALLO)};",
         f"var CLASE_ERROR = {json.dumps(CLASE_ERROR, ensure_ascii=False)};",
+        f"var IDX_PREAP   = {[e for _, e in FUNNEL_EVENTS].index('pre_approval_accepted')};",
         "/* EVENTOS_END */",
     ])
     html = re.sub(r"/\* EVENTOS_START \*/.*?/\* EVENTOS_END \*/",
