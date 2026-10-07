@@ -2,1535 +2,1496 @@
   "_instrucciones": "Actualiza estos numeros manualmente cada semana copiandolos de Meta Ads Manager y Google Ads. Luego ejecuta ejecutar_actualizacion.bat",
   "periodo": "7 dias completos",
   "meta_ads": {
-    "inversion": 1701998,
-    "impresiones": 102989,
-    "clics": 6970,
-    "resultados": 784,
-    "costo_por_resultado": 2171,
-    "inversion_prev": 2112572,
-    "impresiones_prev": 110283,
-    "clics_prev": 6184,
-    "resultados_prev": 338,
-    "costo_por_resultado_prev": 6250,
+    "inversion": 2484717,
+    "impresiones": 219177,
+    "clics": 10559,
+    "resultados": 753,
+    "costo_por_resultado": 3300,
+    "inversion_prev": 1702499,
+    "impresiones_prev": 103012,
+    "clics_prev": 6970,
+    "resultados_prev": 1362,
+    "costo_por_resultado_prev": 1250,
     "campanas": [
       {
-        "nombre": "C2 - Empleados sector privado",
+        "nombre": "C2 - Empleados sector privado - Oct2026",
         "estado": "Active",
         "presupuesto_dia": 95000,
-        "impresiones": 49258,
-        "clics": 3035,
-        "ctr": 6.16,
-        "cpc_promedio": 189.06,
-        "gasto": 573808,
-        "resultados": 274,
-        "costo_por_resultado": 2094,
-        "prev": {
-          "nombre": "C2 - Empleados sector privado",
-          "gasto": 730957,
-          "impresiones": 45342,
-          "clics": 2475,
-          "ctr": 5.46,
-          "cpc_promedio": 295.34,
-          "resultados": 91,
-          "costo_por_resultado": 8032
-        }
+        "impresiones": 64318,
+        "clics": 2771,
+        "ctr": 4.31,
+        "cpc_promedio": 227.36,
+        "gasto": 630017,
+        "resultados": 232,
+        "costo_por_resultado": 2716,
+        "prev": null
+      },
+      {
+        "nombre": "C4 - Retargeting caliente - Oct2026",
+        "estado": "Active",
+        "presupuesto_dia": 95000,
+        "impresiones": 48740,
+        "clics": 2526,
+        "ctr": 5.18,
+        "cpc_promedio": 248.42,
+        "gasto": 627511,
+        "resultados": 215,
+        "costo_por_resultado": 2919,
+        "prev": null
+      },
+      {
+        "nombre": "C1 - Convenio por sectores - Oct2026",
+        "estado": "Active",
+        "presupuesto_dia": 60000,
+        "impresiones": 47755,
+        "clics": 1801,
+        "ctr": 3.77,
+        "cpc_promedio": 211.8,
+        "gasto": 381459,
+        "resultados": 87,
+        "costo_por_resultado": 4385,
+        "prev": null
       },
       {
         "nombre": "C4 - Retargeting caliente",
-        "estado": "Active",
+        "estado": "Paused",
         "presupuesto_dia": 95000,
-        "impresiones": 26693,
-        "clics": 2120,
-        "ctr": 7.94,
-        "cpc_promedio": 268.44,
-        "gasto": 569092,
-        "resultados": 264,
-        "costo_por_resultado": 2156,
+        "impresiones": 10658,
+        "clics": 822,
+        "ctr": 7.71,
+        "cpc_promedio": 270.74,
+        "gasto": 222552,
+        "resultados": 75,
+        "costo_por_resultado": 2967,
         "prev": {
           "nombre": "C4 - Retargeting caliente",
-          "gasto": 718518,
-          "impresiones": 30879,
-          "clics": 1873,
-          "ctr": 6.07,
-          "cpc_promedio": 383.62,
-          "resultados": 79,
-          "costo_por_resultado": 9095
+          "gasto": 569152,
+          "impresiones": 26696,
+          "clics": 2120,
+          "ctr": 7.94,
+          "cpc_promedio": 268.47,
+          "resultados": 519,
+          "costo_por_resultado": 1097
+        }
+      },
+      {
+        "nombre": "C2 - Empleados sector privado",
+        "estado": "Paused",
+        "presupuesto_dia": 95000,
+        "impresiones": 17456,
+        "clics": 1042,
+        "ctr": 5.97,
+        "cpc_promedio": 198.6,
+        "gasto": 206945,
+        "resultados": 69,
+        "costo_por_resultado": 2999,
+        "prev": {
+          "nombre": "C2 - Empleados sector privado",
+          "gasto": 573958,
+          "impresiones": 49271,
+          "clics": 3035,
+          "ctr": 6.16,
+          "cpc_promedio": 189.11,
+          "resultados": 526,
+          "costo_por_resultado": 1091
         }
       },
       {
         "nombre": "C1 - Convenio por Sectores - Jun2026",
-        "estado": "Active",
+        "estado": "Paused",
         "presupuesto_dia": 60000,
-        "impresiones": 17175,
-        "clics": 1160,
-        "ctr": 6.75,
-        "cpc_promedio": 314.33,
-        "gasto": 364622,
-        "resultados": 123,
-        "costo_por_resultado": 2964,
+        "impresiones": 8191,
+        "clics": 530,
+        "ctr": 6.47,
+        "cpc_promedio": 278.63,
+        "gasto": 147673,
+        "resultados": 43,
+        "costo_por_resultado": 3434,
         "prev": {
           "nombre": "C1 - Convenio por Sectores - Jun2026",
-          "gasto": 450857,
-          "impresiones": 20291,
-          "clics": 1218,
-          "ctr": 6.0,
-          "cpc_promedio": 370.16,
-          "resultados": 59,
-          "costo_por_resultado": 7642
+          "gasto": 364906,
+          "impresiones": 17180,
+          "clics": 1160,
+          "ctr": 6.75,
+          "cpc_promedio": 314.57,
+          "resultados": 235,
+          "costo_por_resultado": 1553
         }
       },
       {
-        "nombre": "C3 - Reportados",
+        "nombre": "C3 - Reportados - Oct2026",
         "estado": "Active",
         "presupuesto_dia": 20000,
-        "impresiones": 5445,
-        "clics": 295,
-        "ctr": 5.42,
-        "cpc_promedio": 420.06,
-        "gasto": 123917,
-        "resultados": 46,
-        "costo_por_resultado": 2694,
-        "prev": {
-          "nombre": "C3 - Reportados",
-          "gasto": 145455,
-          "impresiones": 9601,
-          "clics": 222,
-          "ctr": 2.31,
-          "cpc_promedio": 655.2,
-          "resultados": 10,
-          "costo_por_resultado": 14546
-        }
+        "impresiones": 10832,
+        "clics": 359,
+        "ctr": 3.31,
+        "cpc_promedio": 369.47,
+        "gasto": 132641,
+        "resultados": 21,
+        "costo_por_resultado": 6316,
+        "prev": null
       },
       {
         "nombre": "Campaña de formulario Copia 06/05/2026",
         "estado": "Active",
         "presupuesto_dia": 10000,
-        "impresiones": 4418,
-        "clics": 360,
-        "ctr": 8.15,
-        "cpc_promedio": 196.0,
-        "gasto": 70559,
-        "resultados": 77,
-        "costo_por_resultado": 916,
+        "impresiones": 4641,
+        "clics": 388,
+        "ctr": 8.36,
+        "cpc_promedio": 184.06,
+        "gasto": 71415,
+        "resultados": 0,
+        "costo_por_resultado": 0,
         "prev": {
           "nombre": "Campaña de formulario Copia 06/05/2026",
-          "gasto": 66785,
-          "impresiones": 4170,
-          "clics": 396,
-          "ctr": 9.5,
-          "cpc_promedio": 168.65,
-          "resultados": 99,
-          "costo_por_resultado": 675
+          "gasto": 70561,
+          "impresiones": 4419,
+          "clics": 360,
+          "ctr": 8.15,
+          "cpc_promedio": 196.0,
+          "resultados": 0,
+          "costo_por_resultado": 0
         }
+      },
+      {
+        "nombre": "C3 - Reportados",
+        "estado": "Paused",
+        "presupuesto_dia": 20000,
+        "impresiones": 2378,
+        "clics": 102,
+        "ctr": 4.29,
+        "cpc_promedio": 458.31,
+        "gasto": 46748,
+        "resultados": 11,
+        "costo_por_resultado": 4250,
+        "prev": {
+          "nombre": "C3 - Reportados",
+          "gasto": 123922,
+          "impresiones": 5446,
+          "clics": 295,
+          "ctr": 5.42,
+          "cpc_promedio": 420.07,
+          "resultados": 82,
+          "costo_por_resultado": 1511
+        }
+      },
+      {
+        "nombre": "Webinar Navidad sin deudas 22/10/2026",
+        "estado": "Active",
+        "presupuesto_dia": 10000,
+        "impresiones": 4208,
+        "clics": 218,
+        "ctr": 5.18,
+        "cpc_promedio": 81.45,
+        "gasto": 17756,
+        "resultados": 0,
+        "costo_por_resultado": 0,
+        "prev": null
       }
     ],
     "meses": [
       {
-        "inversion": 8081396,
-        "impresiones": 540119,
-        "clics": 33983,
-        "resultados": 3397,
-        "costo_por_resultado": 2379,
+        "inversion": 2285372,
+        "impresiones": 212919,
+        "clics": 9915,
+        "resultados": 707,
+        "costo_por_resultado": 3232,
+        "label": "Oct 2026"
+      },
+      {
+        "inversion": 8286325,
+        "impresiones": 551661,
+        "clics": 34773,
+        "resultados": 5880,
+        "costo_por_resultado": 1409,
         "label": "Sep 2026"
       },
       {
         "inversion": 7889002,
         "impresiones": 707960,
         "clics": 39515,
-        "resultados": 4437,
-        "costo_por_resultado": 1778,
+        "resultados": 7871,
+        "costo_por_resultado": 1002,
         "label": "Ago 2026"
-      },
-      {
-        "inversion": 7224027,
-        "impresiones": 540714,
-        "clics": 27341,
-        "resultados": 3426,
-        "costo_por_resultado": 2109,
-        "label": "Jul 2026"
       }
     ],
     "diario": [
-      {
-        "fecha": "2026-04-03",
-        "inversion": 130034,
-        "impresiones": 14482,
-        "clics": 620,
-        "resultados": 115
-      },
-      {
-        "fecha": "2026-04-04",
-        "inversion": 129849,
-        "impresiones": 13755,
-        "clics": 567,
-        "resultados": 106
-      },
-      {
-        "fecha": "2026-04-05",
-        "inversion": 141904,
-        "impresiones": 14524,
-        "clics": 685,
-        "resultados": 133
-      },
-      {
-        "fecha": "2026-04-06",
-        "inversion": 153430,
-        "impresiones": 15435,
-        "clics": 790,
-        "resultados": 159
-      },
-      {
-        "fecha": "2026-04-07",
-        "inversion": 111534,
-        "impresiones": 16393,
-        "clics": 730,
-        "resultados": 100
-      },
-      {
-        "fecha": "2026-04-08",
-        "inversion": 99081,
-        "impresiones": 9039,
-        "clics": 565,
-        "resultados": 111
-      },
-      {
-        "fecha": "2026-04-09",
-        "inversion": 81808,
-        "impresiones": 7974,
-        "clics": 467,
-        "resultados": 95
-      },
       {
         "fecha": "2026-04-10",
         "inversion": 59220,
         "impresiones": 4778,
         "clics": 213,
-        "resultados": 43
+        "resultados": 0
       },
       {
         "fecha": "2026-04-11",
         "inversion": 108223,
         "impresiones": 7878,
         "clics": 235,
-        "resultados": 47
+        "resultados": 0
       },
       {
         "fecha": "2026-04-12",
         "inversion": 152378,
         "impresiones": 12828,
         "clics": 510,
-        "resultados": 96
+        "resultados": 0
       },
       {
         "fecha": "2026-04-13",
         "inversion": 111302,
         "impresiones": 9648,
         "clics": 561,
-        "resultados": 116
+        "resultados": 0
       },
       {
         "fecha": "2026-04-14",
         "inversion": 76392,
         "impresiones": 7383,
         "clics": 501,
-        "resultados": 110
+        "resultados": 0
       },
       {
         "fecha": "2026-04-15",
         "inversion": 70908,
         "impresiones": 6583,
         "clics": 427,
-        "resultados": 76
+        "resultados": 0
       },
       {
         "fecha": "2026-04-16",
         "inversion": 66874,
         "impresiones": 6575,
         "clics": 390,
-        "resultados": 70
+        "resultados": 0
       },
       {
         "fecha": "2026-04-17",
         "inversion": 74268,
         "impresiones": 6607,
         "clics": 456,
-        "resultados": 89
+        "resultados": 0
       },
       {
         "fecha": "2026-04-18",
         "inversion": 77775,
         "impresiones": 5462,
         "clics": 280,
-        "resultados": 52
+        "resultados": 0
       },
       {
         "fecha": "2026-04-19",
         "inversion": 62979,
         "impresiones": 3438,
         "clics": 246,
-        "resultados": 56
+        "resultados": 0
       },
       {
         "fecha": "2026-04-20",
         "inversion": 46989,
         "impresiones": 3839,
         "clics": 351,
-        "resultados": 79
+        "resultados": 0
       },
       {
         "fecha": "2026-04-21",
         "inversion": 54737,
         "impresiones": 5625,
         "clics": 536,
-        "resultados": 127
+        "resultados": 0
       },
       {
         "fecha": "2026-04-22",
         "inversion": 27256,
         "impresiones": 2831,
         "clics": 208,
-        "resultados": 41
+        "resultados": 0
       },
       {
         "fecha": "2026-04-23",
         "inversion": 15973,
         "impresiones": 1422,
         "clics": 76,
-        "resultados": 16
+        "resultados": 0
       },
       {
         "fecha": "2026-04-24",
         "inversion": 15247,
         "impresiones": 1200,
         "clics": 83,
-        "resultados": 15
+        "resultados": 0
       },
       {
         "fecha": "2026-04-25",
         "inversion": 63096,
         "impresiones": 5217,
         "clics": 268,
-        "resultados": 53
+        "resultados": 0
       },
       {
         "fecha": "2026-04-26",
         "inversion": 83713,
         "impresiones": 7405,
         "clics": 337,
-        "resultados": 68
+        "resultados": 0
       },
       {
         "fecha": "2026-04-27",
         "inversion": 78076,
         "impresiones": 8689,
         "clics": 453,
-        "resultados": 80
+        "resultados": 0
       },
       {
         "fecha": "2026-04-28",
         "inversion": 57918,
         "impresiones": 8020,
         "clics": 341,
-        "resultados": 63
+        "resultados": 0
       },
       {
         "fecha": "2026-04-29",
         "inversion": 27647,
         "impresiones": 3439,
         "clics": 189,
-        "resultados": 42
+        "resultados": 0
       },
       {
         "fecha": "2026-04-30",
         "inversion": 56146,
         "impresiones": 5945,
         "clics": 279,
-        "resultados": 59
+        "resultados": 0
       },
       {
         "fecha": "2026-05-01",
         "inversion": 33101,
         "impresiones": 3747,
         "clics": 182,
-        "resultados": 48
+        "resultados": 0
       },
       {
         "fecha": "2026-05-02",
         "inversion": 13252,
         "impresiones": 1522,
         "clics": 100,
-        "resultados": 22
+        "resultados": 0
       },
       {
         "fecha": "2026-05-03",
         "inversion": 38058,
         "impresiones": 3747,
         "clics": 183,
-        "resultados": 46
+        "resultados": 0
       },
       {
         "fecha": "2026-05-04",
         "inversion": 86385,
         "impresiones": 9596,
         "clics": 550,
-        "resultados": 120
+        "resultados": 0
       },
       {
         "fecha": "2026-05-05",
         "inversion": 74430,
         "impresiones": 8283,
         "clics": 388,
-        "resultados": 83
+        "resultados": 0
       },
       {
         "fecha": "2026-05-06",
         "inversion": 99186,
         "impresiones": 8885,
         "clics": 392,
-        "resultados": 76
+        "resultados": 0
       },
       {
         "fecha": "2026-05-07",
         "inversion": 151429,
         "impresiones": 13797,
         "clics": 772,
-        "resultados": 167
+        "resultados": 0
       },
       {
         "fecha": "2026-05-08",
         "inversion": 141327,
         "impresiones": 15060,
         "clics": 676,
-        "resultados": 139
+        "resultados": 0
       },
       {
         "fecha": "2026-05-09",
         "inversion": 64954,
         "impresiones": 5750,
         "clics": 273,
-        "resultados": 55
+        "resultados": 0
       },
       {
         "fecha": "2026-05-10",
         "inversion": 81987,
         "impresiones": 6805,
         "clics": 365,
-        "resultados": 76
+        "resultados": 0
       },
       {
         "fecha": "2026-05-11",
         "inversion": 112199,
         "impresiones": 10864,
         "clics": 556,
-        "resultados": 99
+        "resultados": 0
       },
       {
         "fecha": "2026-05-12",
         "inversion": 96290,
         "impresiones": 10262,
         "clics": 506,
-        "resultados": 99
+        "resultados": 0
       },
       {
         "fecha": "2026-05-13",
         "inversion": 86199,
         "impresiones": 8219,
         "clics": 446,
-        "resultados": 97
+        "resultados": 0
       },
       {
         "fecha": "2026-05-14",
         "inversion": 83941,
         "impresiones": 8171,
         "clics": 359,
-        "resultados": 71
+        "resultados": 0
       },
       {
         "fecha": "2026-05-15",
         "inversion": 80770,
         "impresiones": 6894,
         "clics": 373,
-        "resultados": 73
+        "resultados": 0
       },
       {
         "fecha": "2026-05-16",
         "inversion": 88581,
         "impresiones": 7557,
         "clics": 392,
-        "resultados": 80
+        "resultados": 0
       },
       {
         "fecha": "2026-05-17",
         "inversion": 98093,
         "impresiones": 9496,
         "clics": 385,
-        "resultados": 70
+        "resultados": 0
       },
       {
         "fecha": "2026-05-18",
         "inversion": 106289,
         "impresiones": 12048,
         "clics": 489,
-        "resultados": 96
+        "resultados": 0
       },
       {
         "fecha": "2026-05-19",
         "inversion": 101479,
         "impresiones": 11465,
         "clics": 474,
-        "resultados": 88
+        "resultados": 0
       },
       {
         "fecha": "2026-05-20",
         "inversion": 87215,
         "impresiones": 9484,
         "clics": 457,
-        "resultados": 77
+        "resultados": 0
       },
       {
         "fecha": "2026-05-21",
         "inversion": 98042,
         "impresiones": 12035,
         "clics": 549,
-        "resultados": 76
+        "resultados": 0
       },
       {
         "fecha": "2026-05-22",
         "inversion": 177120,
         "impresiones": 17466,
         "clics": 694,
-        "resultados": 100
+        "resultados": 0
       },
       {
         "fecha": "2026-05-23",
         "inversion": 136790,
         "impresiones": 16429,
         "clics": 746,
-        "resultados": 94
+        "resultados": 0
       },
       {
         "fecha": "2026-05-24",
         "inversion": 108520,
         "impresiones": 12291,
         "clics": 592,
-        "resultados": 75
+        "resultados": 0
       },
       {
         "fecha": "2026-05-25",
         "inversion": 138502,
         "impresiones": 15730,
         "clics": 785,
-        "resultados": 90
+        "resultados": 0
       },
       {
         "fecha": "2026-05-26",
         "inversion": 142823,
         "impresiones": 17751,
         "clics": 766,
-        "resultados": 79
+        "resultados": 0
       },
       {
         "fecha": "2026-05-27",
         "inversion": 131360,
         "impresiones": 16494,
         "clics": 690,
-        "resultados": 69
+        "resultados": 0
       },
       {
         "fecha": "2026-05-28",
         "inversion": 126585,
         "impresiones": 18521,
         "clics": 736,
-        "resultados": 71
+        "resultados": 0
       },
       {
         "fecha": "2026-05-29",
         "inversion": 121630,
         "impresiones": 18991,
         "clics": 678,
-        "resultados": 62
+        "resultados": 0
       },
       {
         "fecha": "2026-05-30",
         "inversion": 117908,
         "impresiones": 22897,
         "clics": 634,
-        "resultados": 43
+        "resultados": 0
       },
       {
         "fecha": "2026-05-31",
         "inversion": 119889,
         "impresiones": 23718,
         "clics": 575,
-        "resultados": 54
+        "resultados": 0
       },
       {
         "fecha": "2026-06-01",
         "inversion": 135598,
         "impresiones": 27912,
         "clics": 647,
-        "resultados": 92
+        "resultados": 0
       },
       {
         "fecha": "2026-06-02",
         "inversion": 119232,
         "impresiones": 13222,
         "clics": 418,
-        "resultados": 79
+        "resultados": 0
       },
       {
         "fecha": "2026-06-03",
         "inversion": 168909,
         "impresiones": 17268,
         "clics": 474,
-        "resultados": 40
+        "resultados": 0
       },
       {
         "fecha": "2026-06-04",
         "inversion": 229282,
         "impresiones": 26503,
         "clics": 826,
-        "resultados": 75
+        "resultados": 0
       },
       {
         "fecha": "2026-06-05",
         "inversion": 240367,
         "impresiones": 31962,
         "clics": 1020,
-        "resultados": 78
+        "resultados": 0
       },
       {
         "fecha": "2026-06-06",
         "inversion": 247349,
         "impresiones": 45476,
         "clics": 1120,
-        "resultados": 60
+        "resultados": 0
       },
       {
         "fecha": "2026-06-07",
         "inversion": 280245,
         "impresiones": 46273,
         "clics": 1171,
-        "resultados": 63
+        "resultados": 0
       },
       {
         "fecha": "2026-06-08",
         "inversion": 255852,
         "impresiones": 46242,
         "clics": 1139,
-        "resultados": 57
+        "resultados": 0
       },
       {
         "fecha": "2026-06-09",
         "inversion": 314033,
         "impresiones": 49766,
         "clics": 1364,
-        "resultados": 73
+        "resultados": 0
       },
       {
         "fecha": "2026-06-10",
         "inversion": 254147,
         "impresiones": 55978,
         "clics": 1517,
-        "resultados": 90
+        "resultados": 0
       },
       {
         "fecha": "2026-06-11",
         "inversion": 324650,
         "impresiones": 201550,
         "clics": 3438,
-        "resultados": 83
+        "resultados": 5
       },
       {
         "fecha": "2026-06-12",
         "inversion": 297938,
         "impresiones": 37788,
         "clics": 1213,
-        "resultados": 88
+        "resultados": 23
       },
       {
         "fecha": "2026-06-13",
         "inversion": 239706,
         "impresiones": 14420,
         "clics": 652,
-        "resultados": 83
+        "resultados": 29
       },
       {
         "fecha": "2026-06-14",
         "inversion": 306846,
         "impresiones": 18149,
         "clics": 775,
-        "resultados": 113
+        "resultados": 56
       },
       {
         "fecha": "2026-06-15",
         "inversion": 324785,
         "impresiones": 24345,
         "clics": 1227,
-        "resultados": 165
+        "resultados": 77
       },
       {
         "fecha": "2026-06-16",
         "inversion": 241498,
         "impresiones": 19345,
         "clics": 897,
-        "resultados": 146
+        "resultados": 54
       },
       {
         "fecha": "2026-06-17",
         "inversion": 247104,
         "impresiones": 20245,
         "clics": 937,
-        "resultados": 137
+        "resultados": 85
       },
       {
         "fecha": "2026-06-18",
         "inversion": 270390,
         "impresiones": 23073,
         "clics": 982,
-        "resultados": 117
+        "resultados": 100
       },
       {
         "fecha": "2026-06-19",
         "inversion": 215462,
         "impresiones": 15739,
         "clics": 671,
-        "resultados": 126
+        "resultados": 88
       },
       {
         "fecha": "2026-06-20",
         "inversion": 253925,
         "impresiones": 23266,
         "clics": 1012,
-        "resultados": 91
+        "resultados": 85
       },
       {
         "fecha": "2026-06-21",
         "inversion": 270743,
         "impresiones": 26792,
         "clics": 1389,
-        "resultados": 108
+        "resultados": 65
       },
       {
         "fecha": "2026-06-22",
         "inversion": 162166,
         "impresiones": 15004,
         "clics": 504,
-        "resultados": 78
+        "resultados": 59
       },
       {
         "fecha": "2026-06-23",
         "inversion": 116737,
         "impresiones": 9254,
         "clics": 432,
-        "resultados": 62
+        "resultados": 91
       },
       {
         "fecha": "2026-06-24",
         "inversion": 160521,
         "impresiones": 12556,
         "clics": 616,
-        "resultados": 96
+        "resultados": 151
       },
       {
         "fecha": "2026-06-25",
         "inversion": 134196,
         "impresiones": 9970,
         "clics": 544,
-        "resultados": 73
+        "resultados": 114
       },
       {
         "fecha": "2026-06-26",
         "inversion": 122945,
         "impresiones": 8377,
         "clics": 537,
-        "resultados": 72
+        "resultados": 118
       },
       {
         "fecha": "2026-06-27",
         "inversion": 95194,
         "impresiones": 6049,
         "clics": 377,
-        "resultados": 59
+        "resultados": 102
       },
       {
         "fecha": "2026-06-28",
         "inversion": 144238,
         "impresiones": 9127,
         "clics": 548,
-        "resultados": 86
+        "resultados": 129
       },
       {
         "fecha": "2026-06-29",
         "inversion": 141008,
         "impresiones": 9415,
         "clics": 575,
-        "resultados": 73
+        "resultados": 118
       },
       {
         "fecha": "2026-06-30",
         "inversion": 229454,
         "impresiones": 13844,
         "clics": 801,
-        "resultados": 60
+        "resultados": 83
       },
       {
         "fecha": "2026-07-01",
         "inversion": 236301,
         "impresiones": 17505,
         "clics": 1001,
-        "resultados": 77
+        "resultados": 122
       },
       {
         "fecha": "2026-07-02",
         "inversion": 168831,
         "impresiones": 12047,
         "clics": 592,
-        "resultados": 65
+        "resultados": 110
       },
       {
         "fecha": "2026-07-03",
         "inversion": 237261,
         "impresiones": 18646,
         "clics": 872,
-        "resultados": 113
+        "resultados": 188
       },
       {
         "fecha": "2026-07-04",
         "inversion": 211079,
         "impresiones": 16857,
         "clics": 791,
-        "resultados": 88
+        "resultados": 151
       },
       {
         "fecha": "2026-07-05",
         "inversion": 246883,
         "impresiones": 18275,
         "clics": 925,
-        "resultados": 118
+        "resultados": 176
       },
       {
         "fecha": "2026-07-06",
         "inversion": 254012,
         "impresiones": 19300,
         "clics": 874,
-        "resultados": 114
+        "resultados": 170
       },
       {
         "fecha": "2026-07-07",
         "inversion": 228948,
         "impresiones": 17790,
         "clics": 750,
-        "resultados": 88
+        "resultados": 149
       },
       {
         "fecha": "2026-07-08",
         "inversion": 245775,
         "impresiones": 19808,
         "clics": 927,
-        "resultados": 101
+        "resultados": 161
       },
       {
         "fecha": "2026-07-09",
         "inversion": 233208,
         "impresiones": 18968,
         "clics": 900,
-        "resultados": 88
+        "resultados": 136
       },
       {
         "fecha": "2026-07-10",
         "inversion": 201343,
         "impresiones": 14786,
         "clics": 716,
-        "resultados": 97
+        "resultados": 145
       },
       {
         "fecha": "2026-07-11",
         "inversion": 196443,
         "impresiones": 14622,
         "clics": 684,
-        "resultados": 88
+        "resultados": 138
       },
       {
         "fecha": "2026-07-12",
         "inversion": 267405,
         "impresiones": 19200,
         "clics": 918,
-        "resultados": 111
+        "resultados": 177
       },
       {
         "fecha": "2026-07-13",
         "inversion": 233308,
         "impresiones": 17847,
         "clics": 922,
-        "resultados": 137
+        "resultados": 213
       },
       {
         "fecha": "2026-07-14",
         "inversion": 249805,
         "impresiones": 20539,
         "clics": 1083,
-        "resultados": 136
+        "resultados": 212
       },
       {
         "fecha": "2026-07-15",
         "inversion": 251197,
         "impresiones": 20561,
         "clics": 1005,
-        "resultados": 137
+        "resultados": 223
       },
       {
         "fecha": "2026-07-16",
         "inversion": 216736,
         "impresiones": 16105,
         "clics": 854,
-        "resultados": 122
+        "resultados": 198
       },
       {
         "fecha": "2026-07-17",
         "inversion": 228216,
         "impresiones": 15940,
         "clics": 850,
-        "resultados": 119
+        "resultados": 195
       },
       {
         "fecha": "2026-07-18",
         "inversion": 192397,
         "impresiones": 14296,
         "clics": 746,
-        "resultados": 97
+        "resultados": 161
       },
       {
         "fecha": "2026-07-19",
         "inversion": 260936,
         "impresiones": 19977,
         "clics": 962,
-        "resultados": 136
+        "resultados": 221
       },
       {
         "fecha": "2026-07-20",
         "inversion": 260850,
         "impresiones": 20560,
         "clics": 987,
-        "resultados": 128
+        "resultados": 203
       },
       {
         "fecha": "2026-07-21",
         "inversion": 249608,
         "impresiones": 20281,
         "clics": 966,
-        "resultados": 149
+        "resultados": 231
       },
       {
         "fecha": "2026-07-22",
         "inversion": 216361,
         "impresiones": 14966,
         "clics": 721,
-        "resultados": 105
+        "resultados": 168
       },
       {
         "fecha": "2026-07-23",
         "inversion": 213643,
         "impresiones": 14086,
         "clics": 703,
-        "resultados": 92
+        "resultados": 158
       },
       {
         "fecha": "2026-07-24",
         "inversion": 227360,
         "impresiones": 14880,
         "clics": 815,
-        "resultados": 121
+        "resultados": 206
       },
       {
         "fecha": "2026-07-25",
         "inversion": 215707,
         "impresiones": 14251,
         "clics": 716,
-        "resultados": 71
+        "resultados": 125
       },
       {
         "fecha": "2026-07-26",
         "inversion": 258373,
         "impresiones": 18552,
         "clics": 838,
-        "resultados": 102
+        "resultados": 172
       },
       {
         "fecha": "2026-07-27",
         "inversion": 250210,
         "impresiones": 17937,
         "clics": 921,
-        "resultados": 109
+        "resultados": 200
       },
       {
         "fecha": "2026-07-28",
         "inversion": 227875,
         "impresiones": 15460,
         "clics": 780,
-        "resultados": 106
+        "resultados": 186
       },
       {
         "fecha": "2026-07-29",
         "inversion": 247266,
         "impresiones": 18426,
         "clics": 1160,
-        "resultados": 126
+        "resultados": 221
       },
       {
         "fecha": "2026-07-30",
         "inversion": 251865,
         "impresiones": 18799,
         "clics": 1134,
-        "resultados": 150
+        "resultados": 239
       },
       {
         "fecha": "2026-07-31",
         "inversion": 244825,
         "impresiones": 19447,
         "clics": 1228,
-        "resultados": 135
+        "resultados": 240
       },
       {
         "fecha": "2026-08-01",
         "inversion": 231736,
         "impresiones": 16739,
         "clics": 984,
-        "resultados": 130
+        "resultados": 230
       },
       {
         "fecha": "2026-08-02",
         "inversion": 273342,
         "impresiones": 21452,
         "clics": 1123,
-        "resultados": 119
+        "resultados": 213
       },
       {
         "fecha": "2026-08-03",
         "inversion": 323085,
         "impresiones": 27698,
         "clics": 1608,
-        "resultados": 158
+        "resultados": 300
       },
       {
         "fecha": "2026-08-04",
         "inversion": 261829,
         "impresiones": 24168,
         "clics": 1335,
-        "resultados": 171
+        "resultados": 295
       },
       {
         "fecha": "2026-08-05",
         "inversion": 276451,
         "impresiones": 24146,
         "clics": 1426,
-        "resultados": 164
+        "resultados": 298
       },
       {
         "fecha": "2026-08-06",
         "inversion": 238648,
         "impresiones": 20080,
         "clics": 1189,
-        "resultados": 135
+        "resultados": 244
       },
       {
         "fecha": "2026-08-07",
         "inversion": 221321,
         "impresiones": 16913,
         "clics": 1134,
-        "resultados": 149
+        "resultados": 256
       },
       {
         "fecha": "2026-08-08",
         "inversion": 203044,
         "impresiones": 16343,
         "clics": 913,
-        "resultados": 102
+        "resultados": 180
       },
       {
         "fecha": "2026-08-09",
         "inversion": 251590,
         "impresiones": 21096,
         "clics": 1198,
-        "resultados": 139
+        "resultados": 241
       },
       {
         "fecha": "2026-08-10",
         "inversion": 246665,
         "impresiones": 24073,
         "clics": 1087,
-        "resultados": 133
+        "resultados": 236
       },
       {
         "fecha": "2026-08-11",
         "inversion": 245168,
         "impresiones": 23107,
         "clics": 1216,
-        "resultados": 170
+        "resultados": 292
       },
       {
         "fecha": "2026-08-12",
         "inversion": 286476,
         "impresiones": 28449,
         "clics": 1528,
-        "resultados": 159
+        "resultados": 269
       },
       {
         "fecha": "2026-08-13",
         "inversion": 212696,
         "impresiones": 22122,
         "clics": 1113,
-        "resultados": 132
+        "resultados": 213
       },
       {
         "fecha": "2026-08-14",
         "inversion": 264729,
         "impresiones": 26048,
         "clics": 1358,
-        "resultados": 157
+        "resultados": 278
       },
       {
         "fecha": "2026-08-15",
         "inversion": 235960,
         "impresiones": 22468,
         "clics": 1137,
-        "resultados": 139
+        "resultados": 258
       },
       {
         "fecha": "2026-08-16",
         "inversion": 260074,
         "impresiones": 22421,
         "clics": 1252,
-        "resultados": 166
+        "resultados": 298
       },
       {
         "fecha": "2026-08-17",
         "inversion": 209511,
         "impresiones": 17130,
         "clics": 1012,
-        "resultados": 126
+        "resultados": 221
       },
       {
         "fecha": "2026-08-18",
         "inversion": 296724,
         "impresiones": 25798,
         "clics": 1652,
-        "resultados": 185
+        "resultados": 327
       },
       {
         "fecha": "2026-08-19",
         "inversion": 276381,
         "impresiones": 25530,
         "clics": 1517,
-        "resultados": 164
+        "resultados": 314
       },
       {
         "fecha": "2026-08-20",
         "inversion": 255959,
         "impresiones": 23743,
         "clics": 1410,
-        "resultados": 128
+        "resultados": 239
       },
       {
         "fecha": "2026-08-21",
         "inversion": 231803,
         "impresiones": 23649,
         "clics": 1314,
-        "resultados": 114
+        "resultados": 208
       },
       {
         "fecha": "2026-08-22",
         "inversion": 216770,
         "impresiones": 21214,
         "clics": 1132,
-        "resultados": 148
+        "resultados": 251
       },
       {
         "fecha": "2026-08-23",
         "inversion": 284035,
         "impresiones": 29437,
         "clics": 1576,
-        "resultados": 160
+        "resultados": 290
       },
       {
         "fecha": "2026-08-24",
         "inversion": 251088,
         "impresiones": 25691,
         "clics": 1425,
-        "resultados": 153
+        "resultados": 275
       },
       {
         "fecha": "2026-08-25",
         "inversion": 285435,
         "impresiones": 27985,
         "clics": 1552,
-        "resultados": 157
+        "resultados": 287
       },
       {
         "fecha": "2026-08-26",
         "inversion": 258984,
         "impresiones": 23677,
         "clics": 1345,
-        "resultados": 148
+        "resultados": 262
       },
       {
         "fecha": "2026-08-27",
         "inversion": 239581,
         "impresiones": 20688,
         "clics": 1122,
-        "resultados": 128
+        "resultados": 220
       },
       {
         "fecha": "2026-08-28",
         "inversion": 208643,
         "impresiones": 18535,
         "clics": 959,
-        "resultados": 86
+        "resultados": 147
       },
       {
         "fecha": "2026-08-29",
         "inversion": 231701,
         "impresiones": 18371,
         "clics": 1084,
-        "resultados": 127
+        "resultados": 219
       },
       {
         "fecha": "2026-08-30",
         "inversion": 279731,
         "impresiones": 22815,
         "clics": 1252,
-        "resultados": 109
+        "resultados": 196
       },
       {
         "fecha": "2026-08-31",
         "inversion": 329842,
         "impresiones": 26374,
         "clics": 1562,
-        "resultados": 181
+        "resultados": 314
       },
       {
         "fecha": "2026-09-01",
         "inversion": 274908,
         "impresiones": 21520,
         "clics": 1305,
-        "resultados": 168
+        "resultados": 296
       },
       {
         "fecha": "2026-09-02",
         "inversion": 260408,
         "impresiones": 19899,
         "clics": 1228,
-        "resultados": 166
+        "resultados": 284
       },
       {
         "fecha": "2026-09-03",
         "inversion": 234092,
         "impresiones": 17763,
         "clics": 1168,
-        "resultados": 141
+        "resultados": 242
       },
       {
         "fecha": "2026-09-04",
         "inversion": 219379,
         "impresiones": 16078,
         "clics": 966,
-        "resultados": 96
+        "resultados": 169
       },
       {
         "fecha": "2026-09-05",
         "inversion": 231105,
         "impresiones": 17329,
         "clics": 1083,
-        "resultados": 108
+        "resultados": 191
       },
       {
         "fecha": "2026-09-06",
         "inversion": 349826,
         "impresiones": 27430,
         "clics": 1744,
-        "resultados": 173
+        "resultados": 301
       },
       {
         "fecha": "2026-09-07",
         "inversion": 333455,
         "impresiones": 26907,
         "clics": 1602,
-        "resultados": 167
+        "resultados": 298
       },
       {
         "fecha": "2026-09-08",
         "inversion": 294382,
         "impresiones": 23202,
         "clics": 1506,
-        "resultados": 160
+        "resultados": 294
       },
       {
         "fecha": "2026-09-09",
         "inversion": 261759,
         "impresiones": 20778,
         "clics": 1270,
-        "resultados": 146
+        "resultados": 261
       },
       {
         "fecha": "2026-09-10",
         "inversion": 275523,
         "impresiones": 21663,
         "clics": 1372,
-        "resultados": 146
+        "resultados": 261
       },
       {
         "fecha": "2026-09-11",
         "inversion": 268333,
         "impresiones": 20580,
         "clics": 1302,
-        "resultados": 141
+        "resultados": 256
       },
       {
         "fecha": "2026-09-12",
         "inversion": 242341,
         "impresiones": 17845,
         "clics": 1200,
-        "resultados": 122
+        "resultados": 224
       },
       {
         "fecha": "2026-09-13",
         "inversion": 314020,
         "impresiones": 23931,
         "clics": 1591,
-        "resultados": 146
+        "resultados": 242
       },
       {
         "fecha": "2026-09-14",
         "inversion": 273954,
         "impresiones": 21384,
         "clics": 1466,
-        "resultados": 148
+        "resultados": 274
       },
       {
         "fecha": "2026-09-15",
         "inversion": 338404,
         "impresiones": 24688,
         "clics": 1665,
-        "resultados": 218
+        "resultados": 368
       },
       {
         "fecha": "2026-09-16",
         "inversion": 288049,
         "impresiones": 19556,
         "clics": 1359,
-        "resultados": 112
+        "resultados": 195
       },
       {
         "fecha": "2026-09-17",
         "inversion": 246792,
         "impresiones": 17152,
         "clics": 1184,
-        "resultados": 9
+        "resultados": 0
       },
       {
         "fecha": "2026-09-18",
         "inversion": 141170,
         "impresiones": 9750,
         "clics": 730,
-        "resultados": 24
+        "resultados": 0
       },
       {
         "fecha": "2026-09-19",
         "inversion": 349215,
         "impresiones": 19248,
         "clics": 838,
-        "resultados": 7
+        "resultados": 0
       },
       {
         "fecha": "2026-09-20",
         "inversion": 206663,
         "impresiones": 9176,
         "clics": 358,
-        "resultados": 19
+        "resultados": 0
       },
       {
         "fecha": "2026-09-21",
         "inversion": 426825,
         "impresiones": 16867,
         "clics": 648,
-        "resultados": 57
+        "resultados": 81
       },
       {
         "fecha": "2026-09-22",
         "inversion": 453858,
         "impresiones": 18534,
         "clics": 1067,
-        "resultados": 110
+        "resultados": 185
       },
       {
         "fecha": "2026-09-23",
         "inversion": 297203,
         "impresiones": 15736,
         "clics": 1071,
-        "resultados": 121
+        "resultados": 201
       },
       {
         "fecha": "2026-09-24",
         "inversion": 202798,
         "impresiones": 11646,
         "clics": 823,
-        "resultados": 91
+        "resultados": 155
       },
       {
         "fecha": "2026-09-25",
         "inversion": 190171,
         "impresiones": 11092,
         "clics": 735,
-        "resultados": 97
+        "resultados": 173
       },
       {
         "fecha": "2026-09-26",
         "inversion": 179162,
         "impresiones": 10712,
         "clics": 784,
-        "resultados": 85
+        "resultados": 158
       },
       {
         "fecha": "2026-09-27",
         "inversion": 282973,
         "impresiones": 18030,
         "clics": 1185,
-        "resultados": 121
+        "resultados": 211
       },
       {
         "fecha": "2026-09-28",
-        "inversion": 273947,
-        "impresiones": 18421,
+        "inversion": 273957,
+        "impresiones": 18422,
         "clics": 1187,
-        "resultados": 137
+        "resultados": 240
       },
       {
         "fecha": "2026-09-29",
-        "inversion": 275744,
-        "impresiones": 17352,
+        "inversion": 276235,
+        "impresiones": 17374,
         "clics": 1185,
-        "resultados": 132
+        "resultados": 224
       },
       {
         "fecha": "2026-09-30",
-        "inversion": 94937,
-        "impresiones": 5850,
-        "clics": 361,
-        "resultados": 29
-      }
-    ],
-    "diario_campanas": [
-      {
-        "fecha": "2026-04-03",
-        "campana": "A campaña de Clientes potenciales 09/03/2026",
-        "inversion": 47852,
-        "impresiones": 5036,
-        "clics": 110,
-        "resultados": 21
-      },
-      {
-        "fecha": "2026-04-03",
-        "campana": "A campaña de Clientes potenciales 11/11/2025 - Copia",
-        "inversion": 82182,
-        "impresiones": 9446,
-        "clics": 510,
-        "resultados": 94
-      },
-      {
-        "fecha": "2026-04-04",
-        "campana": "A campaña de Clientes potenciales 09/03/2026",
-        "inversion": 46765,
-        "impresiones": 4319,
-        "clics": 123,
-        "resultados": 27
-      },
-      {
-        "fecha": "2026-04-04",
-        "campana": "A campaña de Clientes potenciales 11/11/2025 - Copia",
-        "inversion": 83084,
-        "impresiones": 9436,
-        "clics": 444,
-        "resultados": 79
-      },
-      {
-        "fecha": "2026-04-05",
-        "campana": "A campaña de Clientes potenciales 09/03/2026",
-        "inversion": 52915,
-        "impresiones": 3933,
-        "clics": 140,
-        "resultados": 30
-      },
-      {
-        "fecha": "2026-04-05",
-        "campana": "A campaña de Clientes potenciales 11/11/2025 - Copia",
-        "inversion": 88989,
-        "impresiones": 10591,
-        "clics": 545,
-        "resultados": 103
-      },
-      {
-        "fecha": "2026-04-06",
-        "campana": "A campaña de Clientes potenciales 09/03/2026",
-        "inversion": 55772,
-        "impresiones": 3958,
-        "clics": 175,
-        "resultados": 39
-      },
-      {
-        "fecha": "2026-04-06",
-        "campana": "A campaña de Clientes potenciales 11/11/2025 - Copia",
-        "inversion": 97658,
-        "impresiones": 11477,
-        "clics": 615,
-        "resultados": 120
-      },
-      {
-        "fecha": "2026-04-07",
-        "campana": "A campaña de Clientes potenciales 09/03/2026",
-        "inversion": 8223,
-        "impresiones": 984,
-        "clics": 31,
-        "resultados": 4
-      },
-      {
-        "fecha": "2026-04-07",
-        "campana": "A campaña de Clientes potenciales 11/11/2025 - Copia",
-        "inversion": 103311,
-        "impresiones": 15409,
-        "clics": 699,
+        "inversion": 299365,
+        "impresiones": 17369,
+        "clics": 1151,
         "resultados": 96
       },
       {
-        "fecha": "2026-04-08",
-        "campana": "A campaña de Clientes potenciales 09/03/2026",
-        "inversion": 0,
-        "impresiones": 0,
-        "clics": 0,
-        "resultados": 0
+        "fecha": "2026-10-01",
+        "inversion": 298085,
+        "impresiones": 19891,
+        "clics": 1257,
+        "resultados": 84
       },
       {
-        "fecha": "2026-04-08",
-        "campana": "A campaña de Clientes potenciales 11/11/2025 - Copia",
-        "inversion": 99081,
-        "impresiones": 9039,
-        "clics": 565,
-        "resultados": 111
+        "fecha": "2026-10-02",
+        "inversion": 513168,
+        "impresiones": 34460,
+        "clics": 1358,
+        "resultados": 86
       },
       {
-        "fecha": "2026-04-09",
-        "campana": "A campaña de Clientes potenciales 11/11/2025 - Copia",
-        "inversion": 81808,
-        "impresiones": 7974,
-        "clics": 467,
-        "resultados": 95
+        "fecha": "2026-10-03",
+        "inversion": 466116,
+        "impresiones": 42812,
+        "clics": 1945,
+        "resultados": 135
       },
+      {
+        "fecha": "2026-10-04",
+        "inversion": 301778,
+        "impresiones": 30647,
+        "clics": 1509,
+        "resultados": 108
+      },
+      {
+        "fecha": "2026-10-05",
+        "inversion": 335039,
+        "impresiones": 40242,
+        "clics": 1775,
+        "resultados": 119
+      },
+      {
+        "fecha": "2026-10-06",
+        "inversion": 271166,
+        "impresiones": 33756,
+        "clics": 1564,
+        "resultados": 125
+      },
+      {
+        "fecha": "2026-10-07",
+        "inversion": 100020,
+        "impresiones": 11111,
+        "clics": 507,
+        "resultados": 50
+      }
+    ],
+    "diario_campanas": [
       {
         "fecha": "2026-04-10",
         "campana": "A campaña de Clientes potenciales 11/11/2025 - Copia",
         "inversion": 59220,
         "impresiones": 4778,
         "clics": 213,
-        "resultados": 43
+        "resultados": 0
       },
       {
         "fecha": "2026-04-11",
@@ -1538,7 +1499,7 @@
         "inversion": 108223,
         "impresiones": 7878,
         "clics": 235,
-        "resultados": 47
+        "resultados": 0
       },
       {
         "fecha": "2026-04-12",
@@ -1546,7 +1507,7 @@
         "inversion": 152378,
         "impresiones": 12828,
         "clics": 510,
-        "resultados": 96
+        "resultados": 0
       },
       {
         "fecha": "2026-04-13",
@@ -1554,7 +1515,7 @@
         "inversion": 111302,
         "impresiones": 9648,
         "clics": 561,
-        "resultados": 116
+        "resultados": 0
       },
       {
         "fecha": "2026-04-14",
@@ -1562,7 +1523,7 @@
         "inversion": 76392,
         "impresiones": 7383,
         "clics": 501,
-        "resultados": 110
+        "resultados": 0
       },
       {
         "fecha": "2026-04-15",
@@ -1570,7 +1531,7 @@
         "inversion": 70908,
         "impresiones": 6583,
         "clics": 427,
-        "resultados": 76
+        "resultados": 0
       },
       {
         "fecha": "2026-04-16",
@@ -1578,7 +1539,7 @@
         "inversion": 66874,
         "impresiones": 6575,
         "clics": 390,
-        "resultados": 70
+        "resultados": 0
       },
       {
         "fecha": "2026-04-17",
@@ -1586,7 +1547,7 @@
         "inversion": 74268,
         "impresiones": 6607,
         "clics": 456,
-        "resultados": 89
+        "resultados": 0
       },
       {
         "fecha": "2026-04-18",
@@ -1594,7 +1555,7 @@
         "inversion": 77775,
         "impresiones": 5462,
         "clics": 280,
-        "resultados": 52
+        "resultados": 0
       },
       {
         "fecha": "2026-04-19",
@@ -1602,7 +1563,7 @@
         "inversion": 11375,
         "impresiones": 719,
         "clics": 32,
-        "resultados": 8
+        "resultados": 0
       },
       {
         "fecha": "2026-04-19",
@@ -1610,7 +1571,7 @@
         "inversion": 51604,
         "impresiones": 2719,
         "clics": 214,
-        "resultados": 48
+        "resultados": 0
       },
       {
         "fecha": "2026-04-20",
@@ -1618,7 +1579,7 @@
         "inversion": 46989,
         "impresiones": 3839,
         "clics": 351,
-        "resultados": 79
+        "resultados": 0
       },
       {
         "fecha": "2026-04-21",
@@ -1626,7 +1587,7 @@
         "inversion": 54737,
         "impresiones": 5625,
         "clics": 536,
-        "resultados": 127
+        "resultados": 0
       },
       {
         "fecha": "2026-04-22",
@@ -1634,7 +1595,7 @@
         "inversion": 27256,
         "impresiones": 2831,
         "clics": 208,
-        "resultados": 41
+        "resultados": 0
       },
       {
         "fecha": "2026-04-23",
@@ -1642,7 +1603,7 @@
         "inversion": 15973,
         "impresiones": 1422,
         "clics": 76,
-        "resultados": 16
+        "resultados": 0
       },
       {
         "fecha": "2026-04-24",
@@ -1650,7 +1611,7 @@
         "inversion": 15247,
         "impresiones": 1200,
         "clics": 83,
-        "resultados": 15
+        "resultados": 0
       },
       {
         "fecha": "2026-04-25",
@@ -1658,7 +1619,7 @@
         "inversion": 63096,
         "impresiones": 5217,
         "clics": 268,
-        "resultados": 53
+        "resultados": 0
       },
       {
         "fecha": "2026-04-26",
@@ -1666,7 +1627,7 @@
         "inversion": 83713,
         "impresiones": 7405,
         "clics": 337,
-        "resultados": 68
+        "resultados": 0
       },
       {
         "fecha": "2026-04-27",
@@ -1674,7 +1635,7 @@
         "inversion": 78076,
         "impresiones": 8689,
         "clics": 453,
-        "resultados": 80
+        "resultados": 0
       },
       {
         "fecha": "2026-04-28",
@@ -1682,7 +1643,7 @@
         "inversion": 57918,
         "impresiones": 8020,
         "clics": 341,
-        "resultados": 63
+        "resultados": 0
       },
       {
         "fecha": "2026-04-29",
@@ -1690,7 +1651,7 @@
         "inversion": 27647,
         "impresiones": 3439,
         "clics": 189,
-        "resultados": 42
+        "resultados": 0
       },
       {
         "fecha": "2026-04-30",
@@ -1698,7 +1659,7 @@
         "inversion": 56146,
         "impresiones": 5945,
         "clics": 279,
-        "resultados": 59
+        "resultados": 0
       },
       {
         "fecha": "2026-05-01",
@@ -1706,7 +1667,7 @@
         "inversion": 33101,
         "impresiones": 3747,
         "clics": 182,
-        "resultados": 48
+        "resultados": 0
       },
       {
         "fecha": "2026-05-02",
@@ -1714,7 +1675,7 @@
         "inversion": 13252,
         "impresiones": 1522,
         "clics": 100,
-        "resultados": 22
+        "resultados": 0
       },
       {
         "fecha": "2026-05-03",
@@ -1722,7 +1683,7 @@
         "inversion": 38058,
         "impresiones": 3747,
         "clics": 183,
-        "resultados": 46
+        "resultados": 0
       },
       {
         "fecha": "2026-05-04",
@@ -1730,7 +1691,7 @@
         "inversion": 86385,
         "impresiones": 9596,
         "clics": 550,
-        "resultados": 120
+        "resultados": 0
       },
       {
         "fecha": "2026-05-05",
@@ -1738,7 +1699,7 @@
         "inversion": 74430,
         "impresiones": 8283,
         "clics": 388,
-        "resultados": 83
+        "resultados": 0
       },
       {
         "fecha": "2026-05-06",
@@ -1746,7 +1707,7 @@
         "inversion": 44348,
         "impresiones": 4713,
         "clics": 236,
-        "resultados": 52
+        "resultados": 0
       },
       {
         "fecha": "2026-05-06",
@@ -1754,7 +1715,7 @@
         "inversion": 54838,
         "impresiones": 4172,
         "clics": 156,
-        "resultados": 24
+        "resultados": 0
       },
       {
         "fecha": "2026-05-07",
@@ -1762,7 +1723,7 @@
         "inversion": 45709,
         "impresiones": 3875,
         "clics": 300,
-        "resultados": 74
+        "resultados": 0
       },
       {
         "fecha": "2026-05-07",
@@ -1770,7 +1731,7 @@
         "inversion": 105720,
         "impresiones": 9922,
         "clics": 472,
-        "resultados": 93
+        "resultados": 0
       },
       {
         "fecha": "2026-05-08",
@@ -1778,7 +1739,7 @@
         "inversion": 65822,
         "impresiones": 7765,
         "clics": 353,
-        "resultados": 68
+        "resultados": 0
       },
       {
         "fecha": "2026-05-08",
@@ -1786,7 +1747,7 @@
         "inversion": 75505,
         "impresiones": 7295,
         "clics": 323,
-        "resultados": 71
+        "resultados": 0
       },
       {
         "fecha": "2026-05-09",
@@ -1794,7 +1755,7 @@
         "inversion": 64954,
         "impresiones": 5750,
         "clics": 273,
-        "resultados": 55
+        "resultados": 0
       },
       {
         "fecha": "2026-05-10",
@@ -1802,7 +1763,7 @@
         "inversion": 81987,
         "impresiones": 6805,
         "clics": 365,
-        "resultados": 76
+        "resultados": 0
       },
       {
         "fecha": "2026-05-11",
@@ -1810,7 +1771,7 @@
         "inversion": 112199,
         "impresiones": 10864,
         "clics": 556,
-        "resultados": 99
+        "resultados": 0
       },
       {
         "fecha": "2026-05-12",
@@ -1818,7 +1779,7 @@
         "inversion": 96290,
         "impresiones": 10262,
         "clics": 506,
-        "resultados": 99
+        "resultados": 0
       },
       {
         "fecha": "2026-05-13",
@@ -1826,7 +1787,7 @@
         "inversion": 86199,
         "impresiones": 8219,
         "clics": 446,
-        "resultados": 97
+        "resultados": 0
       },
       {
         "fecha": "2026-05-14",
@@ -1834,7 +1795,7 @@
         "inversion": 83941,
         "impresiones": 8171,
         "clics": 359,
-        "resultados": 71
+        "resultados": 0
       },
       {
         "fecha": "2026-05-15",
@@ -1842,7 +1803,7 @@
         "inversion": 80770,
         "impresiones": 6894,
         "clics": 373,
-        "resultados": 73
+        "resultados": 0
       },
       {
         "fecha": "2026-05-16",
@@ -1850,7 +1811,7 @@
         "inversion": 88581,
         "impresiones": 7557,
         "clics": 392,
-        "resultados": 80
+        "resultados": 0
       },
       {
         "fecha": "2026-05-17",
@@ -1858,7 +1819,7 @@
         "inversion": 98093,
         "impresiones": 9496,
         "clics": 385,
-        "resultados": 70
+        "resultados": 0
       },
       {
         "fecha": "2026-05-18",
@@ -1866,7 +1827,7 @@
         "inversion": 106289,
         "impresiones": 12048,
         "clics": 489,
-        "resultados": 96
+        "resultados": 0
       },
       {
         "fecha": "2026-05-19",
@@ -1874,7 +1835,7 @@
         "inversion": 95967,
         "impresiones": 11353,
         "clics": 474,
-        "resultados": 88
+        "resultados": 0
       },
       {
         "fecha": "2026-05-19",
@@ -1890,7 +1851,7 @@
         "inversion": 77351,
         "impresiones": 8259,
         "clics": 412,
-        "resultados": 77
+        "resultados": 0
       },
       {
         "fecha": "2026-05-20",
@@ -1914,7 +1875,7 @@
         "inversion": 87253,
         "impresiones": 8536,
         "clics": 374,
-        "resultados": 76
+        "resultados": 0
       },
       {
         "fecha": "2026-05-21",
@@ -1930,7 +1891,7 @@
         "inversion": 83867,
         "impresiones": 5614,
         "clics": 173,
-        "resultados": 39
+        "resultados": 0
       },
       {
         "fecha": "2026-05-22",
@@ -1938,7 +1899,7 @@
         "inversion": 82726,
         "impresiones": 8113,
         "clics": 313,
-        "resultados": 61
+        "resultados": 0
       },
       {
         "fecha": "2026-05-22",
@@ -1954,7 +1915,7 @@
         "inversion": 46104,
         "impresiones": 3953,
         "clics": 130,
-        "resultados": 22
+        "resultados": 0
       },
       {
         "fecha": "2026-05-23",
@@ -1962,7 +1923,7 @@
         "inversion": 80397,
         "impresiones": 8410,
         "clics": 323,
-        "resultados": 72
+        "resultados": 0
       },
       {
         "fecha": "2026-05-23",
@@ -1978,7 +1939,7 @@
         "inversion": 99063,
         "impresiones": 8549,
         "clics": 350,
-        "resultados": 75
+        "resultados": 0
       },
       {
         "fecha": "2026-05-24",
@@ -1994,7 +1955,7 @@
         "inversion": 100539,
         "impresiones": 8528,
         "clics": 385,
-        "resultados": 90
+        "resultados": 0
       },
       {
         "fecha": "2026-05-25",
@@ -2018,7 +1979,7 @@
         "inversion": 100677,
         "impresiones": 7944,
         "clics": 350,
-        "resultados": 79
+        "resultados": 0
       },
       {
         "fecha": "2026-05-26",
@@ -2042,7 +2003,7 @@
         "inversion": 90328,
         "impresiones": 6772,
         "clics": 295,
-        "resultados": 69
+        "resultados": 0
       },
       {
         "fecha": "2026-05-27",
@@ -2066,7 +2027,7 @@
         "inversion": 83636,
         "impresiones": 7373,
         "clics": 321,
-        "resultados": 71
+        "resultados": 0
       },
       {
         "fecha": "2026-05-28",
@@ -2090,7 +2051,7 @@
         "inversion": 81644,
         "impresiones": 6302,
         "clics": 285,
-        "resultados": 62
+        "resultados": 0
       },
       {
         "fecha": "2026-05-29",
@@ -2114,7 +2075,7 @@
         "inversion": 73399,
         "impresiones": 5507,
         "clics": 204,
-        "resultados": 43
+        "resultados": 0
       },
       {
         "fecha": "2026-05-30",
@@ -2138,7 +2099,7 @@
         "inversion": 88326,
         "impresiones": 8190,
         "clics": 286,
-        "resultados": 54
+        "resultados": 0
       },
       {
         "fecha": "2026-05-31",
@@ -2162,7 +2123,7 @@
         "inversion": 103016,
         "impresiones": 11552,
         "clics": 386,
-        "resultados": 92
+        "resultados": 0
       },
       {
         "fecha": "2026-06-01",
@@ -2186,7 +2147,7 @@
         "inversion": 95825,
         "impresiones": 9859,
         "clics": 348,
-        "resultados": 79
+        "resultados": 0
       },
       {
         "fecha": "2026-06-02",
@@ -2210,7 +2171,7 @@
         "inversion": 72748,
         "impresiones": 6279,
         "clics": 208,
-        "resultados": 40
+        "resultados": 0
       },
       {
         "fecha": "2026-06-03",
@@ -2242,7 +2203,7 @@
         "inversion": 96444,
         "impresiones": 9081,
         "clics": 371,
-        "resultados": 75
+        "resultados": 0
       },
       {
         "fecha": "2026-06-04",
@@ -2298,7 +2259,7 @@
         "inversion": 93482,
         "impresiones": 8333,
         "clics": 358,
-        "resultados": 78
+        "resultados": 0
       },
       {
         "fecha": "2026-06-05",
@@ -2354,7 +2315,7 @@
         "inversion": 79657,
         "impresiones": 7466,
         "clics": 270,
-        "resultados": 60
+        "resultados": 0
       },
       {
         "fecha": "2026-06-06",
@@ -2410,7 +2371,7 @@
         "inversion": 100793,
         "impresiones": 6455,
         "clics": 261,
-        "resultados": 63
+        "resultados": 0
       },
       {
         "fecha": "2026-06-07",
@@ -2466,7 +2427,7 @@
         "inversion": 97248,
         "impresiones": 7565,
         "clics": 293,
-        "resultados": 57
+        "resultados": 0
       },
       {
         "fecha": "2026-06-08",
@@ -2522,7 +2483,7 @@
         "inversion": 96598,
         "impresiones": 7283,
         "clics": 352,
-        "resultados": 73
+        "resultados": 0
       },
       {
         "fecha": "2026-06-09",
@@ -2578,7 +2539,7 @@
         "inversion": 87151,
         "impresiones": 5720,
         "clics": 348,
-        "resultados": 90
+        "resultados": 0
       },
       {
         "fecha": "2026-06-10",
@@ -2634,7 +2595,7 @@
         "inversion": 75130,
         "impresiones": 138534,
         "clics": 1924,
-        "resultados": 5
+        "resultados": 4
       },
       {
         "fecha": "2026-06-11",
@@ -2650,7 +2611,7 @@
         "inversion": 84684,
         "impresiones": 5923,
         "clics": 316,
-        "resultados": 77
+        "resultados": 0
       },
       {
         "fecha": "2026-06-11",
@@ -2714,7 +2675,7 @@
         "inversion": 134930,
         "impresiones": 9822,
         "clics": 348,
-        "resultados": 17
+        "resultados": 16
       },
       {
         "fecha": "2026-06-12",
@@ -2722,7 +2683,7 @@
         "inversion": 76776,
         "impresiones": 4800,
         "clics": 267,
-        "resultados": 64
+        "resultados": 0
       },
       {
         "fecha": "2026-06-12",
@@ -2794,7 +2755,7 @@
         "inversion": 45525,
         "impresiones": 2760,
         "clics": 67,
-        "resultados": 2
+        "resultados": 4
       },
       {
         "fecha": "2026-06-13",
@@ -2802,7 +2763,7 @@
         "inversion": 86186,
         "impresiones": 4317,
         "clics": 224,
-        "resultados": 56
+        "resultados": 0
       },
       {
         "fecha": "2026-06-14",
@@ -2810,7 +2771,7 @@
         "inversion": 92114,
         "impresiones": 4837,
         "clics": 318,
-        "resultados": 28
+        "resultados": 25
       },
       {
         "fecha": "2026-06-14",
@@ -2834,7 +2795,7 @@
         "inversion": 95200,
         "impresiones": 4761,
         "clics": 243,
-        "resultados": 54
+        "resultados": 0
       },
       {
         "fecha": "2026-06-15",
@@ -2842,7 +2803,7 @@
         "inversion": 70470,
         "impresiones": 5360,
         "clics": 370,
-        "resultados": 40
+        "resultados": 35
       },
       {
         "fecha": "2026-06-15",
@@ -2866,7 +2827,7 @@
         "inversion": 103078,
         "impresiones": 5648,
         "clics": 341,
-        "resultados": 83
+        "resultados": 0
       },
       {
         "fecha": "2026-06-16",
@@ -2874,7 +2835,7 @@
         "inversion": 36950,
         "impresiones": 3226,
         "clics": 207,
-        "resultados": 28
+        "resultados": 27
       },
       {
         "fecha": "2026-06-16",
@@ -2882,7 +2843,7 @@
         "inversion": 105574,
         "impresiones": 9339,
         "clics": 299,
-        "resultados": 28
+        "resultados": 27
       },
       {
         "fecha": "2026-06-16",
@@ -2890,7 +2851,7 @@
         "inversion": 98974,
         "impresiones": 6780,
         "clics": 391,
-        "resultados": 90
+        "resultados": 0
       },
       {
         "fecha": "2026-06-17",
@@ -2898,7 +2859,7 @@
         "inversion": 63285,
         "impresiones": 4372,
         "clics": 194,
-        "resultados": 26
+        "resultados": 36
       },
       {
         "fecha": "2026-06-17",
@@ -2906,7 +2867,7 @@
         "inversion": 107327,
         "impresiones": 11430,
         "clics": 478,
-        "resultados": 48
+        "resultados": 49
       },
       {
         "fecha": "2026-06-17",
@@ -2922,7 +2883,7 @@
         "inversion": 76492,
         "impresiones": 4443,
         "clics": 265,
-        "resultados": 63
+        "resultados": 0
       },
       {
         "fecha": "2026-06-18",
@@ -2930,7 +2891,7 @@
         "inversion": 63446,
         "impresiones": 4815,
         "clics": 185,
-        "resultados": 20
+        "resultados": 34
       },
       {
         "fecha": "2026-06-18",
@@ -2938,7 +2899,7 @@
         "inversion": 122379,
         "impresiones": 13270,
         "clics": 522,
-        "resultados": 33
+        "resultados": 66
       },
       {
         "fecha": "2026-06-18",
@@ -2946,7 +2907,7 @@
         "inversion": 84565,
         "impresiones": 4988,
         "clics": 275,
-        "resultados": 64
+        "resultados": 0
       },
       {
         "fecha": "2026-06-19",
@@ -2954,7 +2915,7 @@
         "inversion": 55393,
         "impresiones": 4851,
         "clics": 202,
-        "resultados": 25
+        "resultados": 46
       },
       {
         "fecha": "2026-06-19",
@@ -2962,7 +2923,7 @@
         "inversion": 69881,
         "impresiones": 5771,
         "clics": 169,
-        "resultados": 20
+        "resultados": 42
       },
       {
         "fecha": "2026-06-19",
@@ -2970,7 +2931,7 @@
         "inversion": 90188,
         "impresiones": 5117,
         "clics": 300,
-        "resultados": 81
+        "resultados": 0
       },
       {
         "fecha": "2026-06-20",
@@ -2978,7 +2939,7 @@
         "inversion": 37843,
         "impresiones": 3660,
         "clics": 98,
-        "resultados": 17
+        "resultados": 30
       },
       {
         "fecha": "2026-06-20",
@@ -2986,7 +2947,7 @@
         "inversion": 136070,
         "impresiones": 15101,
         "clics": 692,
-        "resultados": 29
+        "resultados": 55
       },
       {
         "fecha": "2026-06-20",
@@ -2994,7 +2955,7 @@
         "inversion": 80012,
         "impresiones": 4505,
         "clics": 222,
-        "resultados": 45
+        "resultados": 0
       },
       {
         "fecha": "2026-06-21",
@@ -3002,7 +2963,7 @@
         "inversion": 60462,
         "impresiones": 7089,
         "clics": 177,
-        "resultados": 8
+        "resultados": 17
       },
       {
         "fecha": "2026-06-21",
@@ -3010,7 +2971,7 @@
         "inversion": 114034,
         "impresiones": 13131,
         "clics": 888,
-        "resultados": 29
+        "resultados": 48
       },
       {
         "fecha": "2026-06-21",
@@ -3018,7 +2979,7 @@
         "inversion": 96247,
         "impresiones": 6572,
         "clics": 324,
-        "resultados": 71
+        "resultados": 0
       },
       {
         "fecha": "2026-06-22",
@@ -3026,7 +2987,7 @@
         "inversion": 56474,
         "impresiones": 6464,
         "clics": 140,
-        "resultados": 14
+        "resultados": 29
       },
       {
         "fecha": "2026-06-22",
@@ -3034,7 +2995,7 @@
         "inversion": 40581,
         "impresiones": 3392,
         "clics": 119,
-        "resultados": 11
+        "resultados": 26
       },
       {
         "fecha": "2026-06-22",
@@ -3042,7 +3003,7 @@
         "inversion": 0,
         "impresiones": 0,
         "clics": 0,
-        "resultados": 2
+        "resultados": 4
       },
       {
         "fecha": "2026-06-22",
@@ -3050,7 +3011,7 @@
         "inversion": 65111,
         "impresiones": 5148,
         "clics": 245,
-        "resultados": 51
+        "resultados": 0
       },
       {
         "fecha": "2026-06-23",
@@ -3058,7 +3019,7 @@
         "inversion": 44106,
         "impresiones": 2928,
         "clics": 167,
-        "resultados": 27
+        "resultados": 54
       },
       {
         "fecha": "2026-06-23",
@@ -3066,7 +3027,7 @@
         "inversion": 62109,
         "impresiones": 5727,
         "clics": 210,
-        "resultados": 20
+        "resultados": 34
       },
       {
         "fecha": "2026-06-23",
@@ -3074,7 +3035,7 @@
         "inversion": 0,
         "impresiones": 0,
         "clics": 0,
-        "resultados": 1
+        "resultados": 3
       },
       {
         "fecha": "2026-06-23",
@@ -3082,7 +3043,7 @@
         "inversion": 10522,
         "impresiones": 599,
         "clics": 55,
-        "resultados": 14
+        "resultados": 0
       },
       {
         "fecha": "2026-06-24",
@@ -3090,7 +3051,7 @@
         "inversion": 75780,
         "impresiones": 5397,
         "clics": 315,
-        "resultados": 40
+        "resultados": 76
       },
       {
         "fecha": "2026-06-24",
@@ -3098,7 +3059,7 @@
         "inversion": 74509,
         "impresiones": 6624,
         "clics": 251,
-        "resultados": 41
+        "resultados": 71
       },
       {
         "fecha": "2026-06-24",
@@ -3106,7 +3067,7 @@
         "inversion": 0,
         "impresiones": 0,
         "clics": 0,
-        "resultados": 2
+        "resultados": 4
       },
       {
         "fecha": "2026-06-24",
@@ -3114,7 +3075,7 @@
         "inversion": 10232,
         "impresiones": 535,
         "clics": 50,
-        "resultados": 13
+        "resultados": 0
       },
       {
         "fecha": "2026-06-25",
@@ -3122,7 +3083,7 @@
         "inversion": 69924,
         "impresiones": 4703,
         "clics": 269,
-        "resultados": 31
+        "resultados": 59
       },
       {
         "fecha": "2026-06-25",
@@ -3130,7 +3091,7 @@
         "inversion": 55154,
         "impresiones": 4644,
         "clics": 228,
-        "resultados": 29
+        "resultados": 53
       },
       {
         "fecha": "2026-06-25",
@@ -3146,7 +3107,7 @@
         "inversion": 9118,
         "impresiones": 623,
         "clics": 47,
-        "resultados": 11
+        "resultados": 0
       },
       {
         "fecha": "2026-06-26",
@@ -3154,7 +3115,7 @@
         "inversion": 61851,
         "impresiones": 3821,
         "clics": 256,
-        "resultados": 37
+        "resultados": 69
       },
       {
         "fecha": "2026-06-26",
@@ -3162,7 +3123,7 @@
         "inversion": 51326,
         "impresiones": 3935,
         "clics": 245,
-        "resultados": 26
+        "resultados": 47
       },
       {
         "fecha": "2026-06-26",
@@ -3170,7 +3131,7 @@
         "inversion": 0,
         "impresiones": 0,
         "clics": 0,
-        "resultados": 1
+        "resultados": 2
       },
       {
         "fecha": "2026-06-26",
@@ -3178,7 +3139,7 @@
         "inversion": 9768,
         "impresiones": 621,
         "clics": 36,
-        "resultados": 8
+        "resultados": 0
       },
       {
         "fecha": "2026-06-27",
@@ -3186,7 +3147,7 @@
         "inversion": 50299,
         "impresiones": 2867,
         "clics": 179,
-        "resultados": 31
+        "resultados": 61
       },
       {
         "fecha": "2026-06-27",
@@ -3194,7 +3155,7 @@
         "inversion": 36285,
         "impresiones": 2685,
         "clics": 171,
-        "resultados": 21
+        "resultados": 41
       },
       {
         "fecha": "2026-06-27",
@@ -3202,7 +3163,7 @@
         "inversion": 8610,
         "impresiones": 497,
         "clics": 27,
-        "resultados": 7
+        "resultados": 0
       },
       {
         "fecha": "2026-06-28",
@@ -3210,7 +3171,7 @@
         "inversion": 61847,
         "impresiones": 3598,
         "clics": 206,
-        "resultados": 24
+        "resultados": 40
       },
       {
         "fecha": "2026-06-28",
@@ -3218,7 +3179,7 @@
         "inversion": 69939,
         "impresiones": 4942,
         "clics": 289,
-        "resultados": 50
+        "resultados": 89
       },
       {
         "fecha": "2026-06-28",
@@ -3226,7 +3187,7 @@
         "inversion": 12452,
         "impresiones": 587,
         "clics": 53,
-        "resultados": 12
+        "resultados": 0
       },
       {
         "fecha": "2026-06-29",
@@ -3234,7 +3195,7 @@
         "inversion": 66880,
         "impresiones": 4048,
         "clics": 271,
-        "resultados": 33
+        "resultados": 59
       },
       {
         "fecha": "2026-06-29",
@@ -3242,7 +3203,7 @@
         "inversion": 62676,
         "impresiones": 4640,
         "clics": 259,
-        "resultados": 31
+        "resultados": 59
       },
       {
         "fecha": "2026-06-29",
@@ -3250,7 +3211,7 @@
         "inversion": 11452,
         "impresiones": 727,
         "clics": 45,
-        "resultados": 9
+        "resultados": 0
       },
       {
         "fecha": "2026-06-30",
@@ -3258,7 +3219,7 @@
         "inversion": 61526,
         "impresiones": 4055,
         "clics": 264,
-        "resultados": 22
+        "resultados": 39
       },
       {
         "fecha": "2026-06-30",
@@ -3266,7 +3227,7 @@
         "inversion": 59344,
         "impresiones": 4924,
         "clics": 314,
-        "resultados": 18
+        "resultados": 34
       },
       {
         "fecha": "2026-06-30",
@@ -3274,7 +3235,7 @@
         "inversion": 51206,
         "impresiones": 2780,
         "clics": 105,
-        "resultados": 5
+        "resultados": 10
       },
       {
         "fecha": "2026-06-30",
@@ -3290,7 +3251,7 @@
         "inversion": 11818,
         "impresiones": 732,
         "clics": 55,
-        "resultados": 15
+        "resultados": 0
       },
       {
         "fecha": "2026-07-01",
@@ -3298,7 +3259,7 @@
         "inversion": 59193,
         "impresiones": 4279,
         "clics": 290,
-        "resultados": 16
+        "resultados": 32
       },
       {
         "fecha": "2026-07-01",
@@ -3306,7 +3267,7 @@
         "inversion": 56364,
         "impresiones": 5170,
         "clics": 312,
-        "resultados": 23
+        "resultados": 40
       },
       {
         "fecha": "2026-07-01",
@@ -3314,7 +3275,7 @@
         "inversion": 61043,
         "impresiones": 4470,
         "clics": 145,
-        "resultados": 6
+        "resultados": 12
       },
       {
         "fecha": "2026-07-01",
@@ -3322,7 +3283,7 @@
         "inversion": 49039,
         "impresiones": 2871,
         "clics": 180,
-        "resultados": 21
+        "resultados": 38
       },
       {
         "fecha": "2026-07-01",
@@ -3330,7 +3291,7 @@
         "inversion": 10662,
         "impresiones": 715,
         "clics": 74,
-        "resultados": 11
+        "resultados": 0
       },
       {
         "fecha": "2026-07-02",
@@ -3338,7 +3299,7 @@
         "inversion": 45896,
         "impresiones": 2755,
         "clics": 151,
-        "resultados": 15
+        "resultados": 34
       },
       {
         "fecha": "2026-07-02",
@@ -3346,7 +3307,7 @@
         "inversion": 50362,
         "impresiones": 4092,
         "clics": 223,
-        "resultados": 25
+        "resultados": 43
       },
       {
         "fecha": "2026-07-02",
@@ -3354,7 +3315,7 @@
         "inversion": 37010,
         "impresiones": 3191,
         "clics": 84,
-        "resultados": 8
+        "resultados": 11
       },
       {
         "fecha": "2026-07-02",
@@ -3362,7 +3323,7 @@
         "inversion": 27636,
         "impresiones": 1473,
         "clics": 91,
-        "resultados": 9
+        "resultados": 22
       },
       {
         "fecha": "2026-07-02",
@@ -3370,7 +3331,7 @@
         "inversion": 7927,
         "impresiones": 536,
         "clics": 43,
-        "resultados": 8
+        "resultados": 0
       },
       {
         "fecha": "2026-07-03",
@@ -3378,7 +3339,7 @@
         "inversion": 61382,
         "impresiones": 4092,
         "clics": 238,
-        "resultados": 34
+        "resultados": 62
       },
       {
         "fecha": "2026-07-03",
@@ -3386,7 +3347,7 @@
         "inversion": 65171,
         "impresiones": 5549,
         "clics": 312,
-        "resultados": 32
+        "resultados": 63
       },
       {
         "fecha": "2026-07-03",
@@ -3394,7 +3355,7 @@
         "inversion": 69206,
         "impresiones": 6534,
         "clics": 159,
-        "resultados": 23
+        "resultados": 38
       },
       {
         "fecha": "2026-07-03",
@@ -3402,7 +3363,7 @@
         "inversion": 32952,
         "impresiones": 2014,
         "clics": 126,
-        "resultados": 13
+        "resultados": 25
       },
       {
         "fecha": "2026-07-03",
@@ -3410,7 +3371,7 @@
         "inversion": 8550,
         "impresiones": 457,
         "clics": 37,
-        "resultados": 11
+        "resultados": 0
       },
       {
         "fecha": "2026-07-04",
@@ -3418,7 +3379,7 @@
         "inversion": 62836,
         "impresiones": 4199,
         "clics": 224,
-        "resultados": 14
+        "resultados": 30
       },
       {
         "fecha": "2026-07-04",
@@ -3426,7 +3387,7 @@
         "inversion": 55817,
         "impresiones": 4569,
         "clics": 248,
-        "resultados": 32
+        "resultados": 58
       },
       {
         "fecha": "2026-07-04",
@@ -3434,7 +3395,7 @@
         "inversion": 57514,
         "impresiones": 5448,
         "clics": 163,
-        "resultados": 17
+        "resultados": 34
       },
       {
         "fecha": "2026-07-04",
@@ -3442,7 +3403,7 @@
         "inversion": 27954,
         "impresiones": 2116,
         "clics": 125,
-        "resultados": 17
+        "resultados": 29
       },
       {
         "fecha": "2026-07-04",
@@ -3450,7 +3411,7 @@
         "inversion": 6958,
         "impresiones": 525,
         "clics": 31,
-        "resultados": 8
+        "resultados": 0
       },
       {
         "fecha": "2026-07-05",
@@ -3458,7 +3419,7 @@
         "inversion": 62524,
         "impresiones": 3946,
         "clics": 244,
-        "resultados": 26
+        "resultados": 41
       },
       {
         "fecha": "2026-07-05",
@@ -3466,7 +3427,7 @@
         "inversion": 61457,
         "impresiones": 4511,
         "clics": 279,
-        "resultados": 37
+        "resultados": 65
       },
       {
         "fecha": "2026-07-05",
@@ -3474,7 +3435,7 @@
         "inversion": 68668,
         "impresiones": 6095,
         "clics": 155,
-        "resultados": 23
+        "resultados": 36
       },
       {
         "fecha": "2026-07-05",
@@ -3482,7 +3443,7 @@
         "inversion": 42547,
         "impresiones": 2909,
         "clics": 186,
-        "resultados": 19
+        "resultados": 34
       },
       {
         "fecha": "2026-07-05",
@@ -3490,7 +3451,7 @@
         "inversion": 11687,
         "impresiones": 814,
         "clics": 61,
-        "resultados": 13
+        "resultados": 0
       },
       {
         "fecha": "2026-07-06",
@@ -3498,7 +3459,7 @@
         "inversion": 67997,
         "impresiones": 4366,
         "clics": 243,
-        "resultados": 23
+        "resultados": 31
       },
       {
         "fecha": "2026-07-06",
@@ -3506,7 +3467,7 @@
         "inversion": 64438,
         "impresiones": 4512,
         "clics": 254,
-        "resultados": 31
+        "resultados": 53
       },
       {
         "fecha": "2026-07-06",
@@ -3514,7 +3475,7 @@
         "inversion": 65150,
         "impresiones": 6475,
         "clics": 141,
-        "resultados": 16
+        "resultados": 23
       },
       {
         "fecha": "2026-07-06",
@@ -3522,7 +3483,7 @@
         "inversion": 44312,
         "impresiones": 3073,
         "clics": 186,
-        "resultados": 36
+        "resultados": 63
       },
       {
         "fecha": "2026-07-06",
@@ -3530,7 +3491,7 @@
         "inversion": 12115,
         "impresiones": 874,
         "clics": 50,
-        "resultados": 8
+        "resultados": 0
       },
       {
         "fecha": "2026-07-07",
@@ -3538,7 +3499,7 @@
         "inversion": 57941,
         "impresiones": 3718,
         "clics": 213,
-        "resultados": 16
+        "resultados": 31
       },
       {
         "fecha": "2026-07-07",
@@ -3546,7 +3507,7 @@
         "inversion": 59430,
         "impresiones": 4405,
         "clics": 239,
-        "resultados": 27
+        "resultados": 51
       },
       {
         "fecha": "2026-07-07",
@@ -3554,7 +3515,7 @@
         "inversion": 59342,
         "impresiones": 5940,
         "clics": 106,
-        "resultados": 13
+        "resultados": 24
       },
       {
         "fecha": "2026-07-07",
@@ -3562,7 +3523,7 @@
         "inversion": 41521,
         "impresiones": 3031,
         "clics": 153,
-        "resultados": 23
+        "resultados": 43
       },
       {
         "fecha": "2026-07-07",
@@ -3570,7 +3531,7 @@
         "inversion": 10714,
         "impresiones": 696,
         "clics": 39,
-        "resultados": 9
+        "resultados": 0
       },
       {
         "fecha": "2026-07-08",
@@ -3578,7 +3539,7 @@
         "inversion": 67253,
         "impresiones": 4337,
         "clics": 264,
-        "resultados": 25
+        "resultados": 46
       },
       {
         "fecha": "2026-07-08",
@@ -3586,7 +3547,7 @@
         "inversion": 72700,
         "impresiones": 6105,
         "clics": 325,
-        "resultados": 28
+        "resultados": 46
       },
       {
         "fecha": "2026-07-08",
@@ -3594,7 +3555,7 @@
         "inversion": 56031,
         "impresiones": 5638,
         "clics": 109,
-        "resultados": 9
+        "resultados": 17
       },
       {
         "fecha": "2026-07-08",
@@ -3602,7 +3563,7 @@
         "inversion": 40852,
         "impresiones": 3155,
         "clics": 182,
-        "resultados": 27
+        "resultados": 52
       },
       {
         "fecha": "2026-07-08",
@@ -3610,7 +3571,7 @@
         "inversion": 8939,
         "impresiones": 573,
         "clics": 47,
-        "resultados": 12
+        "resultados": 0
       },
       {
         "fecha": "2026-07-09",
@@ -3618,7 +3579,7 @@
         "inversion": 55958,
         "impresiones": 3770,
         "clics": 263,
-        "resultados": 25
+        "resultados": 40
       },
       {
         "fecha": "2026-07-09",
@@ -3626,7 +3587,7 @@
         "inversion": 56782,
         "impresiones": 4943,
         "clics": 270,
-        "resultados": 22
+        "resultados": 36
       },
       {
         "fecha": "2026-07-09",
@@ -3634,7 +3595,7 @@
         "inversion": 71375,
         "impresiones": 6448,
         "clics": 157,
-        "resultados": 12
+        "resultados": 26
       },
       {
         "fecha": "2026-07-09",
@@ -3642,7 +3603,7 @@
         "inversion": 39991,
         "impresiones": 3078,
         "clics": 159,
-        "resultados": 18
+        "resultados": 34
       },
       {
         "fecha": "2026-07-09",
@@ -3650,7 +3611,7 @@
         "inversion": 9102,
         "impresiones": 729,
         "clics": 51,
-        "resultados": 11
+        "resultados": 0
       },
       {
         "fecha": "2026-07-10",
@@ -3658,7 +3619,7 @@
         "inversion": 53022,
         "impresiones": 3387,
         "clics": 219,
-        "resultados": 26
+        "resultados": 52
       },
       {
         "fecha": "2026-07-10",
@@ -3666,7 +3627,7 @@
         "inversion": 50527,
         "impresiones": 4160,
         "clics": 236,
-        "resultados": 24
+        "resultados": 34
       },
       {
         "fecha": "2026-07-10",
@@ -3674,7 +3635,7 @@
         "inversion": 51964,
         "impresiones": 4428,
         "clics": 77,
-        "resultados": 10
+        "resultados": 20
       },
       {
         "fecha": "2026-07-10",
@@ -3682,7 +3643,7 @@
         "inversion": 36537,
         "impresiones": 2272,
         "clics": 128,
-        "resultados": 25
+        "resultados": 39
       },
       {
         "fecha": "2026-07-10",
@@ -3690,7 +3651,7 @@
         "inversion": 9293,
         "impresiones": 539,
         "clics": 56,
-        "resultados": 12
+        "resultados": 0
       },
       {
         "fecha": "2026-07-11",
@@ -3698,7 +3659,7 @@
         "inversion": 54261,
         "impresiones": 3377,
         "clics": 203,
-        "resultados": 16
+        "resultados": 29
       },
       {
         "fecha": "2026-07-11",
@@ -3706,7 +3667,7 @@
         "inversion": 53596,
         "impresiones": 4179,
         "clics": 239,
-        "resultados": 36
+        "resultados": 59
       },
       {
         "fecha": "2026-07-11",
@@ -3714,7 +3675,7 @@
         "inversion": 47352,
         "impresiones": 4342,
         "clics": 70,
-        "resultados": 3
+        "resultados": 6
       },
       {
         "fecha": "2026-07-11",
@@ -3722,7 +3683,7 @@
         "inversion": 33437,
         "impresiones": 2204,
         "clics": 136,
-        "resultados": 24
+        "resultados": 44
       },
       {
         "fecha": "2026-07-11",
@@ -3730,7 +3691,7 @@
         "inversion": 7797,
         "impresiones": 520,
         "clics": 36,
-        "resultados": 9
+        "resultados": 0
       },
       {
         "fecha": "2026-07-12",
@@ -3738,7 +3699,7 @@
         "inversion": 66996,
         "impresiones": 4088,
         "clics": 275,
-        "resultados": 25
+        "resultados": 38
       },
       {
         "fecha": "2026-07-12",
@@ -3746,7 +3707,7 @@
         "inversion": 63591,
         "impresiones": 5163,
         "clics": 306,
-        "resultados": 41
+        "resultados": 78
       },
       {
         "fecha": "2026-07-12",
@@ -3754,7 +3715,7 @@
         "inversion": 79601,
         "impresiones": 6657,
         "clics": 139,
-        "resultados": 15
+        "resultados": 28
       },
       {
         "fecha": "2026-07-12",
@@ -3762,7 +3723,7 @@
         "inversion": 45220,
         "impresiones": 2537,
         "clics": 144,
-        "resultados": 17
+        "resultados": 33
       },
       {
         "fecha": "2026-07-12",
@@ -3770,7 +3731,7 @@
         "inversion": 11997,
         "impresiones": 755,
         "clics": 54,
-        "resultados": 13
+        "resultados": 0
       },
       {
         "fecha": "2026-07-13",
@@ -3778,7 +3739,7 @@
         "inversion": 59411,
         "impresiones": 3948,
         "clics": 251,
-        "resultados": 33
+        "resultados": 52
       },
       {
         "fecha": "2026-07-13",
@@ -3786,7 +3747,7 @@
         "inversion": 62553,
         "impresiones": 5373,
         "clics": 316,
-        "resultados": 38
+        "resultados": 66
       },
       {
         "fecha": "2026-07-13",
@@ -3794,7 +3755,7 @@
         "inversion": 58182,
         "impresiones": 5113,
         "clics": 111,
-        "resultados": 14
+        "resultados": 27
       },
       {
         "fecha": "2026-07-13",
@@ -3802,7 +3763,7 @@
         "inversion": 40449,
         "impresiones": 2544,
         "clics": 175,
-        "resultados": 38
+        "resultados": 68
       },
       {
         "fecha": "2026-07-13",
@@ -3810,7 +3771,7 @@
         "inversion": 12713,
         "impresiones": 869,
         "clics": 69,
-        "resultados": 14
+        "resultados": 0
       },
       {
         "fecha": "2026-07-14",
@@ -3818,7 +3779,7 @@
         "inversion": 65616,
         "impresiones": 4555,
         "clics": 289,
-        "resultados": 27
+        "resultados": 53
       },
       {
         "fecha": "2026-07-14",
@@ -3826,7 +3787,7 @@
         "inversion": 64390,
         "impresiones": 5748,
         "clics": 350,
-        "resultados": 43
+        "resultados": 73
       },
       {
         "fecha": "2026-07-14",
@@ -3834,7 +3795,7 @@
         "inversion": 63077,
         "impresiones": 5990,
         "clics": 143,
-        "resultados": 16
+        "resultados": 27
       },
       {
         "fecha": "2026-07-14",
@@ -3842,7 +3803,7 @@
         "inversion": 46201,
         "impresiones": 3509,
         "clics": 219,
-        "resultados": 33
+        "resultados": 59
       },
       {
         "fecha": "2026-07-14",
@@ -3850,7 +3811,7 @@
         "inversion": 10521,
         "impresiones": 737,
         "clics": 82,
-        "resultados": 17
+        "resultados": 0
       },
       {
         "fecha": "2026-07-15",
@@ -3858,7 +3819,7 @@
         "inversion": 68996,
         "impresiones": 5521,
         "clics": 298,
-        "resultados": 44
+        "resultados": 76
       },
       {
         "fecha": "2026-07-15",
@@ -3866,7 +3827,7 @@
         "inversion": 62161,
         "impresiones": 5715,
         "clics": 307,
-        "resultados": 23
+        "resultados": 41
       },
       {
         "fecha": "2026-07-15",
@@ -3874,7 +3835,7 @@
         "inversion": 46446,
         "impresiones": 4494,
         "clics": 92,
-        "resultados": 15
+        "resultados": 26
       },
       {
         "fecha": "2026-07-15",
@@ -3882,7 +3843,7 @@
         "inversion": 64378,
         "impresiones": 4178,
         "clics": 254,
-        "resultados": 46
+        "resultados": 80
       },
       {
         "fecha": "2026-07-15",
@@ -3890,7 +3851,7 @@
         "inversion": 9216,
         "impresiones": 653,
         "clics": 54,
-        "resultados": 9
+        "resultados": 0
       },
       {
         "fecha": "2026-07-16",
@@ -3898,7 +3859,7 @@
         "inversion": 57204,
         "impresiones": 4568,
         "clics": 227,
-        "resultados": 35
+        "resultados": 61
       },
       {
         "fecha": "2026-07-16",
@@ -3906,7 +3867,7 @@
         "inversion": 54502,
         "impresiones": 4458,
         "clics": 258,
-        "resultados": 24
+        "resultados": 46
       },
       {
         "fecha": "2026-07-16",
@@ -3914,7 +3875,7 @@
         "inversion": 37254,
         "impresiones": 3195,
         "clics": 78,
-        "resultados": 5
+        "resultados": 10
       },
       {
         "fecha": "2026-07-16",
@@ -3922,7 +3883,7 @@
         "inversion": 58497,
         "impresiones": 3368,
         "clics": 231,
-        "resultados": 45
+        "resultados": 81
       },
       {
         "fecha": "2026-07-16",
@@ -3930,7 +3891,7 @@
         "inversion": 9279,
         "impresiones": 516,
         "clics": 60,
-        "resultados": 13
+        "resultados": 0
       },
       {
         "fecha": "2026-07-17",
@@ -3938,7 +3899,7 @@
         "inversion": 55561,
         "impresiones": 4098,
         "clics": 191,
-        "resultados": 30
+        "resultados": 51
       },
       {
         "fecha": "2026-07-17",
@@ -3946,7 +3907,7 @@
         "inversion": 59519,
         "impresiones": 4506,
         "clics": 308,
-        "resultados": 37
+        "resultados": 75
       },
       {
         "fecha": "2026-07-17",
@@ -3954,7 +3915,7 @@
         "inversion": 40812,
         "impresiones": 3391,
         "clics": 67,
-        "resultados": 7
+        "resultados": 12
       },
       {
         "fecha": "2026-07-17",
@@ -3962,7 +3923,7 @@
         "inversion": 63325,
         "impresiones": 3483,
         "clics": 222,
-        "resultados": 31
+        "resultados": 57
       },
       {
         "fecha": "2026-07-17",
@@ -3970,7 +3931,7 @@
         "inversion": 8999,
         "impresiones": 462,
         "clics": 62,
-        "resultados": 14
+        "resultados": 0
       },
       {
         "fecha": "2026-07-18",
@@ -3978,7 +3939,7 @@
         "inversion": 45516,
         "impresiones": 3452,
         "clics": 154,
-        "resultados": 15
+        "resultados": 30
       },
       {
         "fecha": "2026-07-18",
@@ -3986,7 +3947,7 @@
         "inversion": 52690,
         "impresiones": 4168,
         "clics": 289,
-        "resultados": 35
+        "resultados": 64
       },
       {
         "fecha": "2026-07-18",
@@ -3994,7 +3955,7 @@
         "inversion": 35599,
         "impresiones": 3309,
         "clics": 77,
-        "resultados": 9
+        "resultados": 16
       },
       {
         "fecha": "2026-07-18",
@@ -4002,7 +3963,7 @@
         "inversion": 51529,
         "impresiones": 2936,
         "clics": 187,
-        "resultados": 29
+        "resultados": 51
       },
       {
         "fecha": "2026-07-18",
@@ -4010,7 +3971,7 @@
         "inversion": 7063,
         "impresiones": 431,
         "clics": 39,
-        "resultados": 9
+        "resultados": 0
       },
       {
         "fecha": "2026-07-19",
@@ -4018,7 +3979,7 @@
         "inversion": 65317,
         "impresiones": 4822,
         "clics": 213,
-        "resultados": 33
+        "resultados": 64
       },
       {
         "fecha": "2026-07-19",
@@ -4026,7 +3987,7 @@
         "inversion": 72868,
         "impresiones": 5918,
         "clics": 333,
-        "resultados": 42
+        "resultados": 78
       },
       {
         "fecha": "2026-07-19",
@@ -4034,7 +3995,7 @@
         "inversion": 47728,
         "impresiones": 4802,
         "clics": 78,
-        "resultados": 5
+        "resultados": 12
       },
       {
         "fecha": "2026-07-19",
@@ -4042,7 +4003,7 @@
         "inversion": 63958,
         "impresiones": 3717,
         "clics": 269,
-        "resultados": 36
+        "resultados": 67
       },
       {
         "fecha": "2026-07-19",
@@ -4050,7 +4011,7 @@
         "inversion": 11065,
         "impresiones": 718,
         "clics": 69,
-        "resultados": 20
+        "resultados": 0
       },
       {
         "fecha": "2026-07-20",
@@ -4058,7 +4019,7 @@
         "inversion": 69016,
         "impresiones": 5193,
         "clics": 188,
-        "resultados": 30
+        "resultados": 52
       },
       {
         "fecha": "2026-07-20",
@@ -4066,7 +4027,7 @@
         "inversion": 65822,
         "impresiones": 6064,
         "clics": 364,
-        "resultados": 41
+        "resultados": 77
       },
       {
         "fecha": "2026-07-20",
@@ -4074,7 +4035,7 @@
         "inversion": 46178,
         "impresiones": 4248,
         "clics": 99,
-        "resultados": 3
+        "resultados": 6
       },
       {
         "fecha": "2026-07-20",
@@ -4082,7 +4043,7 @@
         "inversion": 67755,
         "impresiones": 4227,
         "clics": 279,
-        "resultados": 38
+        "resultados": 68
       },
       {
         "fecha": "2026-07-20",
@@ -4090,7 +4051,7 @@
         "inversion": 12079,
         "impresiones": 828,
         "clics": 57,
-        "resultados": 16
+        "resultados": 0
       },
       {
         "fecha": "2026-07-21",
@@ -4098,7 +4059,7 @@
         "inversion": 71973,
         "impresiones": 5544,
         "clics": 231,
-        "resultados": 34
+        "resultados": 63
       },
       {
         "fecha": "2026-07-21",
@@ -4106,7 +4067,7 @@
         "inversion": 61796,
         "impresiones": 6046,
         "clics": 366,
-        "resultados": 54
+        "resultados": 85
       },
       {
         "fecha": "2026-07-21",
@@ -4114,7 +4075,7 @@
         "inversion": 42821,
         "impresiones": 3892,
         "clics": 85,
-        "resultados": 8
+        "resultados": 14
       },
       {
         "fecha": "2026-07-21",
@@ -4122,7 +4083,7 @@
         "inversion": 61636,
         "impresiones": 3986,
         "clics": 212,
-        "resultados": 35
+        "resultados": 69
       },
       {
         "fecha": "2026-07-21",
@@ -4130,7 +4091,7 @@
         "inversion": 11382,
         "impresiones": 813,
         "clics": 72,
-        "resultados": 18
+        "resultados": 0
       },
       {
         "fecha": "2026-07-22",
@@ -4138,7 +4099,7 @@
         "inversion": 56618,
         "impresiones": 3634,
         "clics": 128,
-        "resultados": 15
+        "resultados": 26
       },
       {
         "fecha": "2026-07-22",
@@ -4146,7 +4107,7 @@
         "inversion": 59326,
         "impresiones": 4451,
         "clics": 217,
-        "resultados": 25
+        "resultados": 46
       },
       {
         "fecha": "2026-07-22",
@@ -4154,7 +4115,7 @@
         "inversion": 32808,
         "impresiones": 2455,
         "clics": 77,
-        "resultados": 13
+        "resultados": 25
       },
       {
         "fecha": "2026-07-22",
@@ -4162,7 +4123,7 @@
         "inversion": 58582,
         "impresiones": 3757,
         "clics": 233,
-        "resultados": 36
+        "resultados": 71
       },
       {
         "fecha": "2026-07-22",
@@ -4170,7 +4131,7 @@
         "inversion": 9027,
         "impresiones": 669,
         "clics": 66,
-        "resultados": 16
+        "resultados": 0
       },
       {
         "fecha": "2026-07-23",
@@ -4178,7 +4139,7 @@
         "inversion": 48671,
         "impresiones": 2673,
         "clics": 102,
-        "resultados": 10
+        "resultados": 23
       },
       {
         "fecha": "2026-07-23",
@@ -4186,7 +4147,7 @@
         "inversion": 54991,
         "impresiones": 4119,
         "clics": 205,
-        "resultados": 21
+        "resultados": 38
       },
       {
         "fecha": "2026-07-23",
@@ -4194,7 +4155,7 @@
         "inversion": 41454,
         "impresiones": 2805,
         "clics": 111,
-        "resultados": 10
+        "resultados": 18
       },
       {
         "fecha": "2026-07-23",
@@ -4202,7 +4163,7 @@
         "inversion": 59256,
         "impresiones": 3651,
         "clics": 230,
-        "resultados": 39
+        "resultados": 79
       },
       {
         "fecha": "2026-07-23",
@@ -4210,7 +4171,7 @@
         "inversion": 9271,
         "impresiones": 838,
         "clics": 55,
-        "resultados": 12
+        "resultados": 0
       },
       {
         "fecha": "2026-07-24",
@@ -4218,7 +4179,7 @@
         "inversion": 65471,
         "impresiones": 3812,
         "clics": 162,
-        "resultados": 25
+        "resultados": 48
       },
       {
         "fecha": "2026-07-24",
@@ -4226,7 +4187,7 @@
         "inversion": 62532,
         "impresiones": 4715,
         "clics": 255,
-        "resultados": 29
+        "resultados": 56
       },
       {
         "fecha": "2026-07-24",
@@ -4234,7 +4195,7 @@
         "inversion": 23145,
         "impresiones": 1654,
         "clics": 59,
-        "resultados": 7
+        "resultados": 12
       },
       {
         "fecha": "2026-07-24",
@@ -4242,7 +4203,7 @@
         "inversion": 66898,
         "impresiones": 3981,
         "clics": 284,
-        "resultados": 48
+        "resultados": 90
       },
       {
         "fecha": "2026-07-24",
@@ -4250,7 +4211,7 @@
         "inversion": 9314,
         "impresiones": 718,
         "clics": 55,
-        "resultados": 12
+        "resultados": 0
       },
       {
         "fecha": "2026-07-25",
@@ -4258,7 +4219,7 @@
         "inversion": 33661,
         "impresiones": 1872,
         "clics": 57,
-        "resultados": 2
+        "resultados": 5
       },
       {
         "fecha": "2026-07-25",
@@ -4266,7 +4227,7 @@
         "inversion": 79172,
         "impresiones": 5738,
         "clics": 282,
-        "resultados": 20
+        "resultados": 39
       },
       {
         "fecha": "2026-07-25",
@@ -4274,7 +4235,7 @@
         "inversion": 17734,
         "impresiones": 1303,
         "clics": 43,
-        "resultados": 2
+        "resultados": 4
       },
       {
         "fecha": "2026-07-25",
@@ -4282,7 +4243,7 @@
         "inversion": 77385,
         "impresiones": 4703,
         "clics": 287,
-        "resultados": 37
+        "resultados": 77
       },
       {
         "fecha": "2026-07-25",
@@ -4290,7 +4251,7 @@
         "inversion": 7755,
         "impresiones": 635,
         "clics": 47,
-        "resultados": 10
+        "resultados": 0
       },
       {
         "fecha": "2026-07-26",
@@ -4298,7 +4259,7 @@
         "inversion": 49370,
         "impresiones": 2852,
         "clics": 96,
-        "resultados": 12
+        "resultados": 22
       },
       {
         "fecha": "2026-07-26",
@@ -4306,7 +4267,7 @@
         "inversion": 84033,
         "impresiones": 6518,
         "clics": 253,
-        "resultados": 30
+        "resultados": 61
       },
       {
         "fecha": "2026-07-26",
@@ -4314,7 +4275,7 @@
         "inversion": 26737,
         "impresiones": 2162,
         "clics": 77,
-        "resultados": 6
+        "resultados": 11
       },
       {
         "fecha": "2026-07-26",
@@ -4322,7 +4283,7 @@
         "inversion": 86543,
         "impresiones": 6255,
         "clics": 356,
-        "resultados": 38
+        "resultados": 78
       },
       {
         "fecha": "2026-07-26",
@@ -4330,7 +4291,7 @@
         "inversion": 11690,
         "impresiones": 765,
         "clics": 56,
-        "resultados": 16
+        "resultados": 0
       },
       {
         "fecha": "2026-07-27",
@@ -4338,7 +4299,7 @@
         "inversion": 44784,
         "impresiones": 2455,
         "clics": 110,
-        "resultados": 12
+        "resultados": 26
       },
       {
         "fecha": "2026-07-27",
@@ -4346,7 +4307,7 @@
         "inversion": 87586,
         "impresiones": 6790,
         "clics": 349,
-        "resultados": 37
+        "resultados": 73
       },
       {
         "fecha": "2026-07-27",
@@ -4354,7 +4315,7 @@
         "inversion": 23056,
         "impresiones": 1788,
         "clics": 83,
-        "resultados": 9
+        "resultados": 20
       },
       {
         "fecha": "2026-07-27",
@@ -4362,7 +4323,7 @@
         "inversion": 82979,
         "impresiones": 6030,
         "clics": 318,
-        "resultados": 39
+        "resultados": 81
       },
       {
         "fecha": "2026-07-27",
@@ -4370,7 +4331,7 @@
         "inversion": 11805,
         "impresiones": 874,
         "clics": 61,
-        "resultados": 12
+        "resultados": 0
       },
       {
         "fecha": "2026-07-28",
@@ -4378,7 +4339,7 @@
         "inversion": 29987,
         "impresiones": 1690,
         "clics": 65,
-        "resultados": 2
+        "resultados": 7
       },
       {
         "fecha": "2026-07-28",
@@ -4386,7 +4347,7 @@
         "inversion": 81910,
         "impresiones": 6271,
         "clics": 292,
-        "resultados": 29
+        "resultados": 60
       },
       {
         "fecha": "2026-07-28",
@@ -4394,7 +4355,7 @@
         "inversion": 21590,
         "impresiones": 1597,
         "clics": 58,
-        "resultados": 3
+        "resultados": 6
       },
       {
         "fecha": "2026-07-28",
@@ -4402,7 +4363,7 @@
         "inversion": 85166,
         "impresiones": 5269,
         "clics": 320,
-        "resultados": 59
+        "resultados": 113
       },
       {
         "fecha": "2026-07-28",
@@ -4410,7 +4371,7 @@
         "inversion": 9222,
         "impresiones": 633,
         "clics": 45,
-        "resultados": 13
+        "resultados": 0
       },
       {
         "fecha": "2026-07-29",
@@ -4418,7 +4379,7 @@
         "inversion": 66784,
         "impresiones": 3780,
         "clics": 176,
-        "resultados": 23
+        "resultados": 43
       },
       {
         "fecha": "2026-07-29",
@@ -4426,7 +4387,7 @@
         "inversion": 63865,
         "impresiones": 5433,
         "clics": 357,
-        "resultados": 40
+        "resultados": 77
       },
       {
         "fecha": "2026-07-29",
@@ -4434,7 +4395,7 @@
         "inversion": 21939,
         "impresiones": 1877,
         "clics": 87,
-        "resultados": 10
+        "resultados": 18
       },
       {
         "fecha": "2026-07-29",
@@ -4442,7 +4403,7 @@
         "inversion": 77056,
         "impresiones": 4520,
         "clics": 310,
-        "resultados": 38
+        "resultados": 83
       },
       {
         "fecha": "2026-07-29",
@@ -4450,7 +4411,7 @@
         "inversion": 10268,
         "impresiones": 719,
         "clics": 71,
-        "resultados": 15
+        "resultados": 0
       },
       {
         "fecha": "2026-07-29",
@@ -4466,7 +4427,7 @@
         "inversion": 61488,
         "impresiones": 3561,
         "clics": 182,
-        "resultados": 40
+        "resultados": 73
       },
       {
         "fecha": "2026-07-30",
@@ -4474,7 +4435,7 @@
         "inversion": 78053,
         "impresiones": 6611,
         "clics": 401,
-        "resultados": 28
+        "resultados": 53
       },
       {
         "fecha": "2026-07-30",
@@ -4482,7 +4443,7 @@
         "inversion": 17099,
         "impresiones": 1423,
         "clics": 61,
-        "resultados": 11
+        "resultados": 23
       },
       {
         "fecha": "2026-07-30",
@@ -4490,7 +4451,7 @@
         "inversion": 77620,
         "impresiones": 4452,
         "clics": 277,
-        "resultados": 48
+        "resultados": 90
       },
       {
         "fecha": "2026-07-30",
@@ -4498,7 +4459,7 @@
         "inversion": 9437,
         "impresiones": 606,
         "clics": 77,
-        "resultados": 23
+        "resultados": 0
       },
       {
         "fecha": "2026-07-30",
@@ -4514,7 +4475,7 @@
         "inversion": 52299,
         "impresiones": 2937,
         "clics": 161,
-        "resultados": 35
+        "resultados": 66
       },
       {
         "fecha": "2026-07-31",
@@ -4522,7 +4483,7 @@
         "inversion": 84459,
         "impresiones": 7066,
         "clics": 428,
-        "resultados": 54
+        "resultados": 101
       },
       {
         "fecha": "2026-07-31",
@@ -4530,7 +4491,7 @@
         "inversion": 12703,
         "impresiones": 1086,
         "clics": 33,
-        "resultados": 2
+        "resultados": 4
       },
       {
         "fecha": "2026-07-31",
@@ -4538,7 +4499,7 @@
         "inversion": 73702,
         "impresiones": 4105,
         "clics": 297,
-        "resultados": 33
+        "resultados": 69
       },
       {
         "fecha": "2026-07-31",
@@ -4546,7 +4507,7 @@
         "inversion": 9393,
         "impresiones": 526,
         "clics": 48,
-        "resultados": 11
+        "resultados": 0
       },
       {
         "fecha": "2026-07-31",
@@ -4562,7 +4523,7 @@
         "inversion": 44219,
         "impresiones": 2222,
         "clics": 142,
-        "resultados": 25
+        "resultados": 46
       },
       {
         "fecha": "2026-08-01",
@@ -4570,7 +4531,7 @@
         "inversion": 79492,
         "impresiones": 6370,
         "clics": 386,
-        "resultados": 46
+        "resultados": 88
       },
       {
         "fecha": "2026-08-01",
@@ -4578,7 +4539,7 @@
         "inversion": 16505,
         "impresiones": 1126,
         "clics": 34,
-        "resultados": 7
+        "resultados": 14
       },
       {
         "fecha": "2026-08-01",
@@ -4586,7 +4547,7 @@
         "inversion": 75603,
         "impresiones": 3746,
         "clics": 264,
-        "resultados": 44
+        "resultados": 82
       },
       {
         "fecha": "2026-08-01",
@@ -4594,7 +4555,7 @@
         "inversion": 7806,
         "impresiones": 470,
         "clics": 37,
-        "resultados": 8
+        "resultados": 0
       },
       {
         "fecha": "2026-08-01",
@@ -4610,7 +4571,7 @@
         "inversion": 70134,
         "impresiones": 4106,
         "clics": 201,
-        "resultados": 26
+        "resultados": 51
       },
       {
         "fecha": "2026-08-02",
@@ -4618,7 +4579,7 @@
         "inversion": 75674,
         "impresiones": 6046,
         "clics": 334,
-        "resultados": 35
+        "resultados": 71
       },
       {
         "fecha": "2026-08-02",
@@ -4626,7 +4587,7 @@
         "inversion": 23666,
         "impresiones": 1859,
         "clics": 61,
-        "resultados": 6
+        "resultados": 10
       },
       {
         "fecha": "2026-08-02",
@@ -4634,7 +4595,7 @@
         "inversion": 82312,
         "impresiones": 4508,
         "clics": 282,
-        "resultados": 42
+        "resultados": 81
       },
       {
         "fecha": "2026-08-02",
@@ -4642,7 +4603,7 @@
         "inversion": 10787,
         "impresiones": 602,
         "clics": 53,
-        "resultados": 10
+        "resultados": 0
       },
       {
         "fecha": "2026-08-02",
@@ -4658,7 +4619,7 @@
         "inversion": 72882,
         "impresiones": 4854,
         "clics": 229,
-        "resultados": 28
+        "resultados": 54
       },
       {
         "fecha": "2026-08-03",
@@ -4666,7 +4627,7 @@
         "inversion": 106473,
         "impresiones": 9092,
         "clics": 547,
-        "resultados": 71
+        "resultados": 137
       },
       {
         "fecha": "2026-08-03",
@@ -4674,7 +4635,7 @@
         "inversion": 24116,
         "impresiones": 1887,
         "clics": 92,
-        "resultados": 6
+        "resultados": 12
       },
       {
         "fecha": "2026-08-03",
@@ -4682,7 +4643,7 @@
         "inversion": 97415,
         "impresiones": 6366,
         "clics": 417,
-        "resultados": 47
+        "resultados": 97
       },
       {
         "fecha": "2026-08-03",
@@ -4690,7 +4651,7 @@
         "inversion": 10068,
         "impresiones": 633,
         "clics": 48,
-        "resultados": 6
+        "resultados": 0
       },
       {
         "fecha": "2026-08-03",
@@ -4706,7 +4667,7 @@
         "inversion": 60372,
         "impresiones": 3955,
         "clics": 227,
-        "resultados": 25
+        "resultados": 50
       },
       {
         "fecha": "2026-08-04",
@@ -4714,7 +4675,7 @@
         "inversion": 78918,
         "impresiones": 6902,
         "clics": 483,
-        "resultados": 59
+        "resultados": 110
       },
       {
         "fecha": "2026-08-04",
@@ -4722,7 +4683,7 @@
         "inversion": 22182,
         "impresiones": 1618,
         "clics": 62,
-        "resultados": 9
+        "resultados": 18
       },
       {
         "fecha": "2026-08-04",
@@ -4730,7 +4691,7 @@
         "inversion": 83519,
         "impresiones": 5635,
         "clics": 358,
-        "resultados": 59
+        "resultados": 117
       },
       {
         "fecha": "2026-08-04",
@@ -4738,7 +4699,7 @@
         "inversion": 9496,
         "impresiones": 682,
         "clics": 63,
-        "resultados": 19
+        "resultados": 0
       },
       {
         "fecha": "2026-08-04",
@@ -4754,7 +4715,7 @@
         "inversion": 61765,
         "impresiones": 3936,
         "clics": 194,
-        "resultados": 28
+        "resultados": 58
       },
       {
         "fecha": "2026-08-05",
@@ -4762,7 +4723,7 @@
         "inversion": 84624,
         "impresiones": 7447,
         "clics": 473,
-        "resultados": 42
+        "resultados": 87
       },
       {
         "fecha": "2026-08-05",
@@ -4770,7 +4731,7 @@
         "inversion": 22231,
         "impresiones": 1852,
         "clics": 94,
-        "resultados": 11
+        "resultados": 24
       },
       {
         "fecha": "2026-08-05",
@@ -4778,7 +4739,7 @@
         "inversion": 84264,
         "impresiones": 5521,
         "clics": 369,
-        "resultados": 60
+        "resultados": 129
       },
       {
         "fecha": "2026-08-05",
@@ -4786,7 +4747,7 @@
         "inversion": 11576,
         "impresiones": 743,
         "clics": 80,
-        "resultados": 23
+        "resultados": 0
       },
       {
         "fecha": "2026-08-05",
@@ -4802,7 +4763,7 @@
         "inversion": 55898,
         "impresiones": 3450,
         "clics": 173,
-        "resultados": 29
+        "resultados": 55
       },
       {
         "fecha": "2026-08-06",
@@ -4810,7 +4771,7 @@
         "inversion": 72117,
         "impresiones": 6188,
         "clics": 401,
-        "resultados": 39
+        "resultados": 77
       },
       {
         "fecha": "2026-08-06",
@@ -4818,7 +4779,7 @@
         "inversion": 18313,
         "impresiones": 1715,
         "clics": 78,
-        "resultados": 5
+        "resultados": 10
       },
       {
         "fecha": "2026-08-06",
@@ -4826,7 +4787,7 @@
         "inversion": 75075,
         "impresiones": 5018,
         "clics": 326,
-        "resultados": 53
+        "resultados": 102
       },
       {
         "fecha": "2026-08-06",
@@ -4834,7 +4795,7 @@
         "inversion": 10314,
         "impresiones": 733,
         "clics": 53,
-        "resultados": 9
+        "resultados": 0
       },
       {
         "fecha": "2026-08-06",
@@ -4850,7 +4811,7 @@
         "inversion": 50767,
         "impresiones": 3052,
         "clics": 182,
-        "resultados": 25
+        "resultados": 52
       },
       {
         "fecha": "2026-08-07",
@@ -4858,7 +4819,7 @@
         "inversion": 71250,
         "impresiones": 6616,
         "clics": 420,
-        "resultados": 41
+        "resultados": 81
       },
       {
         "fecha": "2026-08-07",
@@ -4866,7 +4827,7 @@
         "inversion": 17064,
         "impresiones": 1590,
         "clics": 96,
-        "resultados": 15
+        "resultados": 28
       },
       {
         "fecha": "2026-08-07",
@@ -4874,7 +4835,7 @@
         "inversion": 72785,
         "impresiones": 4918,
         "clics": 361,
-        "resultados": 48
+        "resultados": 95
       },
       {
         "fecha": "2026-08-07",
@@ -4882,7 +4843,7 @@
         "inversion": 9455,
         "impresiones": 737,
         "clics": 75,
-        "resultados": 20
+        "resultados": 0
       },
       {
         "fecha": "2026-08-07",
@@ -4898,7 +4859,7 @@
         "inversion": 47776,
         "impresiones": 3130,
         "clics": 169,
-        "resultados": 22
+        "resultados": 43
       },
       {
         "fecha": "2026-08-08",
@@ -4906,7 +4867,7 @@
         "inversion": 70523,
         "impresiones": 6620,
         "clics": 364,
-        "resultados": 29
+        "resultados": 57
       },
       {
         "fecha": "2026-08-08",
@@ -4914,7 +4875,7 @@
         "inversion": 12148,
         "impresiones": 1350,
         "clics": 65,
-        "resultados": 3
+        "resultados": 6
       },
       {
         "fecha": "2026-08-08",
@@ -4922,7 +4883,7 @@
         "inversion": 64466,
         "impresiones": 4625,
         "clics": 278,
-        "resultados": 37
+        "resultados": 74
       },
       {
         "fecha": "2026-08-08",
@@ -4930,7 +4891,7 @@
         "inversion": 8131,
         "impresiones": 618,
         "clics": 37,
-        "resultados": 11
+        "resultados": 0
       },
       {
         "fecha": "2026-08-09",
@@ -4938,7 +4899,7 @@
         "inversion": 70150,
         "impresiones": 5814,
         "clics": 252,
-        "resultados": 31
+        "resultados": 62
       },
       {
         "fecha": "2026-08-09",
@@ -4946,7 +4907,7 @@
         "inversion": 73985,
         "impresiones": 7090,
         "clics": 425,
-        "resultados": 43
+        "resultados": 82
       },
       {
         "fecha": "2026-08-09",
@@ -4954,7 +4915,7 @@
         "inversion": 18013,
         "impresiones": 1799,
         "clics": 71,
-        "resultados": 5
+        "resultados": 10
       },
       {
         "fecha": "2026-08-09",
@@ -4962,7 +4923,7 @@
         "inversion": 78626,
         "impresiones": 5609,
         "clics": 391,
-        "resultados": 48
+        "resultados": 87
       },
       {
         "fecha": "2026-08-09",
@@ -4970,7 +4931,7 @@
         "inversion": 10816,
         "impresiones": 784,
         "clics": 59,
-        "resultados": 12
+        "resultados": 0
       },
       {
         "fecha": "2026-08-10",
@@ -4978,7 +4939,7 @@
         "inversion": 52023,
         "impresiones": 4674,
         "clics": 163,
-        "resultados": 22
+        "resultados": 47
       },
       {
         "fecha": "2026-08-10",
@@ -4986,7 +4947,7 @@
         "inversion": 77822,
         "impresiones": 8541,
         "clics": 457,
-        "resultados": 41
+        "resultados": 84
       },
       {
         "fecha": "2026-08-10",
@@ -4994,7 +4955,7 @@
         "inversion": 23191,
         "impresiones": 3010,
         "clics": 88,
-        "resultados": 11
+        "resultados": 22
       },
       {
         "fecha": "2026-08-10",
@@ -5002,7 +4963,7 @@
         "inversion": 82388,
         "impresiones": 6843,
         "clics": 307,
-        "resultados": 40
+        "resultados": 83
       },
       {
         "fecha": "2026-08-10",
@@ -5010,7 +4971,7 @@
         "inversion": 11241,
         "impresiones": 1005,
         "clics": 72,
-        "resultados": 19
+        "resultados": 0
       },
       {
         "fecha": "2026-08-11",
@@ -5018,7 +4979,7 @@
         "inversion": 60472,
         "impresiones": 5425,
         "clics": 226,
-        "resultados": 36
+        "resultados": 63
       },
       {
         "fecha": "2026-08-11",
@@ -5026,7 +4987,7 @@
         "inversion": 78866,
         "impresiones": 8691,
         "clics": 485,
-        "resultados": 54
+        "resultados": 101
       },
       {
         "fecha": "2026-08-11",
@@ -5034,7 +4995,7 @@
         "inversion": 20673,
         "impresiones": 2536,
         "clics": 82,
-        "resultados": 4
+        "resultados": 7
       },
       {
         "fecha": "2026-08-11",
@@ -5042,7 +5003,7 @@
         "inversion": 74235,
         "impresiones": 5435,
         "clics": 346,
-        "resultados": 61
+        "resultados": 121
       },
       {
         "fecha": "2026-08-11",
@@ -5050,7 +5011,7 @@
         "inversion": 10922,
         "impresiones": 1020,
         "clics": 77,
-        "resultados": 15
+        "resultados": 0
       },
       {
         "fecha": "2026-08-12",
@@ -5058,7 +5019,7 @@
         "inversion": 66405,
         "impresiones": 5351,
         "clics": 247,
-        "resultados": 28
+        "resultados": 55
       },
       {
         "fecha": "2026-08-12",
@@ -5066,7 +5027,7 @@
         "inversion": 95804,
         "impresiones": 12198,
         "clics": 635,
-        "resultados": 49
+        "resultados": 92
       },
       {
         "fecha": "2026-08-12",
@@ -5074,7 +5035,7 @@
         "inversion": 21426,
         "impresiones": 2826,
         "clics": 119,
-        "resultados": 10
+        "resultados": 20
       },
       {
         "fecha": "2026-08-12",
@@ -5082,7 +5043,7 @@
         "inversion": 92586,
         "impresiones": 7180,
         "clics": 450,
-        "resultados": 53
+        "resultados": 102
       },
       {
         "fecha": "2026-08-12",
@@ -5090,7 +5051,7 @@
         "inversion": 10255,
         "impresiones": 894,
         "clics": 77,
-        "resultados": 19
+        "resultados": 0
       },
       {
         "fecha": "2026-08-13",
@@ -5098,7 +5059,7 @@
         "inversion": 48080,
         "impresiones": 4032,
         "clics": 196,
-        "resultados": 21
+        "resultados": 44
       },
       {
         "fecha": "2026-08-13",
@@ -5106,7 +5067,7 @@
         "inversion": 70157,
         "impresiones": 9342,
         "clics": 420,
-        "resultados": 43
+        "resultados": 81
       },
       {
         "fecha": "2026-08-13",
@@ -5114,7 +5075,7 @@
         "inversion": 18096,
         "impresiones": 2408,
         "clics": 85,
-        "resultados": 5
+        "resultados": 8
       },
       {
         "fecha": "2026-08-13",
@@ -5122,7 +5083,7 @@
         "inversion": 68891,
         "impresiones": 5550,
         "clics": 347,
-        "resultados": 43
+        "resultados": 80
       },
       {
         "fecha": "2026-08-13",
@@ -5130,7 +5091,7 @@
         "inversion": 7472,
         "impresiones": 790,
         "clics": 65,
-        "resultados": 20
+        "resultados": 0
       },
       {
         "fecha": "2026-08-14",
@@ -5138,7 +5099,7 @@
         "inversion": 70394,
         "impresiones": 6175,
         "clics": 272,
-        "resultados": 39
+        "resultados": 75
       },
       {
         "fecha": "2026-08-14",
@@ -5146,7 +5107,7 @@
         "inversion": 84355,
         "impresiones": 10193,
         "clics": 511,
-        "resultados": 52
+        "resultados": 103
       },
       {
         "fecha": "2026-08-14",
@@ -5154,7 +5115,7 @@
         "inversion": 14285,
         "impresiones": 1732,
         "clics": 41,
-        "resultados": 4
+        "resultados": 8
       },
       {
         "fecha": "2026-08-14",
@@ -5162,7 +5123,7 @@
         "inversion": 85995,
         "impresiones": 7018,
         "clics": 463,
-        "resultados": 49
+        "resultados": 92
       },
       {
         "fecha": "2026-08-14",
@@ -5170,7 +5131,7 @@
         "inversion": 9700,
         "impresiones": 930,
         "clics": 71,
-        "resultados": 13
+        "resultados": 0
       },
       {
         "fecha": "2026-08-15",
@@ -5178,7 +5139,7 @@
         "inversion": 49826,
         "impresiones": 3831,
         "clics": 201,
-        "resultados": 32
+        "resultados": 61
       },
       {
         "fecha": "2026-08-15",
@@ -5186,7 +5147,7 @@
         "inversion": 77840,
         "impresiones": 9290,
         "clics": 451,
-        "resultados": 51
+        "resultados": 102
       },
       {
         "fecha": "2026-08-15",
@@ -5194,7 +5155,7 @@
         "inversion": 24024,
         "impresiones": 2997,
         "clics": 99,
-        "resultados": 6
+        "resultados": 12
       },
       {
         "fecha": "2026-08-15",
@@ -5202,7 +5163,7 @@
         "inversion": 75433,
         "impresiones": 5627,
         "clics": 348,
-        "resultados": 43
+        "resultados": 83
       },
       {
         "fecha": "2026-08-15",
@@ -5210,7 +5171,7 @@
         "inversion": 8837,
         "impresiones": 723,
         "clics": 38,
-        "resultados": 7
+        "resultados": 0
       },
       {
         "fecha": "2026-08-16",
@@ -5218,7 +5179,7 @@
         "inversion": 68841,
         "impresiones": 4866,
         "clics": 260,
-        "resultados": 35
+        "resultados": 72
       },
       {
         "fecha": "2026-08-16",
@@ -5226,7 +5187,7 @@
         "inversion": 84402,
         "impresiones": 9303,
         "clics": 495,
-        "resultados": 54
+        "resultados": 108
       },
       {
         "fecha": "2026-08-16",
@@ -5234,7 +5195,7 @@
         "inversion": 19157,
         "impresiones": 2220,
         "clics": 59,
-        "resultados": 2
+        "resultados": 4
       },
       {
         "fecha": "2026-08-16",
@@ -5242,7 +5203,7 @@
         "inversion": 75651,
         "impresiones": 5194,
         "clics": 369,
-        "resultados": 57
+        "resultados": 114
       },
       {
         "fecha": "2026-08-16",
@@ -5250,7 +5211,7 @@
         "inversion": 12023,
         "impresiones": 838,
         "clics": 69,
-        "resultados": 18
+        "resultados": 0
       },
       {
         "fecha": "2026-08-17",
@@ -5258,7 +5219,7 @@
         "inversion": 47109,
         "impresiones": 3225,
         "clics": 180,
-        "resultados": 29
+        "resultados": 56
       },
       {
         "fecha": "2026-08-17",
@@ -5266,7 +5227,7 @@
         "inversion": 69750,
         "impresiones": 7313,
         "clics": 391,
-        "resultados": 36
+        "resultados": 71
       },
       {
         "fecha": "2026-08-17",
@@ -5282,7 +5243,7 @@
         "inversion": 75727,
         "impresiones": 4827,
         "clics": 351,
-        "resultados": 47
+        "resultados": 94
       },
       {
         "fecha": "2026-08-17",
@@ -5290,7 +5251,7 @@
         "inversion": 7748,
         "impresiones": 742,
         "clics": 67,
-        "resultados": 14
+        "resultados": 0
       },
       {
         "fecha": "2026-08-18",
@@ -5298,7 +5259,7 @@
         "inversion": 76708,
         "impresiones": 5002,
         "clics": 316,
-        "resultados": 43
+        "resultados": 81
       },
       {
         "fecha": "2026-08-18",
@@ -5306,7 +5267,7 @@
         "inversion": 101110,
         "impresiones": 11969,
         "clics": 793,
-        "resultados": 73
+        "resultados": 134
       },
       {
         "fecha": "2026-08-18",
@@ -5314,7 +5275,7 @@
         "inversion": 25182,
         "impresiones": 2008,
         "clics": 70,
-        "resultados": 5
+        "resultados": 10
       },
       {
         "fecha": "2026-08-18",
@@ -5322,7 +5283,7 @@
         "inversion": 82295,
         "impresiones": 5675,
         "clics": 402,
-        "resultados": 53
+        "resultados": 102
       },
       {
         "fecha": "2026-08-18",
@@ -5330,7 +5291,7 @@
         "inversion": 11429,
         "impresiones": 1144,
         "clics": 71,
-        "resultados": 11
+        "resultados": 0
       },
       {
         "fecha": "2026-08-19",
@@ -5338,7 +5299,7 @@
         "inversion": 66554,
         "impresiones": 4766,
         "clics": 261,
-        "resultados": 25
+        "resultados": 51
       },
       {
         "fecha": "2026-08-19",
@@ -5346,7 +5307,7 @@
         "inversion": 87999,
         "impresiones": 13140,
         "clics": 741,
-        "resultados": 63
+        "resultados": 127
       },
       {
         "fecha": "2026-08-19",
@@ -5354,7 +5315,7 @@
         "inversion": 18495,
         "impresiones": 1354,
         "clics": 39,
-        "resultados": 5
+        "resultados": 10
       },
       {
         "fecha": "2026-08-19",
@@ -5362,7 +5323,7 @@
         "inversion": 94152,
         "impresiones": 5512,
         "clics": 424,
-        "resultados": 62
+        "resultados": 126
       },
       {
         "fecha": "2026-08-19",
@@ -5370,7 +5331,7 @@
         "inversion": 9181,
         "impresiones": 758,
         "clics": 52,
-        "resultados": 9
+        "resultados": 0
       },
       {
         "fecha": "2026-08-20",
@@ -5378,7 +5339,7 @@
         "inversion": 57149,
         "impresiones": 4390,
         "clics": 246,
-        "resultados": 30
+        "resultados": 58
       },
       {
         "fecha": "2026-08-20",
@@ -5386,7 +5347,7 @@
         "inversion": 69070,
         "impresiones": 10901,
         "clics": 599,
-        "resultados": 38
+        "resultados": 75
       },
       {
         "fecha": "2026-08-20",
@@ -5394,7 +5355,7 @@
         "inversion": 31772,
         "impresiones": 2511,
         "clics": 77,
-        "resultados": 4
+        "resultados": 9
       },
       {
         "fecha": "2026-08-20",
@@ -5402,7 +5363,7 @@
         "inversion": 86916,
         "impresiones": 5444,
         "clics": 439,
-        "resultados": 49
+        "resultados": 97
       },
       {
         "fecha": "2026-08-20",
@@ -5410,7 +5371,7 @@
         "inversion": 11052,
         "impresiones": 497,
         "clics": 49,
-        "resultados": 7
+        "resultados": 0
       },
       {
         "fecha": "2026-08-21",
@@ -5418,7 +5379,7 @@
         "inversion": 55046,
         "impresiones": 4632,
         "clics": 262,
-        "resultados": 27
+        "resultados": 50
       },
       {
         "fecha": "2026-08-21",
@@ -5426,7 +5387,7 @@
         "inversion": 76836,
         "impresiones": 12732,
         "clics": 642,
-        "resultados": 48
+        "resultados": 89
       },
       {
         "fecha": "2026-08-21",
@@ -5434,7 +5395,7 @@
         "inversion": 19530,
         "impresiones": 1405,
         "clics": 44,
-        "resultados": 5
+        "resultados": 9
       },
       {
         "fecha": "2026-08-21",
@@ -5442,7 +5403,7 @@
         "inversion": 71626,
         "impresiones": 4435,
         "clics": 341,
-        "resultados": 30
+        "resultados": 60
       },
       {
         "fecha": "2026-08-21",
@@ -5450,7 +5411,7 @@
         "inversion": 8765,
         "impresiones": 445,
         "clics": 25,
-        "resultados": 4
+        "resultados": 0
       },
       {
         "fecha": "2026-08-22",
@@ -5458,7 +5419,7 @@
         "inversion": 48227,
         "impresiones": 4298,
         "clics": 239,
-        "resultados": 27
+        "resultados": 45
       },
       {
         "fecha": "2026-08-22",
@@ -5466,7 +5427,7 @@
         "inversion": 70406,
         "impresiones": 10644,
         "clics": 476,
-        "resultados": 52
+        "resultados": 92
       },
       {
         "fecha": "2026-08-22",
@@ -5474,7 +5435,7 @@
         "inversion": 16266,
         "impresiones": 1313,
         "clics": 29,
-        "resultados": 5
+        "resultados": 10
       },
       {
         "fecha": "2026-08-22",
@@ -5482,7 +5443,7 @@
         "inversion": 72806,
         "impresiones": 4372,
         "clics": 341,
-        "resultados": 53
+        "resultados": 104
       },
       {
         "fecha": "2026-08-22",
@@ -5490,7 +5451,7 @@
         "inversion": 9065,
         "impresiones": 587,
         "clics": 47,
-        "resultados": 11
+        "resultados": 0
       },
       {
         "fecha": "2026-08-23",
@@ -5498,7 +5459,7 @@
         "inversion": 71523,
         "impresiones": 7257,
         "clics": 391,
-        "resultados": 47
+        "resultados": 88
       },
       {
         "fecha": "2026-08-23",
@@ -5506,7 +5467,7 @@
         "inversion": 88328,
         "impresiones": 13316,
         "clics": 647,
-        "resultados": 55
+        "resultados": 102
       },
       {
         "fecha": "2026-08-23",
@@ -5514,7 +5475,7 @@
         "inversion": 26907,
         "impresiones": 2085,
         "clics": 72,
-        "resultados": 9
+        "resultados": 15
       },
       {
         "fecha": "2026-08-23",
@@ -5522,7 +5483,7 @@
         "inversion": 86193,
         "impresiones": 5983,
         "clics": 424,
-        "resultados": 41
+        "resultados": 85
       },
       {
         "fecha": "2026-08-23",
@@ -5530,7 +5491,7 @@
         "inversion": 11084,
         "impresiones": 796,
         "clics": 42,
-        "resultados": 8
+        "resultados": 0
       },
       {
         "fecha": "2026-08-24",
@@ -5538,7 +5499,7 @@
         "inversion": 60538,
         "impresiones": 6828,
         "clics": 336,
-        "resultados": 39
+        "resultados": 75
       },
       {
         "fecha": "2026-08-24",
@@ -5546,7 +5507,7 @@
         "inversion": 71208,
         "impresiones": 10357,
         "clics": 520,
-        "resultados": 48
+        "resultados": 92
       },
       {
         "fecha": "2026-08-24",
@@ -5554,7 +5515,7 @@
         "inversion": 19992,
         "impresiones": 1676,
         "clics": 67,
-        "resultados": 5
+        "resultados": 10
       },
       {
         "fecha": "2026-08-24",
@@ -5562,7 +5523,7 @@
         "inversion": 89178,
         "impresiones": 6140,
         "clics": 457,
-        "resultados": 50
+        "resultados": 98
       },
       {
         "fecha": "2026-08-24",
@@ -5570,7 +5531,7 @@
         "inversion": 10172,
         "impresiones": 690,
         "clics": 45,
-        "resultados": 11
+        "resultados": 0
       },
       {
         "fecha": "2026-08-25",
@@ -5578,7 +5539,7 @@
         "inversion": 64939,
         "impresiones": 6790,
         "clics": 344,
-        "resultados": 33
+        "resultados": 65
       },
       {
         "fecha": "2026-08-25",
@@ -5586,7 +5547,7 @@
         "inversion": 99665,
         "impresiones": 13045,
         "clics": 705,
-        "resultados": 60
+        "resultados": 117
       },
       {
         "fecha": "2026-08-25",
@@ -5594,7 +5555,7 @@
         "inversion": 24036,
         "impresiones": 2014,
         "clics": 68,
-        "resultados": 9
+        "resultados": 16
       },
       {
         "fecha": "2026-08-25",
@@ -5602,7 +5563,7 @@
         "inversion": 87843,
         "impresiones": 5578,
         "clics": 395,
-        "resultados": 45
+        "resultados": 89
       },
       {
         "fecha": "2026-08-25",
@@ -5610,7 +5571,7 @@
         "inversion": 8952,
         "impresiones": 558,
         "clics": 40,
-        "resultados": 10
+        "resultados": 0
       },
       {
         "fecha": "2026-08-26",
@@ -5618,7 +5579,7 @@
         "inversion": 50142,
         "impresiones": 4972,
         "clics": 268,
-        "resultados": 35
+        "resultados": 70
       },
       {
         "fecha": "2026-08-26",
@@ -5626,7 +5587,7 @@
         "inversion": 91711,
         "impresiones": 10520,
         "clics": 527,
-        "resultados": 53
+        "resultados": 103
       },
       {
         "fecha": "2026-08-26",
@@ -5634,7 +5595,7 @@
         "inversion": 24582,
         "impresiones": 1764,
         "clics": 66,
-        "resultados": 6
+        "resultados": 10
       },
       {
         "fecha": "2026-08-26",
@@ -5642,7 +5603,7 @@
         "inversion": 79909,
         "impresiones": 5423,
         "clics": 413,
-        "resultados": 40
+        "resultados": 79
       },
       {
         "fecha": "2026-08-26",
@@ -5650,7 +5611,7 @@
         "inversion": 12640,
         "impresiones": 998,
         "clics": 71,
-        "resultados": 14
+        "resultados": 0
       },
       {
         "fecha": "2026-08-27",
@@ -5658,7 +5619,7 @@
         "inversion": 64071,
         "impresiones": 5904,
         "clics": 302,
-        "resultados": 35
+        "resultados": 68
       },
       {
         "fecha": "2026-08-27",
@@ -5666,7 +5627,7 @@
         "inversion": 71602,
         "impresiones": 8165,
         "clics": 382,
-        "resultados": 32
+        "resultados": 56
       },
       {
         "fecha": "2026-08-27",
@@ -5674,7 +5635,7 @@
         "inversion": 19406,
         "impresiones": 1382,
         "clics": 74,
-        "resultados": 8
+        "resultados": 15
       },
       {
         "fecha": "2026-08-27",
@@ -5682,7 +5643,7 @@
         "inversion": 75201,
         "impresiones": 4560,
         "clics": 321,
-        "resultados": 41
+        "resultados": 81
       },
       {
         "fecha": "2026-08-27",
@@ -5690,7 +5651,7 @@
         "inversion": 9301,
         "impresiones": 677,
         "clics": 43,
-        "resultados": 12
+        "resultados": 0
       },
       {
         "fecha": "2026-08-28",
@@ -5698,7 +5659,7 @@
         "inversion": 54380,
         "impresiones": 4981,
         "clics": 267,
-        "resultados": 24
+        "resultados": 46
       },
       {
         "fecha": "2026-08-28",
@@ -5706,7 +5667,7 @@
         "inversion": 68072,
         "impresiones": 7557,
         "clics": 313,
-        "resultados": 17
+        "resultados": 33
       },
       {
         "fecha": "2026-08-28",
@@ -5714,7 +5675,7 @@
         "inversion": 12254,
         "impresiones": 825,
         "clics": 29,
-        "resultados": 4
+        "resultados": 8
       },
       {
         "fecha": "2026-08-28",
@@ -5722,7 +5683,7 @@
         "inversion": 63615,
         "impresiones": 3905,
         "clics": 275,
-        "resultados": 31
+        "resultados": 60
       },
       {
         "fecha": "2026-08-28",
@@ -5730,7 +5691,7 @@
         "inversion": 7828,
         "impresiones": 591,
         "clics": 42,
-        "resultados": 10
+        "resultados": 0
       },
       {
         "fecha": "2026-08-28",
@@ -5746,7 +5707,7 @@
         "inversion": 53611,
         "impresiones": 4760,
         "clics": 246,
-        "resultados": 28
+        "resultados": 52
       },
       {
         "fecha": "2026-08-29",
@@ -5754,7 +5715,7 @@
         "inversion": 68980,
         "impresiones": 6539,
         "clics": 301,
-        "resultados": 38
+        "resultados": 72
       },
       {
         "fecha": "2026-08-29",
@@ -5770,7 +5731,7 @@
         "inversion": 77129,
         "impresiones": 4499,
         "clics": 349,
-        "resultados": 49
+        "resultados": 95
       },
       {
         "fecha": "2026-08-29",
@@ -5778,7 +5739,7 @@
         "inversion": 9722,
         "impresiones": 607,
         "clics": 46,
-        "resultados": 12
+        "resultados": 0
       },
       {
         "fecha": "2026-08-29",
@@ -5794,7 +5755,7 @@
         "inversion": 66594,
         "impresiones": 5415,
         "clics": 281,
-        "resultados": 25
+        "resultados": 50
       },
       {
         "fecha": "2026-08-30",
@@ -5802,7 +5763,7 @@
         "inversion": 84808,
         "impresiones": 8879,
         "clics": 394,
-        "resultados": 29
+        "resultados": 56
       },
       {
         "fecha": "2026-08-30",
@@ -5810,7 +5771,7 @@
         "inversion": 25751,
         "impresiones": 1984,
         "clics": 86,
-        "resultados": 7
+        "resultados": 15
       },
       {
         "fecha": "2026-08-30",
@@ -5818,7 +5779,7 @@
         "inversion": 78865,
         "impresiones": 4701,
         "clics": 325,
-        "resultados": 39
+        "resultados": 75
       },
       {
         "fecha": "2026-08-30",
@@ -5826,7 +5787,7 @@
         "inversion": 11395,
         "impresiones": 666,
         "clics": 37,
-        "resultados": 9
+        "resultados": 0
       },
       {
         "fecha": "2026-08-30",
@@ -5842,7 +5803,7 @@
         "inversion": 69275,
         "impresiones": 5605,
         "clics": 308,
-        "resultados": 31
+        "resultados": 62
       },
       {
         "fecha": "2026-08-31",
@@ -5850,7 +5811,7 @@
         "inversion": 114872,
         "impresiones": 11301,
         "clics": 559,
-        "resultados": 45
+        "resultados": 80
       },
       {
         "fecha": "2026-08-31",
@@ -5858,7 +5819,7 @@
         "inversion": 24265,
         "impresiones": 1618,
         "clics": 81,
-        "resultados": 11
+        "resultados": 22
       },
       {
         "fecha": "2026-08-31",
@@ -5866,7 +5827,7 @@
         "inversion": 99495,
         "impresiones": 6029,
         "clics": 453,
-        "resultados": 79
+        "resultados": 150
       },
       {
         "fecha": "2026-08-31",
@@ -5874,7 +5835,7 @@
         "inversion": 13128,
         "impresiones": 799,
         "clics": 61,
-        "resultados": 15
+        "resultados": 0
       },
       {
         "fecha": "2026-08-31",
@@ -5890,7 +5851,7 @@
         "inversion": 66771,
         "impresiones": 5263,
         "clics": 316,
-        "resultados": 45
+        "resultados": 90
       },
       {
         "fecha": "2026-09-01",
@@ -5898,7 +5859,7 @@
         "inversion": 77184,
         "impresiones": 7394,
         "clics": 399,
-        "resultados": 44
+        "resultados": 86
       },
       {
         "fecha": "2026-09-01",
@@ -5906,7 +5867,7 @@
         "inversion": 23052,
         "impresiones": 1519,
         "clics": 72,
-        "resultados": 10
+        "resultados": 22
       },
       {
         "fecha": "2026-09-01",
@@ -5914,7 +5875,7 @@
         "inversion": 86044,
         "impresiones": 4874,
         "clics": 302,
-        "resultados": 52
+        "resultados": 98
       },
       {
         "fecha": "2026-09-01",
@@ -5922,7 +5883,7 @@
         "inversion": 9568,
         "impresiones": 717,
         "clics": 67,
-        "resultados": 17
+        "resultados": 0
       },
       {
         "fecha": "2026-09-01",
@@ -5938,7 +5899,7 @@
         "inversion": 64152,
         "impresiones": 4524,
         "clics": 244,
-        "resultados": 35
+        "resultados": 64
       },
       {
         "fecha": "2026-09-02",
@@ -5946,7 +5907,7 @@
         "inversion": 80712,
         "impresiones": 7813,
         "clics": 425,
-        "resultados": 57
+        "resultados": 115
       },
       {
         "fecha": "2026-09-02",
@@ -5954,7 +5915,7 @@
         "inversion": 19129,
         "impresiones": 1249,
         "clics": 41,
-        "resultados": 9
+        "resultados": 17
       },
       {
         "fecha": "2026-09-02",
@@ -5962,7 +5923,7 @@
         "inversion": 76846,
         "impresiones": 4195,
         "clics": 315,
-        "resultados": 45
+        "resultados": 88
       },
       {
         "fecha": "2026-09-02",
@@ -5970,7 +5931,7 @@
         "inversion": 11329,
         "impresiones": 791,
         "clics": 72,
-        "resultados": 20
+        "resultados": 0
       },
       {
         "fecha": "2026-09-02",
@@ -5986,7 +5947,7 @@
         "inversion": 48368,
         "impresiones": 3207,
         "clics": 211,
-        "resultados": 25
+        "resultados": 53
       },
       {
         "fecha": "2026-09-03",
@@ -5994,7 +5955,7 @@
         "inversion": 70050,
         "impresiones": 7170,
         "clics": 397,
-        "resultados": 48
+        "resultados": 83
       },
       {
         "fecha": "2026-09-03",
@@ -6002,7 +5963,7 @@
         "inversion": 14192,
         "impresiones": 922,
         "clics": 46,
-        "resultados": 5
+        "resultados": 11
       },
       {
         "fecha": "2026-09-03",
@@ -6010,7 +5971,7 @@
         "inversion": 81153,
         "impresiones": 4300,
         "clics": 333,
-        "resultados": 48
+        "resultados": 95
       },
       {
         "fecha": "2026-09-03",
@@ -6018,7 +5979,7 @@
         "inversion": 7933,
         "impresiones": 604,
         "clics": 58,
-        "resultados": 15
+        "resultados": 0
       },
       {
         "fecha": "2026-09-03",
@@ -6034,7 +5995,7 @@
         "inversion": 53283,
         "impresiones": 3161,
         "clics": 176,
-        "resultados": 16
+        "resultados": 33
       },
       {
         "fecha": "2026-09-04",
@@ -6042,7 +6003,7 @@
         "inversion": 60530,
         "impresiones": 6521,
         "clics": 361,
-        "resultados": 31
+        "resultados": 56
       },
       {
         "fecha": "2026-09-04",
@@ -6050,7 +6011,7 @@
         "inversion": 20813,
         "impresiones": 1338,
         "clics": 46,
-        "resultados": 6
+        "resultados": 12
       },
       {
         "fecha": "2026-09-04",
@@ -6058,7 +6019,7 @@
         "inversion": 67645,
         "impresiones": 3794,
         "clics": 280,
-        "resultados": 35
+        "resultados": 68
       },
       {
         "fecha": "2026-09-04",
@@ -6066,7 +6027,7 @@
         "inversion": 10591,
         "impresiones": 551,
         "clics": 43,
-        "resultados": 8
+        "resultados": 0
       },
       {
         "fecha": "2026-09-04",
@@ -6082,7 +6043,7 @@
         "inversion": 50739,
         "impresiones": 2890,
         "clics": 162,
-        "resultados": 16
+        "resultados": 30
       },
       {
         "fecha": "2026-09-05",
@@ -6090,7 +6051,7 @@
         "inversion": 77985,
         "impresiones": 8065,
         "clics": 451,
-        "resultados": 38
+        "resultados": 73
       },
       {
         "fecha": "2026-09-05",
@@ -6098,7 +6059,7 @@
         "inversion": 12215,
         "impresiones": 648,
         "clics": 33,
-        "resultados": 6
+        "resultados": 11
       },
       {
         "fecha": "2026-09-05",
@@ -6106,7 +6067,7 @@
         "inversion": 75054,
         "impresiones": 4175,
         "clics": 265,
-        "resultados": 38
+        "resultados": 77
       },
       {
         "fecha": "2026-09-05",
@@ -6114,7 +6075,7 @@
         "inversion": 5733,
         "impresiones": 344,
         "clics": 35,
-        "resultados": 10
+        "resultados": 0
       },
       {
         "fecha": "2026-09-05",
@@ -6130,7 +6091,7 @@
         "inversion": 71053,
         "impresiones": 4659,
         "clics": 283,
-        "resultados": 27
+        "resultados": 49
       },
       {
         "fecha": "2026-09-06",
@@ -6138,7 +6099,7 @@
         "inversion": 108312,
         "impresiones": 11448,
         "clics": 682,
-        "resultados": 59
+        "resultados": 114
       },
       {
         "fecha": "2026-09-06",
@@ -6146,7 +6107,7 @@
         "inversion": 26311,
         "impresiones": 1879,
         "clics": 77,
-        "resultados": 9
+        "resultados": 17
       },
       {
         "fecha": "2026-09-06",
@@ -6154,7 +6115,7 @@
         "inversion": 118353,
         "impresiones": 7019,
         "clics": 457,
-        "resultados": 62
+        "resultados": 121
       },
       {
         "fecha": "2026-09-06",
@@ -6162,7 +6123,7 @@
         "inversion": 12590,
         "impresiones": 853,
         "clics": 73,
-        "resultados": 16
+        "resultados": 0
       },
       {
         "fecha": "2026-09-06",
@@ -6178,7 +6139,7 @@
         "inversion": 70659,
         "impresiones": 4651,
         "clics": 246,
-        "resultados": 28
+        "resultados": 52
       },
       {
         "fecha": "2026-09-07",
@@ -6186,7 +6147,7 @@
         "inversion": 110166,
         "impresiones": 11737,
         "clics": 626,
-        "resultados": 61
+        "resultados": 123
       },
       {
         "fecha": "2026-09-07",
@@ -6194,7 +6155,7 @@
         "inversion": 25269,
         "impresiones": 1882,
         "clics": 73,
-        "resultados": 10
+        "resultados": 18
       },
       {
         "fecha": "2026-09-07",
@@ -6202,7 +6163,7 @@
         "inversion": 105978,
         "impresiones": 6432,
         "clics": 455,
-        "resultados": 55
+        "resultados": 105
       },
       {
         "fecha": "2026-09-07",
@@ -6210,7 +6171,7 @@
         "inversion": 11344,
         "impresiones": 777,
         "clics": 62,
-        "resultados": 13
+        "resultados": 0
       },
       {
         "fecha": "2026-09-07",
@@ -6226,7 +6187,7 @@
         "inversion": 64248,
         "impresiones": 4406,
         "clics": 279,
-        "resultados": 36
+        "resultados": 71
       },
       {
         "fecha": "2026-09-08",
@@ -6234,7 +6195,7 @@
         "inversion": 92821,
         "impresiones": 9712,
         "clics": 562,
-        "resultados": 46
+        "resultados": 92
       },
       {
         "fecha": "2026-09-08",
@@ -6242,7 +6203,7 @@
         "inversion": 17462,
         "impresiones": 1354,
         "clics": 59,
-        "resultados": 7
+        "resultados": 14
       },
       {
         "fecha": "2026-09-08",
@@ -6250,7 +6211,7 @@
         "inversion": 100848,
         "impresiones": 5630,
         "clics": 435,
-        "resultados": 59
+        "resultados": 117
       },
       {
         "fecha": "2026-09-08",
@@ -6258,7 +6219,7 @@
         "inversion": 10510,
         "impresiones": 668,
         "clics": 59,
-        "resultados": 12
+        "resultados": 0
       },
       {
         "fecha": "2026-09-08",
@@ -6274,7 +6235,7 @@
         "inversion": 50050,
         "impresiones": 3699,
         "clics": 184,
-        "resultados": 27
+        "resultados": 52
       },
       {
         "fecha": "2026-09-09",
@@ -6282,7 +6243,7 @@
         "inversion": 84045,
         "impresiones": 8365,
         "clics": 461,
-        "resultados": 50
+        "resultados": 98
       },
       {
         "fecha": "2026-09-09",
@@ -6290,7 +6251,7 @@
         "inversion": 16879,
         "impresiones": 1114,
         "clics": 45,
-        "resultados": 11
+        "resultados": 21
       },
       {
         "fecha": "2026-09-09",
@@ -6298,7 +6259,7 @@
         "inversion": 92085,
         "impresiones": 4994,
         "clics": 370,
-        "resultados": 46
+        "resultados": 90
       },
       {
         "fecha": "2026-09-09",
@@ -6306,7 +6267,7 @@
         "inversion": 9244,
         "impresiones": 652,
         "clics": 54,
-        "resultados": 12
+        "resultados": 0
       },
       {
         "fecha": "2026-09-09",
@@ -6322,7 +6283,7 @@
         "inversion": 58876,
         "impresiones": 4254,
         "clics": 236,
-        "resultados": 32
+        "resultados": 62
       },
       {
         "fecha": "2026-09-10",
@@ -6330,7 +6291,7 @@
         "inversion": 95264,
         "impresiones": 9071,
         "clics": 589,
-        "resultados": 54
+        "resultados": 106
       },
       {
         "fecha": "2026-09-10",
@@ -6338,7 +6299,7 @@
         "inversion": 21266,
         "impresiones": 1484,
         "clics": 58,
-        "resultados": 4
+        "resultados": 8
       },
       {
         "fecha": "2026-09-10",
@@ -6346,7 +6307,7 @@
         "inversion": 82205,
         "impresiones": 4418,
         "clics": 277,
-        "resultados": 44
+        "resultados": 85
       },
       {
         "fecha": "2026-09-10",
@@ -6354,7 +6315,7 @@
         "inversion": 7523,
         "impresiones": 513,
         "clics": 55,
-        "resultados": 12
+        "resultados": 0
       },
       {
         "fecha": "2026-09-10",
@@ -6370,7 +6331,7 @@
         "inversion": 58033,
         "impresiones": 4139,
         "clics": 247,
-        "resultados": 35
+        "resultados": 67
       },
       {
         "fecha": "2026-09-11",
@@ -6378,7 +6339,7 @@
         "inversion": 90532,
         "impresiones": 8196,
         "clics": 522,
-        "resultados": 52
+        "resultados": 101
       },
       {
         "fecha": "2026-09-11",
@@ -6394,7 +6355,7 @@
         "inversion": 88467,
         "impresiones": 5015,
         "clics": 301,
-        "resultados": 42
+        "resultados": 88
       },
       {
         "fecha": "2026-09-11",
@@ -6402,7 +6363,7 @@
         "inversion": 10981,
         "impresiones": 707,
         "clics": 61,
-        "resultados": 12
+        "resultados": 0
       },
       {
         "fecha": "2026-09-11",
@@ -6418,7 +6379,7 @@
         "inversion": 45348,
         "impresiones": 3026,
         "clics": 216,
-        "resultados": 25
+        "resultados": 46
       },
       {
         "fecha": "2026-09-12",
@@ -6426,7 +6387,7 @@
         "inversion": 82344,
         "impresiones": 7045,
         "clics": 490,
-        "resultados": 56
+        "resultados": 110
       },
       {
         "fecha": "2026-09-12",
@@ -6434,7 +6395,7 @@
         "inversion": 22069,
         "impresiones": 1469,
         "clics": 58,
-        "resultados": 3
+        "resultados": 6
       },
       {
         "fecha": "2026-09-12",
@@ -6442,7 +6403,7 @@
         "inversion": 77042,
         "impresiones": 4534,
         "clics": 281,
-        "resultados": 30
+        "resultados": 62
       },
       {
         "fecha": "2026-09-12",
@@ -6450,7 +6411,7 @@
         "inversion": 7427,
         "impresiones": 441,
         "clics": 38,
-        "resultados": 8
+        "resultados": 0
       },
       {
         "fecha": "2026-09-12",
@@ -6466,7 +6427,7 @@
         "inversion": 66193,
         "impresiones": 5042,
         "clics": 265,
-        "resultados": 23
+        "resultados": 45
       },
       {
         "fecha": "2026-09-13",
@@ -6474,7 +6435,7 @@
         "inversion": 96393,
         "impresiones": 8269,
         "clics": 588,
-        "resultados": 56
+        "resultados": 109
       },
       {
         "fecha": "2026-09-13",
@@ -6482,7 +6443,7 @@
         "inversion": 20231,
         "impresiones": 1305,
         "clics": 62,
-        "resultados": 7
+        "resultados": 14
       },
       {
         "fecha": "2026-09-13",
@@ -6490,7 +6451,7 @@
         "inversion": 107134,
         "impresiones": 6513,
         "clics": 433,
-        "resultados": 39
+        "resultados": 74
       },
       {
         "fecha": "2026-09-13",
@@ -6498,7 +6459,7 @@
         "inversion": 12134,
         "impresiones": 885,
         "clics": 86,
-        "resultados": 21
+        "resultados": 0
       },
       {
         "fecha": "2026-09-13",
@@ -6514,7 +6475,7 @@
         "inversion": 55295,
         "impresiones": 4123,
         "clics": 265,
-        "resultados": 27
+        "resultados": 53
       },
       {
         "fecha": "2026-09-14",
@@ -6522,7 +6483,7 @@
         "inversion": 82055,
         "impresiones": 7478,
         "clics": 505,
-        "resultados": 56
+        "resultados": 108
       },
       {
         "fecha": "2026-09-14",
@@ -6530,7 +6491,7 @@
         "inversion": 25251,
         "impresiones": 1600,
         "clics": 68,
-        "resultados": 9
+        "resultados": 18
       },
       {
         "fecha": "2026-09-14",
@@ -6538,7 +6499,7 @@
         "inversion": 90579,
         "impresiones": 5656,
         "clics": 451,
-        "resultados": 49
+        "resultados": 95
       },
       {
         "fecha": "2026-09-14",
@@ -6546,7 +6507,7 @@
         "inversion": 11310,
         "impresiones": 883,
         "clics": 35,
-        "resultados": 7
+        "resultados": 0
       },
       {
         "fecha": "2026-09-14",
@@ -6562,7 +6523,7 @@
         "inversion": 70719,
         "impresiones": 4977,
         "clics": 333,
-        "resultados": 42
+        "resultados": 83
       },
       {
         "fecha": "2026-09-15",
@@ -6570,7 +6531,7 @@
         "inversion": 116083,
         "impresiones": 10513,
         "clics": 668,
-        "resultados": 86
+        "resultados": 163
       },
       {
         "fecha": "2026-09-15",
@@ -6578,7 +6539,7 @@
         "inversion": 24401,
         "impresiones": 1456,
         "clics": 44,
-        "resultados": 5
+        "resultados": 10
       },
       {
         "fecha": "2026-09-15",
@@ -6586,7 +6547,7 @@
         "inversion": 111358,
         "impresiones": 6140,
         "clics": 460,
-        "resultados": 58
+        "resultados": 112
       },
       {
         "fecha": "2026-09-15",
@@ -6594,7 +6555,7 @@
         "inversion": 11148,
         "impresiones": 755,
         "clics": 94,
-        "resultados": 27
+        "resultados": 0
       },
       {
         "fecha": "2026-09-15",
@@ -6610,7 +6571,7 @@
         "inversion": 61819,
         "impresiones": 3771,
         "clics": 291,
-        "resultados": 26
+        "resultados": 46
       },
       {
         "fecha": "2026-09-16",
@@ -6618,7 +6579,7 @@
         "inversion": 101163,
         "impresiones": 8857,
         "clics": 600,
-        "resultados": 38
+        "resultados": 73
       },
       {
         "fecha": "2026-09-16",
@@ -6626,7 +6587,7 @@
         "inversion": 21075,
         "impresiones": 1186,
         "clics": 51,
-        "resultados": 7
+        "resultados": 13
       },
       {
         "fecha": "2026-09-16",
@@ -6634,7 +6595,7 @@
         "inversion": 94405,
         "impresiones": 5097,
         "clics": 358,
-        "resultados": 30
+        "resultados": 62
       },
       {
         "fecha": "2026-09-16",
@@ -6642,7 +6603,7 @@
         "inversion": 9587,
         "impresiones": 645,
         "clics": 59,
-        "resultados": 11
+        "resultados": 0
       },
       {
         "fecha": "2026-09-16",
@@ -6650,7 +6611,7 @@
         "inversion": 0,
         "impresiones": 0,
         "clics": 0,
-        "resultados": 0
+        "resultados": 1
       },
       {
         "fecha": "2026-09-17",
@@ -6690,7 +6651,7 @@
         "inversion": 5913,
         "impresiones": 404,
         "clics": 38,
-        "resultados": 9
+        "resultados": 0
       },
       {
         "fecha": "2026-09-18",
@@ -6730,7 +6691,7 @@
         "inversion": 11801,
         "impresiones": 647,
         "clics": 74,
-        "resultados": 24
+        "resultados": 0
       },
       {
         "fecha": "2026-09-19",
@@ -6770,7 +6731,7 @@
         "inversion": 7649,
         "impresiones": 451,
         "clics": 39,
-        "resultados": 7
+        "resultados": 0
       },
       {
         "fecha": "2026-09-20",
@@ -6802,7 +6763,7 @@
         "inversion": 74993,
         "impresiones": 2725,
         "clics": 128,
-        "resultados": 1
+        "resultados": 0
       },
       {
         "fecha": "2026-09-20",
@@ -6810,7 +6771,7 @@
         "inversion": 11358,
         "impresiones": 723,
         "clics": 67,
-        "resultados": 18
+        "resultados": 0
       },
       {
         "fecha": "2026-09-21",
@@ -6818,7 +6779,7 @@
         "inversion": 88164,
         "impresiones": 2525,
         "clics": 124,
-        "resultados": 9
+        "resultados": 18
       },
       {
         "fecha": "2026-09-21",
@@ -6826,7 +6787,7 @@
         "inversion": 151112,
         "impresiones": 6700,
         "clics": 260,
-        "resultados": 14
+        "resultados": 28
       },
       {
         "fecha": "2026-09-21",
@@ -6834,7 +6795,7 @@
         "inversion": 33744,
         "impresiones": 2648,
         "clics": 26,
-        "resultados": 1
+        "resultados": 2
       },
       {
         "fecha": "2026-09-21",
@@ -6842,7 +6803,7 @@
         "inversion": 143251,
         "impresiones": 4343,
         "clics": 175,
-        "resultados": 18
+        "resultados": 33
       },
       {
         "fecha": "2026-09-21",
@@ -6850,7 +6811,7 @@
         "inversion": 10554,
         "impresiones": 651,
         "clics": 63,
-        "resultados": 15
+        "resultados": 0
       },
       {
         "fecha": "2026-09-22",
@@ -6858,7 +6819,7 @@
         "inversion": 99411,
         "impresiones": 3409,
         "clics": 203,
-        "resultados": 24
+        "resultados": 42
       },
       {
         "fecha": "2026-09-22",
@@ -6866,7 +6827,7 @@
         "inversion": 156907,
         "impresiones": 7750,
         "clics": 419,
-        "resultados": 39
+        "resultados": 79
       },
       {
         "fecha": "2026-09-22",
@@ -6874,7 +6835,7 @@
         "inversion": 31424,
         "impresiones": 1100,
         "clics": 25,
-        "resultados": 2
+        "resultados": 7
       },
       {
         "fecha": "2026-09-22",
@@ -6882,7 +6843,7 @@
         "inversion": 156193,
         "impresiones": 5626,
         "clics": 364,
-        "resultados": 30
+        "resultados": 57
       },
       {
         "fecha": "2026-09-22",
@@ -6890,7 +6851,7 @@
         "inversion": 9923,
         "impresiones": 649,
         "clics": 56,
-        "resultados": 15
+        "resultados": 0
       },
       {
         "fecha": "2026-09-23",
@@ -6898,7 +6859,7 @@
         "inversion": 66604,
         "impresiones": 2729,
         "clics": 173,
-        "resultados": 16
+        "resultados": 31
       },
       {
         "fecha": "2026-09-23",
@@ -6906,7 +6867,7 @@
         "inversion": 91451,
         "impresiones": 6602,
         "clics": 452,
-        "resultados": 42
+        "resultados": 84
       },
       {
         "fecha": "2026-09-23",
@@ -6914,7 +6875,7 @@
         "inversion": 26499,
         "impresiones": 949,
         "clics": 42,
-        "resultados": 4
+        "resultados": 8
       },
       {
         "fecha": "2026-09-23",
@@ -6922,7 +6883,7 @@
         "inversion": 102363,
         "impresiones": 4722,
         "clics": 336,
-        "resultados": 42
+        "resultados": 78
       },
       {
         "fecha": "2026-09-23",
@@ -6930,7 +6891,7 @@
         "inversion": 10286,
         "impresiones": 734,
         "clics": 68,
-        "resultados": 17
+        "resultados": 0
       },
       {
         "fecha": "2026-09-24",
@@ -6938,7 +6899,7 @@
         "inversion": 54928,
         "impresiones": 2506,
         "clics": 179,
-        "resultados": 20
+        "resultados": 38
       },
       {
         "fecha": "2026-09-24",
@@ -6946,7 +6907,7 @@
         "inversion": 63956,
         "impresiones": 5290,
         "clics": 343,
-        "resultados": 28
+        "resultados": 53
       },
       {
         "fecha": "2026-09-24",
@@ -6954,7 +6915,7 @@
         "inversion": 17731,
         "impresiones": 693,
         "clics": 37,
-        "resultados": 1
+        "resultados": 3
       },
       {
         "fecha": "2026-09-24",
@@ -6962,7 +6923,7 @@
         "inversion": 58025,
         "impresiones": 2571,
         "clics": 215,
-        "resultados": 31
+        "resultados": 61
       },
       {
         "fecha": "2026-09-24",
@@ -6970,7 +6931,7 @@
         "inversion": 8158,
         "impresiones": 586,
         "clics": 49,
-        "resultados": 11
+        "resultados": 0
       },
       {
         "fecha": "2026-09-25",
@@ -6978,7 +6939,7 @@
         "inversion": 35795,
         "impresiones": 1660,
         "clics": 95,
-        "resultados": 16
+        "resultados": 32
       },
       {
         "fecha": "2026-09-25",
@@ -6986,7 +6947,7 @@
         "inversion": 63567,
         "impresiones": 5415,
         "clics": 335,
-        "resultados": 37
+        "resultados": 74
       },
       {
         "fecha": "2026-09-25",
@@ -6994,7 +6955,7 @@
         "inversion": 11953,
         "impresiones": 467,
         "clics": 31,
-        "resultados": 6
+        "resultados": 12
       },
       {
         "fecha": "2026-09-25",
@@ -7002,7 +6963,7 @@
         "inversion": 67993,
         "impresiones": 2927,
         "clics": 232,
-        "resultados": 29
+        "resultados": 55
       },
       {
         "fecha": "2026-09-25",
@@ -7010,7 +6971,7 @@
         "inversion": 10863,
         "impresiones": 623,
         "clics": 42,
-        "resultados": 9
+        "resultados": 0
       },
       {
         "fecha": "2026-09-26",
@@ -7018,7 +6979,7 @@
         "inversion": 30539,
         "impresiones": 1457,
         "clics": 103,
-        "resultados": 15
+        "resultados": 28
       },
       {
         "fecha": "2026-09-26",
@@ -7026,7 +6987,7 @@
         "inversion": 73717,
         "impresiones": 5884,
         "clics": 374,
-        "resultados": 29
+        "resultados": 55
       },
       {
         "fecha": "2026-09-26",
@@ -7034,7 +6995,7 @@
         "inversion": 4909,
         "impresiones": 263,
         "clics": 13,
-        "resultados": 2
+        "resultados": 4
       },
       {
         "fecha": "2026-09-26",
@@ -7042,7 +7003,7 @@
         "inversion": 61521,
         "impresiones": 2639,
         "clics": 265,
-        "resultados": 35
+        "resultados": 71
       },
       {
         "fecha": "2026-09-26",
@@ -7050,7 +7011,7 @@
         "inversion": 8476,
         "impresiones": 469,
         "clics": 29,
-        "resultados": 4
+        "resultados": 0
       },
       {
         "fecha": "2026-09-27",
@@ -7058,7 +7019,7 @@
         "inversion": 63876,
         "impresiones": 2971,
         "clics": 192,
-        "resultados": 20
+        "resultados": 39
       },
       {
         "fecha": "2026-09-27",
@@ -7066,7 +7027,7 @@
         "inversion": 91570,
         "impresiones": 8560,
         "clics": 537,
-        "resultados": 46
+        "resultados": 86
       },
       {
         "fecha": "2026-09-27",
@@ -7074,7 +7035,7 @@
         "inversion": 24973,
         "impresiones": 1121,
         "clics": 64,
-        "resultados": 7
+        "resultados": 11
       },
       {
         "fecha": "2026-09-27",
@@ -7082,7 +7043,7 @@
         "inversion": 90643,
         "impresiones": 4700,
         "clics": 349,
-        "resultados": 38
+        "resultados": 75
       },
       {
         "fecha": "2026-09-27",
@@ -7090,15 +7051,15 @@
         "inversion": 11911,
         "impresiones": 678,
         "clics": 43,
-        "resultados": 10
+        "resultados": 0
       },
       {
         "fecha": "2026-09-28",
         "campana": "C1 - Convenio por Sectores - Jun2026",
-        "inversion": 57097,
-        "impresiones": 2905,
+        "inversion": 57107,
+        "impresiones": 2906,
         "clics": 205,
-        "resultados": 19
+        "resultados": 36
       },
       {
         "fecha": "2026-09-28",
@@ -7106,7 +7067,7 @@
         "inversion": 94352,
         "impresiones": 9376,
         "clics": 508,
-        "resultados": 44
+        "resultados": 82
       },
       {
         "fecha": "2026-09-28",
@@ -7114,7 +7075,7 @@
         "inversion": 17066,
         "impresiones": 785,
         "clics": 53,
-        "resultados": 13
+        "resultados": 24
       },
       {
         "fecha": "2026-09-28",
@@ -7122,7 +7083,7 @@
         "inversion": 94390,
         "impresiones": 4611,
         "clics": 358,
-        "resultados": 48
+        "resultados": 98
       },
       {
         "fecha": "2026-09-28",
@@ -7130,155 +7091,611 @@
         "inversion": 11042,
         "impresiones": 744,
         "clics": 63,
-        "resultados": 13
+        "resultados": 0
       },
       {
         "fecha": "2026-09-29",
         "campana": "C1 - Convenio por Sectores - Jun2026",
-        "inversion": 55783,
-        "impresiones": 2947,
+        "inversion": 56057,
+        "impresiones": 2951,
         "clics": 213,
-        "resultados": 17
+        "resultados": 31
       },
       {
         "fecha": "2026-09-29",
         "campana": "C2 - Empleados sector privado",
-        "inversion": 95195,
-        "impresiones": 8131,
+        "inversion": 95345,
+        "impresiones": 8144,
         "clics": 486,
-        "resultados": 48
+        "resultados": 92
       },
       {
         "fecha": "2026-09-29",
         "campana": "C3 - Reportados",
-        "inversion": 20786,
-        "impresiones": 1167,
+        "inversion": 20791,
+        "impresiones": 1168,
         "clics": 55,
-        "resultados": 13
+        "resultados": 20
       },
       {
         "fecha": "2026-09-29",
         "campana": "C4 - Retargeting caliente",
-        "inversion": 94157,
-        "impresiones": 4523,
+        "inversion": 94217,
+        "impresiones": 4526,
         "clics": 365,
-        "resultados": 41
+        "resultados": 81
       },
       {
         "fecha": "2026-09-29",
         "campana": "Campaña de formulario Copia 06/05/2026",
-        "inversion": 9823,
-        "impresiones": 584,
+        "inversion": 9825,
+        "impresiones": 585,
         "clics": 66,
-        "resultados": 13
+        "resultados": 0
       },
       {
         "fecha": "2026-09-30",
         "campana": "C1 - Convenio por Sectores - Jun2026",
-        "inversion": 18803,
-        "impresiones": 851,
-        "clics": 57,
-        "resultados": 4
+        "inversion": 72638,
+        "impresiones": 3880,
+        "clics": 273,
+        "resultados": 24
       },
       {
         "fecha": "2026-09-30",
         "campana": "C2 - Empleados sector privado",
-        "inversion": 34616,
-        "impresiones": 2879,
-        "clics": 176,
-        "resultados": 9
+        "inversion": 95456,
+        "impresiones": 7377,
+        "clics": 447,
+        "resultados": 34
       },
       {
         "fecha": "2026-09-30",
         "campana": "C3 - Reportados",
-        "inversion": 6715,
-        "impresiones": 369,
-        "clics": 10,
-        "resultados": 2
+        "inversion": 18395,
+        "impresiones": 891,
+        "clics": 31,
+        "resultados": 4
       },
       {
         "fecha": "2026-09-30",
         "campana": "C4 - Retargeting caliente",
-        "inversion": 31328,
-        "impresiones": 1487,
-        "clics": 104,
-        "resultados": 10
+        "inversion": 104891,
+        "impresiones": 4696,
+        "clics": 369,
+        "resultados": 34
       },
       {
         "fecha": "2026-09-30",
         "campana": "Campaña de formulario Copia 06/05/2026",
-        "inversion": 3475,
-        "impresiones": 264,
-        "clics": 14,
+        "inversion": 7985,
+        "impresiones": 525,
+        "clics": 31,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-01",
+        "campana": "C1 - Convenio por Sectores - Jun2026",
+        "inversion": 59655,
+        "impresiones": 3508,
+        "clics": 205,
+        "resultados": 15
+      },
+      {
+        "fecha": "2026-10-01",
+        "campana": "C2 - Empleados sector privado",
+        "inversion": 95938,
+        "impresiones": 8738,
+        "clics": 507,
+        "resultados": 30
+      },
+      {
+        "fecha": "2026-10-01",
+        "campana": "C3 - Reportados",
+        "inversion": 25491,
+        "impresiones": 1339,
+        "clics": 64,
+        "resultados": 7
+      },
+      {
+        "fecha": "2026-10-01",
+        "campana": "C4 - Retargeting caliente",
+        "inversion": 106451,
+        "impresiones": 5490,
+        "clics": 409,
+        "resultados": 32
+      },
+      {
+        "fecha": "2026-10-01",
+        "campana": "Campaña de formulario Copia 06/05/2026",
+        "inversion": 10550,
+        "impresiones": 816,
+        "clics": 72,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-02",
+        "campana": "C1 - Convenio por Sectores - Jun2026",
+        "inversion": 15380,
+        "impresiones": 803,
+        "clics": 52,
         "resultados": 4
+      },
+      {
+        "fecha": "2026-10-02",
+        "campana": "C1 - Convenio por sectores - Oct2026",
+        "inversion": 98961,
+        "impresiones": 8358,
+        "clics": 295,
+        "resultados": 12
+      },
+      {
+        "fecha": "2026-10-02",
+        "campana": "C2 - Empleados sector privado",
+        "inversion": 15551,
+        "impresiones": 1341,
+        "clics": 88,
+        "resultados": 5
+      },
+      {
+        "fecha": "2026-10-02",
+        "campana": "C2 - Empleados sector privado - Oct2026",
+        "inversion": 159856,
+        "impresiones": 13273,
+        "clics": 443,
+        "resultados": 33
+      },
+      {
+        "fecha": "2026-10-02",
+        "campana": "C3 - Reportados",
+        "inversion": 2862,
+        "impresiones": 148,
+        "clics": 7,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-02",
+        "campana": "C3 - Reportados - Oct2026",
+        "inversion": 32730,
+        "impresiones": 1464,
+        "clics": 64,
+        "resultados": 5
+      },
+      {
+        "fecha": "2026-10-02",
+        "campana": "C4 - Retargeting caliente",
+        "inversion": 11210,
+        "impresiones": 472,
+        "clics": 44,
+        "resultados": 8
+      },
+      {
+        "fecha": "2026-10-02",
+        "campana": "C4 - Retargeting caliente - Oct2026",
+        "inversion": 166249,
+        "impresiones": 7987,
+        "clics": 318,
+        "resultados": 19
+      },
+      {
+        "fecha": "2026-10-02",
+        "campana": "Campaña de formulario Copia 06/05/2026",
+        "inversion": 10369,
+        "impresiones": 614,
+        "clics": 47,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-03",
+        "campana": "C1 - Convenio por Sectores - Jun2026",
+        "inversion": 0,
+        "impresiones": 0,
+        "clics": 0,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-03",
+        "campana": "C1 - Convenio por sectores - Oct2026",
+        "inversion": 101880,
+        "impresiones": 13706,
+        "clics": 559,
+        "resultados": 25
+      },
+      {
+        "fecha": "2026-10-03",
+        "campana": "C2 - Empleados sector privado",
+        "inversion": 0,
+        "impresiones": 0,
+        "clics": 0,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-03",
+        "campana": "C2 - Empleados sector privado - Oct2026",
+        "inversion": 160346,
+        "impresiones": 15468,
+        "clics": 669,
+        "resultados": 55
+      },
+      {
+        "fecha": "2026-10-03",
+        "campana": "C3 - Reportados - Oct2026",
+        "inversion": 34387,
+        "impresiones": 2341,
+        "clics": 76,
+        "resultados": 3
+      },
+      {
+        "fecha": "2026-10-03",
+        "campana": "C4 - Retargeting caliente",
+        "inversion": 0,
+        "impresiones": 0,
+        "clics": 0,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-03",
+        "campana": "C4 - Retargeting caliente - Oct2026",
+        "inversion": 161554,
+        "impresiones": 10803,
+        "clics": 607,
+        "resultados": 52
+      },
+      {
+        "fecha": "2026-10-03",
+        "campana": "Campaña de formulario Copia 06/05/2026",
+        "inversion": 7949,
+        "impresiones": 494,
+        "clics": 34,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-04",
+        "campana": "C1 - Convenio por Sectores - Jun2026",
+        "inversion": 0,
+        "impresiones": 0,
+        "clics": 0,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-04",
+        "campana": "C1 - Convenio por sectores - Oct2026",
+        "inversion": 53639,
+        "impresiones": 7938,
+        "clics": 302,
+        "resultados": 13
+      },
+      {
+        "fecha": "2026-10-04",
+        "campana": "C2 - Empleados sector privado",
+        "inversion": 0,
+        "impresiones": 0,
+        "clics": 0,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-04",
+        "campana": "C2 - Empleados sector privado - Oct2026",
+        "inversion": 112206,
+        "impresiones": 11578,
+        "clics": 575,
+        "resultados": 45
+      },
+      {
+        "fecha": "2026-10-04",
+        "campana": "C3 - Reportados - Oct2026",
+        "inversion": 24084,
+        "impresiones": 2181,
+        "clics": 90,
+        "resultados": 5
+      },
+      {
+        "fecha": "2026-10-04",
+        "campana": "C4 - Retargeting caliente",
+        "inversion": 0,
+        "impresiones": 0,
+        "clics": 0,
+        "resultados": 1
+      },
+      {
+        "fecha": "2026-10-04",
+        "campana": "C4 - Retargeting caliente - Oct2026",
+        "inversion": 98472,
+        "impresiones": 8203,
+        "clics": 479,
+        "resultados": 44
+      },
+      {
+        "fecha": "2026-10-04",
+        "campana": "Campaña de formulario Copia 06/05/2026",
+        "inversion": 13377,
+        "impresiones": 747,
+        "clics": 63,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-05",
+        "campana": "C1 - Convenio por Sectores - Jun2026",
+        "inversion": 0,
+        "impresiones": 0,
+        "clics": 0,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-05",
+        "campana": "C1 - Convenio por sectores - Oct2026",
+        "inversion": 60348,
+        "impresiones": 9133,
+        "clics": 325,
+        "resultados": 16
+      },
+      {
+        "fecha": "2026-10-05",
+        "campana": "C2 - Empleados sector privado",
+        "inversion": 0,
+        "impresiones": 0,
+        "clics": 0,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-05",
+        "campana": "C2 - Empleados sector privado - Oct2026",
+        "inversion": 114046,
+        "impresiones": 13317,
+        "clics": 567,
+        "resultados": 46
+      },
+      {
+        "fecha": "2026-10-05",
+        "campana": "C3 - Reportados",
+        "inversion": 0,
+        "impresiones": 0,
+        "clics": 0,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-05",
+        "campana": "C3 - Reportados - Oct2026",
+        "inversion": 23421,
+        "impresiones": 2611,
+        "clics": 70,
+        "resultados": 3
+      },
+      {
+        "fecha": "2026-10-05",
+        "campana": "C4 - Retargeting caliente",
+        "inversion": 0,
+        "impresiones": 0,
+        "clics": 0,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-05",
+        "campana": "C4 - Retargeting caliente - Oct2026",
+        "inversion": 118073,
+        "impresiones": 12573,
+        "clics": 657,
+        "resultados": 54
+      },
+      {
+        "fecha": "2026-10-05",
+        "campana": "Campaña de formulario Copia 06/05/2026",
+        "inversion": 11991,
+        "impresiones": 807,
+        "clics": 59,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-05",
+        "campana": "Webinar Navidad sin deudas 22/10/2026",
+        "inversion": 7160,
+        "impresiones": 1801,
+        "clics": 97,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-06",
+        "campana": "C1 - Convenio por sectores - Oct2026",
+        "inversion": 66631,
+        "impresiones": 8620,
+        "clics": 320,
+        "resultados": 21
+      },
+      {
+        "fecha": "2026-10-06",
+        "campana": "C2 - Empleados sector privado",
+        "inversion": 0,
+        "impresiones": 0,
+        "clics": 0,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-06",
+        "campana": "C2 - Empleados sector privado - Oct2026",
+        "inversion": 83563,
+        "impresiones": 10682,
+        "clics": 517,
+        "resultados": 53
+      },
+      {
+        "fecha": "2026-10-06",
+        "campana": "C3 - Reportados - Oct2026",
+        "inversion": 18019,
+        "impresiones": 2235,
+        "clics": 59,
+        "resultados": 5
+      },
+      {
+        "fecha": "2026-10-06",
+        "campana": "C4 - Retargeting caliente",
+        "inversion": 0,
+        "impresiones": 0,
+        "clics": 0,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-06",
+        "campana": "C4 - Retargeting caliente - Oct2026",
+        "inversion": 83163,
+        "impresiones": 9174,
+        "clics": 465,
+        "resultados": 46
+      },
+      {
+        "fecha": "2026-10-06",
+        "campana": "Campaña de formulario Copia 06/05/2026",
+        "inversion": 9194,
+        "impresiones": 638,
+        "clics": 82,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-06",
+        "campana": "Webinar Navidad sin deudas 22/10/2026",
+        "inversion": 10596,
+        "impresiones": 2407,
+        "clics": 121,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-07",
+        "campana": "C1 - Convenio por sectores - Oct2026",
+        "inversion": 29879,
+        "impresiones": 2919,
+        "clics": 104,
+        "resultados": 8
+      },
+      {
+        "fecha": "2026-10-07",
+        "campana": "C2 - Empleados sector privado",
+        "inversion": 0,
+        "impresiones": 0,
+        "clics": 0,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-07",
+        "campana": "C2 - Empleados sector privado - Oct2026",
+        "inversion": 27323,
+        "impresiones": 3381,
+        "clics": 177,
+        "resultados": 20
+      },
+      {
+        "fecha": "2026-10-07",
+        "campana": "C3 - Reportados - Oct2026",
+        "inversion": 6579,
+        "impresiones": 738,
+        "clics": 22,
+        "resultados": 1
+      },
+      {
+        "fecha": "2026-10-07",
+        "campana": "C4 - Retargeting caliente",
+        "inversion": 0,
+        "impresiones": 0,
+        "clics": 0,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-07",
+        "campana": "C4 - Retargeting caliente - Oct2026",
+        "inversion": 31747,
+        "impresiones": 3535,
+        "clics": 162,
+        "resultados": 21
+      },
+      {
+        "fecha": "2026-10-07",
+        "campana": "Campaña de formulario Copia 06/05/2026",
+        "inversion": 3258,
+        "impresiones": 207,
+        "clics": 27,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-07",
+        "campana": "Webinar Navidad sin deudas 22/10/2026",
+        "inversion": 1553,
+        "impresiones": 359,
+        "clics": 16,
+        "resultados": 0
       }
     ]
   },
   "google_ads": {
-    "inversion": 143457,
-    "impresiones": 1385,
-    "clics": 291,
-    "conversiones": 53.0,
-    "costo_por_conversion": 2706.74,
+    "inversion": 136872,
+    "impresiones": 1409,
+    "clics": 296,
+    "conversiones": 31.0,
+    "costo_por_conversion": 4415.23,
     "campanas": [
-      {
-        "nombre": "C5 - Búsqueda - Libranza Nómina - Jun2026",
-        "estado": "Enabled",
-        "tipo": "Busqueda",
-        "impresiones": 741,
-        "clics": 147,
-        "ctr": 19.84,
-        "cpc_promedio": 492.74,
-        "presupuesto_dia": 10000,
-        "gasto": 72432,
-        "conversiones": 26.0,
-        "costo_por_conversion": 2785.86,
-        "prev": {
-          "impresiones": 3675,
-          "clics": 601,
-          "ctr": 16.35,
-          "cpc_promedio": 616.62,
-          "gasto": 370586,
-          "conversiones": 62.7,
-          "costo_por_conversion": 5913.61
-        }
-      },
       {
         "nombre": "C6 - Búsqueda - Reportados - Jun2026",
         "estado": "Enabled",
         "tipo": "Busqueda",
-        "impresiones": 644,
-        "clics": 144,
-        "ctr": 22.36,
-        "cpc_promedio": 493.23,
+        "impresiones": 703,
+        "clics": 147,
+        "ctr": 20.91,
+        "cpc_promedio": 469.57,
         "presupuesto_dia": 10000,
-        "gasto": 71025,
-        "conversiones": 27.0,
-        "costo_por_conversion": 2630.54,
+        "gasto": 69027,
+        "conversiones": 12.0,
+        "costo_por_conversion": 5752.28,
         "prev": {
-          "impresiones": 3274,
-          "clics": 627,
-          "ctr": 19.15,
-          "cpc_promedio": 544.8,
-          "gasto": 341593,
-          "conversiones": 61.3,
-          "costo_por_conversion": 5569.45
+          "impresiones": 644,
+          "clics": 144,
+          "ctr": 22.36,
+          "cpc_promedio": 493.23,
+          "gasto": 71025,
+          "conversiones": 28.0,
+          "costo_por_conversion": 2536.6
+        }
+      },
+      {
+        "nombre": "C5 - Búsqueda - Libranza Nómina - Jun2026",
+        "estado": "Enabled",
+        "tipo": "Busqueda",
+        "impresiones": 706,
+        "clics": 149,
+        "ctr": 21.1,
+        "cpc_promedio": 455.33,
+        "presupuesto_dia": 10000,
+        "gasto": 67845,
+        "conversiones": 19.0,
+        "costo_por_conversion": 3570.78,
+        "prev": {
+          "impresiones": 741,
+          "clics": 147,
+          "ctr": 19.84,
+          "cpc_promedio": 492.74,
+          "gasto": 72432,
+          "conversiones": 27.0,
+          "costo_por_conversion": 2682.68
         }
       }
     ],
-    "inversion_prev": 712179,
-    "impresiones_prev": 6949,
-    "clics_prev": 1228,
-    "conversiones_prev": 124.0,
-    "costo_por_conversion_prev": 5743.38,
+    "inversion_prev": 143457,
+    "impresiones_prev": 1385,
+    "clics_prev": 291,
+    "conversiones_prev": 55.0,
+    "costo_por_conversion_prev": 2608.31,
     "meses": [
       {
+        "label": "Oct 2026",
+        "inversion": 124148,
+        "impresiones": 1363,
+        "clics": 280,
+        "conversiones": 29.0,
+        "costo_por_conversion": 4280.97
+      },
+      {
         "label": "Sep 2026",
-        "inversion": 2897845,
-        "impresiones": 25623,
-        "clics": 4986,
-        "conversiones": 937.0,
-        "costo_por_conversion": 3092.68
+        "inversion": 2908894,
+        "impresiones": 25697,
+        "clics": 5005,
+        "conversiones": 948.0,
+        "costo_por_conversion": 3068.45
       },
       {
         "label": "Ago 2026",
@@ -7287,14 +7704,6 @@
         "clics": 3022,
         "conversiones": 695.0,
         "costo_por_conversion": 2614.94
-      },
-      {
-        "label": "Jul 2026",
-        "inversion": 2204727,
-        "impresiones": 13351,
-        "clics": 2917,
-        "conversiones": 639.5,
-        "costo_por_conversion": 3447.58
       }
     ],
     "diario": [
@@ -8311,7 +8720,7 @@
         "inversion": 80088,
         "impresiones": 598,
         "clics": 137,
-        "conversiones": 32.0
+        "conversiones": 33.0
       },
       {
         "fecha": "2026-09-14",
@@ -8325,28 +8734,28 @@
         "inversion": 129520,
         "impresiones": 1155,
         "clics": 221,
-        "conversiones": 45.0
+        "conversiones": 46.5
       },
       {
         "fecha": "2026-09-16",
         "inversion": 131246,
         "impresiones": 1084,
         "clics": 234,
-        "conversiones": 50.0
+        "conversiones": 51.0
       },
       {
         "fecha": "2026-09-17",
         "inversion": 130868,
         "impresiones": 1127,
         "clics": 241,
-        "conversiones": 1.0
+        "conversiones": 3.5
       },
       {
         "fecha": "2026-09-18",
         "inversion": 134895,
         "impresiones": 1197,
         "clics": 232,
-        "conversiones": 1.0
+        "conversiones": 2.0
       },
       {
         "fecha": "2026-09-19",
@@ -8395,14 +8804,14 @@
         "inversion": 21629,
         "impresiones": 161,
         "clics": 49,
-        "conversiones": 12.0
+        "conversiones": 13.0
       },
       {
         "fecha": "2026-09-26",
         "inversion": 20746,
         "impresiones": 191,
         "clics": 45,
-        "conversiones": 8.0
+        "conversiones": 9.0
       },
       {
         "fecha": "2026-09-27",
@@ -8427,9 +8836,58 @@
       },
       {
         "fecha": "2026-09-30",
-        "inversion": 5274,
-        "impresiones": 40,
-        "clics": 8,
+        "inversion": 16323,
+        "impresiones": 114,
+        "clics": 27,
+        "conversiones": 3.0
+      },
+      {
+        "fecha": "2026-10-01",
+        "inversion": 21035,
+        "impresiones": 222,
+        "clics": 42,
+        "conversiones": 3.0
+      },
+      {
+        "fecha": "2026-10-02",
+        "inversion": 20631,
+        "impresiones": 166,
+        "clics": 45,
+        "conversiones": 5.0
+      },
+      {
+        "fecha": "2026-10-03",
+        "inversion": 21175,
+        "impresiones": 204,
+        "clics": 39,
+        "conversiones": 4.0
+      },
+      {
+        "fecha": "2026-10-04",
+        "inversion": 11512,
+        "impresiones": 100,
+        "clics": 24,
+        "conversiones": 5.0
+      },
+      {
+        "fecha": "2026-10-05",
+        "inversion": 22886,
+        "impresiones": 311,
+        "clics": 64,
+        "conversiones": 8.0
+      },
+      {
+        "fecha": "2026-10-06",
+        "inversion": 23311,
+        "impresiones": 292,
+        "clics": 55,
+        "conversiones": 3.0
+      },
+      {
+        "fecha": "2026-10-07",
+        "inversion": 3599,
+        "impresiones": 68,
+        "clics": 11,
         "conversiones": 1.0
       }
     ],
@@ -10328,7 +10786,7 @@
         "inversion": 31387,
         "impresiones": 276,
         "clics": 63,
-        "conversiones": 16.0
+        "conversiones": 17.0
       },
       {
         "fecha": "2026-09-13",
@@ -10360,7 +10818,7 @@
         "inversion": 66291,
         "impresiones": 570,
         "clics": 122,
-        "conversiones": 24.5
+        "conversiones": 25.5
       },
       {
         "fecha": "2026-09-15",
@@ -10368,7 +10826,7 @@
         "inversion": 63228,
         "impresiones": 585,
         "clics": 99,
-        "conversiones": 20.5
+        "conversiones": 21.0
       },
       {
         "fecha": "2026-09-16",
@@ -10384,7 +10842,7 @@
         "inversion": 67161,
         "impresiones": 506,
         "clics": 111,
-        "conversiones": 24.7
+        "conversiones": 25.7
       },
       {
         "fecha": "2026-09-17",
@@ -10392,7 +10850,7 @@
         "inversion": 66737,
         "impresiones": 593,
         "clics": 130,
-        "conversiones": 0.0
+        "conversiones": 2.0
       },
       {
         "fecha": "2026-09-17",
@@ -10400,7 +10858,7 @@
         "inversion": 64131,
         "impresiones": 534,
         "clics": 111,
-        "conversiones": 1.0
+        "conversiones": 1.5
       },
       {
         "fecha": "2026-09-18",
@@ -10408,7 +10866,7 @@
         "inversion": 68960,
         "impresiones": 644,
         "clics": 126,
-        "conversiones": 0.0
+        "conversiones": 1.0
       },
       {
         "fecha": "2026-09-18",
@@ -10520,7 +10978,7 @@
         "inversion": 10965,
         "impresiones": 72,
         "clics": 24,
-        "conversiones": 7.0
+        "conversiones": 8.0
       },
       {
         "fecha": "2026-09-25",
@@ -10544,7 +11002,7 @@
         "inversion": 10842,
         "impresiones": 110,
         "clics": 25,
-        "conversiones": 4.0
+        "conversiones": 5.0
       },
       {
         "fecha": "2026-09-27",
@@ -10597,24 +11055,136 @@
       {
         "fecha": "2026-09-30",
         "campana": "C6 - Búsqueda - Reportados - Jun2026",
-        "inversion": 1603,
-        "impresiones": 14,
-        "clics": 2,
-        "conversiones": 0.0
+        "inversion": 8975,
+        "impresiones": 63,
+        "clics": 16,
+        "conversiones": 2.0
       },
       {
         "fecha": "2026-09-30",
         "campana": "C5 - Búsqueda - Libranza Nómina - Jun2026",
-        "inversion": 3671,
-        "impresiones": 26,
-        "clics": 6,
+        "inversion": 7348,
+        "impresiones": 51,
+        "clics": 11,
         "conversiones": 1.0
+      },
+      {
+        "fecha": "2026-10-01",
+        "campana": "C6 - Búsqueda - Reportados - Jun2026",
+        "inversion": 10584,
+        "impresiones": 122,
+        "clics": 20,
+        "conversiones": 1.0
+      },
+      {
+        "fecha": "2026-10-01",
+        "campana": "C5 - Búsqueda - Libranza Nómina - Jun2026",
+        "inversion": 10451,
+        "impresiones": 100,
+        "clics": 22,
+        "conversiones": 2.0
+      },
+      {
+        "fecha": "2026-10-02",
+        "campana": "C6 - Búsqueda - Reportados - Jun2026",
+        "inversion": 10042,
+        "impresiones": 67,
+        "clics": 20,
+        "conversiones": 1.0
+      },
+      {
+        "fecha": "2026-10-02",
+        "campana": "C5 - Búsqueda - Libranza Nómina - Jun2026",
+        "inversion": 10589,
+        "impresiones": 99,
+        "clics": 25,
+        "conversiones": 4.0
+      },
+      {
+        "fecha": "2026-10-03",
+        "campana": "C6 - Búsqueda - Reportados - Jun2026",
+        "inversion": 10643,
+        "impresiones": 98,
+        "clics": 19,
+        "conversiones": 1.0
+      },
+      {
+        "fecha": "2026-10-03",
+        "campana": "C5 - Búsqueda - Libranza Nómina - Jun2026",
+        "inversion": 10532,
+        "impresiones": 106,
+        "clics": 20,
+        "conversiones": 3.0
+      },
+      {
+        "fecha": "2026-10-04",
+        "campana": "C6 - Búsqueda - Reportados - Jun2026",
+        "inversion": 5437,
+        "impresiones": 53,
+        "clics": 13,
+        "conversiones": 2.0
+      },
+      {
+        "fecha": "2026-10-04",
+        "campana": "C5 - Búsqueda - Libranza Nómina - Jun2026",
+        "inversion": 6075,
+        "impresiones": 47,
+        "clics": 11,
+        "conversiones": 3.0
+      },
+      {
+        "fecha": "2026-10-05",
+        "campana": "C6 - Búsqueda - Reportados - Jun2026",
+        "inversion": 12497,
+        "impresiones": 158,
+        "clics": 34,
+        "conversiones": 4.0
+      },
+      {
+        "fecha": "2026-10-05",
+        "campana": "C5 - Búsqueda - Libranza Nómina - Jun2026",
+        "inversion": 10389,
+        "impresiones": 153,
+        "clics": 30,
+        "conversiones": 4.0
+      },
+      {
+        "fecha": "2026-10-06",
+        "campana": "C6 - Búsqueda - Reportados - Jun2026",
+        "inversion": 10850,
+        "impresiones": 142,
+        "clics": 25,
+        "conversiones": 1.0
+      },
+      {
+        "fecha": "2026-10-06",
+        "campana": "C5 - Búsqueda - Libranza Nómina - Jun2026",
+        "inversion": 12461,
+        "impresiones": 150,
+        "clics": 30,
+        "conversiones": 2.0
+      },
+      {
+        "fecha": "2026-10-07",
+        "campana": "C6 - Búsqueda - Reportados - Jun2026",
+        "inversion": 2736,
+        "impresiones": 31,
+        "clics": 7,
+        "conversiones": 1.0
+      },
+      {
+        "fecha": "2026-10-07",
+        "campana": "C5 - Búsqueda - Libranza Nómina - Jun2026",
+        "inversion": 863,
+        "impresiones": 37,
+        "clics": 4,
+        "conversiones": 0.0
       }
     ]
   },
-  "periodo_desde": "2026-09-23",
-  "periodo_hasta": "2026-09-29",
-  "periodo_prev_desde": "2026-09-16",
-  "periodo_prev_hasta": "2026-09-22",
-  "actualizado": "2026-09-30T12:27:39"
+  "periodo_desde": "2026-09-30",
+  "periodo_hasta": "2026-10-06",
+  "periodo_prev_desde": "2026-09-23",
+  "periodo_prev_hasta": "2026-09-29",
+  "actualizado": "2026-10-07T11:27:19"
 }

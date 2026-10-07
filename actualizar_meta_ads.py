@@ -31,9 +31,25 @@ MESES_ES = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","D
 DIAS_SERIE = 180
 
 
+
+# ---------------------------------------------------------------------------
+# QUE CUENTA COMO "RESULTADO"
+#
+# Hasta el 30-sep-2026 el contenedor de GTM enviaba Lead y Purchase a la vez,
+# asi que contar "lead" funcionaba. El cotizador nuevo ya solo envia Purchase:
+# contar "lead" dejaba octubre en 91 resultados cuando eran mas de 700, con un
+# costo por resultado de 25.114 COP en lugar de ~3.000.
+#
+# "offsite_conversion.fb_pixel_purchase" = solicitud de credito creada, y es
+# consistente en los dos cotizadores, asi que la comparativa mensual cuadra.
+# Las campanas de formulario nativo de Meta no envian este evento y quedan en
+# cero aqui: sus leads no son solicitudes y mezclarlos deformaria el CPA.
+# ---------------------------------------------------------------------------
+ACCION_CONVERSION = "offsite_conversion.fb_pixel_purchase"
+
 def fetch_insights(account_id, token, since, until):
     """Devuelve dict {inversion, impresiones, clics, resultados, costo_por_resultado}
-    para el rango de fechas dado (resultados = action_type 'lead')."""
+    para el rango de fechas dado (resultados = solicitudes del cotizador)."""
     url = f"{GRAPH_URL}/{account_id}/insights"
     params = {
         "fields": "spend,impressions,clicks,actions",
@@ -53,7 +69,7 @@ def fetch_insights(account_id, token, since, until):
     clics = int(row.get("clicks", 0))
     resultados = 0
     for action in row.get("actions", []):
-        if action.get("action_type") == "lead":
+        if action.get("action_type") == ACCION_CONVERSION:
             resultados = int(float(action.get("value", 0)))
             break
 
@@ -88,7 +104,7 @@ def fetch_campaign_insights(account_id, token, since, until):
             clics = int(row.get("clicks", 0))
             resultados = 0
             for action in row.get("actions", []):
-                if action.get("action_type") == "lead":
+                if action.get("action_type") == ACCION_CONVERSION:
                     resultados = int(float(action.get("value", 0)))
                     break
             out[row["campaign_id"]] = {
@@ -158,7 +174,7 @@ def fetch_daily_series(account_id, token, since, until):
             spend = float(row.get("spend", 0))
             resultados = 0
             for action in row.get("actions", []):
-                if action.get("action_type") == "lead":
+                if action.get("action_type") == ACCION_CONVERSION:
                     resultados = int(float(action.get("value", 0)))
                     break
             dias.append({
@@ -197,7 +213,7 @@ def fetch_daily_series_by_campaign(account_id, token, since, until):
             spend = float(row.get("spend", 0))
             resultados = 0
             for action in row.get("actions", []):
-                if action.get("action_type") == "lead":
+                if action.get("action_type") == ACCION_CONVERSION:
                     resultados = int(float(action.get("value", 0)))
                     break
             dias.append({
@@ -252,14 +268,14 @@ def main():
     print(f"Inversion: ${actual['inversion']:,.0f}")
     print(f"Impresiones: {actual['impresiones']}")
     print(f"Clics: {actual['clics']}")
-    print(f"Resultados (leads): {actual['resultados']}")
+    print(f"Resultados (solicitudes): {actual['resultados']}")
     print(f"Costo por resultado: ${actual['costo_por_resultado']:,.0f}")
 
     # --- Semana anterior ---
     prev = fetch_insights(account_id, token, prev_desde, prev_hasta)
     print("\n=== Meta Ads (semana anterior) ===")
     print(f"Inversion: ${prev['inversion']:,.0f}")
-    print(f"Resultados (leads): {prev['resultados']}")
+    print(f"Resultados (solicitudes): {prev['resultados']}")
 
     # --- Campanas (ultimos 7 dias, incluye pausadas/deshabilitadas) ---
     actual_camp = fetch_campaign_insights(account_id, token, act_desde, act_hasta)

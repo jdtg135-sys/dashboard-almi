@@ -52,7 +52,24 @@ ADS_DATA_FILE = os.path.join(BASE_DIR, "ads_data.json")
 # 522022877 y no se migra (GA4 no permite mover datos entre propiedades).
 # Para consultarlo, volver a poner COTIZADOR = "viejo".
 # ---------------------------------------------------------------------------
-COTIZADOR = "nuevo"      # "viejo" | "nuevo"
+COTIZADOR = os.environ.get("ALMI_COTIZADOR") or "nuevo"   # "viejo" | "nuevo"
+
+# ---------------------------------------------------------------------------
+# GENERAR UN DESCARGABLE DE UN PERIODO CERRADO
+#
+# Por defecto el script trabaja sobre Dashboard_ALMI.html y mide hasta hoy.
+# Para sacar la foto de un mes ya terminado, sin tocar el dashboard vivo:
+#
+#   ALMI_COTIZADOR=viejo ALMI_DESDE=2026-08-01 ALMI_HASTA=2026-08-31 \
+#   ALMI_SALIDA=Dashboard_ALMI_agosto2026.html python actualizar_dashboard.py
+#
+# ALMI_HASTA reemplaza a "hoy" en todo el script, asi que los rangos del filtro
+# y las comparativas quedan ancladas al cierre del mes y no a la fecha real.
+# ---------------------------------------------------------------------------
+HOY = (datetime.date.fromisoformat(os.environ["ALMI_HASTA"])
+       if os.environ.get("ALMI_HASTA") else datetime.date.today())
+if os.environ.get("ALMI_SALIDA"):
+    DASHBOARD_FILE = os.path.join(BASE_DIR, os.environ["ALMI_SALIDA"])
 
 SCOPES = ["https://www.googleapis.com/auth/analytics.readonly"]
 
@@ -63,11 +80,23 @@ SCOPES = ["https://www.googleapis.com/auth/analytics.readonly"]
 # 8 dias (incluye hoy, que ademas esta incompleto) mientras la ventana previa
 # eran 7: la comparativa semanal comparaba 8 contra 7. Ahora ambas son de 7
 # dias completos, terminando ayer, igual que las de Meta y Google Ads.
-DATE_RANGE = DateRange(start_date="7daysAgo", end_date="yesterday")
-PREV_DATE_RANGE = DateRange(start_date="14daysAgo", end_date="8daysAgo")
+_FIN = os.environ.get("ALMI_HASTA")
+if _FIN:
+    # Periodo cerrado: las dos ventanas de 7 dias terminan en el ultimo dia
+    # del mes, no en "ayer", para que la comparativa semanal siga midiendo
+    # algo que ocurrio dentro del periodo descargado.
+    DATE_RANGE = DateRange(start_date=(HOY - timedelta(days=6)).isoformat(),
+                           end_date=HOY.isoformat())
+    PREV_DATE_RANGE = DateRange(start_date=(HOY - timedelta(days=13)).isoformat(),
+                                end_date=(HOY - timedelta(days=7)).isoformat())
+else:
+    DATE_RANGE = DateRange(start_date="7daysAgo", end_date="yesterday")
+    PREV_DATE_RANGE = DateRange(start_date="14daysAgo", end_date="8daysAgo")
+
 ACCUM_DATE_RANGE = DateRange(
-    start_date="2026-06-08" if COTIZADOR == "viejo" else "2026-10-01",
-    end_date="today",
+    start_date=(os.environ.get("ALMI_DESDE")
+                or ("2026-06-08" if COTIZADOR == "viejo" else "2026-10-01")),
+    end_date=HOY.isoformat(),
 )
 
 MESES_ES = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"]
@@ -684,8 +713,8 @@ def main():
     html = re.sub(r'(Ahora sabemos que son <em>)\d+(\.</em>)',
                   rf'\g<1>{funnel_values[-1]}\g<2>', html, count=1)
     html = re.sub(r'(<span id="closingFecha">)[^<]*(</span>)',
-                  rf'\g<1>{MESES_ES[datetime.date.today().month - 1]} '
-                  rf'{datetime.date.today().year}\g<2>', html, count=1)
+                  rf'\g<1>{MESES_ES[HOY.month - 1]} '
+                  rf'{HOY.year}\g<2>', html, count=1)
 
     # --- Funnel stages (acumulado desde implementacion) ---
     base = funnel_accum[0] if funnel_accum[0] else 1
@@ -859,7 +888,7 @@ def main():
     html = re.sub(r'var DATA_EVENTS = \[.*?\];', new_data_events, html, count=1, flags=re.DOTALL)
 
     # --- Rangos del filtro global (embudo, KPIs, errores, graficos) ---
-    rangos = construir_rangos(client, datetime.date.today(), all_event_names)
+    rangos = construir_rangos(client, HOY, all_event_names)
     nuevo_rangos = (
         "/* DATA_RANGOS_START */\n"
         "var DATA_RANGOS = "
@@ -1198,7 +1227,7 @@ def main():
     # --- Comparativas mensuales (mes calendario) ---
     def month_range(months_back):
         """Devuelve (inicio, fin, etiqueta) del mes calendario `months_back` meses atras (0 = mes actual)."""
-        today = datetime.date.today()
+        today = HOY
         y, mo = today.year, today.month
         for _ in range(months_back):
             mo -= 1
@@ -1273,7 +1302,7 @@ def main():
     print("Comparativas mensuales actualizadas")
 
     # Fecha del periodo medido
-    hoy = datetime.date.today()
+    hoy = HOY
     hace_7 = hoy - datetime.timedelta(days=7)
 
     def fmt_dia_mes(d):
