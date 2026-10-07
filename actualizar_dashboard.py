@@ -141,27 +141,48 @@ if COTIZADOR == "viejo":
     EVENTO_INICIO = "worker_classification_selected"
     EVENTO_CONVERSION = "purchase"
 
+    # Errores tecnicos y avisos de dato duplicado, separados a proposito: un
+    # duplicado es la validacion funcionando, no una falla, y mezclarlos hacia
+    # ver como error algo esperado.
+    EVENTOS_ERROR = ["form_validation_error", "loan_request_failure"]
+    EVENTOS_DUPLICADO = []
+    DIM_ERROR = "customEvent:error_message"
+    ETIQUETA_ERROR = {}
+    CLASE_ERROR = {}
+
 else:
     # Propiedad "ALMI Financiera Cotizador nuevo"
     PROPERTY_ID = "554405139"
 
-    # El wizard nuevo tiene 5 pantallas (datos/monto/contacto/cuenta/resumen).
-    # Desaparecen worker_classification_selected y terms_accepted; el embudo se
-    # rearma con los eventos que si existen, manteniendo 7 pasos.
+    # El wizard nuevo tiene 5 pantallas (datos/monto/contacto/cuenta/resumen)
+    # y un paso de verificacion por codigo (OTP) que el embudo anterior no
+    # tenia. Se miden los dos momentos del OTP, pedirlo y verificarlo, porque
+    # la mayor fuga esta justo antes de pedirlo: de 1.558 preaprobados solo
+    # 1.085 llegan a solicitar el codigo. Un embudo que salte de preaprobacion
+    # a datos personales esconde ese tramo.
     FUNNEL_EVENTS = [
         ("1. Empresa seleccionada",  "company_selected"),
         ("2. Cotizacion solicitada", "calculate_credit_clicked"),
         ("3. Cotizacion calculada",  "loan_quote_calculated"),
         ("4. Pre aprobacion",        "pre_approval_accepted"),
-        ("5. Datos personales",      "personal_info_submitted"),
-        ("6. Datos bancarios",       "bank_info_submitted"),
-        ("7. Solicitud creada",      "loan_request_created"),
+        ("5. Codigo solicitado",     "otp_requested"),
+        ("6. Codigo verificado",     "otp_verified"),
+        ("7. Datos personales",      "personal_info_submitted"),
+        ("8. Datos bancarios",       "bank_info_submitted"),
+        ("9. Solicitud creada",      "loan_request_created"),
     ]
 
+    # OJO: "form_error" NO existe en el cotizador nuevo. El tablero lo buscaba
+    # y mostraba 0 errores durante toda la semana del lanzamiento mientras el
+    # cotizador reportaba tres fallas distintas con otros nombres.
     EXTRA_EVENTS = [
-        "form_error",
         "loan_request_submitted",
+        "loan_quote_error",
+        "otp_failed",
         "loan_request_error",
+        "duplicate_phone_detected",
+        "duplicate_email_detected",
+        "duplicate_document_detected",
     ]
 
     CHART_EVENTS = [
@@ -174,13 +195,38 @@ else:
         ("bank_info_submitted",      "Datos bancarios"),
         ("loan_request_created",     "Solicitud creada"),
         ("whatsapp_clicked",         "Contacto WhatsApp"),
-        ("form_error",               "Error formulario"),
+        ("loan_request_error",       "Error al crear solicitud"),
     ]
 
-    EVENTO_ERROR_FORM = "form_error"
     EVENTO_FALLO = "loan_request_error"
     EVENTO_INICIO = "company_selected"
     EVENTO_CONVERSION = "loan_request_created"
+
+    # Errores tecnicos y avisos de dato duplicado, separados a proposito: un
+    # duplicado es la validacion funcionando, no una falla del sistema, y
+    # mezclarlos hacia ver como error algo esperado.
+    EVENTOS_ERROR = ["loan_quote_error", "otp_failed", "loan_request_error"]
+    EVENTOS_DUPLICADO = ["duplicate_phone_detected", "duplicate_email_detected",
+                         "duplicate_document_detected"]
+    EVENTO_ERROR_FORM = EVENTOS_ERROR[0]
+
+    # El mensaje viaja en el parametro "error", salvo en otp_failed que usa
+    # "reason". En vez de depender de eso, el desglose se arma por nombre de
+    # evento con estas etiquetas.
+    DIM_ERROR = "customEvent:error"
+    CLASE_ERROR = {
+        "No se pudo crear la solicitud":     "Falla del sistema",
+        "Fallo el calculo de la cotizacion": "Falla del sistema",
+        "Codigo de verificacion incorrecto": "Codigo mal digitado",
+    }
+    ETIQUETA_ERROR = {
+        "loan_request_error":          "No se pudo crear la solicitud",
+        "loan_quote_error":            "Fallo el calculo de la cotizacion",
+        "otp_failed":                  "Codigo de verificacion incorrecto",
+        "duplicate_phone_detected":    "Telefono ya registrado",
+        "duplicate_email_detected":    "Correo ya registrado",
+        "duplicate_document_detected": "Cedula ya registrada",
+    }
 
 
 def get_credentials():
@@ -275,12 +321,44 @@ def fetch_event_counts(client, event_names, date_range=DATE_RANGE):
     return {name: counts.get(name, 0) for name in event_names}
 
 
+def fetch_error_breakdown_por_evento(client, date_range, event_names):
+    """Desglose por NOMBRE de evento, con usuarios unicos y ocurrencias.
+
+    El cotizador nuevo manda el texto del error en el parametro "error" y, solo
+    en otp_failed, en "reason". Armar el desglose con una sola dimension dejaba
+    filas en "(not set)". Por nombre de evento siempre cuadra, y la etiqueta
+    legible sale de ETIQUETA_ERROR.
+    """
+    request = RunReportRequest(
+        property=f"properties/{PROPERTY_ID}",
+        dimensions=[Dimension(name="eventName")],
+        metrics=[Metric(name="eventCount"), Metric(name="activeUsers")],
+        date_ranges=[date_range],
+        dimension_filter=FilterExpression(
+            filter=Filter(
+                field_name="eventName",
+                in_list_filter=Filter.InListFilter(values=list(event_names)),
+            )
+        ),
+        order_bys=[OrderBy(metric=OrderBy.MetricOrderBy(metric_name="activeUsers"), desc=True)],
+        limit=50,
+    )
+    response = client.run_report(request)
+    out = []
+    for row in response.rows:
+        ev = row.dimension_values[0].value
+        out.append((ETIQUETA_ERROR.get(ev, ev),
+                    int(row.metric_values[0].value),
+                    int(row.metric_values[1].value)))
+    return out
+
+
 def fetch_error_breakdown(client, date_range=DATE_RANGE, limit=8,
                            event_names=(EVENTO_ERROR_FORM,)):
     """Devuelve lista [(mensaje_error, conteo), ...] ordenada de mayor a menor."""
     request = RunReportRequest(
         property=f"properties/{PROPERTY_ID}",
-        dimensions=[Dimension(name="customEvent:error_message")],
+        dimensions=[Dimension(name=DIM_ERROR)],
         metrics=[Metric(name="eventCount")],
         date_ranges=[date_range],
         dimension_filter=FilterExpression(
@@ -348,13 +426,14 @@ def fetch_funnel_users_fast(client, funnel_events, date_range):
 
 
 def fetch_error_breakdown_diario(client, date_range, limit=200,
-                                 event_names=(EVENTO_ERROR_FORM,)):
+                                 event_names=None):
     """Errores por (fecha, mensaje). eventCount es aditivo, asi que el navegador
     puede sumar cualquier subrango sin volver a consultar."""
+    event_names = event_names or tuple(EVENTOS_ERROR)
     request = RunReportRequest(
         property=f"properties/{PROPERTY_ID}",
         dimensions=[Dimension(name="date"),
-                    Dimension(name="customEvent:error_message")],
+                    Dimension(name="eventName")],
         metrics=[Metric(name="eventCount")],
         date_ranges=[date_range],
         dimension_filter=FilterExpression(
@@ -370,6 +449,9 @@ def fetch_error_breakdown_diario(client, date_range, limit=200,
     for row in response.rows:
         f = row.dimension_values[0].value          # YYYYMMDD
         msg = row.dimension_values[1].value or "(sin especificar)"
+        # La serie se agrupa por nombre de evento; el tablero muestra la
+        # etiqueta legible, la misma que usa la tabla que arma este script.
+        msg = ETIQUETA_ERROR.get(msg, msg)
         filas.append({
             "fecha": f"{f[0:4]}-{f[4:6]}-{f[6:8]}",
             "msg": msg,
@@ -490,12 +572,18 @@ def fetch_sessions(client, date_range=DATE_RANGE):
     return 0
 
 
-def fetch_daily_errors(client, date_range, event_name=EVENTO_ERROR_FORM):
-    """Devuelve lista [(fecha 'YYYY-MM-DD', conteo), ...] del evento dado por dia."""
+def fetch_daily_errors(client, date_range, event_name=EVENTO_ERROR_FORM,
+                       metrica="eventCount"):
+    """Devuelve lista [(fecha 'YYYY-MM-DD', conteo), ...] del evento dado por dia.
+
+    Con metrica="activeUsers" devuelve usuarios unicos de cada dia, que es lo
+    correcto para comparar dos pasos del embudo entre si. Por dia no hay
+    sobreconteo porque cada dia es su propio rango.
+    """
     request = RunReportRequest(
         property=f"properties/{PROPERTY_ID}",
         dimensions=[Dimension(name="date")],
-        metrics=[Metric(name="eventCount")],
+        metrics=[Metric(name=metrica)],
         date_ranges=[date_range],
         dimension_filter=FilterExpression(
             filter=Filter(
@@ -525,6 +613,9 @@ def fmt_money(v):
 
 
 def fmt_num(v):
+    # None = periodo sin datos en esta propiedad (ver el corte de octubre).
+    if v is None:
+        return "—"
     return f"{v:,.0f}".replace(",", ".")
 
 
@@ -533,7 +624,10 @@ def fmt_pct_change(curr, prev):
     if prev == 0:
         if curr == 0:
             return "0%", "delta-neutral"
-        return "+100%", "delta-up"
+        # Sin base no hay variacion que calcular. Decir "+100%" era enganoso y
+        # con el corte de propiedad producia cosas como "+2.100.600%" al
+        # comparar octubre contra un septiembre que en esta propiedad no existe.
+        return "sin base", "delta-neutral"
     pct = round((curr - prev) / prev * 100, 1)
     if pct > 0:
         return f"+{pct}%", "delta-up"
@@ -543,14 +637,19 @@ def fmt_pct_change(curr, prev):
 
 
 def comp_row_simple_global(label, curr, prev, invertir=False, formatter=fmt_num):
-    txt, css = fmt_pct_change(curr, prev)
-    if invertir:
-        css = {"delta-up": "delta-down", "delta-down": "delta-up"}.get(css, css)
+    # Un mes anterior al inicio de la propiedad llega como None: no hay base
+    # contra la cual comparar y la celda lo dice en vez de inventar un numero.
+    if prev is None or curr is None:
+        txt, css = "sin base", "delta-neutral"
+    else:
+        txt, css = fmt_pct_change(curr, prev)
+        if invertir:
+            css = {"delta-up": "delta-down", "delta-down": "delta-up"}.get(css, css)
     return (
         "<tr>"
         f"<td>{label}</td>"
-        f"<td>{formatter(curr)}</td>"
-        f"<td>{formatter(prev)}</td>"
+        f"<td>{formatter(curr) if curr is not None else '—'}</td>"
+        f"<td>{formatter(prev) if prev is not None else '—'}</td>"
         f'<td class="{css}">{txt}</td>'
         "</tr>"
     )
@@ -605,7 +704,7 @@ def construir_rangos(client, hoy, all_event_names):
     print("  descargando series diarias (eventos, errores, sesiones)...")
     serie_eventos = fetch_serie_diaria_eventos(client, rango_total, all_event_names)
     serie_errores = fetch_error_breakdown_diario(
-        client, rango_total, event_names=(EVENTO_ERROR_FORM,))
+        client, rango_total, event_names=tuple(EVENTOS_ERROR + EVENTOS_DUPLICADO))
     serie_sesiones = fetch_sesiones_diarias(client, rango_total)
     print(f"  series: {len(serie_eventos)} filas evento-dia, "
           f"{len(serie_errores)} filas error-dia, {len(serie_sesiones)} dias de sesiones")
@@ -634,7 +733,7 @@ def main():
     funnel_values = fetch_funnel_users(client, FUNNEL_EVENTS)
     solicitudes = funnel_values[-1]  # purchase / step 6
     pre_aprobaciones = counts["pre_approval_accepted"]
-    errores_form = counts[EVENTO_ERROR_FORM]
+    errores_form = sum(counts.get(e, 0) for e in EVENTOS_ERROR)
     fallos_solicitud = counts[EVENTO_FALLO]
     cotizador_starts = funnel_values[0]
 
@@ -642,16 +741,20 @@ def main():
     print(f"Sesiones: {sessions}")
     for (label, event), val in zip(FUNNEL_EVENTS, funnel_values):
         print(f"{label} [{event}]: {val}")
-    print(f"Errores formulario [form_validation_error]: {errores_form}")
+    print(f"Errores tecnicos {EVENTOS_ERROR}: {errores_form}")
     print(f"Fallos al enviar solicitud [loan_request_failure]: {fallos_solicitud}")
 
     # Mismo rango que el contador "Errores de formulario" del resumen del embudo.
     # Antes el desglose salia a 7 dias (~2.809 errores) mientras el resumen mostraba
     # el acumulado (~20.236): el lector veia dos cifras que no cuadraban entre si.
-    error_breakdown = fetch_error_breakdown(client, ACCUM_DATE_RANGE)
-    print("\n=== Desglose de errores de formulario ===")
-    for msg, cnt in error_breakdown:
-        print(f"  - {msg}: {cnt}")
+    error_breakdown = fetch_error_breakdown_por_evento(
+        client, ACCUM_DATE_RANGE, EVENTOS_ERROR + EVENTOS_DUPLICADO)
+    tecnicos = set(ETIQUETA_ERROR.get(e, e) for e in EVENTOS_ERROR)
+    print("")
+    print("=== Errores reportados por el cotizador ===")
+    for msg, cnt, usr in error_breakdown:
+        clase = "falla" if msg in tecnicos else "duplicado"
+        print(f"  - [{clase}] {msg}: {cnt} ocurrencias, {usr} usuarios")
 
     # --- Acumulado desde implementacion (2026-06-08) ---
     sessions_accum = fetch_sessions(client, ACCUM_DATE_RANGE)
@@ -659,7 +762,7 @@ def main():
     funnel_accum = fetch_funnel_users(client, FUNNEL_EVENTS, ACCUM_DATE_RANGE)
     solicitudes_accum = funnel_accum[-1]
     pre_aprobaciones_accum = counts_accum["pre_approval_accepted"]
-    errores_accum = counts_accum[EVENTO_ERROR_FORM]
+    errores_accum = sum(counts_accum.get(e, 0) for e in EVENTOS_ERROR)
     cotizador_starts_accum = funnel_accum[0]
 
     print("\n=== Acumulado desde implementacion (2026-06-08) ===")
@@ -667,7 +770,7 @@ def main():
     print(f"Iniciaron cotizacion: {cotizador_starts_accum}")
     print(f"Solicitudes enviadas: {solicitudes_accum}")
     print(f"Pre-aprobaciones: {pre_aprobaciones_accum}")
-    print(f"Errores formulario: {errores_accum}")
+    print(f"Errores tecnicos: {errores_accum}")
 
     # --- Datos de la semana anterior (para comparativa) ---
     sessions_prev = fetch_sessions(client, PREV_DATE_RANGE)
@@ -675,7 +778,7 @@ def main():
     funnel_values_prev = fetch_funnel_users(client, FUNNEL_EVENTS, PREV_DATE_RANGE)
     solicitudes_prev = funnel_values_prev[-1]
     pre_aprobaciones_prev = counts_prev["pre_approval_accepted"]
-    errores_form_prev = counts_prev[EVENTO_ERROR_FORM]
+    errores_form_prev = sum(counts_prev.get(e, 0) for e in EVENTOS_ERROR)
     cotizador_starts_prev = funnel_values_prev[0]
 
     print("\n=== Semana anterior (comparativa) ===")
@@ -683,7 +786,7 @@ def main():
     print(f"Iniciaron cotizacion: {cotizador_starts_prev}")
     print(f"Solicitudes enviadas: {solicitudes_prev}")
     print(f"Pre-aprobaciones: {pre_aprobaciones_prev}")
-    print(f"Errores formulario: {errores_form_prev}")
+    print(f"Errores tecnicos: {errores_form_prev}")
 
     with open(DASHBOARD_FILE, "r", encoding="utf-8") as f:
         html = f.read()
@@ -698,7 +801,7 @@ def main():
     html = replace_stat_by_label(html, "Iniciaron cotizacion", cotizador_starts_accum)
     html = replace_stat_by_label(html, "Solicitudes enviadas", solicitudes_accum)
     html = replace_stat_by_label(html, "Pre-aprobaciones", pre_aprobaciones_accum)
-    html = replace_stat_by_label(html, "Errores formulario", errores_accum)
+    html = replace_stat_by_label(html, "Errores tecnicos", errores_accum)
 
     # Conversion % de sesiones que inician cotizacion (acumulado)
     pct_inicio = round(cotizador_starts_accum / sessions_accum * 100, 1) if sessions_accum else 0
@@ -783,20 +886,28 @@ def main():
 
     fallos_accum = counts_accum[EVENTO_FALLO]
     html = re.sub(
-        r'(<div class="fsumm-num" style="color:var\(--red\)">)\d+(</div>\s*<div class="fsumm-label">Fallos al enviar solicitud)',
+        r'(<div class="fsumm-num" style="color:var\(--red\)">)\d+(</div>\s*<div class="fsumm-label">Fallos al crear la solicitud)',
         rf'\g<1>{fallos_accum}\g<2>',
         html,
     )
 
     # Desglose de errores de formulario por tipo
     if error_breakdown:
-        total_err = sum(c for _, c in error_breakdown) or 1
+        # Se ordena por usuarios afectados, no por ocurrencias: un mismo usuario
+        # reintenta varias veces y eso destacaba el error que mas se repite por
+        # reintento en vez del que afecta a mas gente.
+        total_err = sum(c for _, c, _ in error_breakdown) or 1
         rows_html = []
-        for msg, cnt in error_breakdown:
+        for msg, cnt, usr in error_breakdown:
+            es_falla = CLASE_ERROR.get(msg) == "Falla del sistema"
+            clase = CLASE_ERROR.get(msg) or ("Falla" if msg in tecnicos
+                                             else "Dato ya registrado")
+            color = "var(--red)" if es_falla else "var(--ink-dim)"
             pct = round(cnt / total_err * 100, 1)
             rows_html.append(
                 "<tr>"
-                f"<td>{msg}</td>"
+                f'<td>{msg}<br><span style="font-size:10px;color:{color};'
+                f'letter-spacing:.08em;text-transform:uppercase">{clase}</span></td>'
                 f"<td>{fmt_num(cnt)}</td>"
                 f"<td>{pct}%</td>"
                 "</tr>"
@@ -810,6 +921,27 @@ def main():
         re.DOTALL,
     )
     html = error_table_pattern.sub(lambda m: m.group(1) + "\n          " + new_error_rows + "\n          " + m.group(2), html, count=1)
+
+    # --- Nombres de evento que usa el JS del filtro ---
+    #
+    # Estaban escritos a mano en el HTML y se quedaron en los del cotizador
+    # anterior: al cambiar de rango el navegador recalculaba los KPIs con
+    # eventos que ya no existen y los dejaba en cero. Ahora los escribe el
+    # script, asi que no pueden volver a desfasarse de la configuracion.
+    nl = chr(10)
+    bloque_eventos = nl.join([
+        "/* EVENTOS_START */",
+        f"var EV_INICIO   = {json.dumps(EVENTO_INICIO)};",
+        f"var EV_PREAP    = {json.dumps('pre_approval_accepted')};",
+        f"var EV_SOLICITUD= {json.dumps(EVENTO_CONVERSION)};",
+        f"var EV_ERROR    = {json.dumps(EVENTOS_ERROR)};",
+        f"var EV_FALLO    = {json.dumps(EVENTO_FALLO)};",
+        f"var CLASE_ERROR = {json.dumps(CLASE_ERROR, ensure_ascii=False)};",
+        "/* EVENTOS_END */",
+    ])
+    html = re.sub(r"/\* EVENTOS_START \*/.*?/\* EVENTOS_END \*/",
+                  lambda _: bloque_eventos, html, count=1, flags=re.DOTALL)
+    print("Nombres de evento inyectados en el JS")
 
     # --- Insights dinamicos ---
     def replace_insight(html, n, tag, h3, p):
@@ -1209,7 +1341,7 @@ def main():
             comparativa_row("Iniciaron cotizacion", cotizador_starts, cotizador_starts_prev),
             comparativa_row("Solicitudes enviadas", solicitudes, solicitudes_prev),
             comparativa_row("Pre-aprobaciones", pre_aprobaciones, pre_aprobaciones_prev),
-            comparativa_row("Errores formulario", errores_form, errores_form_prev, invertir=True),
+            comparativa_row("Errores tecnicos", errores_form, errores_form_prev, invertir=True),
             comparativa_row("Inversion Google Ads", g.get("inversion", 0), g.get("inversion_prev"), formatter=fmt_money),
             comparativa_row("Conversiones Google Ads", g.get("conversiones", 0), g.get("conversiones_prev")),
             comparativa_row("Inversion Meta Ads", m.get("inversion", 0), m.get("inversion_prev"), formatter=fmt_money),
@@ -1241,24 +1373,42 @@ def main():
         return start, end, f"{MESES_ES[mo - 1]} {y}"
 
     month_data = []
+    inicio_datos = ACCUM_DATE_RANGE.start_date
     for mb in range(3):
         m_start, m_end, m_label = month_range(mb)
-        m_dr = DateRange(start_date=m_start.isoformat(), end_date=m_end.isoformat())
+        # Un mes entero anterior al inicio de la propiedad no tiene datos que
+        # traer. Consultarlo devolvia residuos (1 sesion de una prueba) contra
+        # los que octubre salia "+2.100.800%".
+        if m_end.isoformat() < inicio_datos:
+            month_data.append({"label": m_label, "vacio": True, "sessions": None,
+                               "starts": None, "solicitudes": None,
+                               "pre_aprob": None, "errores": None})
+            continue
+        m_dr = DateRange(start_date=max(m_start.isoformat(), inicio_datos),
+                         end_date=m_end.isoformat())
         m_sessions = fetch_sessions(client, m_dr)
         m_counts = fetch_event_counts(client, all_event_names, m_dr)
+        # Inicios y solicitudes en USUARIOS UNICOS, igual que el embudo. Con
+        # eventCount la tabla decia 21.009 inicios junto a un embudo de 2.787 y
+        # una tasa de conversion de 4%, cuando la real es 32%: company_selected
+        # se dispara ~7 veces por usuario mientras elige empresa.
+        m_users = fetch_funnel_users(
+            client, [FUNNEL_EVENTS[0], FUNNEL_EVENTS[-1]], m_dr)
         month_data.append({
             "label": m_label,
             "sessions": m_sessions,
-            "starts": m_counts[FUNNEL_EVENTS[0][1]],
-            "solicitudes": m_counts[FUNNEL_EVENTS[-1][1]],
+            "starts": m_users[0],
+            "solicitudes": m_users[-1],
             "pre_aprob": m_counts["pre_approval_accepted"],
-            "errores": m_counts[EVENTO_ERROR_FORM],
+            "errores": sum(m_counts.get(e, 0) for e in EVENTOS_ERROR),
+            "vacio": False,
         })
 
     print("\n=== Comparativa mensual (mes calendario) ===")
     for md in month_data:
         print(f"  {md['label']}: sesiones={md['sessions']}, inicios={md['starts']}, "
-              f"solicitudes={md['solicitudes']}, preaprob={md['pre_aprob']}, errores={md['errores']}")
+              f"solicitudes={md['solicitudes']}, preaprob={md['pre_aprob']}, errores={md['errores']}"
+              + ("  (sin datos en esta propiedad)" if md.get("vacio") else ""))
 
     cm, pm = month_data[0], month_data[1]
     comp_row_simple = comp_row_simple_global
@@ -1268,7 +1418,7 @@ def main():
         comp_row_simple("Iniciaron cotizacion", cm["starts"], pm["starts"]),
         comp_row_simple("Solicitudes enviadas", cm["solicitudes"], pm["solicitudes"]),
         comp_row_simple("Pre-aprobaciones", cm["pre_aprob"], pm["pre_aprob"]),
-        comp_row_simple("Errores formulario", cm["errores"], pm["errores"], invertir=True),
+        comp_row_simple("Errores tecnicos", cm["errores"], pm["errores"], invertir=True),
     ]
     new_monthly_rows = "\n          ".join(monthly_rows)
 
@@ -1375,12 +1525,14 @@ def main():
     )
 
     # Grafico agrupado cotizaciones vs solicitudes por dia: ultimos 30 dias
+    # En usuarios unicos: con eventCount el panel mostraba 21.009 inicios y
+    # una tasa de conversion de 4,2% al lado de un embudo que decia 31,7%.
     daily_starts = dict(fetch_daily_errors(client, DateRange(
         start_date=inicio_series.strftime("%Y-%m-%d"), end_date=hoy.strftime("%Y-%m-%d")
-    ), event_name=EVENTO_INICIO))
+    ), event_name=EVENTO_INICIO, metrica="activeUsers"))
     daily_subs = dict(fetch_daily_errors(client, DateRange(
         start_date=inicio_series.strftime("%Y-%m-%d"), end_date=hoy.strftime("%Y-%m-%d")
-    ), event_name=EVENTO_CONVERSION))
+    ), event_name=EVENTO_CONVERSION, metrica="activeUsers"))
     all_dates = sorted(set(daily_starts) | set(daily_subs))
     funnel_items = [f"{{date:'{d}', starts:{daily_starts.get(d,0)}, subs:{daily_subs.get(d,0)}}}" for d in all_dates]
     lines = []
