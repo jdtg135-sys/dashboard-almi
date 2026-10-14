@@ -460,6 +460,37 @@ def fetch_error_breakdown_diario(client, date_range, limit=200,
     return filas
 
 
+def fetch_monto_solicitado(client, date_range):
+    """Monto total solicitado y numero de solicitudes del periodo.
+
+    El 14-oct-2026 descubrimos que el valor de conversion llegaba en cero
+    desde el lanzamiento: la variable de GTM exigia que el monto fuera de
+    tipo numero y el cotizador lo envia como texto. Nadie lo noto en dos
+    semanas porque el tablero no mostraba esta cifra. Por eso esta aqui, y
+    por eso avisa cuando llega en cero.
+
+    GA4 devuelve las metricas de moneda multiplicadas por mil.
+    """
+    if COTIZADOR == "viejo":
+        return None, None
+    try:
+        r = client.run_report(RunReportRequest(
+            property=f"properties/{PROPERTY_ID}",
+            metrics=[Metric(name="customEvent:loan_amount"), Metric(name="eventCount")],
+            date_ranges=[date_range],
+            dimension_filter=FilterExpression(filter=Filter(
+                field_name="eventName",
+                string_filter=Filter.StringFilter(value="loan_request_submitted"))),
+        ))
+    except Exception:
+        return None, None
+    if not r.rows:
+        return 0, 0
+    monto = float(r.rows[0].metric_values[0].value) / 1000.0
+    n = int(r.rows[0].metric_values[1].value)
+    return monto, n
+
+
 def fetch_serie_usuarios_diaria(client, date_range, event_names):
     """activeUsers por (fecha, evento) para los pasos del embudo.
 
@@ -994,6 +1025,33 @@ def main():
     html = re.sub(r"/\* EVENTOS_START \*/.*?/\* EVENTOS_END \*/",
                   lambda _: bloque_eventos, html, count=1, flags=re.DOTALL)
     print("Nombres de evento inyectados en el JS")
+
+    # --- Monto solicitado, con aviso si llega en cero ---
+    monto, n_monto = fetch_monto_solicitado(client, ACCUM_DATE_RANGE)
+    if monto is None:
+        aviso, total_txt, ticket_txt = "", "—", "—"
+    elif monto <= 0:
+        total_txt = ticket_txt = "sin dato"
+        aviso = ("El cotizador no esta enviando el monto del credito. "
+                 "Sin ese dato no se puede medir el valor de las solicitudes "
+                 "ni optimizar la pauta por monto.")
+    else:
+        total_txt = fmt_money(monto)
+        ticket_txt = fmt_money(monto / n_monto) if n_monto else "—"
+        aviso = ""
+    print("")
+    print(f"Monto solicitado: {total_txt} en {n_monto or 0} solicitudes")
+    html = re.sub(r'(<div class="fsumm-num" id="valorTotal">)[^<]*(</div>)',
+                  lambda _: '<div class="fsumm-num" id="valorTotal">' + total_txt + '</div>',
+                  html, count=1)
+    html = re.sub(r'(<div class="fsumm-num" id="valorTicket">)[^<]*(</div>)',
+                  lambda _: '<div class="fsumm-num" id="valorTicket">' + ticket_txt + '</div>',
+                  html, count=1)
+    clase = 'dfilter-warn' if aviso else 'dfilter-warn oculto'
+    html = re.sub(r'<div id="valorAviso"[^>]*>[^<]*</div>',
+                  lambda _: f'<div id="valorAviso" class="{clase}" '
+                            f'style="margin-top:14px">{aviso}</div>',
+                  html, count=1)
 
     # --- Insights dinamicos ---
     def replace_insight(html, n, tag, h3, p):
