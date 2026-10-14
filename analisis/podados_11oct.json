@@ -1,0 +1,706 @@
+[
+ {
+  "id": "120252908690570392",
+  "campana": "C4",
+  "conjunto": "retargeting-general",
+  "nombre": "c4-video-10",
+  "impresiones": 15,
+  "gasto": 471.0
+ },
+ {
+  "id": "120252908684990392",
+  "campana": "C4",
+  "conjunto": "retargeting-general",
+  "nombre": "c4-video-7",
+  "impresiones": 41,
+  "gasto": 534.0
+ },
+ {
+  "id": "120252908516350392",
+  "campana": "C4",
+  "conjunto": "retargeting-general",
+  "nombre": "c4-retargeting-general-trabajas-y-quieres-un-empujon",
+  "impresiones": 19,
+  "gasto": 121.0
+ },
+ {
+  "id": "120252908500260392",
+  "campana": "C4",
+  "conjunto": "retargeting-general",
+  "nombre": "c4-retargeting-general-ya-reclamaste-tu-cupo",
+  "impresiones": 13,
+  "gasto": 172.0
+ },
+ {
+  "id": "120252908655220392",
+  "campana": "C3",
+  "conjunto": "reportados-advantage",
+  "nombre": "c3-video-4",
+  "impresiones": 0,
+  "gasto": 0.0
+ },
+ {
+  "id": "120252908487230392",
+  "campana": "C3",
+  "conjunto": "reportados-advantage",
+  "nombre": "c3-reportados-advantage-todo-lo-pide-el-banco-almi-lo-hace-facil",
+  "impresiones": 5,
+  "gasto": 103.0
+ },
+ {
+  "id": "120252908497150392",
+  "campana": "C3",
+  "conjunto": "reportados-advantage",
+  "nombre": "c3-reportados-advantage-por-que-el-banco-pide-tanto",
+  "impresiones": 2,
+  "gasto": 121.0
+ },
+ {
+  "id": "120252908479640392",
+  "campana": "C3",
+  "conjunto": "reportados-advantage",
+  "nombre": "c3-reportados-advantage-el-banco-te-pidio-demasiado",
+  "impresiones": 55,
+  "gasto": 1043.0
+ },
+ {
+  "id": "120252908639740392",
+  "campana": "C2",
+  "conjunto": "advantage-frio",
+  "nombre": "c2-video-8",
+  "impresiones": 90,
+  "gasto": 1993.0
+ },
+ {
+  "id": "120252908451230392",
+  "campana": "C2",
+  "conjunto": "lookalike-3-5",
+  "nombre": "c2-lookalike-3-5-tu-empresa-ya-tiene-convenio",
+  "impresiones": 7,
+  "gasto": 56.0
+ },
+ {
+  "id": "120252908643010392",
+  "campana": "C2",
+  "conjunto": "advantage-frio",
+  "nombre": "c2-video-10",
+  "impresiones": 27,
+  "gasto": 737.0
+ },
+ {
+  "id": "120252908635990392",
+  "campana": "C2",
+  "conjunto": "advantage-frio",
+  "nombre": "c2-video-7",
+  "impresiones": 87,
+  "gasto": 2326.0
+ },
+ {
+  "id": "120252908456940392",
+  "campana": "C2",
+  "conjunto": "lookalike-3-5",
+  "nombre": "c2-lookalike-3-5-miles-de-privados-ya-lo-tienen",
+  "impresiones": 11,
+  "gasto": 313.0
+ },
+ {
+  "id": "120252908439880392",
+  "campana": "C2",
+  "conjunto": "lookalike-3-5",
+  "nombre": "c2-lookalike-3-5-tu-trabajo-es-tu-garantia",
+  "impresiones": 12,
+  "gasto": 128.0
+ },
+ {
+  "id": "120252908470500392",
+  "campana": "C2",
+  "conjunto": "lookalike-3-5",
+  "nombre": "c2-lookalike-3-5-trabajas-tu-nomina-trabaja",
+  "impresiones": 98,
+  "gasto": 2336.0
+ },
+ {
+  "id": "120252908463370392",
+  "campana": "C2",
+  "conjunto": "lookalike-3-5",
+  "nombre": "c2-lookalike-3-5-empresa-privada-calificas",
+  "impresiones": 66,
+  "gasto": 1037.0
+ },
+ {
+  "id": "120252908445630392",
+  "campana": "C2",
+  "conjunto": "lookalike-3-5",
+  "nombre": "c2-lookalike-3-5-credito-si-almi-tiene-el-tuyo",
+  "impresiones": 7,
+  "gasto": 91.0
+ },
+ {
+  "id": "120252908435960392",
+  "campana": "C2",
+  "conjunto": "advantage-frio",
+  "nombre": "c2-advantage-frio-tu-trabajo-es-tu-garantia",
+  "impresiones": 5,
+  "gasto": 26.0
+ },
+ {
+  "id": "120252908474170392",
+  "campana": "C2",
+  "conjunto": "advantage-frio",
+  "nombre": "c2-advantage-frio-tu-trabajo-habla-por-vos",
+  "impresiones": 35,
+  "gasto": 846.0
+ },
+ {
+  "id": "120252908448750392",
+  "campana": "C2",
+  "conjunto": "advantage-frio",
+  "nombre": "c2-advantage-frio-tu-empresa-ya-tiene-convenio",
+  "impresiones": 2,
+  "gasto": 3.0
+ },
+ {
+  "id": "120252908466430392",
+  "campana": "C2",
+  "conjunto": "advantage-frio",
+  "nombre": "c2-advantage-frio-trabajas-tu-nomina-trabaja",
+  "impresiones": 67,
+  "gasto": 1445.0
+ },
+ {
+  "id": "120252908442490392",
+  "campana": "C2",
+  "conjunto": "advantage-frio",
+  "nombre": "c2-advantage-frio-credito-si-almi-tiene-el-tuyo",
+  "impresiones": 29,
+  "gasto": 619.0
+ },
+ {
+  "id": "120252908614300392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-video-8",
+  "impresiones": 8,
+  "gasto": 148.0
+ },
+ {
+  "id": "120252908611910392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-video-7",
+  "impresiones": 15,
+  "gasto": 893.0
+ },
+ {
+  "id": "120252908609820392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-video-4",
+  "impresiones": 2,
+  "gasto": 92.0
+ },
+ {
+  "id": "120252908607220392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-video-2",
+  "impresiones": 2,
+  "gasto": 52.0
+ },
+ {
+  "id": "120252908461170392",
+  "campana": "C2",
+  "conjunto": "advantage-frio",
+  "nombre": "c2-advantage-frio-empresa-privada-calificas",
+  "impresiones": 8,
+  "gasto": 109.0
+ },
+ {
+  "id": "120252908455320392",
+  "campana": "C2",
+  "conjunto": "advantage-frio",
+  "nombre": "c2-advantage-frio-miles-de-privados-ya-lo-tienen",
+  "impresiones": 9,
+  "gasto": 61.0
+ },
+ {
+  "id": "120252908616880392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-video-10",
+  "impresiones": 12,
+  "gasto": 360.0
+ },
+ {
+  "id": "120252908303350392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-temporales-y-servicios-listos",
+  "impresiones": 16,
+  "gasto": 117.0
+ },
+ {
+  "id": "120252908297400392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-temporales-y-servicios-temporales-plus",
+  "impresiones": 5,
+  "gasto": 43.0
+ },
+ {
+  "id": "120252908294530392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-temporales-y-servicios-temporizar",
+  "impresiones": 44,
+  "gasto": 743.0
+ },
+ {
+  "id": "120252908291190392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-temporales-y-servicios-tu-temporal",
+  "impresiones": 16,
+  "gasto": 143.0
+ },
+ {
+  "id": "120252908302360392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-temporales-y-servicios-interaseo",
+  "impresiones": 41,
+  "gasto": 682.0
+ },
+ {
+  "id": "120252908282280392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-temporales-y-servicios-summar-productividad",
+  "impresiones": 13,
+  "gasto": 174.0
+ },
+ {
+  "id": "120252908285740392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-temporales-y-servicios-brillaseo",
+  "impresiones": 21,
+  "gasto": 384.0
+ },
+ {
+  "id": "120252908299750392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-temporales-y-servicios-asservi",
+  "impresiones": 5,
+  "gasto": 113.0
+ },
+ {
+  "id": "120252908278920392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-seguridad-y-vigilancia-sevicol",
+  "impresiones": 7,
+  "gasto": 38.0
+ },
+ {
+  "id": "120252908274510392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-seguridad-y-vigilancia-nueva-era-seguridad",
+  "impresiones": 51,
+  "gasto": 469.0
+ },
+ {
+  "id": "120252908276650392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-seguridad-y-vigilancia-fortox-security-group",
+  "impresiones": 10,
+  "gasto": 95.0
+ },
+ {
+  "id": "120252908270540392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-seguridad-y-vigilancia-avizor-seguridad",
+  "impresiones": 2,
+  "gasto": 9.0
+ },
+ {
+  "id": "120252908384050392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-salud-y-bienestar-smart-fit",
+  "impresiones": 4,
+  "gasto": 37.0
+ },
+ {
+  "id": "120252908378810392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-salud-y-bienestar-farmatodo",
+  "impresiones": 2,
+  "gasto": 29.0
+ },
+ {
+  "id": "120252908254960392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-seguridad-y-vigilancia-delthac-seguridad",
+  "impresiones": 39,
+  "gasto": 430.0
+ },
+ {
+  "id": "120252908387740392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-salud-y-bienestar-christus-sinergia-salud",
+  "impresiones": 6,
+  "gasto": 66.0
+ },
+ {
+  "id": "120252908380270392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-salud-y-bienestar-cruz-verde",
+  "impresiones": 3,
+  "gasto": 22.0
+ },
+ {
+  "id": "120252908357660392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-retail-y-moda-pricesmart",
+  "impresiones": 26,
+  "gasto": 703.0
+ },
+ {
+  "id": "120252908351210392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-retail-y-moda-h-y-m",
+  "impresiones": 0,
+  "gasto": 0.0
+ },
+ {
+  "id": "120252908347920392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-retail-y-moda-tennis",
+  "impresiones": 6,
+  "gasto": 84.0
+ },
+ {
+  "id": "120252908361670392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-retail-y-moda-ava",
+  "impresiones": 4,
+  "gasto": 11.0
+ },
+ {
+  "id": "120252908359690392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-retail-y-moda-beauty-studio",
+  "impresiones": 0,
+  "gasto": 0.0
+ },
+ {
+  "id": "120252908354240392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-retail-y-moda-calzatodo",
+  "impresiones": 12,
+  "gasto": 76.0
+ },
+ {
+  "id": "120252908332190392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-restaurantes-y-alimentos-raca-man-dapa",
+  "impresiones": 0,
+  "gasto": 0.0
+ },
+ {
+  "id": "120252908314400392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-restaurantes-y-alimentos-ramo",
+  "impresiones": 35,
+  "gasto": 509.0
+ },
+ {
+  "id": "120252908341130392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-restaurantes-y-alimentos-natura-foods",
+  "impresiones": 2,
+  "gasto": 9.0
+ },
+ {
+  "id": "120252908345240392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-restaurantes-y-alimentos-postobon",
+  "impresiones": 19,
+  "gasto": 412.0
+ },
+ {
+  "id": "120252908326000392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-restaurantes-y-alimentos-penelope-martini",
+  "impresiones": 27,
+  "gasto": 524.0
+ },
+ {
+  "id": "120252908324550392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-restaurantes-y-alimentos-martin-birrieria",
+  "impresiones": 14,
+  "gasto": 101.0
+ },
+ {
+  "id": "120252908338070392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-restaurantes-y-alimentos-gios-pizza",
+  "impresiones": 5,
+  "gasto": 22.0
+ },
+ {
+  "id": "120252908322300392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-restaurantes-y-alimentos-el-corral-gourmet",
+  "impresiones": 26,
+  "gasto": 349.0
+ },
+ {
+  "id": "120252908343710392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-restaurantes-y-alimentos-el-gringo-american-kitchen",
+  "impresiones": 15,
+  "gasto": 113.0
+ },
+ {
+  "id": "120252908386180392",
+  "campana": "C1",
+  "conjunto": "lookalike-solicitantes",
+  "nombre": "c1-lookalike-smart-fit",
+  "impresiones": 25,
+  "gasto": 355.0
+ },
+ {
+  "id": "120252908320260392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-restaurantes-y-alimentos-citadino-gastro-bar",
+  "impresiones": 12,
+  "gasto": 336.0
+ },
+ {
+  "id": "120252908352700392",
+  "campana": "C1",
+  "conjunto": "lookalike-solicitantes",
+  "nombre": "c1-lookalike-h-y-m",
+  "impresiones": 20,
+  "gasto": 260.0
+ },
+ {
+  "id": "120252908349210392",
+  "campana": "C1",
+  "conjunto": "lookalike-solicitantes",
+  "nombre": "c1-lookalike-tennis",
+  "impresiones": 3,
+  "gasto": 65.0
+ },
+ {
+  "id": "120252908346750392",
+  "campana": "C1",
+  "conjunto": "lookalike-solicitantes",
+  "nombre": "c1-lookalike-postobon",
+  "impresiones": 22,
+  "gasto": 162.0
+ },
+ {
+  "id": "120252908312160392",
+  "campana": "C1",
+  "conjunto": "lookalike-solicitantes",
+  "nombre": "c1-lookalike-el-corral",
+  "impresiones": 26,
+  "gasto": 283.0
+ },
+ {
+  "id": "120252908306770392",
+  "campana": "C1",
+  "conjunto": "sectores-alto-volumen",
+  "nombre": "c1-restaurantes-y-alimentos-el-corral",
+  "impresiones": 29,
+  "gasto": 277.0
+ },
+ {
+  "id": "120252908429120392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-industria-y-automotriz-plastypetco",
+  "impresiones": 10,
+  "gasto": 61.0
+ },
+ {
+  "id": "120252908418110392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-industria-y-automotriz-ladrillera-el-ajizal",
+  "impresiones": 5,
+  "gasto": 16.0
+ },
+ {
+  "id": "120252908412830392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-industria-y-automotriz-autopacifico-chevrolet",
+  "impresiones": 0,
+  "gasto": 0.0
+ },
+ {
+  "id": "120252908372880392",
+  "campana": "C1",
+  "conjunto": "lookalike-solicitantes",
+  "nombre": "c1-lookalike-davivienda",
+  "impresiones": 65,
+  "gasto": 1019.0
+ },
+ {
+  "id": "120252908423350392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-industria-y-automotriz-aritex",
+  "impresiones": 9,
+  "gasto": 101.0
+ },
+ {
+  "id": "120252908421510392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-industria-y-automotriz-altipal",
+  "impresiones": 12,
+  "gasto": 112.0
+ },
+ {
+  "id": "120252908416730392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-industria-y-automotriz-almotores-kia",
+  "impresiones": 13,
+  "gasto": 134.0
+ },
+ {
+  "id": "120252908426330392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-industria-y-automotriz-atsa",
+  "impresiones": 21,
+  "gasto": 236.0
+ },
+ {
+  "id": "120252908368960392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-financiero-y-seguros-mundo-mujer",
+  "impresiones": 35,
+  "gasto": 557.0
+ },
+ {
+  "id": "120252908365960392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-financiero-y-seguros-coomeva",
+  "impresiones": 48,
+  "gasto": 662.0
+ },
+ {
+  "id": "120252908397450392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-bpo-y-tecnologia-grupo-cinte",
+  "impresiones": 8,
+  "gasto": 173.0
+ },
+ {
+  "id": "120252908393940392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-bpo-y-tecnologia-siigo",
+  "impresiones": 10,
+  "gasto": 91.0
+ },
+ {
+  "id": "120252908376660392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-financiero-y-seguros-axa-colpatria",
+  "impresiones": 4,
+  "gasto": 22.0
+ },
+ {
+  "id": "120252908374440392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-financiero-y-seguros-cifin",
+  "impresiones": 4,
+  "gasto": 36.0
+ },
+ {
+  "id": "120252908389950392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-bpo-y-tecnologia-groupcos",
+  "impresiones": 13,
+  "gasto": 125.0
+ },
+ {
+  "id": "120252908362960392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-financiero-y-seguros-acertemos",
+  "impresiones": 14,
+  "gasto": 272.0
+ },
+ {
+  "id": "120252908409250392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-bpo-y-tecnologia-iztech",
+  "impresiones": 0,
+  "gasto": 0.0
+ },
+ {
+  "id": "120252908401500392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-bpo-y-tecnologia-ciber-c",
+  "impresiones": 6,
+  "gasto": 84.0
+ },
+ {
+  "id": "120252908406120392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-bpo-y-tecnologia-abai",
+  "impresiones": 44,
+  "gasto": 636.0
+ },
+ {
+  "id": "120252908391310392",
+  "campana": "C1",
+  "conjunto": "sectores-especializados",
+  "nombre": "c1-bpo-y-tecnologia-foundever",
+  "impresiones": 15,
+  "gasto": 242.0
+ }
+]
