@@ -41,11 +41,23 @@ for f in sorted(rows, key=lambda x: -float(x.get("spend", 0))):
           f" {c:>5.0f} conv | CPA {(g/c if c else 0):>8,.0f}")
 print(f"  {'TOTAL':<42} {tg:>10,.0f} COP | {tc:>5.0f} conv | CPA {(tg/tc if tc else 0):,.0f}")
 
-print(f"\n=== META por dia ===")
-d = get(f"{ACT}/insights", level="account", fields="spend,impressions,clicks,actions",
-        time_range=json.dumps({"since": SINCE, "until": UNTIL}),
-        time_increment="1", limit=100)
-for f in d:
-    c, _ = conv(f); g = float(f.get("spend", 0))
-    print(f"  {f['date_start']}  {g:>9,.0f} COP | {int(f.get('clicks',0)):>6,} clics |"
+print("")
+print("=== META por dia ===")
+#
+# OJO: pedir "actions" junto con "spend" y time_increment=1 hace que Meta
+# devuelva el gasto en CERO (comprobado el 21-oct-2026). El gasto y las
+# conversiones se traen en llamadas separadas y se cruzan por fecha.
+gasto = {f["date_start"]: (float(f.get("spend", 0)), int(f.get("clicks", 0)))
+         for f in get(f"{ACT}/insights", level="account",
+                      fields="spend,clicks,impressions",
+                      time_range=json.dumps({"since": SINCE, "until": UNTIL}),
+                      time_increment="1", limit=100)}
+convs = {f["date_start"]: conv(f)[0]
+         for f in get(f"{ACT}/insights", level="account", fields="actions",
+                      time_range=json.dumps({"since": SINCE, "until": UNTIL}),
+                      time_increment="1", limit=100)}
+for fecha in sorted(set(gasto) | set(convs)):
+    g, cl = gasto.get(fecha, (0.0, 0))
+    c = convs.get(fecha, 0)
+    print(f"  {fecha}  {g:>9,.0f} COP | {cl:>6,} clics |"
           f" {c:>4.0f} conv | CPA {(g/c if c else 0):>8,.0f}")
