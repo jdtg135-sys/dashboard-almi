@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ALMI — Cotizador anterior vs. nuevo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#04111F; --bg-1:#071A2E; --bg-2:#0E2A45;
+    --ink:#f4f8fb; --ink-dim:#9fb3c8; --ink-faint:#56697d;
+    --border:rgba(255,255,255,0.08);
+    --glass-bg:rgba(14,42,69,0.45);
+    /* Paleta de series: validada con el script de los seis chequeos contra el
+       fondo #071A2E. El acento de marca #29C7F8 queda fuera de la banda de
+       luminosidad en modo oscuro (L 0.774 contra el tope 0.67), asi que se usa
+       su paso oscuro. CVD ΔE 23.8, normal ΔE 30.4. */
+    --serie-anterior:#D95926;
+    --serie-nuevo:#1A9AD4;
+    --good:#10b981; --bad:#ef4444; --warn:#f59e0b;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0; background:var(--bg-0); color:var(--ink);
+    font-family:'Poppins',system-ui,sans-serif; font-size:15px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1040px; margin:0 auto; padding:48px 16px 72px}
+  .eyebrow{
+    font-size:10px; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--ink-faint); margin-bottom:10px;
+  }
+  h1{font-size:clamp(30px,5vw,46px); line-height:1.1; margin:0 0 18px; font-weight:700}
+  h1 em{font-style:normal; color:var(--serie-nuevo)}
+  h2{font-size:clamp(20px,3vw,26px); margin:56px 0 6px; font-weight:600}
+  .sub{color:var(--ink-dim); max-width:66ch; margin:0 0 4px}
+  .nota{color:var(--ink-faint); font-size:13px; max-width:72ch}
+
+  .panel{
+    background:var(--glass-bg); border:1px solid var(--border);
+    border-radius:14px; padding:22px 24px; margin-top:20px;
+  }
+
+  /* --- leyenda: la identidad nunca depende solo del color --- */
+  .leyenda{display:flex; gap:22px; flex-wrap:wrap; align-items:center; margin:18px 0 6px}
+  .leyenda span{display:flex; align-items:center; gap:8px; font-size:13px; color:var(--ink-dim)}
+  .chip{width:11px; height:11px; border-radius:3px; flex:none}
+  .chip.ant{background:var(--serie-anterior)}
+  .chip.nue{background:var(--serie-nuevo)}
+
+  /* --- embudo comparado: barras finas, extremo redondeado, ancladas a la base --- */
+  .paso{display:grid; grid-template-columns:168px 1fr; gap:16px; align-items:center;
+        padding:11px 0; border-bottom:1px solid rgba(255,255,255,0.045)}
+  .paso:last-child{border-bottom:0}
+  .paso-nom{font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-dim)}
+  .barras{display:flex; flex-direction:column; gap:2px}
+  .fila{display:grid; grid-template-columns:1fr 92px; gap:12px; align-items:center}
+  .pista{height:13px; background:rgba(255,255,255,0.045); border-radius:4px; overflow:hidden}
+  .barra{height:100%; border-radius:0 4px 4px 0; transition:width .9s cubic-bezier(.2,.7,.3,1)}
+  .barra.ant{background:var(--serie-anterior)}
+  .barra.nue{background:var(--serie-nuevo)}
+  .cifra{font-size:13px; font-variant-numeric:tabular-nums; text-align:right; color:var(--ink)}
+  .cifra small{color:var(--ink-faint); font-size:11px; margin-left:5px}
+
+  /* --- tarjetas de cambio --- */
+  .tarjetas{display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:14px; margin-top:22px}
+  .tarjeta{background:var(--glass-bg); border:1px solid var(--border); border-radius:12px; padding:18px 20px}
+  .tarjeta .num{font-size:30px; font-weight:700; line-height:1.1; font-variant-numeric:tabular-nums}
+  .tarjeta .num.sube{color:var(--good)} .tarjeta .num.baja{color:var(--bad)}
+  .tarjeta .et{font-size:11px; letter-spacing:.11em; text-transform:uppercase; color:var(--ink-faint); margin-top:7px}
+  .tarjeta .de{font-size:12px; color:var(--ink-dim); margin-top:9px; font-variant-numeric:tabular-nums}
+
+  table{width:100%; border-collapse:collapse; margin-top:16px; font-size:13.5px}
+  th,td{text-align:left; padding:11px 12px; border-bottom:1px solid rgba(255,255,255,0.055)}
+  th{font-size:10px; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-faint); font-weight:500}
+  td.n{text-align:right; font-variant-numeric:tabular-nums}
+  .sube{color:var(--good)} .baja{color:var(--bad)} .igual{color:var(--ink-dim)}
+
+  .aviso{border-left:3px solid var(--warn); padding:4px 0 4px 16px; margin:18px 0; color:var(--ink-dim); font-size:14px}
+  .aviso strong{color:var(--ink)}
+  footer{margin-top:64px; padding-top:22px; border-top:1px solid var(--border);
+         color:var(--ink-faint); font-size:12.5px}
+  @media(max-width:620px){
+    .paso{grid-template-columns:1fr; gap:7px}
+    .fila{grid-template-columns:1fr 84px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="eyebrow">ALMI Financiera · Medición del cotizador</div>
+  <h1>Qué cambió con el<br><em>cotizador nuevo</em></h1>
+  <p class="sub">
+    Comparación sobre los mismos eventos y la misma definición en las dos versiones:
+    usuarios únicos, solo tráfico del cotizador. El cotizador anterior se mide del
+    1 al 15 de septiembre, su mejor quincena del año. El nuevo, del 15 al 21 de octubre,
+    su última semana completa.
+  </p>
+
+  <h2>Lo que mejoró</h2>
+  <p class="sub">Cuatro indicadores se movieron a favor, y tres de ellos son del recorrido inicial.</p>
+
+  <div class="tarjetas">
+    <div class="tarjeta">
+      <div class="num sube">+11,6%</div>
+      <div class="et">Piden su cotización</div>
+      <div class="de">72,4% → 80,8% de quienes entran</div>
+    </div>
+    <div class="tarjeta">
+      <div class="num sube">+17,6%</div>
+      <div class="et">Aceptan la preaprobación</div>
+      <div class="de">51,8% → 60,9% de quienes entran</div>
+    </div>
+    <div class="tarjeta">
+      <div class="num sube">−68,4%</div>
+      <div class="et">Errores del sistema</div>
+      <div class="de">15,8% → 5,0% de quienes entran</div>
+    </div>
+    <div class="tarjeta">
+      <div class="num sube">−20,7%</div>
+      <div class="et">Avisos de dato repetido</div>
+      <div class="de">16,4% → 13,0% de quienes entran</div>
+    </div>
+  </div>
+
+  <h2>El recorrido, paso por paso</h2>
+  <p class="sub">
+    Solo los pasos que existen con el mismo nombre y el mismo significado en las dos
+    versiones. Cada barra es el porcentaje de quienes entran al cotizador que llega a
+    ese paso.
+  </p>
+
+  <div class="leyenda">
+    <span><i class="chip ant"></i>Cotizador anterior · 1 al 15 de septiembre</span>
+    <span><i class="chip nue"></i>Cotizador nuevo · 15 al 21 de octubre</span>
+  </div>
+
+  <div class="panel" id="embudo">
+    <!-- las barras se dibujan desde DATOS, con etiqueta directa en cada una -->
+  </div>
+
+  <h2>Lo que todavía no mejoró</h2>
+  <p class="sub">
+    Un solo punto del recorrido explica la diferencia, y está después de la preaprobación.
+  </p>
+
+  <div class="tarjetas">
+    <div class="tarjeta">
+      <div class="num baja">−31,3%</div>
+      <div class="et">Continúan tras la preaprobación</div>
+      <div class="de">87,0% → 59,8% de los preaprobados</div>
+    </div>
+    <div class="tarjeta">
+      <div class="num baja">−19,1%</div>
+      <div class="et">Conversión de punta a punta</div>
+      <div class="de">45,0% → 36,4% de quienes entran</div>
+    </div>
+  </div>
+
+  <div class="aviso">
+    <strong>Por qué ocurre.</strong> En el cotizador anterior la validación de dato
+    repetido se hacía al principio del proceso. En el nuevo ocurre en la pantalla de
+    contacto, después de que la persona ya avanzó cuatro pasos. No se bloquea a más
+    gente —de hecho hay 20,7% menos avisos—, se bloquea más tarde, y quien se va ya
+    había recorrido casi todo el camino.
+  </div>
+
+  <h2>Resumen</h2>
+  <table>
+    <thead>
+      <tr><th>Indicador</th><th class="n">Anterior</th><th class="n">Nuevo</th><th class="n">Cambio</th></tr>
+    </thead>
+    <tbody id="tabla"></tbody>
+  </table>
+  <p class="nota" style="margin-top:14px">
+    Esta tabla es la misma información del gráfico, en texto, para quien necesite el
+    dato exacto o no distinga los colores.
+  </p>
+
+  <h2>Pasos nuevos que antes no existían</h2>
+  <p class="sub">
+    El cotizador nuevo agrega verificación por código y separa la captura de datos en
+    dos momentos. Son pasos que el anterior no tenía, así que no se comparan: se miden
+    por su propio costo.
+  </p>
+  <table>
+    <thead><tr><th>Paso</th><th class="n">Personas</th><th class="n">Pierde</th></tr></thead>
+    <tbody id="nuevos"></tbody>
+  </table>
+
+  <footer>
+    Fuente: Google Analytics 4, propiedades 522022877 (cotizador anterior) y 554405139
+    (cotizador nuevo). Usuarios únicos, host cotizador.almifinanciera.com.
+    Los datos del cotizador anterior terminan el 30 de septiembre de 2026 y no se migran:
+    GA4 no permite mover datos entre propiedades.
+    <span id="generado"></span>
+  </footer>
+</div>
+
+<script>
+/* Medido con la API de datos de GA4. Cada paso usa el MISMO evento en las dos
+   versiones; el paso final es `purchase` en el anterior y `loan_request_created`
+   en el nuevo, que son el mismo hecho con distinto nombre. */
+var DATOS = {
+  base: { anterior: 7481, nuevo: 2929 },
+  pasos: [
+    { nombre: "Entra al cotizador",     anterior: 7481, nuevo: 2929 },
+    { nombre: "Pide su cotización",     anterior: 5413, nuevo: 2367 },
+    { nombre: "Acepta la preaprobación",anterior: 3872, nuevo: 1783 },
+    { nombre: "Solicitud creada",       anterior: 3370, nuevo: 1066 }
+  ],
+  resumen: [
+    { et: "Piden su cotización",            a: 72.4, n: 80.8, u: "%", mejorSube: true },
+    { et: "Aceptan la preaprobación",       a: 51.8, n: 60.9, u: "%", mejorSube: true },
+    { et: "Continúan tras la preaprobación",a: 87.0, n: 59.8, u: "%", mejorSube: true },
+    { et: "Conversión de punta a punta",    a: 45.0, n: 36.4, u: "%", mejorSube: true },
+    { et: "Avisos de dato repetido",        a: 16.4, n: 13.0, u: "%", mejorSube: false },
+    { et: "Errores del sistema",            a: 15.8, n: 5.0,  u: "%", mejorSube: false }
+  ],
+  nuevos: [
+    { et: "Pide el código de verificación", v: 1309, pierde: "26,6% de los preaprobados" },
+    { et: "Verifica el código",             v: 1245, pierde: "4,9%" },
+    { et: "Envía sus datos personales",     v: 1245, pierde: "0,0%" },
+    { et: "Envía sus datos bancarios",      v: 1123, pierde: "9,8%" }
+  ]
+};
+
+function pct(v, base){ return v / base * 100; }
+function fmt(n, d){ return n.toLocaleString('es-CO', {minimumFractionDigits:d||0, maximumFractionDigits:d||0}); }
+
+(function dibujar(){
+  var cont = document.getElementById('embudo'), html = '';
+  DATOS.pasos.forEach(function(p){
+    var pa = pct(p.anterior, DATOS.base.anterior), pn = pct(p.nuevo, DATOS.base.nuevo);
+    html += '<div class="paso">'
+      + '<div class="paso-nom">' + p.nombre + '</div>'
+      + '<div class="barras">'
+      +   '<div class="fila"><div class="pista"><div class="barra ant" style="width:0"'
+      +     ' data-w="' + pa.toFixed(1) + '"></div></div>'
+      +     '<div class="cifra">' + pa.toFixed(1) + '%<small>' + fmt(p.anterior) + '</small></div></div>'
+      +   '<div class="fila"><div class="pista"><div class="barra nue" style="width:0"'
+      +     ' data-w="' + pn.toFixed(1) + '"></div></div>'
+      +     '<div class="cifra">' + pn.toFixed(1) + '%<small>' + fmt(p.nuevo) + '</small></div></div>'
+      + '</div></div>';
+  });
+  cont.innerHTML = html;
+  // animar al entrar en pantalla
+  requestAnimationFrame(function(){
+    cont.querySelectorAll('.barra').forEach(function(b){ b.style.width = b.dataset.w + '%'; });
+  });
+
+  var t = '';
+  DATOS.resumen.forEach(function(r){
+    var dif = r.n - r.a, rel = r.a ? (dif / r.a * 100) : 0;
+    var bueno = r.mejorSube ? dif > 0 : dif < 0;
+    var clase = Math.abs(rel) < 1 ? 'igual' : (bueno ? 'sube' : 'baja');
+    t += '<tr><td>' + r.et + '</td>'
+      + '<td class="n">' + fmt(r.a,1) + r.u + '</td>'
+      + '<td class="n">' + fmt(r.n,1) + r.u + '</td>'
+      + '<td class="n ' + clase + '">' + (rel>0?'+':'') + fmt(rel,1) + '%</td></tr>';
+  });
+  document.getElementById('tabla').innerHTML = t;
+
+  var u = '';
+  DATOS.nuevos.forEach(function(x){
+    u += '<tr><td>' + x.et + '</td><td class="n">' + fmt(x.v) + '</td>'
+       + '<td class="n">' + x.pierde + '</td></tr>';
+  });
+  document.getElementById('nuevos').innerHTML = u;
+
+  document.getElementById('generado').textContent =
+    ' · Generado el ' + new Date().toLocaleDateString('es-CO',
+      {day:'numeric', month:'long', year:'numeric'}) + '.';
+})();
+</script>
+</body>
+</html>
