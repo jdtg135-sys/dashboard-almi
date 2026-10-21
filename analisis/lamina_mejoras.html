@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>ALMI — Lo que mejoró con el cotizador nuevo</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#04111F; --bg-1:#071A2E;
+    --ink:#f4f8fb; --ink-dim:#9fb3c8; --ink-faint:#56697d;
+    --border:rgba(255,255,255,0.08);
+    --panel:rgba(14,42,69,0.52);
+    /* paso oscuro del acento de marca: validado contra el fondo #071A2E */
+    --acento:#1A9AD4;
+    --good:#10b981;
+  }
+  *{box-sizing:border-box; margin:0; padding:0}
+  body{
+    width:1200px; background:var(--bg-0); color:var(--ink);
+    font-family:'Poppins',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(900px 500px at 88% -8%, rgba(26,154,212,0.16), transparent 62%),
+      radial-gradient(700px 420px at -6% 104%, rgba(26,154,212,0.09), transparent 60%);
+  }
+  .hoja{padding:56px 60px 48px}
+  .marca{
+    display:flex; align-items:baseline; justify-content:space-between;
+    border-bottom:1px solid var(--border); padding-bottom:18px; margin-bottom:34px;
+  }
+  .marca .n{font-size:19px; font-weight:600; letter-spacing:.01em}
+  .marca .n span{color:var(--acento)}
+  .marca .f{font-size:12px; color:var(--ink-faint); letter-spacing:.1em; text-transform:uppercase}
+
+  h1{font-size:46px; line-height:1.08; font-weight:700; margin-bottom:14px}
+  h1 em{font-style:normal; color:var(--acento)}
+  .bajada{font-size:16px; color:var(--ink-dim); max-width:74ch; line-height:1.6; margin-bottom:38px}
+
+  .rejilla{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+  .tarjeta{
+    background:var(--panel); border:1px solid var(--border);
+    border-radius:16px; padding:24px 24px 22px; position:relative; overflow:hidden;
+  }
+  .tarjeta::after{
+    content:''; position:absolute; left:0; top:0; width:3px; height:100%;
+    background:var(--acento); opacity:.55;
+  }
+  .tarjeta .delta{
+    font-size:15px; font-weight:600; color:var(--good);
+    letter-spacing:.02em; margin-bottom:8px;
+  }
+  .tarjeta .gran{
+    font-size:40px; font-weight:700; line-height:1; font-variant-numeric:tabular-nums;
+    margin-bottom:4px;
+  }
+  .tarjeta .et{
+    font-size:12.5px; letter-spacing:.09em; text-transform:uppercase;
+    color:var(--ink-faint); margin:10px 0 12px; line-height:1.5;
+  }
+  .tarjeta .de{font-size:14px; color:var(--ink-dim); line-height:1.55}
+  .tarjeta .de b{color:var(--ink); font-weight:600}
+
+  .ancha{grid-column:span 3; display:grid; grid-template-columns:260px 1fr; gap:34px; align-items:center}
+  .ancha .gran{font-size:46px}
+
+  /* barras de la tendencia semanal */
+  .tendencia{display:flex; gap:12px; align-items:flex-end; height:112px}
+  .sem{flex:1; display:flex; flex-direction:column; justify-content:flex-end; gap:9px}
+  .sem .pista{background:rgba(255,255,255,0.05); border-radius:5px; overflow:hidden; display:flex; align-items:flex-end; height:84px}
+  .sem .barra{width:100%; background:var(--acento); border-radius:5px 5px 0 0}
+  .sem.ult .barra{background:var(--good)}
+  .sem .val{font-size:15px; font-weight:600; font-variant-numeric:tabular-nums; text-align:center}
+  .sem .nom{font-size:11px; color:var(--ink-faint); text-align:center; letter-spacing:.06em; text-transform:uppercase}
+
+  .pie{
+    margin-top:34px; padding-top:20px; border-top:1px solid var(--border);
+    font-size:12px; color:var(--ink-faint); line-height:1.7;
+  }
+</style>
+</head>
+<body>
+<div class="hoja">
+
+  <div class="marca">
+    <div class="n">ALMI <span>Financiera</span> · Cotizador digital</div>
+    <div class="f" id="fecha">Octubre 2026</div>
+  </div>
+
+  <h1>Lo que mejoró con el<br><em>cotizador nuevo</em></h1>
+  <p class="bajada">
+    Comparación sobre los mismos eventos y la misma definición en las dos versiones:
+    usuarios únicos, solo tráfico del cotizador. El cotizador anterior se mide en su
+    mejor quincena del año.
+  </p>
+
+  <div class="rejilla">
+
+    <div class="tarjeta">
+      <div class="delta">↑ 11,6%</div>
+      <div class="gran">80,8%</div>
+      <div class="et">Piden su cotización</div>
+      <div class="de">Antes 72,4%. Son <b>unas 790 personas más</b> que recibieron su cotización en octubre.</div>
+    </div>
+
+    <div class="tarjeta">
+      <div class="delta">↑ 17,6%</div>
+      <div class="gran">60,9%</div>
+      <div class="et">Aceptan la preaprobación</div>
+      <div class="de">Antes 51,8%. <b>Unas 850 personas más</b> puestas frente a la oferta de crédito.</div>
+    </div>
+
+    <div class="tarjeta">
+      <div class="delta">↓ 69%</div>
+      <div class="gran">4,9%</div>
+      <div class="et">Personas que chocan con un error</div>
+      <div class="de">Antes 15,8%, una de cada seis. <b>Unas 1.020 personas</b> dejaron de toparse con una falla.</div>
+    </div>
+
+    <div class="tarjeta">
+      <div class="delta">↓ 21%</div>
+      <div class="gran">13,0%</div>
+      <div class="et">Avisos de dato ya registrado</div>
+      <div class="de">Antes 16,4% de quienes entran. Se bloquea a menos gente que antes.</div>
+    </div>
+
+    <div class="tarjeta">
+      <div class="delta">prácticamente sin fricción</div>
+      <div class="gran">0,2%</div>
+      <div class="et">Pérdida en el formulario de datos</div>
+      <div class="de">Tres personas de cada mil. Mover la captación más adelante en el proceso funcionó.</div>
+    </div>
+
+    <div class="tarjeta">
+      <div class="delta">capacidad nueva</div>
+      <div class="gran">4,9%</div>
+      <div class="et">Costo de la verificación por código</div>
+      <div class="de">Seguridad que el cotizador anterior <b>no tenía</b>, a un costo mínimo.</div>
+    </div>
+
+    <div class="tarjeta ancha">
+      <div>
+        <div class="delta">↑ 18,6% frente a la semana anterior</div>
+        <div class="gran">36,4%</div>
+        <div class="et" style="margin-bottom:0">Conversión de la última semana<br>Es la mejor desde el lanzamiento</div>
+      </div>
+      <div class="tendencia">
+        <div class="sem"><div class="val">32,2%</div><div class="pista"><div class="barra" style="height:88.5%"></div></div><div class="nom">2 al 8 oct</div></div>
+        <div class="sem"><div class="val">30,7%</div><div class="pista"><div class="barra" style="height:84.3%"></div></div><div class="nom">9 al 14 oct</div></div>
+        <div class="sem ult"><div class="val">36,4%</div><div class="pista"><div class="barra" style="height:100%"></div></div><div class="nom">15 al 21 oct</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="pie">
+    Fuente: Google Analytics 4, propiedades 522022877 y 554405139. Usuarios únicos,
+    host cotizador.almifinanciera.com. El cotizador anterior se mide del 1 al 15 de
+    septiembre de 2026, su mejor quincena; el nuevo, del 15 al 21 de octubre de 2026.
+    <br>
+    Dos capacidades nuevas: el sitio responde en 85 milisegundos y carga completo en un
+    segundo; y ya se puede medir el monto solicitado, 11.560 millones de pesos en octubre
+    con ticket promedio de 3.396.231.
+  </div>
+
+</div>
+</body>
+</html>
