@@ -82,6 +82,45 @@ def fetch_insights(account_id, token, since, until):
     }
 
 
+def fetch_valor_conversion(account_id, token, since, until):
+    """Cuantas compras reporta Meta y cuanto valor les asigna.
+
+    Meta usa el valor de la conversion para decidir a quien mostrarle el
+    anuncio. Si siempre llega en cero, optimiza a ciegas. Entre el 30-sep y
+    el 24-oct-2026 llegaron 2.674 compras con un valor promedio de 19.055,
+    cuando el monto real promedio es de unos 3.160.000: el pixel estaba
+    mandando value en cero porque GTM no conserva los montos entre eventos.
+    Esto quedo aqui para que no vuelva a pasar un mes sin que nadie lo vea.
+    """
+    url = f"{GRAPH_URL}/{account_id}/insights"
+    params = {
+        "fields": "actions,action_values",
+        "time_range": json.dumps({"since": since, "until": until}),
+        "access_token": token,
+    }
+    try:
+        response = requests.get(url, params=params, timeout=60)
+        response.raise_for_status()
+    except Exception:
+        return None
+    rows = response.json().get("data", [])
+    if not rows:
+        return {"compras": 0, "valor": 0, "valor_por_compra": 0}
+    row = rows[0]
+    compras = valor = 0.0
+    for a in row.get("actions", []):
+        if a.get("action_type") == ACCION_CONVERSION:
+            compras = float(a.get("value", 0))
+    for a in row.get("action_values", []):
+        if a.get("action_type") == ACCION_CONVERSION:
+            valor = float(a.get("value", 0))
+    return {
+        "compras": int(compras),
+        "valor": round(valor),
+        "valor_por_compra": round(valor / compras) if compras else 0,
+    }
+
+
 def fetch_campaign_insights(account_id, token, since, until):
     """Devuelve dict {campaign_id: {nombre, gasto, impresiones, clics, ctr, cpc_promedio, resultados, costo_por_resultado}}
     para todas las campanas con actividad en el rango (incluye pausadas/deshabilitadas)."""
@@ -317,6 +356,15 @@ def main():
         print(f"  {md['label']}: inversion=${md['inversion']:,.0f}, impresiones={md['impresiones']}, "
               f"clics={md['clics']}, resultados={md['resultados']}, costo_x_resultado=${md['costo_por_resultado']:,.0f}")
 
+    # --- Valor de conversion que recibe Meta ---
+    valor_conv = fetch_valor_conversion(account_id, token, act_desde, act_hasta)
+    print("\n=== Valor de conversion en Meta (ultimos 7 dias) ===")
+    if valor_conv is None:
+        print("  no se pudo consultar")
+    else:
+        print(f"  {valor_conv['compras']} compras, valor total ${valor_conv['valor']:,.0f}, "
+              f"promedio ${valor_conv['valor_por_compra']:,.0f} por compra")
+
     # --- Serie diaria (alimenta el filtro de fechas del dashboard) ---
     serie_desde = (hoy - datetime.timedelta(days=DIAS_SERIE)).isoformat()
     diario = fetch_daily_series(account_id, token, serie_desde, hoy.isoformat())
@@ -352,6 +400,7 @@ def main():
         "clics_prev": prev["clics"],
         "resultados_prev": prev["resultados"],
         "costo_por_resultado_prev": prev["costo_por_resultado"],
+        "valor_conversion": valor_conv,
         "campanas": campaigns,
         "meses": meses,
         "diario": diario,

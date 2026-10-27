@@ -491,6 +491,54 @@ def fetch_monto_solicitado(client, date_range):
     return monto, n
 
 
+def fetch_valor_conversion(client, date_range):
+    """Cuanto valor viaja PEGADO a la conversion, que es distinto del monto.
+
+    El monto solicitado (arriba) llega bien y siempre llego: viaja como
+    parametro propio en loan_request_submitted. Lo que fallaba es otra cosa:
+    el parametro `value` que la etiqueta de conversion manda a GA4, a Meta y
+    a Google, y que las plataformas usan para decidir a quien mostrarle el
+    anuncio. Ese estuvo en cero desde el 1-oct-2026.
+
+    Devuelve (valor recibido por conversion, numero de conversiones,
+    ticket real promedio). Comparar los dos promedios dice que porcentaje
+    del valor esta llegando. No se puede saber la cobertura exacta por
+    conversion: GA4 no expone esa division. Si el promedio recibido es una
+    fraccion del real, el valor esta llegando solo en parte.
+    """
+    if COTIZADOR == "viejo":
+        return None, None, None
+    try:
+        r = client.run_report(RunReportRequest(
+            property=f"properties/{PROPERTY_ID}",
+            dimensions=[Dimension(name="eventName")],
+            metrics=[Metric(name="eventCount"), Metric(name="eventValue")],
+            date_ranges=[date_range],
+            dimension_filter=FilterExpression(filter=Filter(
+                field_name="eventName",
+                in_list_filter=Filter.InListFilter(
+                    values=["loan_request_created", "loan_request_submitted"]))),
+        ))
+    except Exception:
+        return None, None, None
+
+    valor = n_conv = 0.0
+    monto_real = n_env = 0.0
+    for row in r.rows:
+        ev = row.dimension_values[0].value
+        n = float(row.metric_values[0].value)
+        v = float(row.metric_values[1].value)
+        if ev == "loan_request_created":
+            n_conv, valor = n, v
+        elif ev == "loan_request_submitted":
+            n_env = n
+
+    # El ticket real sale del monto, que nunca estuvo roto.
+    monto_real, n_monto = fetch_monto_solicitado(client, date_range)
+    ticket = (monto_real / n_monto) if (monto_real and n_monto) else None
+    return (valor, int(n_conv), ticket)
+
+
 def fetch_serie_usuarios_diaria(client, date_range, event_names):
     """activeUsers por (fecha, evento) para los pasos del embudo.
 
@@ -1051,6 +1099,50 @@ def main():
     html = re.sub(r'<div id="valorAviso"[^>]*>[^<]*</div>',
                   lambda _: f'<div id="valorAviso" class="{clase}" '
                             f'style="margin-top:14px">{aviso}</div>',
+                  html, count=1)
+
+    # --- Valor que llega a las plataformas ---
+    # Esto NO es el monto solicitado de arriba. Es el parametro `value` que
+    # viaja pegado a la conversion y que Meta y Google usan para optimizar.
+    valor_ga4, n_conv, ticket_real = fetch_valor_conversion(client, ACCUM_DATE_RANGE)
+    _ads = {}
+    if os.path.exists(ADS_DATA_FILE):
+        with open(ADS_DATA_FILE, "r", encoding="utf-8") as f:
+            _ads = json.load(f)
+    meta_vc = (_ads.get("meta_ads") or {}).get("valor_conversion") or {}
+    meta_por_compra = meta_vc.get("valor_por_compra")
+
+    vc_ga4_txt = vc_real_txt = vc_cob_txt = vc_meta_txt = "—"
+    vc_aviso = ""
+    if valor_ga4 is not None:
+        por_conv = (valor_ga4 / n_conv) if n_conv else 0
+        vc_ga4_txt = fmt_money(por_conv) if por_conv else "$0 COP"
+        vc_real_txt = fmt_money(ticket_real) if ticket_real else "sin base"
+        if meta_por_compra is not None:
+            vc_meta_txt = fmt_money(meta_por_compra)
+        if ticket_real:
+            cob = por_conv / ticket_real * 100
+            vc_cob_txt = f"{cob:.0f}%"
+            if cob < 80:
+                vc_aviso = (
+                    "El valor no esta llegando completo a las plataformas. Meta y Google "
+                    "usan este dato para decidir a quien mostrarle el anuncio: si llega "
+                    "en cero, optimizan a ciegas. El monto solicitado del bloque de "
+                    "arriba si llega bien; lo que falla es el valor pegado a la conversion."
+                )
+    print("")
+    print(f"Valor de conversion: GA4 {vc_ga4_txt} por conversion, Meta {vc_meta_txt} "
+          f"por compra, real {vc_real_txt} (cobertura {vc_cob_txt})")
+
+    for ident, txt in (("vcCobertura", vc_cob_txt), ("vcGa4", vc_ga4_txt),
+                       ("vcMeta", vc_meta_txt), ("vcReal", vc_real_txt)):
+        html = re.sub(r'(<div class="fsumm-num" id="' + ident + r'">)[^<]*(</div>)',
+                      lambda _, i=ident, t=txt: f'<div class="fsumm-num" id="{i}">{t}</div>',
+                      html, count=1)
+    clase_vc = 'dfilter-warn' if vc_aviso else 'dfilter-warn oculto'
+    html = re.sub(r'<div id="vcAviso"[^>]*>[^<]*</div>',
+                  lambda _: f'<div id="vcAviso" class="{clase_vc}" '
+                            f'style="margin-top:14px">{vc_aviso}</div>',
                   html, count=1)
 
     # --- Insights dinamicos ---

@@ -2,145 +2,150 @@
   "_instrucciones": "Actualiza estos numeros manualmente cada semana copiandolos de Meta Ads Manager y Google Ads. Luego ejecuta ejecutar_actualizacion.bat",
   "periodo": "7 dias completos",
   "meta_ads": {
-    "inversion": 2147409,
-    "impresiones": 248000,
-    "clics": 11849,
-    "resultados": 801,
-    "costo_por_resultado": 2681,
-    "inversion_prev": 2052176,
-    "impresiones_prev": 258691,
-    "clics_prev": 11885,
-    "resultados_prev": 721,
-    "costo_por_resultado_prev": 2846,
+    "inversion": 1974147,
+    "impresiones": 242529,
+    "clics": 11297,
+    "resultados": 765,
+    "costo_por_resultado": 2581,
+    "inversion_prev": 2173414,
+    "impresiones_prev": 258295,
+    "clics_prev": 12006,
+    "resultados_prev": 795,
+    "costo_por_resultado_prev": 2734,
+    "valor_conversion": {
+      "compras": 765,
+      "valor": 1850958,
+      "valor_por_compra": 2420
+    },
     "campanas": [
       {
         "nombre": "C4 - Retargeting caliente - Oct2026",
         "estado": "Active",
         "presupuesto_dia": 95000,
-        "impresiones": 61556,
-        "clics": 3278,
-        "ctr": 5.33,
-        "cpc_promedio": 209.75,
-        "gasto": 687561,
-        "resultados": 283,
-        "costo_por_resultado": 2430,
+        "impresiones": 65653,
+        "clics": 3092,
+        "ctr": 4.71,
+        "cpc_promedio": 208.6,
+        "gasto": 644982,
+        "resultados": 237,
+        "costo_por_resultado": 2721,
         "prev": {
           "nombre": "C4 - Retargeting caliente - Oct2026",
-          "gasto": 660837,
-          "impresiones": 70834,
-          "clics": 3411,
-          "ctr": 4.82,
-          "cpc_promedio": 193.74,
-          "resultados": 255,
-          "costo_por_resultado": 2592
+          "gasto": 675214,
+          "impresiones": 62223,
+          "clics": 3168,
+          "ctr": 5.09,
+          "cpc_promedio": 213.14,
+          "resultados": 272,
+          "costo_por_resultado": 2482
         }
       },
       {
         "nombre": "C2 - Empleados sector privado - Oct2026",
         "estado": "Active",
         "presupuesto_dia": 95000,
-        "impresiones": 81081,
-        "clics": 3363,
-        "ctr": 4.15,
-        "cpc_promedio": 200.65,
-        "gasto": 674773,
-        "resultados": 261,
-        "costo_por_resultado": 2585,
+        "impresiones": 76988,
+        "clics": 3391,
+        "ctr": 4.4,
+        "cpc_promedio": 185.5,
+        "gasto": 629044,
+        "resultados": 287,
+        "costo_por_resultado": 2192,
         "prev": {
           "nombre": "C2 - Empleados sector privado - Oct2026",
-          "gasto": 669473,
-          "impresiones": 91198,
-          "clics": 3884,
-          "ctr": 4.26,
-          "cpc_promedio": 172.37,
-          "resultados": 271,
-          "costo_por_resultado": 2470
+          "gasto": 695097,
+          "impresiones": 86478,
+          "clics": 3464,
+          "ctr": 4.01,
+          "cpc_promedio": 200.66,
+          "resultados": 257,
+          "costo_por_resultado": 2705
         }
       },
       {
         "nombre": "C1 - Convenio por sectores - Oct2026",
         "estado": "Active",
-        "presupuesto_dia": 69000,
-        "impresiones": 65029,
-        "clics": 2898,
-        "ctr": 4.46,
-        "cpc_promedio": 168.8,
-        "gasto": 489178,
-        "resultados": 198,
-        "costo_por_resultado": 2471,
+        "presupuesto_dia": 89000,
+        "impresiones": 79745,
+        "clics": 3659,
+        "ctr": 4.59,
+        "cpc_promedio": 146.95,
+        "gasto": 537689,
+        "resultados": 221,
+        "costo_por_resultado": 2433,
         "prev": {
           "nombre": "C1 - Convenio por sectores - Oct2026",
-          "gasto": 433794,
-          "impresiones": 59820,
-          "clics": 2568,
-          "ctr": 4.29,
-          "cpc_promedio": 168.92,
-          "resultados": 149,
-          "costo_por_resultado": 2911
+          "gasto": 496056,
+          "impresiones": 67091,
+          "clics": 2953,
+          "ctr": 4.4,
+          "cpc_promedio": 167.98,
+          "resultados": 199,
+          "costo_por_resultado": 2493
         }
       },
       {
         "nombre": "C3 - Reportados - Oct2026",
-        "estado": "Active",
+        "estado": "Paused",
         "presupuesto_dia": 23000,
-        "impresiones": 13976,
-        "clics": 605,
-        "ctr": 4.33,
-        "cpc_promedio": 255.86,
-        "gasto": 154797,
-        "resultados": 59,
-        "costo_por_resultado": 2624,
+        "impresiones": 8564,
+        "clics": 255,
+        "ctr": 2.98,
+        "cpc_promedio": 287.67,
+        "gasto": 73355,
+        "resultados": 20,
+        "costo_por_resultado": 3668,
         "prev": {
           "nombre": "C3 - Reportados - Oct2026",
-          "gasto": 150824,
-          "impresiones": 14003,
-          "clics": 565,
-          "ctr": 4.03,
-          "cpc_promedio": 266.95,
-          "resultados": 46,
-          "costo_por_resultado": 3279
-        }
-      },
-      {
-        "nombre": "Webinar Navidad sin deudas 22/10/2026",
-        "estado": "Active",
-        "presupuesto_dia": 10000,
-        "impresiones": 16282,
-        "clics": 962,
-        "ctr": 5.91,
-        "cpc_promedio": 73.78,
-        "gasto": 70978,
-        "resultados": 0,
-        "costo_por_resultado": 0,
-        "prev": {
-          "nombre": "Webinar Navidad sin deudas 22/10/2026",
-          "gasto": 69003,
-          "impresiones": 15947,
-          "clics": 845,
-          "ctr": 5.3,
-          "cpc_promedio": 81.66,
-          "resultados": 0,
-          "costo_por_resultado": 0
+          "gasto": 163775,
+          "impresiones": 14847,
+          "clics": 650,
+          "ctr": 4.38,
+          "cpc_promedio": 251.96,
+          "resultados": 67,
+          "costo_por_resultado": 2444
         }
       },
       {
         "nombre": "Campaña de formulario Copia 06/05/2026",
         "estado": "Active",
         "presupuesto_dia": 10000,
-        "impresiones": 10076,
-        "clics": 743,
-        "ctr": 7.37,
-        "cpc_promedio": 94.38,
-        "gasto": 70122,
+        "impresiones": 8722,
+        "clics": 665,
+        "ctr": 7.62,
+        "cpc_promedio": 103.54,
+        "gasto": 68851,
         "resultados": 0,
         "costo_por_resultado": 0,
         "prev": {
           "nombre": "Campaña de formulario Copia 06/05/2026",
-          "gasto": 68245,
-          "impresiones": 6889,
-          "clics": 612,
-          "ctr": 8.88,
-          "cpc_promedio": 111.51,
+          "gasto": 70532,
+          "impresiones": 9727,
+          "clics": 760,
+          "ctr": 7.81,
+          "cpc_promedio": 92.81,
+          "resultados": 0,
+          "costo_por_resultado": 0
+        }
+      },
+      {
+        "nombre": "Webinar Navidad sin deudas 22/10/2026",
+        "estado": "Active",
+        "presupuesto_dia": 10000,
+        "impresiones": 2857,
+        "clics": 235,
+        "ctr": 8.23,
+        "cpc_promedio": 86.07,
+        "gasto": 20226,
+        "resultados": 0,
+        "costo_por_resultado": 0,
+        "prev": {
+          "nombre": "Webinar Navidad sin deudas 22/10/2026",
+          "gasto": 72740,
+          "impresiones": 17929,
+          "clics": 1011,
+          "ctr": 5.64,
+          "cpc_promedio": 71.95,
           "resultados": 0,
           "costo_por_resultado": 0
         }
@@ -148,11 +153,11 @@
     ],
     "meses": [
       {
-        "inversion": 6560622,
-        "impresiones": 728224,
-        "clics": 34061,
-        "resultados": 2240,
-        "costo_por_resultado": 2929,
+        "inversion": 8149999,
+        "impresiones": 929580,
+        "clics": 43248,
+        "resultados": 2849,
+        "costo_por_resultado": 2861,
         "label": "Oct 2026"
       },
       {
@@ -173,48 +178,6 @@
       }
     ],
     "diario": [
-      {
-        "fecha": "2026-04-24",
-        "inversion": 15247,
-        "impresiones": 1200,
-        "clics": 83,
-        "resultados": 0
-      },
-      {
-        "fecha": "2026-04-25",
-        "inversion": 63096,
-        "impresiones": 5217,
-        "clics": 268,
-        "resultados": 0
-      },
-      {
-        "fecha": "2026-04-26",
-        "inversion": 83713,
-        "impresiones": 7405,
-        "clics": 337,
-        "resultados": 0
-      },
-      {
-        "fecha": "2026-04-27",
-        "inversion": 78076,
-        "impresiones": 8689,
-        "clics": 453,
-        "resultados": 0
-      },
-      {
-        "fecha": "2026-04-28",
-        "inversion": 57918,
-        "impresiones": 8020,
-        "clics": 341,
-        "resultados": 0
-      },
-      {
-        "fecha": "2026-04-29",
-        "inversion": 27647,
-        "impresiones": 3439,
-        "clics": 189,
-        "resultados": 0
-      },
       {
         "fecha": "2026-04-30",
         "inversion": 56146,
@@ -1428,68 +1391,62 @@
       },
       {
         "fecha": "2026-10-20",
-        "inversion": 281220,
-        "impresiones": 30011,
-        "clics": 1616,
+        "inversion": 281560,
+        "impresiones": 30047,
+        "clics": 1619,
         "resultados": 122
       },
       {
         "fecha": "2026-10-21",
-        "inversion": 175018,
-        "impresiones": 19652,
-        "clics": 918,
-        "resultados": 61
+        "inversion": 316898,
+        "impresiones": 36478,
+        "clics": 1766,
+        "resultados": 122
+      },
+      {
+        "fecha": "2026-10-22",
+        "inversion": 259833,
+        "impresiones": 32449,
+        "clics": 1659,
+        "resultados": 104
+      },
+      {
+        "fecha": "2026-10-23",
+        "inversion": 247148,
+        "impresiones": 31196,
+        "clics": 1416,
+        "resultados": 87
+      },
+      {
+        "fecha": "2026-10-24",
+        "inversion": 233732,
+        "impresiones": 29074,
+        "clics": 1241,
+        "resultados": 86
+      },
+      {
+        "fecha": "2026-10-25",
+        "inversion": 279301,
+        "impresiones": 36899,
+        "clics": 1652,
+        "resultados": 124
+      },
+      {
+        "fecha": "2026-10-26",
+        "inversion": 355675,
+        "impresiones": 46386,
+        "clics": 1944,
+        "resultados": 120
+      },
+      {
+        "fecha": "2026-10-27",
+        "inversion": 72987,
+        "impresiones": 8675,
+        "clics": 431,
+        "resultados": 28
       }
     ],
     "diario_campanas": [
-      {
-        "fecha": "2026-04-24",
-        "campana": "Campaña de formulario 19/04/2026",
-        "inversion": 15247,
-        "impresiones": 1200,
-        "clics": 83,
-        "resultados": 0
-      },
-      {
-        "fecha": "2026-04-25",
-        "campana": "Campaña de formulario 19/04/2026",
-        "inversion": 63096,
-        "impresiones": 5217,
-        "clics": 268,
-        "resultados": 0
-      },
-      {
-        "fecha": "2026-04-26",
-        "campana": "Campaña de formulario 19/04/2026",
-        "inversion": 83713,
-        "impresiones": 7405,
-        "clics": 337,
-        "resultados": 0
-      },
-      {
-        "fecha": "2026-04-27",
-        "campana": "Campaña de formulario 19/04/2026",
-        "inversion": 78076,
-        "impresiones": 8689,
-        "clics": 453,
-        "resultados": 0
-      },
-      {
-        "fecha": "2026-04-28",
-        "campana": "Campaña de formulario 19/04/2026",
-        "inversion": 57918,
-        "impresiones": 8020,
-        "clics": 341,
-        "resultados": 0
-      },
-      {
-        "fecha": "2026-04-29",
-        "campana": "Campaña de formulario 19/04/2026",
-        "inversion": 27647,
-        "impresiones": 3439,
-        "clics": 189,
-        "resultados": 0
-      },
       {
         "fecha": "2026-04-30",
         "campana": "Campaña de formulario 19/04/2026",
@@ -8029,188 +7986,428 @@
       {
         "fecha": "2026-10-20",
         "campana": "C1 - Convenio por sectores - Oct2026",
-        "inversion": 62250,
-        "impresiones": 7322,
+        "inversion": 62352,
+        "impresiones": 7327,
         "clics": 355,
         "resultados": 33
       },
       {
         "fecha": "2026-10-20",
         "campana": "C2 - Empleados sector privado - Oct2026",
-        "inversion": 87816,
-        "impresiones": 9882,
+        "inversion": 87843,
+        "impresiones": 9891,
         "clics": 524,
         "resultados": 44
       },
       {
         "fecha": "2026-10-20",
         "campana": "C3 - Reportados - Oct2026",
-        "inversion": 16352,
-        "impresiones": 1549,
+        "inversion": 16353,
+        "impresiones": 1550,
         "clics": 56,
         "resultados": 5
       },
       {
         "fecha": "2026-10-20",
         "campana": "C4 - Retargeting caliente - Oct2026",
-        "inversion": 94553,
-        "impresiones": 8202,
-        "clics": 472,
+        "inversion": 94642,
+        "impresiones": 8210,
+        "clics": 474,
         "resultados": 40
       },
       {
         "fecha": "2026-10-20",
         "campana": "Campaña de formulario Copia 06/05/2026",
-        "inversion": 10362,
-        "impresiones": 1576,
+        "inversion": 10369,
+        "impresiones": 1579,
         "clics": 94,
         "resultados": 0
       },
       {
         "fecha": "2026-10-20",
         "campana": "Webinar Navidad sin deudas 22/10/2026",
-        "inversion": 9887,
-        "impresiones": 1480,
-        "clics": 115,
+        "inversion": 10001,
+        "impresiones": 1490,
+        "clics": 116,
         "resultados": 0
       },
       {
         "fecha": "2026-10-21",
         "campana": "C1 - Convenio por sectores - Oct2026",
-        "inversion": 42431,
-        "impresiones": 5499,
-        "clics": 250,
-        "resultados": 14
+        "inversion": 71430,
+        "impresiones": 9247,
+        "clics": 440,
+        "resultados": 27
       },
       {
         "fecha": "2026-10-21",
         "campana": "C2 - Empleados sector privado - Oct2026",
-        "inversion": 55938,
-        "impresiones": 6394,
-        "clics": 288,
-        "resultados": 24
+        "inversion": 103601,
+        "impresiones": 12388,
+        "clics": 555,
+        "resultados": 48
       },
       {
         "fecha": "2026-10-21",
         "campana": "C3 - Reportados - Oct2026",
-        "inversion": 12901,
-        "impresiones": 1563,
-        "clics": 52,
-        "resultados": 2
+        "inversion": 23628,
+        "impresiones": 2934,
+        "clics": 84,
+        "resultados": 6
       },
       {
         "fecha": "2026-10-21",
         "campana": "C4 - Retargeting caliente - Oct2026",
-        "inversion": 57683,
-        "impresiones": 5321,
-        "clics": 247,
-        "resultados": 21
+        "inversion": 101649,
+        "impresiones": 9692,
+        "clics": 466,
+        "resultados": 41
       },
       {
         "fecha": "2026-10-21",
         "campana": "Campaña de formulario Copia 06/05/2026",
-        "inversion": 3729,
-        "impresiones": 529,
-        "clics": 55,
+        "inversion": 9167,
+        "impresiones": 1263,
+        "clics": 138,
         "resultados": 0
       },
       {
         "fecha": "2026-10-21",
         "campana": "Webinar Navidad sin deudas 22/10/2026",
-        "inversion": 2336,
-        "impresiones": 346,
-        "clics": 26,
+        "inversion": 7423,
+        "impresiones": 954,
+        "clics": 83,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-22",
+        "campana": "C1 - Convenio por sectores - Oct2026",
+        "inversion": 61373,
+        "impresiones": 9073,
+        "clics": 496,
+        "resultados": 28
+      },
+      {
+        "fecha": "2026-10-22",
+        "campana": "C2 - Empleados sector privado - Oct2026",
+        "inversion": 82261,
+        "impresiones": 10775,
+        "clics": 492,
+        "resultados": 38
+      },
+      {
+        "fecha": "2026-10-22",
+        "campana": "C3 - Reportados - Oct2026",
+        "inversion": 23982,
+        "impresiones": 2766,
+        "clics": 73,
+        "resultados": 6
+      },
+      {
+        "fecha": "2026-10-22",
+        "campana": "C4 - Retargeting caliente - Oct2026",
+        "inversion": 80195,
+        "impresiones": 8167,
+        "clics": 470,
+        "resultados": 32
+      },
+      {
+        "fecha": "2026-10-22",
+        "campana": "Campaña de formulario Copia 06/05/2026",
+        "inversion": 9220,
+        "impresiones": 1255,
+        "clics": 92,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-22",
+        "campana": "Webinar Navidad sin deudas 22/10/2026",
+        "inversion": 2802,
+        "impresiones": 413,
+        "clics": 36,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-23",
+        "campana": "C1 - Convenio por sectores - Oct2026",
+        "inversion": 63316,
+        "impresiones": 9715,
+        "clics": 444,
+        "resultados": 22
+      },
+      {
+        "fecha": "2026-10-23",
+        "campana": "C2 - Empleados sector privado - Oct2026",
+        "inversion": 81420,
+        "impresiones": 10441,
+        "clics": 439,
+        "resultados": 37
+      },
+      {
+        "fecha": "2026-10-23",
+        "campana": "C3 - Reportados - Oct2026",
+        "inversion": 9392,
+        "impresiones": 1314,
+        "clics": 42,
+        "resultados": 3
+      },
+      {
+        "fecha": "2026-10-23",
+        "campana": "C4 - Retargeting caliente - Oct2026",
+        "inversion": 84260,
+        "impresiones": 8687,
+        "clics": 412,
+        "resultados": 25
+      },
+      {
+        "fecha": "2026-10-23",
+        "campana": "Campaña de formulario Copia 06/05/2026",
+        "inversion": 8760,
+        "impresiones": 1039,
+        "clics": 79,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-24",
+        "campana": "C1 - Convenio por sectores - Oct2026",
+        "inversion": 83532,
+        "impresiones": 12669,
+        "clics": 540,
+        "resultados": 28
+      },
+      {
+        "fecha": "2026-10-24",
+        "campana": "C2 - Empleados sector privado - Oct2026",
+        "inversion": 64323,
+        "impresiones": 7533,
+        "clics": 315,
+        "resultados": 29
+      },
+      {
+        "fecha": "2026-10-24",
+        "campana": "C4 - Retargeting caliente - Oct2026",
+        "inversion": 76820,
+        "impresiones": 7894,
+        "clics": 315,
+        "resultados": 29
+      },
+      {
+        "fecha": "2026-10-24",
+        "campana": "Campaña de formulario Copia 06/05/2026",
+        "inversion": 9057,
+        "impresiones": 978,
+        "clics": 71,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-25",
+        "campana": "C1 - Convenio por sectores - Oct2026",
+        "inversion": 87736,
+        "impresiones": 14190,
+        "clics": 621,
+        "resultados": 39
+      },
+      {
+        "fecha": "2026-10-25",
+        "campana": "C2 - Empleados sector privado - Oct2026",
+        "inversion": 97758,
+        "impresiones": 12039,
+        "clics": 518,
+        "resultados": 52
+      },
+      {
+        "fecha": "2026-10-25",
+        "campana": "C3 - Reportados - Oct2026",
+        "inversion": 0,
+        "impresiones": 0,
+        "clics": 0,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-25",
+        "campana": "C4 - Retargeting caliente - Oct2026",
+        "inversion": 82128,
+        "impresiones": 9299,
+        "clics": 415,
+        "resultados": 33
+      },
+      {
+        "fecha": "2026-10-25",
+        "campana": "Campaña de formulario Copia 06/05/2026",
+        "inversion": 11679,
+        "impresiones": 1371,
+        "clics": 98,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-26",
+        "campana": "C1 - Convenio por sectores - Oct2026",
+        "inversion": 107950,
+        "impresiones": 17524,
+        "clics": 763,
+        "resultados": 44
+      },
+      {
+        "fecha": "2026-10-26",
+        "campana": "C2 - Empleados sector privado - Oct2026",
+        "inversion": 111838,
+        "impresiones": 13921,
+        "clics": 548,
+        "resultados": 39
+      },
+      {
+        "fecha": "2026-10-26",
+        "campana": "C3 - Reportados - Oct2026",
+        "inversion": 0,
+        "impresiones": 0,
+        "clics": 0,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-26",
+        "campana": "C4 - Retargeting caliente - Oct2026",
+        "inversion": 125288,
+        "impresiones": 13704,
+        "clics": 540,
+        "resultados": 37
+      },
+      {
+        "fecha": "2026-10-26",
+        "campana": "Campaña de formulario Copia 06/05/2026",
+        "inversion": 10599,
+        "impresiones": 1237,
+        "clics": 93,
+        "resultados": 0
+      },
+      {
+        "fecha": "2026-10-27",
+        "campana": "C1 - Convenio por sectores - Oct2026",
+        "inversion": 18563,
+        "impresiones": 2728,
+        "clics": 127,
+        "resultados": 8
+      },
+      {
+        "fecha": "2026-10-27",
+        "campana": "C2 - Empleados sector privado - Oct2026",
+        "inversion": 27257,
+        "impresiones": 3119,
+        "clics": 135,
+        "resultados": 6
+      },
+      {
+        "fecha": "2026-10-27",
+        "campana": "C3 - Reportados - Oct2026",
+        "inversion": 0,
+        "impresiones": 0,
+        "clics": 0,
+        "resultados": 1
+      },
+      {
+        "fecha": "2026-10-27",
+        "campana": "C4 - Retargeting caliente - Oct2026",
+        "inversion": 24632,
+        "impresiones": 2456,
+        "clics": 151,
+        "resultados": 13
+      },
+      {
+        "fecha": "2026-10-27",
+        "campana": "Campaña de formulario Copia 06/05/2026",
+        "inversion": 2535,
+        "impresiones": 372,
+        "clics": 18,
         "resultados": 0
       }
     ]
   },
   "google_ads": {
-    "inversion": 436090,
-    "impresiones": 5406,
-    "clics": 857,
-    "conversiones": 132.6,
-    "costo_por_conversion": 3289.28,
+    "inversion": 432750,
+    "impresiones": 5719,
+    "clics": 853,
+    "conversiones": 141.9,
+    "costo_por_conversion": 3050.55,
     "campanas": [
-      {
-        "nombre": "C6 - Búsqueda - Reportados - Jun2026",
-        "estado": "Enabled",
-        "tipo": "Busqueda",
-        "impresiones": 1624,
-        "clics": 286,
-        "ctr": 17.61,
-        "cpc_promedio": 515.7,
-        "presupuesto_dia": 20000,
-        "gasto": 147492,
-        "conversiones": 42.0,
-        "costo_por_conversion": 3515.47,
-        "prev": {
-          "impresiones": 739,
-          "clics": 127,
-          "ctr": 17.19,
-          "cpc_promedio": 569.77,
-          "gasto": 72360,
-          "conversiones": 19.0,
-          "costo_por_conversion": 3808.44
-        }
-      },
       {
         "nombre": "C5 - Búsqueda - Libranza Nómina - Jun2026",
         "estado": "Enabled",
         "tipo": "Busqueda",
-        "impresiones": 1417,
-        "clics": 277,
-        "ctr": 19.55,
-        "cpc_promedio": 530.3,
+        "impresiones": 2036,
+        "clics": 283,
+        "ctr": 13.9,
+        "cpc_promedio": 524.56,
         "presupuesto_dia": 20000,
-        "gasto": 146893,
-        "conversiones": 45.6,
-        "costo_por_conversion": 3219.62,
+        "gasto": 148451,
+        "conversiones": 46.9,
+        "costo_por_conversion": 3163.57,
         "prev": {
-          "impresiones": 666,
-          "clics": 135,
-          "ctr": 20.27,
-          "cpc_promedio": 524.69,
-          "gasto": 70833,
-          "conversiones": 21.0,
-          "costo_por_conversion": 3376.8
+          "impresiones": 1323,
+          "clics": 256,
+          "ctr": 19.35,
+          "cpc_promedio": 526.33,
+          "gasto": 134740,
+          "conversiones": 43.6,
+          "costo_por_conversion": 3087.36
+        }
+      },
+      {
+        "nombre": "C6 - Búsqueda - Reportados - Jun2026",
+        "estado": "Enabled",
+        "tipo": "Busqueda",
+        "impresiones": 1721,
+        "clics": 282,
+        "ctr": 16.39,
+        "cpc_promedio": 520.49,
+        "presupuesto_dia": 20000,
+        "gasto": 146778,
+        "conversiones": 46.0,
+        "costo_por_conversion": 3193.09,
+        "prev": {
+          "impresiones": 1429,
+          "clics": 257,
+          "ctr": 17.98,
+          "cpc_promedio": 531.21,
+          "gasto": 136520,
+          "conversiones": 41.0,
+          "costo_por_conversion": 3333.42
         }
       },
       {
         "nombre": "C7 - Performance Max - Libranza - Oct2026",
         "estado": "Enabled",
         "tipo": "Performance Max",
-        "impresiones": 2365,
-        "clics": 294,
-        "ctr": 12.43,
-        "cpc_promedio": 481.99,
+        "impresiones": 1962,
+        "clics": 288,
+        "ctr": 14.68,
+        "cpc_promedio": 477.51,
         "presupuesto_dia": 20000,
-        "gasto": 141706,
-        "conversiones": 45.0,
-        "costo_por_conversion": 3149.03,
+        "gasto": 137522,
+        "conversiones": 49.0,
+        "costo_por_conversion": 2808.44,
         "prev": {
-          "impresiones": 6506,
-          "clics": 794,
-          "ctr": 12.2,
-          "cpc_promedio": 157.52,
-          "gasto": 125067,
-          "conversiones": 22.0,
-          "costo_por_conversion": 5684.89
+          "impresiones": 2384,
+          "clics": 300,
+          "ctr": 12.58,
+          "cpc_promedio": 479.47,
+          "gasto": 143841,
+          "conversiones": 39.0,
+          "costo_por_conversion": 3688.24
         }
       }
     ],
-    "inversion_prev": 268260,
-    "impresiones_prev": 7911,
-    "clics_prev": 1056,
-    "conversiones_prev": 62.0,
-    "costo_por_conversion_prev": 4328.44,
+    "inversion_prev": 415102,
+    "impresiones_prev": 5136,
+    "clics_prev": 813,
+    "conversiones_prev": 123.6,
+    "costo_por_conversion_prev": 3358.5,
     "meses": [
       {
         "label": "Oct 2026",
-        "inversion": 858912,
-        "impresiones": 15109,
-        "clics": 2254,
-        "conversiones": 228.6,
-        "costo_por_conversion": 3758.0
+        "inversion": 1215980,
+        "impresiones": 19666,
+        "clics": 2938,
+        "conversiones": 347.5,
+        "costo_por_conversion": 3499.65
       },
       {
         "label": "Sep 2026",
@@ -8218,7 +8415,7 @@
         "impresiones": 25697,
         "clics": 5005,
         "conversiones": 949.4,
-        "costo_por_conversion": 3063.99
+        "costo_por_conversion": 3063.78
       },
       {
         "label": "Ago 2026",
@@ -8226,52 +8423,10 @@
         "impresiones": 14477,
         "clics": 3022,
         "conversiones": 695.1,
-        "costo_por_conversion": 2614.71
+        "costo_por_conversion": 2614.58
       }
     ],
     "diario": [
-      {
-        "fecha": "2026-04-24",
-        "inversion": 14452,
-        "impresiones": 135,
-        "clics": 61,
-        "conversiones": 5.0
-      },
-      {
-        "fecha": "2026-04-25",
-        "inversion": 14365,
-        "impresiones": 185,
-        "clics": 61,
-        "conversiones": 7.0
-      },
-      {
-        "fecha": "2026-04-26",
-        "inversion": 17610,
-        "impresiones": 117,
-        "clics": 33,
-        "conversiones": 9.0
-      },
-      {
-        "fecha": "2026-04-27",
-        "inversion": 14972,
-        "impresiones": 87,
-        "clics": 30,
-        "conversiones": 6.0
-      },
-      {
-        "fecha": "2026-04-28",
-        "inversion": 15027,
-        "impresiones": 101,
-        "clics": 19,
-        "conversiones": 2.0
-      },
-      {
-        "fecha": "2026-04-29",
-        "inversion": 12916,
-        "impresiones": 149,
-        "clics": 25,
-        "conversiones": 0.0
-      },
       {
         "fecha": "2026-04-30",
         "inversion": 12681,
@@ -9257,7 +9412,7 @@
         "inversion": 134895,
         "impresiones": 1197,
         "clics": 232,
-        "conversiones": 2.5
+        "conversiones": 2.6
       },
       {
         "fecha": "2026-09-19",
@@ -9395,15 +9550,15 @@
       {
         "fecha": "2026-10-08",
         "inversion": 41108,
-        "impresiones": 2130,
+        "impresiones": 2129,
         "clics": 214,
         "conversiones": 3.0
       },
       {
         "fecha": "2026-10-09",
-        "inversion": 41631,
-        "impresiones": 2478,
-        "clics": 349,
+        "inversion": 41549,
+        "impresiones": 2451,
+        "clics": 345,
         "conversiones": 9.0
       },
       {
@@ -9453,7 +9608,7 @@
         "inversion": 62410,
         "impresiones": 733,
         "clics": 124,
-        "conversiones": 18.7
+        "conversiones": 20.7
       },
       {
         "fecha": "2026-10-17",
@@ -9481,65 +9636,59 @@
         "inversion": 60299,
         "impresiones": 911,
         "clics": 126,
-        "conversiones": 22.0
+        "conversiones": 25.0
       },
       {
         "fecha": "2026-10-21",
-        "inversion": 34012,
-        "impresiones": 497,
-        "clics": 72,
-        "conversiones": 6.0
+        "inversion": 63554,
+        "impresiones": 879,
+        "clics": 131,
+        "conversiones": 25.0
+      },
+      {
+        "fecha": "2026-10-22",
+        "inversion": 63229,
+        "impresiones": 983,
+        "clics": 132,
+        "conversiones": 22.0
+      },
+      {
+        "fecha": "2026-10-23",
+        "inversion": 64210,
+        "impresiones": 749,
+        "clics": 124,
+        "conversiones": 22.0
+      },
+      {
+        "fecha": "2026-10-24",
+        "inversion": 44187,
+        "impresiones": 594,
+        "clics": 85,
+        "conversiones": 10.0
+      },
+      {
+        "fecha": "2026-10-25",
+        "inversion": 61973,
+        "impresiones": 670,
+        "clics": 106,
+        "conversiones": 21.0
+      },
+      {
+        "fecha": "2026-10-26",
+        "inversion": 75298,
+        "impresiones": 933,
+        "clics": 149,
+        "conversiones": 17.0
+      },
+      {
+        "fecha": "2026-10-27",
+        "inversion": 18712,
+        "impresiones": 274,
+        "clics": 33,
+        "conversiones": 3.0
       }
     ],
     "diario_campanas": [
-      {
-        "fecha": "2026-04-24",
-        "campana": "AAA Tráfico 04/2026 Landing",
-        "inversion": 14452,
-        "impresiones": 135,
-        "clics": 61,
-        "conversiones": 5.0
-      },
-      {
-        "fecha": "2026-04-25",
-        "campana": "AAA Tráfico 04/2026 Landing",
-        "inversion": 14365,
-        "impresiones": 185,
-        "clics": 61,
-        "conversiones": 7.0
-      },
-      {
-        "fecha": "2026-04-26",
-        "campana": "AAA Tráfico 04/2026 Landing",
-        "inversion": 17610,
-        "impresiones": 117,
-        "clics": 33,
-        "conversiones": 9.0
-      },
-      {
-        "fecha": "2026-04-27",
-        "campana": "AAA Tráfico 04/2026 Landing",
-        "inversion": 14972,
-        "impresiones": 87,
-        "clics": 30,
-        "conversiones": 6.0
-      },
-      {
-        "fecha": "2026-04-28",
-        "campana": "AAA Tráfico 04/2026 Landing",
-        "inversion": 15027,
-        "impresiones": 101,
-        "clics": 19,
-        "conversiones": 2.0
-      },
-      {
-        "fecha": "2026-04-29",
-        "campana": "AAA Tráfico 04/2026 Landing",
-        "inversion": 12916,
-        "impresiones": 149,
-        "clics": 25,
-        "conversiones": 0.0
-      },
       {
         "fecha": "2026-04-30",
         "campana": "AAA Tráfico 04/2026 Landing",
@@ -11450,7 +11599,7 @@
         "inversion": 65934,
         "impresiones": 553,
         "clics": 106,
-        "conversiones": 1.5
+        "conversiones": 1.6
       },
       {
         "fecha": "2026-09-19",
@@ -11776,7 +11925,7 @@
         "fecha": "2026-10-08",
         "campana": "C7 - Performance Max - Libranza - Oct2026",
         "inversion": 19794,
-        "impresiones": 1960,
+        "impresiones": 1959,
         "clics": 180,
         "conversiones": 0.0
       },
@@ -11799,9 +11948,9 @@
       {
         "fecha": "2026-10-09",
         "campana": "C7 - Performance Max - Libranza - Oct2026",
-        "inversion": 21335,
-        "impresiones": 2298,
-        "clics": 312,
+        "inversion": 21253,
+        "impresiones": 2271,
+        "clics": 308,
         "conversiones": 1.0
       },
       {
@@ -11954,7 +12103,7 @@
         "inversion": 21413,
         "impresiones": 281,
         "clics": 45,
-        "conversiones": 5.0
+        "conversiones": 6.0
       },
       {
         "fecha": "2026-10-16",
@@ -11970,7 +12119,7 @@
         "inversion": 19742,
         "impresiones": 301,
         "clics": 39,
-        "conversiones": 5.0
+        "conversiones": 6.0
       },
       {
         "fecha": "2026-10-17",
@@ -12058,7 +12207,7 @@
         "inversion": 21626,
         "impresiones": 215,
         "clics": 43,
-        "conversiones": 8.0
+        "conversiones": 10.0
       },
       {
         "fecha": "2026-10-20",
@@ -12066,37 +12215,181 @@
         "inversion": 18741,
         "impresiones": 384,
         "clics": 37,
-        "conversiones": 9.0
+        "conversiones": 10.0
       },
       {
         "fecha": "2026-10-21",
         "campana": "C6 - Búsqueda - Reportados - Jun2026",
-        "inversion": 11282,
-        "impresiones": 135,
-        "clics": 21,
-        "conversiones": 3.0
+        "inversion": 20484,
+        "impresiones": 207,
+        "clics": 37,
+        "conversiones": 11.0
       },
       {
         "fecha": "2026-10-21",
         "campana": "C5 - Búsqueda - Libranza Nómina - Jun2026",
-        "inversion": 13982,
-        "impresiones": 194,
-        "clics": 28,
-        "conversiones": 3.0
+        "inversion": 22524,
+        "impresiones": 353,
+        "clics": 48,
+        "conversiones": 9.0
       },
       {
         "fecha": "2026-10-21",
         "campana": "C7 - Performance Max - Libranza - Oct2026",
-        "inversion": 8747,
-        "impresiones": 168,
+        "inversion": 20546,
+        "impresiones": 319,
+        "clics": 46,
+        "conversiones": 5.0
+      },
+      {
+        "fecha": "2026-10-22",
+        "campana": "C6 - Búsqueda - Reportados - Jun2026",
+        "inversion": 21958,
+        "impresiones": 314,
+        "clics": 43,
+        "conversiones": 6.0
+      },
+      {
+        "fecha": "2026-10-22",
+        "campana": "C5 - Búsqueda - Libranza Nómina - Jun2026",
+        "inversion": 21469,
+        "impresiones": 342,
+        "clics": 44,
+        "conversiones": 4.0
+      },
+      {
+        "fecha": "2026-10-22",
+        "campana": "C7 - Performance Max - Libranza - Oct2026",
+        "inversion": 19802,
+        "impresiones": 327,
+        "clics": 45,
+        "conversiones": 12.0
+      },
+      {
+        "fecha": "2026-10-23",
+        "campana": "C6 - Búsqueda - Reportados - Jun2026",
+        "inversion": 21704,
+        "impresiones": 258,
+        "clics": 38,
+        "conversiones": 5.0
+      },
+      {
+        "fecha": "2026-10-23",
+        "campana": "C5 - Búsqueda - Libranza Nómina - Jun2026",
+        "inversion": 22001,
+        "impresiones": 263,
+        "clics": 43,
+        "conversiones": 8.0
+      },
+      {
+        "fecha": "2026-10-23",
+        "campana": "C7 - Performance Max - Libranza - Oct2026",
+        "inversion": 20505,
+        "impresiones": 228,
+        "clics": 43,
+        "conversiones": 9.0
+      },
+      {
+        "fecha": "2026-10-24",
+        "campana": "C6 - Búsqueda - Reportados - Jun2026",
+        "inversion": 13064,
+        "impresiones": 154,
+        "clics": 25,
+        "conversiones": 4.0
+      },
+      {
+        "fecha": "2026-10-24",
+        "campana": "C5 - Búsqueda - Libranza Nómina - Jun2026",
+        "inversion": 14250,
+        "impresiones": 199,
         "clics": 23,
-        "conversiones": 0.0
+        "conversiones": 1.0
+      },
+      {
+        "fecha": "2026-10-24",
+        "campana": "C7 - Performance Max - Libranza - Oct2026",
+        "inversion": 16872,
+        "impresiones": 241,
+        "clics": 37,
+        "conversiones": 5.0
+      },
+      {
+        "fecha": "2026-10-25",
+        "campana": "C6 - Búsqueda - Reportados - Jun2026",
+        "inversion": 17669,
+        "impresiones": 145,
+        "clics": 35,
+        "conversiones": 9.0
+      },
+      {
+        "fecha": "2026-10-25",
+        "campana": "C5 - Búsqueda - Libranza Nómina - Jun2026",
+        "inversion": 21468,
+        "impresiones": 286,
+        "clics": 33,
+        "conversiones": 8.0
+      },
+      {
+        "fecha": "2026-10-25",
+        "campana": "C7 - Performance Max - Libranza - Oct2026",
+        "inversion": 22836,
+        "impresiones": 239,
+        "clics": 38,
+        "conversiones": 4.0
+      },
+      {
+        "fecha": "2026-10-26",
+        "campana": "C6 - Búsqueda - Reportados - Jun2026",
+        "inversion": 31965,
+        "impresiones": 331,
+        "clics": 58,
+        "conversiones": 6.0
+      },
+      {
+        "fecha": "2026-10-26",
+        "campana": "C5 - Búsqueda - Libranza Nómina - Jun2026",
+        "inversion": 25113,
+        "impresiones": 378,
+        "clics": 49,
+        "conversiones": 7.0
+      },
+      {
+        "fecha": "2026-10-26",
+        "campana": "C7 - Performance Max - Libranza - Oct2026",
+        "inversion": 18220,
+        "impresiones": 224,
+        "clics": 42,
+        "conversiones": 4.0
+      },
+      {
+        "fecha": "2026-10-27",
+        "campana": "C6 - Búsqueda - Reportados - Jun2026",
+        "inversion": 7208,
+        "impresiones": 125,
+        "clics": 12,
+        "conversiones": 1.0
+      },
+      {
+        "fecha": "2026-10-27",
+        "campana": "C5 - Búsqueda - Libranza Nómina - Jun2026",
+        "inversion": 8989,
+        "impresiones": 94,
+        "clics": 14,
+        "conversiones": 1.0
+      },
+      {
+        "fecha": "2026-10-27",
+        "campana": "C7 - Performance Max - Libranza - Oct2026",
+        "inversion": 2515,
+        "impresiones": 55,
+        "clics": 7,
+        "conversiones": 1.0
       }
     ]
   },
-  "periodo_desde": "2026-10-14",
-  "periodo_hasta": "2026-10-20",
-  "periodo_prev_desde": "2026-10-07",
-  "periodo_prev_hasta": "2026-10-13",
-  "actualizado": "2026-10-21T14:34:31"
+  "periodo_desde": "2026-10-20",
+  "periodo_hasta": "2026-10-26",
+  "periodo_prev_desde": "2026-10-13",
+  "periodo_prev_hasta": "2026-10-19",
+  "actualizado": "2026-10-27T11:09:28"
 }
