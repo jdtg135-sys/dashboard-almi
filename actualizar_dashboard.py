@@ -1104,7 +1104,14 @@ def main():
     # --- Valor que llega a las plataformas ---
     # Esto NO es el monto solicitado de arriba. Es el parametro `value` que
     # viaja pegado a la conversion y que Meta y Google usan para optimizar.
-    valor_ga4, n_conv, ticket_real = fetch_valor_conversion(client, ACCUM_DATE_RANGE)
+    # Ventana corta a proposito. Con el acumulado del mes, las semanas en cero
+    # entierran la correccion del 27-oct y el indicador marcaria 3% cuando el
+    # estado real es otro. Lo que hay que vigilar es si el valor esta llegando
+    # AHORA, no el promedio de un mes que empezo roto.
+    VALOR_DATE_RANGE = DateRange(
+        start_date=(HOY - timedelta(days=6)).isoformat(),
+        end_date=HOY.isoformat())
+    valor_ga4, n_conv, ticket_real = fetch_valor_conversion(client, VALOR_DATE_RANGE)
     _ads = {}
     if os.path.exists(ADS_DATA_FILE):
         with open(ADS_DATA_FILE, "r", encoding="utf-8") as f:
