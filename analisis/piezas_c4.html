@@ -1,0 +1,876 @@
+<title>Lote C4 Retargeting</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Montserrat:wght@400;500;600&display=swap">
+
+<style>
+/* Layout: columna única de lectura de 68ch, con bandas de ancho completo para
+   el diagnóstico y el embudo; los storyboards rompen a dos columnas en desktop. */
+:root{
+  --navy:#051B3E;
+  --cyan:#009AC9;
+  --bg:#FFFFFF;
+  --surface:#F4F7FA;
+  --fg:#0E1B2E;
+  --muted:#5A6A80;
+  --line:#D8E0EA;
+  --alert:#B4452B;
+  --display:"Poppins","Segoe UI",system-ui,sans-serif;
+  --body:"Montserrat","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --navy:#0A2550;
+    --cyan:#35B6E2;
+    --bg:#060F1F;
+    --surface:#0E1B33;
+    --fg:#E6EDF6;
+    --muted:#92A3BA;
+    --line:#1E3153;
+    --alert:#E0795C;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --navy:#0A2550;
+  --cyan:#35B6E2;
+  --bg:#060F1F;
+  --surface:#0E1B33;
+  --fg:#E6EDF6;
+  --muted:#92A3BA;
+  --line:#1E3153;
+  --alert:#E0795C;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  font-family:var(--body);
+  font-size:15px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{
+  max-width:860px;
+  margin-inline:auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+h1,h2,h3,h4{font-family:var(--display);text-wrap:balance;margin:0}
+p{margin:0}
+strong{font-weight:600;color:var(--fg)}
+code{
+  font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  font-size:.86em;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:4px;
+  padding:.1em .38em;
+}
+
+/* ---------- Portada ---------- */
+.hero{background:var(--navy);color:#fff}
+.hero .wrap{padding-block:52px 44px;display:flex;flex-direction:column;gap:22px}
+.brandmark{display:flex;align-items:center;gap:12px}
+.brandmark svg{display:block}
+.brandmark span{
+  font-family:var(--display);font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;font-size:12px;color:#fff;
+}
+.eyebrow{
+  font-family:var(--display);font-weight:600;font-size:11px;
+  letter-spacing:.18em;text-transform:uppercase;color:#7FD3EE;
+}
+.hero h1{font-size:clamp(30px,6vw,46px);font-weight:700;line-height:1.08;color:#fff}
+.hero .lede{max-width:60ch;color:#C3D2E6;font-size:16px}
+.stamp{
+  display:flex;flex-wrap:wrap;gap:8px 10px;padding-top:6px;
+}
+.stamp span{
+  font-family:var(--display);font-size:11px;font-weight:500;letter-spacing:.06em;
+  color:#C3D2E6;border:1px solid rgba(255,255,255,.22);
+  border-radius:999px;padding:4px 11px;
+}
+
+/* ---------- Secciones ---------- */
+section{border-top:1px solid var(--line)}
+section:first-of-type{border-top:0}
+section > .wrap{padding-block:44px}
+.shead{display:flex;gap:14px;align-items:baseline;margin-bottom:8px}
+.snum{
+  font-family:var(--display);font-weight:700;font-size:12px;color:var(--cyan);
+  letter-spacing:.08em;padding-top:5px;flex:none;
+}
+.shead h2{font-size:clamp(21px,3.4vw,27px);font-weight:600;line-height:1.2}
+.sdek{color:var(--muted);max-width:66ch;margin-bottom:22px;margin-left:34px}
+@media (max-width:520px){.sdek{margin-left:0}}
+.stack{display:flex;flex-direction:column;gap:16px;max-width:68ch}
+
+/* ---------- Cifras de diagnóstico ---------- */
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:24px}
+.fig{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.fig b{
+  display:block;font-family:var(--display);font-weight:700;
+  font-size:30px;line-height:1.1;font-variant-numeric:tabular-nums;color:var(--cyan);
+}
+.fig small{display:block;color:var(--muted);font-size:12.5px;line-height:1.45;margin-top:6px}
+
+/* ---------- Tablas ---------- */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:10px;margin-block:4px}
+table{border-collapse:collapse;width:100%;min-width:min(100%,420px);font-size:14px}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:0}
+thead th{
+  font-family:var(--display);font-weight:600;font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);background:var(--surface);
+}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+td.seg{font-variant-numeric:tabular-nums;color:var(--muted);white-space:nowrap;width:1%}
+
+/* ---------- Embudo ---------- */
+.funnel{display:flex;flex-direction:column;gap:3px;margin-block:8px 18px}
+.step{display:grid;grid-template-columns:minmax(0,1fr) 54px;gap:12px;align-items:center}
+.step .label{min-width:0}
+.step .name{font-size:13.5px}
+.bar{height:26px;border-radius:4px;background:var(--cyan);opacity:.85;margin-top:3px}
+.step.leak .bar{background:var(--alert);opacity:1}
+.pct{
+  font-family:var(--display);font-weight:600;font-size:14px;text-align:right;
+  font-variant-numeric:tabular-nums;
+}
+.drop{
+  display:flex;align-items:center;gap:8px;padding:3px 0 3px 2px;
+  font-family:var(--display);font-size:12px;font-weight:600;color:var(--alert);
+}
+.drop::before{content:"";width:16px;height:1px;background:var(--alert);flex:none}
+
+/* ---------- Tarjetas ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.card{border:1px solid var(--line);border-radius:10px;padding:15px 17px;min-width:0}
+.card h4{font-size:15px;font-weight:600;margin-bottom:4px}
+.card .file{
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11.5px;
+  color:var(--cyan);display:block;margin-bottom:8px;word-break:break-all;
+}
+.card p{font-size:13px;color:var(--muted)}
+
+/* ---------- Paleta ---------- */
+.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px;margin-block:4px 18px}
+.sw{border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.sw .chip{height:52px}
+.sw .meta{padding:9px 12px}
+.sw b{display:block;font-family:var(--display);font-size:12.5px;font-weight:600}
+.sw small{display:block;color:var(--muted);font-size:11px;font-variant-numeric:tabular-nums}
+
+/* ---------- Listas ---------- */
+ul.plain{margin:0;padding-left:1.15em;display:flex;flex-direction:column;gap:7px}
+ul.plain li::marker{color:var(--cyan)}
+ul.ban{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:9px}
+ul.ban li{
+  padding-left:26px;position:relative;font-size:14px;
+}
+ul.ban li::before{
+  content:"×";position:absolute;left:6px;top:-1px;
+  font-family:var(--display);font-weight:700;color:var(--alert);font-size:16px;
+}
+
+/* ---------- Avisos ---------- */
+.note{
+  border-left:3px solid var(--cyan);background:var(--surface);
+  border-radius:0 8px 8px 0;padding:13px 16px;font-size:13.5px;
+}
+.note.warn{border-left-color:var(--alert)}
+.note .tag{
+  display:block;font-family:var(--display);font-weight:700;font-size:10.5px;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--alert);margin-bottom:4px;
+}
+.note.plain .tag{color:var(--cyan)}
+
+/* ---------- Storyboards ---------- */
+.vids{display:flex;flex-direction:column;gap:26px}
+.vid{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.vid header{
+  background:var(--surface);padding:15px 18px;
+  display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;
+  border-bottom:1px solid var(--line);
+}
+.vid header .id{
+  font-family:var(--display);font-weight:700;font-size:12px;color:var(--cyan);letter-spacing:.08em;
+}
+.vid header h3{font-size:18px;font-weight:600;flex:1 1 auto;min-width:0}
+.vid .facts{
+  display:flex;flex-wrap:wrap;gap:6px 8px;padding:13px 18px 0;
+}
+.vid .facts span{
+  font-size:11.5px;font-family:var(--display);font-weight:500;
+  border:1px solid var(--line);border-radius:999px;padding:3px 10px;color:var(--muted);
+}
+.vid .facts span.hot{border-color:var(--cyan);color:var(--cyan)}
+.vid .why{padding:12px 18px 2px;color:var(--muted);font-size:13.5px}
+.vid .tw{margin:14px 18px 18px;border-radius:8px}
+.vid .screen{font-weight:500;color:var(--fg)}
+
+/* ---------- Gráficas: prompts y fichas ---------- */
+.gra{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.gra + .gra{margin-top:20px}
+.gra header{
+  background:var(--surface);padding:15px 18px;border-bottom:1px solid var(--line);
+  display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;
+}
+.gra header .id{font-family:var(--display);font-weight:700;font-size:12px;color:var(--cyan);letter-spacing:.08em}
+.gra header h3{font-size:17px;font-weight:600;flex:1 1 auto;min-width:0}
+.gra .inner{padding:14px 18px 18px;display:flex;flex-direction:column;gap:13px}
+.lines{display:flex;flex-direction:column;gap:7px}
+.lines div{display:flex;gap:10px;font-size:13.5px;align-items:baseline}
+.lines .k{
+  font-family:var(--display);font-size:10.5px;font-weight:600;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted);flex:none;width:86px;padding-top:2px;
+}
+.lines .v{min-width:0}
+pre.prompt{
+  margin:0;background:var(--navy);color:#C6DCEA;border-radius:8px;
+  padding:13px 15px;overflow-x:auto;font-size:12px;line-height:1.6;
+  font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;white-space:pre-wrap;
+}
+:root[data-theme="dark"] pre.prompt,
+:root:not([data-theme="light"]) pre.prompt{border:1px solid var(--line)}
+
+/* ---------- Copy ---------- */
+.copyblock{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.copyblock > div{min-width:0}
+.copyblock h4{
+  font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);font-weight:600;margin-bottom:9px;
+}
+ol.body-copy{margin:0;padding-left:1.3em;display:flex;flex-direction:column;gap:10px;font-size:13.5px}
+ol.body-copy li::marker{color:var(--cyan);font-family:var(--display);font-weight:600}
+ul.chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:7px}
+ul.chips li{
+  border:1px solid var(--line);border-radius:6px;padding:6px 11px;font-size:13px;
+}
+
+/* ---------- Pasos de montaje ---------- */
+ol.steps{margin:0;padding:0;list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:13px}
+ol.steps li{counter-increment:s;padding-left:38px;position:relative;font-size:14px}
+ol.steps li::before{
+  content:counter(s);position:absolute;left:0;top:0;
+  width:25px;height:25px;border-radius:50%;background:var(--cyan);color:#fff;
+  font-family:var(--display);font-weight:700;font-size:12px;
+  display:grid;place-items:center;
+}
+
+/* ---------- Checklist ---------- */
+.check{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:9px}
+.check label{
+  display:flex;gap:10px;align-items:flex-start;font-size:13.5px;
+  border:1px solid var(--line);border-radius:8px;padding:10px 13px;cursor:pointer;
+}
+.check input{margin:3px 0 0;accent-color:var(--cyan);flex:none;width:15px;height:15px}
+.check input:checked + span{color:var(--muted);text-decoration:line-through}
+
+footer{background:var(--navy);color:#9FB4CE}
+footer .wrap{padding-block:26px;font-size:12.5px;display:flex;flex-wrap:wrap;gap:6px 18px}
+</style>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="brandmark">
+      <svg width="30" height="26" viewBox="0 0 30 26" aria-hidden="true">
+        <path d="M14.2 0 29 26h-8.3L13.4 12.6 9.6 19.4h5.1L18 26H0z" fill="#fff"/>
+      </svg>
+      <span>ALMI Financiera</span>
+    </div>
+    <div>
+      <p class="eyebrow">Campaña C4 · Retargeting</p>
+      <h1>Lote de piezas y videos</h1>
+    </div>
+    <p class="lede">Documento de producción para diseño. Trae el diagnóstico que lo origina,
+      lo que ya existe, los guiones completos de cuatro videos nuevos, el copy de los anuncios
+      y las reglas de marca y formato.</p>
+    <div class="stamp">
+      <span>Noviembre 2026</span>
+      <span>Datos medidos el 9 de noviembre</span>
+      <span>Fuentes: Meta Ads y GA4</span>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">01</div><h2>Por qué se renueva C4</h2></div>
+    <p class="sdek">C4 le habla a quien ya entró al cotizador y no terminó. Hoy tiene un problema
+      de concentración y uno de desgaste, y los dos se miden.</p>
+
+    <div class="figs">
+      <div class="fig"><b>79%</b><small>de la inversión de C4 se la lleva una sola pieza, <code>c4-video-6</code></small></div>
+      <div class="fig"><b>85%</b><small>de las solicitudes de la campaña vienen de esa misma pieza</small></div>
+      <div class="fig"><b>+22%</b><small>subió su costo por solicitud entre el 1-4 y el 5-8 de noviembre</small></div>
+    </div>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>c4-video-6</th><th class="num">1-4 nov</th><th class="num">5-8 nov</th></tr></thead>
+        <tbody>
+          <tr><td>Costo por solicitud</td><td class="num">2.362</td><td class="num"><strong>2.875</strong></td></tr>
+          <tr><td>CTR</td><td class="num">4,92</td><td class="num">4,50</td></tr>
+          <tr><td>CPM</td><td class="num">9.893</td><td class="num">9.669</td></tr>
+          <tr><td>Frecuencia</td><td class="num">1,31</td><td class="num">1,31</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="stack" style="margin-top:18px">
+      <p>El CPM bajó y la frecuencia no se movió. <strong>No es que la audiencia se haya saturado
+        ni que la subasta se haya encarecido: la pieza perdió poder de atracción.</strong> Esa es la
+        definición de fatiga de creativo y se corrige con piezas nuevas, no con presupuesto.</p>
+      <p>El resto del inventario no sostiene la campaña. <code>c4-video-2</code> escaló de 12.167 a
+        101.733 de inversión y entregó a 3.083; <code>c4-video-1</code> está en 3.908 y
+        <code>c4-video-3</code> prácticamente no tiene entrega.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">02</div><h2>Qué tiene que hacer una pieza de C4</h2></div>
+    <p class="sdek">Quien ve estos anuncios ya conoce el producto: entró, simuló y se detuvo.
+      Explicarle qué es un crédito por libranza es gastar el anuncio en algo que ya sabe. El trabajo
+      de C4 es quitar la cosa concreta que lo detuvo, y el embudo dice cuál es.</p>
+
+    <div class="funnel" role="img" aria-label="Embudo del cotizador del 1 al 8 de noviembre: entra 100%, cotiza 85,2%, cuota calculada 83,5%, acepta preaprobación 61,4%, entrega datos personales 41,5%, datos bancarios 37,2%, solicitud creada 35,3%.">
+      <div class="step"><div class="label"><div class="name">1 · Selecciona empresa</div><div class="bar" style="width:100%"></div></div><div class="pct">100%</div></div>
+      <div class="step"><div class="label"><div class="name">2 · Clic en cotizar</div><div class="bar" style="width:85.2%"></div></div><div class="pct">85,2%</div></div>
+      <div class="step"><div class="label"><div class="name">3 · Cuota calculada</div><div class="bar" style="width:83.5%"></div></div><div class="pct">83,5%</div></div>
+      <div class="drop">Se pierden 22 puntos</div>
+      <div class="step leak"><div class="label"><div class="name">4 · Acepta preaprobación</div><div class="bar" style="width:61.4%"></div></div><div class="pct">61,4%</div></div>
+      <div class="drop">Se pierden 20 puntos</div>
+      <div class="step leak"><div class="label"><div class="name">5 · Entrega datos personales</div><div class="bar" style="width:41.5%"></div></div><div class="pct">41,5%</div></div>
+      <div class="step"><div class="label"><div class="name">6 · Datos bancarios</div><div class="bar" style="width:37.2%"></div></div><div class="pct">37,2%</div></div>
+      <div class="step"><div class="label"><div class="name">7 · Solicitud creada</div><div class="bar" style="width:35.3%"></div></div><div class="pct">35,3%</div></div>
+    </div>
+
+    <div class="stack">
+      <p>Las dos fugas más grandes del recorrido son <strong>entre ver la cuota y aceptar la
+        preaprobación</strong> —vio el número y no siguió— y <strong>entre aceptar y entregar datos
+        personales</strong> —dijo que sí y se frenó al dar información.</p>
+      <div class="note plain">
+        <span class="tag">La lógica del lote</span>
+        Cada uno de los cuatro videos ataca una de esas dos fugas. Eso es lo que lo diferencia de
+        producir cuatro piezas bonitas sueltas.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">03</div><h2>Lo que ya existe y no se ha usado</h2></div>
+    <p class="sdek">Cuatro estáticas de C4 ya diseñadas, en 1x1 y 4x5, sin subir a la cuenta.
+      Entran tal como están: no hay que rehacer ninguna.</p>
+
+    <div class="cards">
+      <div class="card">
+        <h4>“Vuelve a ver tu cuota.”</h4>
+        <code class="file">almi_c4_a_*</code>
+        <p>Ataca la fuga de cuota → preaprobación.</p>
+      </div>
+      <div class="card">
+        <h4>“Tu crédito sigue disponible.”</h4>
+        <code class="file">almi_c4_b_*</code>
+        <p>Mensaje general de retomar.</p>
+      </div>
+      <div class="card">
+        <h4>“Tu cuota, cuando estés listo.”</h4>
+        <code class="file">almi_c4_texto1_*</code>
+        <p>Ataca la fuga de cuota → preaprobación.</p>
+      </div>
+      <div class="card">
+        <h4>“Sin filas, sin fiador, 100% en línea.”</h4>
+        <code class="file">almi_c4_texto2_*</code>
+        <p>Mensaje general de fricción.</p>
+      </div>
+    </div>
+
+    <div class="note warn" style="margin-top:18px">
+      <span class="tag">Hueco detectado</span>
+      Las cuatro resuelven la fuga de la cuota y el mensaje de “retoma”, pero
+      <strong>ninguna toca la segunda fuga</strong>, la de los datos personales, que vale 20 puntos
+      del embudo. Ese hueco lo cubren V2 y V4 de este lote.
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">04</div><h2>Reglas de marca</h2></div>
+    <p class="sdek">Tomadas del Brand Book v2.0. Una pieza que incumpla cualquiera de estas se devuelve.</p>
+
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#051B3E"></div><div class="meta"><b>Azul Oscuro</b><small>#051B3E · 40-50%</small></div></div>
+      <div class="sw"><div class="chip" style="background:#009AC9"></div><div class="meta"><b>Celeste Vívido</b><small>#009AC9 · 25-35%</small></div></div>
+      <div class="sw"><div class="chip" style="background:#FFFFFF;border-bottom:1px solid var(--line)"></div><div class="meta"><b>Blanco</b><small>#FFFFFF · 20-30%</small></div></div>
+      <div class="sw"><div class="chip" style="background:#000000"></div><div class="meta"><b>Negro</b><small>#000000 · solo legal</small></div></div>
+    </div>
+
+    <div class="stack" style="margin-bottom:20px">
+      <p><strong>Celeste exclusivo de CTA y acentos.</strong> No se usa como fondo de pieza ni para texto corrido.</p>
+      <p><strong>Tipografía:</strong> Poppins. Bold en titulares y cifras, Regular en cuerpo, Light en legal.
+        Máximo dos pesos por pieza.</p>
+      <p><strong>Logo:</strong> versión blanca, esquina superior izquierda, zona de exclusión igual a la altura
+        de la A del ícono. Sin sombras, sin rotación, sin distorsión.</p>
+      <p><strong>Dato de producto:</strong> la antigüedad requerida es de <strong>6 meses</strong> en la empresa.
+        Seis, no cuatro.</p>
+      <p><strong>Destino de todas las piezas:</strong> <code>https://cotizador.almifinanciera.com/</code></p>
+      <div class="note plain">
+        <span class="tag">Legal obligatorio al pie de toda pieza</span>
+        Aprobación sujeta a estudio de crédito y políticas de ALMI Financiera S.A.S.
+      </div>
+    </div>
+
+    <h3 style="font-size:15px;font-weight:600;margin-bottom:12px">Prohibido, sin excepción</h3>
+    <ul class="ban">
+      <li>“Aprobación garantizada”, “sin importar tu historial”, “crédito inmediato sin condiciones”, “última oportunidad”.</li>
+      <li>Urgencia artificial: cuentas regresivas, “quedan pocos cupos”, “tu solicitud vence hoy”.</li>
+      <li>Cualquier forma de reproche: “no terminaste”, “te quedaste a mitad”, “¿se te olvidó?”. El tono es <em>tu proceso te está esperando</em>, nunca <em>tú fallaste</em>.</li>
+      <li>Plazos exactos de desembolso. Se habla de agilidad, no de días.</li>
+    </ul>
+
+    <div class="note" style="margin-top:18px">
+      <span class="tag" style="color:var(--cyan)">Arquetipo: el Cuidador</span>
+      Acompaña, no presiona. En retargeting esto importa el doble, porque la tentación natural del
+      formato es la insistencia.
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">05</div><h2>Casting y dirección de arte</h2></div>
+    <p class="sdek">Las dos personas del Brand Book, ambas presentes en el lote.</p>
+
+    <div class="cards" style="margin-bottom:22px">
+      <div class="card">
+        <h4>Carlos Andrés · 35-48</h4>
+        <p>Operativo en logística, manufactura o servicios. Proveedor principal del hogar.
+          Ropa de trabajo real, manos de trabajo, entornos de bodega, taller o casa de barrio.</p>
+      </div>
+      <div class="card">
+        <h4>Paola Andrea · 28-42</h4>
+        <p>Administrativa o de servicios. Madre o jefa de hogar. Oficina sencilla, casa ordenada,
+          celular en mano.</p>
+      </div>
+    </div>
+
+    <h3 style="font-size:15px;font-weight:600;margin-bottom:12px">Reglas de realismo</h3>
+    <ul class="plain" style="max-width:68ch">
+      <li>Colombia, no genérico latino. Ropa, interiores y luz creíbles en Cali o Bogotá.</li>
+      <li>Nada de oficinas corporativas de stock, trajes, rascacielos ni gente aplaudiendo.</li>
+      <li>Edad real en la piel y en las manos. Sin retoque de belleza.</li>
+      <li>Expresión: alivio contenido o concentración tranquila. <strong>Nunca euforia.</strong></li>
+      <li>El celular es protagonista: el proceso ocurre ahí.</li>
+      <li>Luz natural, hora del día identificable.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">06</div><h2>Los cuatro videos</h2></div>
+    <p class="sdek">Formato común: 9:16 a 1080 × 1920, MP4 H.264, 30 fps, de 15 a 18 segundos con el
+      gancho en los primeros 3. Legibles sin audio: todo mensaje crítico va en pantalla. Texto dentro del
+      80% central vertical. Cierre con tarjeta final sobre #051B3E. Sin música con letra y sin voz en off
+      locutada.</p>
+
+    <div class="vids">
+
+      <article class="vid">
+        <header><span class="id">V1</span><h3>El número no se mueve</h3></header>
+        <div class="facts">
+          <span class="hot">Fuga: cuota → preaprobación</span>
+          <span>Carlos Andrés</span>
+          <span>Beneficios funcionales</span>
+        </div>
+        <p class="why">La duda real en ese paso es <em>¿el número que vi es el que voy a pagar?</em>
+          La pieza responde eso y nada más.</p>
+        <div class="tw">
+          <table>
+            <thead><tr><th class="num">Seg</th><th>Imagen</th><th>Texto en pantalla</th></tr></thead>
+            <tbody>
+              <tr><td class="seg">0-3</td><td>Primer plano del celular con una cuota en pantalla. El dedo se detiene sobre ella, no avanza.</td><td class="screen">El número que viste es el que pagas.</td></tr>
+              <tr><td class="seg">3-8</td><td>Carlos sentado al final del turno, mira la pantalla, respira, asiente.</td><td class="screen">La cuota sale directo de tu nómina.</td></tr>
+              <tr><td class="seg">8-13</td><td>Plano de la mano desplazándose en el cotizador, avanzando al siguiente paso.</td><td class="screen">Fija, sin sorpresas, mes a mes.</td></tr>
+              <tr><td class="seg">13-17</td><td>Tarjeta final.</td><td class="screen">Vuelve a ver tu cuota · botón “Simula tu cuota”</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="padding:0 18px 18px">
+          <div class="note warn">
+            <span class="tag">No debe aparecer</span>
+            Cifras de cuota inventadas. Si se muestra un monto, tiene que ser coherente con el simulador
+            real; si no hay un número validado, la interfaz va desenfocada.
+          </div>
+        </div>
+      </article>
+
+      <article class="vid">
+        <header><span class="id">V2</span><h3>Para qué te pedimos lo que te pedimos</h3></header>
+        <div class="facts">
+          <span class="hot">Fuga: preaprobación → datos</span>
+          <span>Paola Andrea</span>
+          <span>Innovación / detrás de ALMI</span>
+          <span class="hot">No existe hoy en ningún formato</span>
+        </div>
+        <p class="why">La duda real es <em>¿para qué quieren mis datos y qué van a hacer con ellos?</em>
+          Se responde con transparencia, que es el territorio natural de la marca.</p>
+        <div class="tw">
+          <table>
+            <thead><tr><th class="num">Seg</th><th>Imagen</th><th>Texto en pantalla</th></tr></thead>
+            <tbody>
+              <tr><td class="seg">0-3</td><td>Paola en casa, celular en mano, se detiene en un formulario.</td><td class="screen">¿Por qué te pedimos estos datos?</td></tr>
+              <tr><td class="seg">3-8</td><td>Plano cercano del formulario, campos simples, pocos.</td><td class="screen">Para confirmar que la cuota te cabe. Nada más.</td></tr>
+              <tr><td class="seg">8-13</td><td>Ella escribe tranquila, sin apuro. Luz de tarde.</td><td class="screen">Sin extractos. Sin cartas laborales. Sin fiador.</td></tr>
+              <tr><td class="seg">13-17</td><td>Tarjeta final.</td><td class="screen">Termina en línea, desde tu celular · botón “Retoma tu solicitud”</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="padding:0 18px 18px">
+          <div class="note warn">
+            <span class="tag">Verificar antes de producir</span>
+            Si se quiere afirmar algo sobre tratamiento de datos o consulta en centrales de riesgo, el texto
+            exacto lo aprueba el área legal de ALMI. <strong>No producir ninguna versión que afirme que el
+            proceso no afecta el historial financiero sin esa aprobación por escrito.</strong>
+          </div>
+        </div>
+      </article>
+
+      <article class="vid">
+        <header><span class="id">V3</span><h3>Donde lo dejaste</h3></header>
+        <div class="facts">
+          <span class="hot">Objeción: esfuerzo</span>
+          <span>Carlos Andrés</span>
+          <span>Beneficios funcionales</span>
+        </div>
+        <p class="why">La duda real es <em>¿tengo que hacer todo otra vez?</em></p>
+        <div class="tw">
+          <table>
+            <thead><tr><th class="num">Seg</th><th>Imagen</th><th>Texto en pantalla</th></tr></thead>
+            <tbody>
+              <tr><td class="seg">0-3</td><td>Celular sobre la mesa de la cocina, pantalla apagada. Una mano lo toma.</td><td class="screen">No empiezas de cero.</td></tr>
+              <tr><td class="seg">3-8</td><td>La pantalla se enciende en el punto exacto donde quedó el proceso.</td><td class="screen">Tu solicitud sigue donde la dejaste.</td></tr>
+              <tr><td class="seg">8-13</td><td>Carlos avanza dos pasos, sin fricción. Plano de la mano y la pantalla.</td><td class="screen">Lo terminas en minutos, desde el celular.</td></tr>
+              <tr><td class="seg">13-17</td><td>Tarjeta final.</td><td class="screen">Tu crédito sigue disponible · botón “Retoma tu solicitud”</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="padding:0 18px 18px">
+          <div class="note">
+            <span class="tag" style="color:var(--cyan)">Tono crítico</span>
+            “No empiezas de cero” es un alivio. “No terminaste” es un reproche. La diferencia es toda la pieza.
+          </div>
+        </div>
+      </article>
+
+      <article class="vid">
+        <header><span class="id">V4</span><h3>Avanzar no es firmar</h3></header>
+        <div class="facts">
+          <span class="hot">Fuga: preaprobación → datos</span>
+          <span>Paola Andrea</span>
+          <span>Educación financiera</span>
+        </div>
+        <p class="why">La duda real es <em>si sigo, ¿ya quedé amarrada?</em></p>
+        <div class="tw">
+          <table>
+            <thead><tr><th class="num">Seg</th><th>Imagen</th><th>Texto en pantalla</th></tr></thead>
+            <tbody>
+              <tr><td class="seg">0-3</td><td>Paola mira el celular con una ceja levantada, dudando.</td><td class="screen">¿Si avanzo, ya estoy comprometida?</td></tr>
+              <tr><td class="seg">3-8</td><td>Plano de la pantalla, paso a paso simple.</td><td class="screen">No. Decides al final, con el número en frente.</td></tr>
+              <tr><td class="seg">8-13</td><td>Ella deja el celular, se sirve un café, lo retoma. Sin prisa.</td><td class="screen">Puedes mirarlo hoy y decidir mañana.</td></tr>
+              <tr><td class="seg">13-17</td><td>Tarjeta final.</td><td class="screen">Simula sin compromiso · botón “Simula tu cuota”</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div style="padding:0 18px 18px">
+          <div class="note warn">
+            <span class="tag">Verificar antes de producir</span>
+            La frase “decides al final” tiene que corresponder al flujo real del cotizador. Confirmar con
+            producto en qué paso exacto existe compromiso, y ajustar el guion a eso si difiere.
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">07</div><h2>Las cuatro gráficas nuevas</h2></div>
+    <p class="sdek">Cada video tiene su gemela gráfica: mismo mensaje, mismo ángulo, formato distinto.
+      En retargeting la gráfica suele ganarle al video en costo por clic, y tener el par permite saber si
+      lo que funciona es el mensaje o el formato, que con piezas sueltas nunca se sabe. Con las cuatro que
+      ya existen, C4 queda con ocho gráficas y cuatro videos.</p>
+
+    <div class="note warn" style="margin-bottom:22px">
+      <span class="tag">Regla que no se negocia</span>
+      El texto se monta en post, en Poppins. <strong>Ningún texto lo genera el modelo de imagen:</strong>
+      los modelos deforman las tildes y la ñ, y una pieza de una financiera con un error tipográfico
+      cuesta credibilidad. El prompt siempre pide el espacio limpio donde va el texto.
+    </div>
+
+    <article class="gra">
+      <header><span class="id">E1</span><h3>Para qué te pedimos tus datos</h3></header>
+      <div class="inner">
+        <div class="facts" style="padding:0">
+          <span class="hot">Fuga: preaprobación → datos</span><span>Paola Andrea</span><span>Fotográfica</span><span>Gemela de V2</span>
+        </div>
+        <div class="lines">
+          <div><span class="k">Titular</span><span class="v"><strong>Te pedimos pocos datos. Y te decimos para qué.</strong></span></div>
+          <div><span class="k">Bajada</span><span class="v">Para confirmar que la cuota te cabe. Nada más.</span></div>
+          <div><span class="k">Habilitador</span><span class="v">Con 6 meses en tu empresa ya puedes solicitar.</span></div>
+          <div><span class="k">Botón</span><span class="v">Retoma tu solicitud</span></div>
+        </div>
+<pre class="prompt">Colombian woman in her thirties at a small kitchen table at home,
+holding a smartphone with both hands, calm and unhurried expression,
+looking down at the screen, soft late afternoon daylight from a window,
+cool blue and white interior, no brand logos anywhere,
+4:5 composition, subject on the lower right,
+large clean uncluttered area across the top left for headline text,
+photorealistic, natural skin texture, no beauty retouching</pre>
+      </div>
+    </article>
+
+    <article class="gra">
+      <header><span class="id">E2</span><h3>Avanzar no es firmar</h3></header>
+      <div class="inner">
+        <div class="facts" style="padding:0">
+          <span class="hot">Fuga: preaprobación → datos</span><span>Paola Andrea</span><span>Tipográfica</span><span>Gemela de V4</span>
+        </div>
+        <div class="lines">
+          <div><span class="k">Titular</span><span class="v"><strong>Simular no te compromete.</strong></span></div>
+          <div><span class="k">Bajada</span><span class="v">Miras el número, lo piensas y decides después.</span></div>
+          <div><span class="k">Botón</span><span class="v">Simula tu cuota</span></div>
+        </div>
+        <p style="font-size:13.5px;color:var(--muted)">Sin fotografía. Fondo <code>#051B3E</code> pleno,
+          titular en Poppins Bold blanco y arco celeste inferior derecho como en las piezas tipográficas que
+          ya existen, para que la familia se reconozca. Es la más barata de producir y la que mejor aguanta
+          el recorte a 1:1.</p>
+        <div class="note warn">
+          <span class="tag">Verificar antes de producir</span>
+          Igual que en V4, “decides después” tiene que corresponder al flujo real del cotizador. Confirmar
+          con producto en qué paso exacto existe compromiso.
+        </div>
+      </div>
+    </article>
+
+    <article class="gra">
+      <header><span class="id">E3</span><h3>El número no se mueve</h3></header>
+      <div class="inner">
+        <div class="facts" style="padding:0">
+          <span class="hot">Fuga: cuota → preaprobación</span><span>Carlos Andrés</span><span>Fotográfica</span><span>Gemela de V1</span>
+        </div>
+        <div class="lines">
+          <div><span class="k">Titular</span><span class="v"><strong>El número que viste es el que pagas.</strong></span></div>
+          <div><span class="k">Bajada</span><span class="v">Sale directo de tu nómina. Fija, mes a mes.</span></div>
+          <div><span class="k">Habilitador</span><span class="v">Con 6 meses en tu empresa ya puedes solicitar.</span></div>
+          <div><span class="k">Botón</span><span class="v">Vuelve a ver tu cuota</span></div>
+        </div>
+<pre class="prompt">Close-up of the weathered hands of a Colombian man in his forties
+holding a smartphone, screen facing away or neutral and unreadable,
+worn work jacket sleeve visible, end of the workday,
+plain industrial wall out of focus behind, cool blue shadows,
+no brand logos anywhere, 4:5 composition, hands in the lower third,
+large clean empty space in the upper two thirds for headline text,
+photorealistic, real skin texture on the hands, no beauty retouching</pre>
+        <div class="note">
+          <span class="tag" style="color:var(--cyan)">Nota</span>
+          La pantalla va neutra o desenfocada. Si se quiere mostrar una cuota real, el número lo monta
+          diseño en post y tiene que ser coherente con el simulador; nunca un monto inventado por el modelo.
+        </div>
+      </div>
+    </article>
+
+    <article class="gra">
+      <header><span class="id">E4</span><h3>No empiezas de cero</h3></header>
+      <div class="inner">
+        <div class="facts" style="padding:0">
+          <span class="hot">Objeción: esfuerzo</span><span>Carlos Andrés</span><span>Tipográfica con interfaz</span><span>Gemela de V3</span>
+        </div>
+        <div class="lines">
+          <div><span class="k">Titular</span><span class="v"><strong>No empiezas de cero.</strong></span></div>
+          <div><span class="k">Bajada</span><span class="v">Tu solicitud sigue donde la dejaste. La terminas en minutos.</span></div>
+          <div><span class="k">Botón</span><span class="v">Retoma tu solicitud</span></div>
+        </div>
+        <p style="font-size:13.5px;color:var(--muted)">Fondo <code>#051B3E</code>. A la derecha, una
+          representación limpia y simplificada del avance del cotizador —una barra de pasos con los primeros
+          marcados— dibujada en vectores por diseño, <strong>no generada por el modelo</strong>. Es el único
+          recurso gráfico del lote que muestra producto, y es justo el que responde la objeción.</p>
+      </div>
+    </article>
+
+    <h3 style="font-size:15px;font-weight:600;margin:28px 0 12px">Formatos de las gráficas</h3>
+    <div class="tw" style="margin-bottom:18px">
+      <table>
+        <thead><tr><th>Relación</th><th>Resolución</th><th>Dónde</th></tr></thead>
+        <tbody>
+          <tr><td>4:5</td><td>1080 × 1350</td><td>Feed de Facebook e Instagram, la principal</td></tr>
+          <tr><td>1:1</td><td>1080 × 1080</td><td>Feed cuadrado y ubicaciones mixtas</td></tr>
+          <tr><td>9:16</td><td>1080 × 1920</td><td>Historias y Reels</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="stack">
+      <p><strong>Zona segura:</strong> 120 px por lado en 4:5, 100 px en 1:1, y en 9:16 dejar 250 px arriba
+        y 420 px abajo libres de texto, que es lo que tapa la interfaz.</p>
+      <p><strong>Ajustes de Magnific.</strong> Mystic con realismo alto y fidelidad al prompt media-alta;
+        generar a la relación nativa y luego Upscaler a 2× con engine Illusio, creativity entre 0 y 1 para
+        que no invente rasgos, HDR entre 0 y 2 y resemblance alta. Relight solo si la toma sale demasiado
+        cálida y hay que empujarla al azul de marca. Style Transfer no se usa: rompe la coherencia entre
+        piezas. El error más frecuente y más dañino aquí es lo sobreprocesado: una imagen con HDR alto se lee
+        como publicidad agresiva, que es lo contrario del arquetipo Cuidador.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">08</div><h2>Copy de los anuncios</h2></div>
+    <p class="sdek">Cuatro cuerpos, cuatro títulos y dos descripciones, para que Meta combine. Todos siguen
+      el framework de la marca: gancho cotidiano → explicación simple → tranquilidad → CTA amable.</p>
+
+    <div class="copyblock">
+      <div style="grid-column:1/-1">
+        <h4>Cuerpos</h4>
+        <ol class="body-copy">
+          <li>Tu solicitud sigue donde la dejaste. No tienes que empezar de nuevo: la retomas desde tu celular y la terminas cuando estés listo.</li>
+          <li>La cuota que viste es la que pagas. Sale directo de tu nómina, fija y sin sorpresas. Con 6 meses en tu empresa ya puedes solicitar.</li>
+          <li>Simular no te compromete a nada. Miras el número, lo piensas y decides después. Sin extractos bancarios, sin cartas laborales y sin fiador.</li>
+          <li>Te pedimos pocos datos y te decimos para qué: para confirmar que la cuota te cabe. Todo en línea, sin filas y sin papeleo.</li>
+        </ol>
+      </div>
+      <div>
+        <h4>Títulos</h4>
+        <ul class="chips">
+          <li>Retoma tu solicitud</li>
+          <li>Tu cuota te espera</li>
+          <li>Decides tú, al final</li>
+          <li>Sin filas, sin fiador</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Descripciones</h4>
+        <ul class="chips">
+          <li>Descuento directo por nómina</li>
+          <li>100% en línea, desde tu celular</li>
+        </ul>
+        <h4 style="margin-top:18px">Llamado a la acción</h4>
+        <ul class="chips"><li><code>GET_QUOTE</code> · “Obtener cotización”</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">09</div><h2>Resumen de entregables</h2></div>
+    <p class="sdek">Ocho archivos nuevos de video o imagen —4 videos y 4 gráficas— que con los tres
+      formatos de cada gráfica suman 16 archivos en total. El sufijo <code>c4</code> indica campaña,
+      <code>v</code> es video y <code>e</code> es estática.</p>
+
+    <div class="tw" style="margin-bottom:18px">
+      <table>
+        <thead><tr><th>Pieza</th><th>Estado</th><th>Formatos a entregar</th></tr></thead>
+        <tbody>
+          <tr><td>V1 a V4 · videos</td><td><strong>por producir</strong></td><td>9:16 (1080×1920). Opcional 4:5 recortado con el texto reubicado, no escalado.</td></tr>
+          <tr><td>E1 a E4 · gráficas nuevas</td><td><strong>por producir</strong></td><td>4:5, 1:1 y 9:16</td></tr>
+          <tr><td>4 gráficas existentes</td><td>ya entregadas</td><td>1:1 y 4:5, entran sin cambios</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ul class="chips">
+      <li><code>almi_c4_v1_9x16_v1.mp4</code></li>
+      <li><code>almi_c4_v2_9x16_v1.mp4</code></li>
+      <li><code>almi_c4_v3_9x16_v1.mp4</code></li>
+      <li><code>almi_c4_v4_9x16_v1.mp4</code></li>
+      <li><code>almi_c4_e1_4x5_v1.png</code></li>
+      <li><code>almi_c4_e2_4x5_v1.png</code></li>
+      <li><code>almi_c4_e3_4x5_v1.png</code></li>
+      <li><code>almi_c4_e4_4x5_v1.png</code></li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">10</div><h2>Cómo se montan</h2></div>
+    <p class="sdek">El conjunto <code>retargeting-general</code> no es dinámico, así que cada pieza entra
+      como un anuncio independiente y convive con lo que ya corre. Agregar anuncios a un conjunto que no
+      es dinámico no reinicia el aprendizaje.</p>
+
+    <div class="note warn" style="margin-bottom:20px">
+      <span class="tag">Por qué en dos olas y no todo de una</span>
+      Entre las 8 gráficas y los 4 videos serían doce anuncios nuevos sobre los cinco que ya existen.
+      Meta reparte el presupuesto del conjunto entre todos, así que con diecisiete anuncios ninguno junta
+      entregas suficientes para que el algoritmo distinga cuál rinde: elige dos o tres temprano y apaga
+      el resto.
+    </div>
+
+    <h3 style="font-size:15px;font-weight:600;margin-bottom:12px">Ola 1 · al recibir el material</h3>
+    <ol class="steps" style="max-width:68ch;margin-bottom:22px">
+      <li>Entran los <strong>4 videos</strong> y las <strong>4 gráficas nuevas</strong> (E1 a E4): ocho anuncios.</li>
+      <li>Se apagan <code>c4-video-1</code> (3.908 por solicitud) y <code>c4-video-3</code> (sin entrega real).</li>
+      <li><code>c4-video-6</code> <strong>se deja prendido</strong>. Sigue siendo la pieza con más volumen; se apaga solo cuando una nueva lo supere, no antes.</li>
+      <li><code>c4-video-2</code> se deja una semana más y se decide con datos.</li>
+    </ol>
+
+    <h3 style="font-size:15px;font-weight:600;margin-bottom:12px">Ola 2 · una semana después</h3>
+    <div class="stack" style="margin-bottom:18px">
+      <p>Se apagan las piezas nuevas que no hayan entregado nada y entran las 4 gráficas que ya existían,
+        para ocupar ese espacio.</p>
+    </div>
+
+    <div class="note plain">
+      <span class="tag">El verdadero entregable de este lote</span>
+      Cada par video-gráfica comparte mensaje, así que la comparación es limpia. Si E3 le gana a V1 y
+      E1 le gana a V2, lo que funciona en retargeting es la gráfica, y el siguiente lote se produce así,
+      que además cuesta una fracción. Si pasa al revés, se concentra en video.
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">11</div><h2>Revisión antes de entregar</h2></div>
+    <p class="sdek">Se marca sobre esta misma página mientras se revisa cada pieza.</p>
+
+    <div class="check">
+      <label><input type="checkbox" id="c1"><span>¿Solo #051B3E, #009AC9, #FFFFFF y negro en el legal?</span></label>
+      <label><input type="checkbox" id="c2"><span>¿Poppins, máximo dos pesos?</span></label>
+      <label><input type="checkbox" id="c3"><span>¿Logo blanco arriba a la izquierda con su zona de exclusión?</span></label>
+      <label><input type="checkbox" id="c4"><span>¿Está el legal completo al pie?</span></label>
+      <label><input type="checkbox" id="c5"><span>¿Dice 6 meses, no 4?</span></label>
+      <label><input type="checkbox" id="c13"><span>¿Todo el texto está montado en post, ninguno generado por el modelo?</span></label>
+      <label><input type="checkbox" id="c14"><span>¿Sin billetes, monedas ni símbolos de dinero?</span></label>
+      <label><input type="checkbox" id="c15"><span>¿Sin logotipos de terceros legibles en ropa o entorno?</span></label>
+      <label><input type="checkbox" id="c16"><span>¿La persona se lee como colombiana real y no como banco de imágenes?</span></label>
+      <label><input type="checkbox" id="c6"><span>¿Se entiende sin audio?</span></label>
+      <label><input type="checkbox" id="c7"><span>¿El gancho ocurre antes del segundo 3?</span></label>
+      <label><input type="checkbox" id="c8"><span>¿Una sola idea y un solo CTA por pieza?</span></label>
+      <label><input type="checkbox" id="c9"><span>¿Cero urgencia artificial y cero reproche?</span></label>
+      <label><input type="checkbox" id="c10"><span>¿Ninguna promesa de aprobación?</span></label>
+      <label><input type="checkbox" id="c11"><span>¿Las frases marcadas para verificación legal fueron aprobadas por escrito?</span></label>
+      <label><input type="checkbox" id="c12"><span>¿Carlos Andrés o Paola Andrea lo entienden en 5 segundos?</span></label>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>ALMI Financiera · Campaña C4 Retargeting · Noviembre 2026</span>
+    <span>Cifras de Meta Ads y GA4 medidas el 9 de noviembre de 2026</span>
+  </div>
+</footer>
