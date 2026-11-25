@@ -1,0 +1,363 @@
+<title>Escalado ALMI 2027</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;600;700&family=Figtree:wght@400;500;600&display=swap">
+
+<style>
+/* Layout: columna de lectura de 880px; bandas de datos a ancho completo.
+   Paleta e imprenta del sitio real de ALMI. */
+:root{
+  --navy:#051B3E; --cyan:#29C7F8; --ink:#0B2038; --ink-2:#44617D; --ink-3:#7A93AC;
+  --bg:#FFFFFF; --surface:#F2F7FC; --line:#DCE6F0; --alert:#C0462A; --ok:#1C7F5E;
+  --ff-head:"Host Grotesk","Segoe UI",system-ui,sans-serif;
+  --ff-body:"Figtree","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --navy:#09244C; --cyan:#45CEFA; --ink:#E8F0F8; --ink-2:#A3B8CD; --ink-3:#73889E;
+    --bg:#050E1C; --surface:#0C1B30; --line:#1B3150; --alert:#E4785A; --ok:#4FBF97;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --navy:#09244C; --cyan:#45CEFA; --ink:#E8F0F8; --ink-2:#A3B8CD; --ink-3:#73889E;
+  --bg:#050E1C; --surface:#0C1B30; --line:#1B3150; --alert:#E4785A; --ok:#4FBF97;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ff-body);
+     font-size:16px;line-height:1.68;-webkit-font-smoothing:antialiased}
+.wrap{max-width:880px;margin-inline:auto;
+      padding-left:max(16px,env(safe-area-inset-left,0px));
+      padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--ff-head);text-wrap:balance;margin:0}
+p{margin:0}
+strong{font-weight:600}
+.num{font-variant-numeric:tabular-nums}
+
+.hero{background:var(--navy)}
+.hero .wrap{padding-block:58px 48px;display:flex;flex-direction:column;gap:22px}
+.eyebrow{font-family:var(--ff-head);font-size:12px;font-weight:700;letter-spacing:.17em;
+         text-transform:uppercase;color:var(--cyan)}
+.hero h1{font-size:clamp(31px,6vw,48px);line-height:1.08;font-weight:700;color:#fff}
+.hero .lede{max-width:64ch;color:#C2D5E6;font-size:17px}
+.jump{display:flex;flex-wrap:wrap;gap:22px;padding-top:8px}
+.jump div{min-width:124px}
+.jump b{display:block;font-family:var(--ff-head);font-weight:700;font-size:27px;color:#fff;
+        line-height:1.15;font-variant-numeric:tabular-nums}
+.jump span{display:block;font-size:12.5px;color:#8FB0CC;line-height:1.4;margin-top:2px}
+
+section{border-top:1px solid var(--line)}
+section>.wrap{padding-block:48px}
+.shead{display:flex;gap:15px;align-items:baseline;margin-bottom:10px}
+.snum{font-family:var(--ff-head);font-weight:700;font-size:12.5px;color:var(--cyan);
+      padding-top:6px;flex:none;letter-spacing:.06em}
+.shead h2{font-size:clamp(22px,3.6vw,30px);font-weight:700;line-height:1.2}
+.dek{color:var(--ink-2);max-width:66ch;margin:0 0 26px 35px}
+@media (max-width:560px){.dek{margin-left:0}}
+.stack{display:flex;flex-direction:column;gap:17px;max-width:68ch}
+
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin-block:6px 20px}
+table{border-collapse:collapse;width:100%;min-width:480px;font-size:14.5px}
+th,td{padding:10px 15px;text-align:left;border-bottom:1px solid var(--line)}
+thead th{font-family:var(--ff-head);font-size:11px;font-weight:700;letter-spacing:.1em;
+         text-transform:uppercase;color:var(--ink-3);background:var(--surface)}
+tr:last-child td{border-bottom:0}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+tbody tr.hi{background:color-mix(in srgb,var(--cyan) 9%,transparent)}
+tbody tr.hi td{font-weight:600}
+td.bad{color:var(--alert);font-weight:600}
+
+.note{background:var(--surface);border-left:4px solid var(--cyan);
+      border-radius:0 12px 12px 0;padding:17px 21px;margin-block:4px 20px}
+.note.warn{border-left-color:var(--alert)}
+.note .tag{display:block;font-family:var(--ff-head);font-size:10.5px;font-weight:700;
+           letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:5px}
+.note.warn .tag{color:var(--alert)}
+.note p+p{margin-top:9px}
+
+/* Embudo */
+.funnel{display:flex;flex-direction:column;gap:4px;margin-block:8px 20px}
+.fstep{display:grid;grid-template-columns:minmax(0,1fr) 86px;gap:14px;align-items:center}
+.fstep .lab{min-width:0;font-size:13.5px}
+.fbar{height:30px;border-radius:4px;background:var(--cyan);opacity:.85;margin-top:3px}
+.fstep.leak .fbar{background:var(--alert);opacity:1}
+.fstep .pc{font-family:var(--ff-head);font-weight:700;font-size:14px;text-align:right;
+           font-variant-numeric:tabular-nums}
+.fdrop{font-family:var(--ff-head);font-size:12px;font-weight:700;color:var(--alert);
+       padding:2px 0 2px 2px}
+
+.lev{display:grid;grid-template-columns:repeat(auto-fit,minmax(248px,1fr));gap:14px}
+.lev article{border:1px solid var(--line);border-radius:12px;padding:18px 20px;min-width:0}
+.lev .k{font-family:var(--ff-head);font-size:11px;font-weight:700;letter-spacing:.11em;
+        text-transform:uppercase;color:var(--cyan);margin-bottom:7px}
+.lev h3{font-size:17px;font-weight:600;margin-bottom:8px;line-height:1.3}
+.lev p{font-size:14px;color:var(--ink-2)}
+.lev .gain{display:inline-block;margin-top:12px;font-family:var(--ff-head);font-weight:700;
+           font-size:13px;color:var(--ok)}
+
+figure{margin:0 0 22px}
+figcaption{font-size:13px;color:var(--ink-3);margin-top:10px;max-width:62ch}
+.chart{border:1px solid var(--line);border-radius:12px;padding:20px 18px 14px;background:var(--surface)}
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+
+ul.plain{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:10px}
+ul.plain li::marker{color:var(--cyan)}
+
+footer{background:var(--navy);color:#90AECB}
+footer .wrap{padding-block:28px;font-size:12.5px;display:flex;flex-wrap:wrap;gap:6px 20px}
+</style>
+
+<div class="hero">
+  <div class="wrap">
+    <p class="eyebrow">ALMI Financiera · Plan de escalado 2027</p>
+    <h1>Antes de escalar la pauta, hay que arreglar lo que pasa después de la solicitud</h1>
+    <p class="lede">Cruce de la pauta de Meta y Google con el tablero de KPI's de ALMI.
+      La conclusión no es cuánto hay que invertir: es que el cuello de botella dejó de
+      estar en conseguir solicitudes.</p>
+    <div class="jump">
+      <div><b class="num">46.233</b><span>solicitudes en 2026</span></div>
+      <div><b class="num">13.336</b><span>desembolsos</span></div>
+      <div><b class="num">28,8</b><span>desembolsos por cada 100 solicitudes</span></div>
+      <div><b class="num">40,1 → 28,1</b><span>esa misma cifra, de enero a septiembre</span></div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">01</div><h2>El hallazgo</h2></div>
+    <div class="stack">
+      <p>En 2026 las solicitudes se multiplicaron por cuatro entre enero y septiembre, de
+        1.829 a 7.236 al mes. Los desembolsos no siguieron el mismo ritmo: pasaron de 733 a
+        2.034, menos del triple.</p>
+      <p><strong>Cada 100 solicitudes producían 40 desembolsos en enero y producen 28 hoy.</strong>
+        En julio y agosto llegaron a producir 21. Hemos estado comprando más solicitudes de
+        calidad decreciente.</p>
+      <div class="note warn">
+        <span class="tag">Lo que esto implica para la meta</span>
+        <p>Multiplicar las solicitudes no multiplica el negocio en la misma proporción, y
+          probablemente empeore la tasa todavía más. Un plan que solo compre más volumen
+          entrega menos de lo que promete.</p>
+      </div>
+    </div>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>Mes 2026</th><th class="n">Solicitudes</th><th class="n">Desembolsos</th><th class="n">Por cada 100</th></tr></thead>
+        <tbody>
+          <tr><td>Enero</td><td class="n">1.829</td><td class="n">733</td><td class="n">40,1</td></tr>
+          <tr><td>Febrero</td><td class="n">1.603</td><td class="n">778</td><td class="n">48,5</td></tr>
+          <tr><td>Marzo</td><td class="n">2.699</td><td class="n">910</td><td class="n">33,7</td></tr>
+          <tr><td>Abril</td><td class="n">2.525</td><td class="n">965</td><td class="n">38,2</td></tr>
+          <tr><td>Mayo</td><td class="n">3.294</td><td class="n">1.078</td><td class="n">32,7</td></tr>
+          <tr><td>Junio</td><td class="n">3.988</td><td class="n">1.171</td><td class="n">29,4</td></tr>
+          <tr><td>Julio</td><td class="n">6.606</td><td class="n">1.435</td><td class="n bad">21,7</td></tr>
+          <tr><td>Agosto</td><td class="n">7.374</td><td class="n">1.585</td><td class="n bad">21,5</td></tr>
+          <tr><td>Septiembre</td><td class="n">7.236</td><td class="n">2.034</td><td class="n">28,1</td></tr>
+          <tr><td>Octubre</td><td class="n">6.655</td><td class="n">1.979</td><td class="n">29,7</td></tr>
+          <tr class="hi"><td>Noviembre (al 10)</td><td class="n">2.424</td><td class="n">668</td><td class="n">27,6</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">02</div><h2>Dónde se pierde, con los números del tablero</h2></div>
+    <p class="dek">Recorrido completo del 1 al 10 de noviembre, tomado del tablero mensual de
+      KPI's. Es la primera vez que vemos el tramo que va después de la solicitud.</p>
+
+    <div class="funnel" role="img" aria-label="Del 1 al 10 de noviembre: 8.729 atenciones, 2.424 solicitudes, 1.246 recepciones de documentos, 608 radicados y 668 desembolsos.">
+      <div class="fstep"><div class="lab"><div>Atenciones</div><div class="fbar" style="width:100%"></div></div><div class="pc">8.729</div></div>
+      <div class="fdrop">se pierden 6.305 · el 72%</div>
+      <div class="fstep"><div class="lab"><div>Solicitudes</div><div class="fbar" style="width:27.8%"></div></div><div class="pc">2.424</div></div>
+      <div class="fdrop">se pierden 1.178 · el 49% de quienes ya solicitaron</div>
+      <div class="fstep leak"><div class="lab"><div>Recepción de documentos</div><div class="fbar" style="width:14.3%"></div></div><div class="pc">1.246</div></div>
+      <div class="fstep"><div class="lab"><div>Radicado</div><div class="fbar" style="width:7.0%"></div></div><div class="pc">608</div></div>
+      <div class="fstep"><div class="lab"><div>Desembolsos</div><div class="fbar" style="width:7.7%"></div></div><div class="pc">668</div></div>
+    </div>
+
+    <div class="stack">
+      <p><strong>La fuga más cara del negocio está entre la solicitud y la entrega de
+        documentos: casi la mitad de quienes ya solicitaron no completan.</strong> Son 1.178
+        personas en diez días que ya pasaron todo el embudo del cotizador, ya entregaron sus
+        datos y ya fueron preaprobadas.</p>
+      <p>Son además las personas más caras que compramos: por cada una ya pagamos la
+        solicitud completa. Perderlas ahí es tirar el 100% de ese costo.</p>
+      <p>Ese tramo es exactamente el de los 20 días que la pieza nueva de retargeting
+        menciona, y hasta hoy no teníamos ni un anuncio ni un público dirigido a él.</p>
+      <div class="note">
+        <span class="tag">La cuenta que vale la pena</span>
+        <p>Subir la recepción de documentos del 51% al 70% añadiría unos 460 desembolsos al
+          mes <strong>sin una sola solicitud adicional</strong>. Para conseguir eso mismo
+          comprando pauta harían falta unas 1.650 solicitudes más al mes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">03</div><h2>La meta de 1.000 diarias no cuadra con el presupuesto 2027</h2></div>
+    <p class="dek">El borrador de Presupuesto 2027 que está en el mismo archivo proyecta
+      31.311 colocaciones en el año. Al traducir las dos cifras a la misma unidad, no
+      coinciden ni de lejos.</p>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>Si 1.000 diarias significa…</th><th class="n">Al año</th><th class="n">Desembolsos a 28,8%</th><th>Contra el presupuesto 2027</th></tr></thead>
+        <tbody>
+          <tr><td>Solicitudes</td><td class="n">365.000</td><td class="n">105.120</td><td>3,4 veces las 31.311 presupuestadas</td></tr>
+          <tr class="hi"><td>Atenciones</td><td class="n">365.000</td><td class="n">27.900</td><td>Encaja: las atenciones van hoy en 873 diarias</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="stack">
+      <p>Para cumplir las 31.311 colocaciones del presupuesto 2027 harían falta unas
+        <strong>298 solicitudes diarias</strong>, no 1.000. Hoy vamos en 242.</p>
+      <p>En cambio, las atenciones van en 873 diarias. Una meta de 1.000 atenciones por día
+        es un crecimiento del 15% y es perfectamente coherente con el presupuesto.</p>
+      <div class="note warn">
+        <span class="tag">Hay que aclararlo antes de planear</span>
+        <p>Si la meta son 1.000 <em>solicitudes</em> diarias, el presupuesto de colocación de
+          2027 se queda corto por un factor de tres y hay que rehacerlo. Si son 1.000
+          <em>atenciones</em>, el plan es mucho más alcanzable de lo que parecía.
+          La diferencia entre las dos lecturas son miles de millones de pesos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">04</div><h2>Lo que sí sabemos de la pauta</h2></div>
+    <p class="dek">Independiente de cuál sea la meta, esto aplica: las plataformas no escalan
+      en línea recta.</p>
+
+    <div class="stack">
+      <p>Medimos la elasticidad sobre 156 días: <strong>al doblar la inversión diaria, el
+        costo por solicitud sube un 22%.</strong> El volumen crece con la inversión elevada
+        a 0,71, no en proporción directa.</p>
+      <p>Llevado al extremo: cuadruplicar las solicitudes diarias por la sola vía de comprar
+        más pauta costaría del orden de diez veces el presupuesto actual. Y, por lo que vimos
+        en la sección 1, esas solicitudes adicionales convertirían peor que las de hoy.</p>
+    </div>
+
+    <figure>
+      <div class="chart">
+        <svg viewBox="0 0 700 290" role="img" aria-label="Curva de rendimientos decrecientes: con 430.000 diarios se obtienen 195 solicitudes de pauta; con 1,7 millones 522; y hacen falta 4,3 millones diarios para llegar a 1.000.">
+          <g stroke="var(--line)" stroke-width="1">
+            <line x1="62" y1="235" x2="672" y2="235"/>
+            <line x1="62" y1="182" x2="672" y2="182"/>
+            <line x1="62" y1="129" x2="672" y2="129"/>
+            <line x1="62" y1="76"  x2="672" y2="76"/>
+            <line x1="62" y1="24"  x2="672" y2="24"/>
+          </g>
+          <g font-family="Figtree, sans-serif" font-size="11" fill="var(--ink-3)" text-anchor="end">
+            <text x="54" y="239">0</text><text x="54" y="186">250</text>
+            <text x="54" y="133">500</text><text x="54" y="80">750</text><text x="54" y="28">1.000</text>
+          </g>
+          <path d="M 120,194 L 178,168 L 237,145 L 295,125 L 354,106 L 412,89 L 470,73 L 529,58 L 587,43 L 645,24"
+                fill="none" stroke="var(--cyan)" stroke-width="2" stroke-linecap="round"/>
+          <line x1="62" y1="24" x2="672" y2="24" stroke="var(--alert)" stroke-width="1" stroke-dasharray="4 4"/>
+          <text x="66" y="18" font-family="Figtree, sans-serif" font-size="11" fill="var(--alert)">1.000 solicitudes diarias de pauta</text>
+          <circle cx="120" cy="194" r="5" fill="var(--cyan)" stroke="var(--surface)" stroke-width="2"/>
+          <text x="128" y="189" font-family="Figtree, sans-serif" font-size="11.5" fill="var(--ink-2)">hoy · 430 mil → 195</text>
+          <circle cx="295" cy="125" r="5" fill="var(--cyan)" stroke="var(--surface)" stroke-width="2"/>
+          <text x="303" y="120" font-family="Figtree, sans-serif" font-size="11.5" fill="var(--ink-2)">1,7 M → 522</text>
+          <circle cx="645" cy="24" r="6" fill="var(--alert)" stroke="var(--surface)" stroke-width="2"/>
+          <text x="637" y="44" font-family="Figtree, sans-serif" font-size="11.5" fill="var(--alert)" text-anchor="end">4,3 M → 1.000</text>
+          <g font-family="Figtree, sans-serif" font-size="11" fill="var(--ink-3)" text-anchor="middle">
+            <text x="120" y="253">430 mil</text><text x="295" y="253">1,7 M</text>
+            <text x="470" y="253">3,0 M</text><text x="645" y="253">4,3 M</text>
+            <text x="367" y="276" fill="var(--ink-2)">inversión diaria en pauta</text>
+          </g>
+        </svg>
+      </div>
+      <figcaption>Triplicar la inversión no triplica las solicitudes: las multiplica por 2,2.
+        Y en 2026 cada solicitud adicional convirtió peor que la anterior.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">05</div><h2>Las palancas, reordenadas</h2></div>
+    <p class="dek">El orden cambió al ver el tablero. Las dos primeras no cuestan pauta y
+      valen más que duplicar el presupuesto.</p>
+
+    <div class="lev">
+      <article>
+        <div class="k">Palanca 1</div>
+        <h3>Recepción de documentos</h3>
+        <p>Del 51% al 70%. Son personas ya preaprobadas, ya pagadas, con 20 días de plazo
+          para completar. Retargeting dirigido solo a ellas, recordatorios por WhatsApp y
+          correo, y seguimiento comercial antes de que venza el plazo.</p>
+        <span class="gain">+460 desembolsos al mes · sin pauta nueva</span>
+      </article>
+      <article>
+        <div class="k">Palanca 2</div>
+        <h3>Conversión del cotizador</h3>
+        <p>36,4% de punta a punta contra 45,0% del cotizador anterior. La fuga está en la
+          pantalla de contacto, donde se piden teléfono, correo y cédula para el código.</p>
+        <span class="gain">+46 solicitudes diarias · sin un peso más</span>
+      </article>
+      <article>
+        <div class="k">Palanca 3</div>
+        <h3>Posición en búsqueda</h3>
+        <p>Aparecemos en el 10% de las búsquedas relevantes y perdemos entre el 60% y el 70%
+          de las impresiones por posición, no por presupuesto. Demanda que ya existe.</p>
+        <span class="gain">Volumen de mejor calidad: viene de intención</span>
+      </article>
+      <article>
+        <div class="k">Palanca 4</div>
+        <h3>Más convenios</h3>
+        <p>Las solicitudes con convenio convierten mucho mejor que las de pauta abierta. Cada
+          convenio nuevo amplía la base elegible sin competir en subasta.</p>
+        <span class="gain">La palanca estructural del negocio</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">06</div><h2>Lo que hay que decidir, en orden</h2></div>
+    <ul class="plain" style="max-width:68ch">
+      <li><strong>Qué son las 1.000 diarias: solicitudes o atenciones.</strong> De eso depende
+        si el presupuesto 2027 sirve o hay que rehacerlo por tres. Es la primera pregunta y
+        no se puede planear sin responderla.</li>
+      <li><strong>Si la meta del año se fija en desembolsos y no en solicitudes.</strong> Es
+        lo que mide el negocio, ya está en el tablero y evita premiar volumen que no coloca.</li>
+      <li><strong>Quién se hace cargo del tramo de documentos.</strong> Es la palanca más
+        rentable que encontramos y no es de medios: es producto, CRM y comercial.</li>
+      <li><strong>Cuántos convenios nuevos puede firmar comercial en 2027.</strong> Ese número
+        define el techo real de crecimiento.</li>
+      <li><strong>El presupuesto del primer trimestre</strong>, que es lo único que conviene
+        comprometer hoy. El resto se confirma con los datos de cada revisión.</li>
+    </ul>
+
+    <div class="note" style="margin-top:24px">
+      <span class="tag">Sobre este documento</span>
+      <p>Cifras de pauta: Meta Ads y Google Ads, 9 de junio al 11 de noviembre de 2026.
+        Cifras de negocio: tablero de KPI's 2026 de ALMI, hojas mensuales y Dashboard Anual.
+        La elasticidad se midió por separado en las dos versiones del cotizador y las dos
+        dieron el mismo resultado, aunque con correlación baja: sirve para descartar
+        escenarios, no para prometer un costo exacto.</p>
+      <p>No hay estacionalidad anual confiable en la pauta: cinco meses de datos con un
+        cambio de cotizador en la mitad. Lo que sí está medido y se repite es el día de la
+        semana: de viernes a domingo la solicitud cuesta 31% más que de lunes a jueves.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>ALMI Financiera · Plan de escalado 2027</span>
+    <span>Pauta al 11-nov-2026 · KPI's 2026 de ALMI</span>
+  </div>
+</footer>

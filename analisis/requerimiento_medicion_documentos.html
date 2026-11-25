@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Requerimiento · Medición de documentos · ALMI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;600;700&family=Figtree:wght@400;500;600&display=swap">
+<style>
+@page { size:A4; margin:0 }
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#051B3E; --cyan:#29C7F8; --ink:#17283D; --ink-2:#4B6279; --ink-3:#8498AB;
+  --line:#DCE6F0; --surface:#F2F7FC; --alert:#B5411F;
+  --head:"Host Grotesk","Segoe UI",sans-serif;
+  --body:"Figtree","Segoe UI",sans-serif;
+  --mono:"Consolas","Courier New",monospace;
+}
+body{font-family:var(--body);color:var(--ink);font-size:10.4pt;line-height:1.56;
+     -webkit-print-color-adjust:exact;print-color-adjust:exact}
+.page{width:210mm;height:297mm;overflow:hidden;page-break-after:always;position:relative;
+      padding:20mm 20mm 16mm}
+.page:last-child{page-break-after:auto}
+h1,h2,h3{font-family:var(--head);line-height:1.2}
+code{font-family:var(--mono);font-size:8.8pt;background:var(--surface);
+     border:1px solid var(--line);border-radius:2.5px;padding:0.5mm 1.2mm}
+strong{font-weight:600}
+p{margin-bottom:3.2mm}
+p:last-child{margin-bottom:0}
+
+/* --- portada --- */
+.cover{background:var(--navy);color:#fff;padding:0}
+.cover .inner{padding:28mm 20mm 20mm;height:100%;display:flex;flex-direction:column}
+.mark{display:flex;align-items:center;gap:3.5mm;margin-bottom:auto}
+.mark .wm{font-family:var(--head);font-weight:700;font-size:13pt;letter-spacing:.22em;color:#fff}
+.mark .sub{font-family:var(--head);font-size:6.6pt;letter-spacing:.3em;color:#8FB6D4;margin-top:.6mm}
+.cover .eyebrow{font-family:var(--head);font-size:8pt;font-weight:700;letter-spacing:.2em;
+                text-transform:uppercase;color:var(--cyan);margin-bottom:5mm}
+.cover h1{font-size:30pt;font-weight:700;color:#fff;line-height:1.1;margin-bottom:6mm}
+.cover .lede{font-size:12pt;color:#C6D9EA;max-width:135mm;margin-bottom:12mm}
+.ficha{border-top:1px solid rgba(255,255,255,.22);padding-top:6mm;
+       display:grid;grid-template-columns:1fr 1fr;gap:5mm 10mm;max-width:150mm}
+.ficha div .k{font-family:var(--head);font-size:7.4pt;font-weight:700;letter-spacing:.14em;
+              text-transform:uppercase;color:#7FA8C9;margin-bottom:1mm}
+.ficha div .v{font-size:10pt;color:#fff}
+.resumen{margin-top:12mm;background:rgba(41,199,248,.12);border-left:3px solid var(--cyan);
+         padding:6mm 7mm;max-width:150mm}
+.resumen .t{font-family:var(--head);font-size:8pt;font-weight:700;letter-spacing:.14em;
+            text-transform:uppercase;color:var(--cyan);margin-bottom:2.5mm}
+.resumen p{color:#DCE9F4;font-size:10pt;margin-bottom:2mm}
+.resumen p:last-child{margin-bottom:0}
+
+/* --- páginas interiores --- */
+.ph{display:flex;justify-content:space-between;align-items:baseline;
+    border-bottom:1px solid var(--line);padding-bottom:3mm;margin-bottom:8mm}
+.ph .t{font-family:var(--head);font-size:8pt;font-weight:700;letter-spacing:.16em;
+       text-transform:uppercase;color:var(--ink-3)}
+.ph .n{font-family:var(--head);font-size:8pt;font-weight:700;color:var(--cyan)}
+h2{font-size:17pt;font-weight:700;color:var(--navy);margin-bottom:4mm}
+h2 .num{color:var(--cyan);margin-right:2.5mm}
+h3{font-size:11.5pt;font-weight:600;color:var(--navy);margin:6mm 0 2.5mm}
+.pf{position:absolute;left:20mm;right:20mm;bottom:9mm;display:flex;
+    justify-content:space-between;font-size:7.6pt;color:var(--ink-3);
+    border-top:1px solid var(--line);padding-top:2.5mm}
+
+.caja{background:var(--surface);border-left:3px solid var(--cyan);
+      padding:5mm 6mm;margin:4mm 0 5mm}
+.caja.alerta{border-left-color:var(--alert)}
+.caja .t{font-family:var(--head);font-size:7.6pt;font-weight:700;letter-spacing:.14em;
+         text-transform:uppercase;color:var(--cyan);margin-bottom:2mm}
+.caja.alerta .t{color:var(--alert)}
+.caja p{font-size:9.8pt;margin-bottom:2mm}
+
+table{border-collapse:collapse;width:100%;font-size:9.4pt;margin:3mm 0 5mm}
+th,td{text-align:left;padding:2.6mm 3mm;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--head);font-size:7.6pt;font-weight:700;letter-spacing:.1em;
+   text-transform:uppercase;color:var(--ink-3);background:var(--surface)}
+tr:last-child td{border-bottom:none}
+td.hito{color:var(--navy);font-weight:600}
+
+ul{margin:0 0 4mm 5mm}
+li{margin-bottom:2.2mm;padding-left:1mm}
+li::marker{color:var(--cyan)}
+
+.req{border:1px solid var(--line);border-radius:3mm;padding:5mm 6mm;margin-bottom:4.5mm}
+.req .cab{display:flex;align-items:baseline;gap:3mm;margin-bottom:2.5mm}
+.req .id{font-family:var(--head);font-weight:700;font-size:9pt;color:#fff;background:var(--cyan);
+         border-radius:2mm;padding:.8mm 2.2mm;white-space:nowrap}
+.req .id.rojo{background:var(--alert)}
+.req .tit{font-family:var(--head);font-weight:600;font-size:11pt;color:var(--navy)}
+.req p{font-size:9.8pt;margin-bottom:2.2mm}
+.req .prueba{margin-top:3mm;padding-top:2.5mm;border-top:1px dashed var(--line);
+             font-size:9pt;color:var(--ink-2)}
+.req .prueba b{font-family:var(--head);font-size:7.4pt;font-weight:700;letter-spacing:.12em;
+               text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:.8mm}
+</style>
+</head>
+<body>
+
+<!-- ============ 1 · PORTADA ============ -->
+<div class="page cover">
+  <div class="inner">
+    <div class="mark">
+      <svg width="34" height="29" viewBox="0 0 30 26" aria-hidden="true">
+        <path d="M14.2 0 29 26h-8.3L13.4 12.6 9.6 19.4h5.1L18 26H0z" fill="#fff"/>
+      </svg>
+      <div>
+        <div class="wm">ALMI</div>
+        <div class="sub">FINANCIERA</div>
+      </div>
+    </div>
+
+    <p class="eyebrow">Requerimiento de desarrollo · 001</p>
+    <h1>Medición de la carga<br>y firma de documentos</h1>
+    <p class="lede">Lo necesario para cerrar la medición del tramo que va entre la solicitud
+      creada y el crédito firmado.</p>
+
+    <div class="ficha">
+      <div><div class="k">Dirigido a</div><div class="v">Equipo de desarrollo de ALMI</div></div>
+      <div><div class="k">Fecha</div><div class="v">20 de noviembre de 2026</div></div>
+      <div><div class="k">Sistemas afectados</div><div class="v">cotizador · admin · loans</div></div>
+      <div><div class="k">Estado</div><div class="v">Solicitud formal</div></div>
+    </div>
+
+    <div class="resumen">
+      <div class="t">En tres líneas</div>
+      <p>Hoy se mide hasta la solicitud creada. Lo que pasa después no se ve, y ahí se cae
+        casi la mitad de la gente que ya pagamos.</p>
+      <p>Pedimos cuatro cosas: una consulta a la base de datos, dos campos en la solicitud,
+        dos eventos enviados desde el servidor y una etiqueta en la plataforma.</p>
+      <p>La consulta va primero porque decide el diseño del resto.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 2 · CONTEXTO Y FLUJO ============ -->
+<div class="page">
+  <div class="ph"><span class="t">Requerimiento 001 · ALMI Financiera</span><span class="n">02</span></div>
+
+  <h2><span class="num">1.</span>Por qué lo pedimos</h2>
+  <p>El cotizador mide hasta la solicitud creada. A partir de ahí la persona pasa a
+    <code>admin.almifinanciera.com</code>, carga sus documentos y los firma, y nada de eso
+    llega a las plataformas de pauta ni a la analítica.</p>
+  <p>El costo de no verlo es medible. Entre el 1 y el 10 de noviembre hubo <strong>2.424
+    solicitudes y 1.246 recepciones de documentos</strong>. Casi la mitad de las personas por
+    las que ya se pagó publicidad se detiene en un tramo que no podemos observar, segmentar
+    ni acompañar.</p>
+  <p>Con esta medición se podrá recordarle a quien dejó documentos pendientes antes de que
+    venza su plazo, y orientar la inversión publicitaria hacia las personas que completan el
+    proceso y no solo hacia las que inician una solicitud.</p>
+
+  <h2 style="margin-top:9mm"><span class="num">2.</span>El flujo, tal como está hoy</h2>
+  <p>Levantado el 20 de noviembre de 2026 a partir del comportamiento de la plataforma en
+    producción. Los dos hitos marcados son los que necesitamos medir.</p>
+
+  <table>
+    <thead><tr><th style="width:52mm">Paso</th><th>Qué ocurre</th></tr></thead>
+    <tbody>
+      <tr><td>Solicitud creada</td><td>Fin del cotizador. Hoy sí se mide.</td></tr>
+      <tr><td>Entrega a la plataforma</td><td>La persona recibe un enlace del tipo <code>/upload-company-working-documents/&lt;id&gt;</code></td></tr>
+      <tr><td>Documentos requeridos</td><td><code>required-company-working-documents/{id}</code> · puede venir vacío</td></tr>
+      <tr><td class="hito">Carga de documentos</td><td><strong>Primer hito a medir.</strong> <code>upload-company-working-documents/{id}</code></td></tr>
+      <tr><td>Invitación a firmar</td><td><code>electronic-signature/documents/invite-to-sign/{id}</code></td></tr>
+      <tr><td class="hito">Firma completa</td><td><strong>Segundo hito a medir.</strong> Bandera <code>areAllDocumentsSigned</code></td></tr>
+      <tr><td>Desembolso</td><td>Fuera del alcance de este requerimiento</td></tr>
+    </tbody>
+  </table>
+
+  <div class="caja">
+    <div class="t">Dos hechos que condicionan el diseño</div>
+    <p><strong>El plazo es de 20 días.</strong> La carga rara vez ocurre en la misma sesión y
+      con frecuencia no ocurre en el mismo dispositivo. Un evento disparado desde el navegador
+      perdería la mayoría de los casos: por eso lo pedimos desde el servidor.</p>
+    <p><strong>Hay empresas que no requieren documentos.</strong> La plataforma contempla ese
+      caso. Contarlas como carga completada distorsionaría la métrica.</p>
+  </div>
+
+  <div class="pf"><span>Medición de la carga y firma de documentos</span><span>Página 2 de 6</span></div>
+</div>
+
+<!-- ============ 3 · PETICIONES 1 Y 2 ============ -->
+<div class="page">
+  <div class="ph"><span class="t">Requerimiento 001 · ALMI Financiera</span><span class="n">03</span></div>
+
+  <h2><span class="num">3.</span>Lo que pedimos</h2>
+  <p>Cuatro entregas, en orden de dependencia. La primera no es desarrollo: es una consulta,
+    y de su resultado depende cómo se diseña el resto.</p>
+
+  <div class="req">
+    <div class="cab"><span class="id rojo">1</span><span class="tit">Consulta del rezago entre solicitud y carga</span></div>
+    <p>Para las solicitudes creadas entre el <strong>1 y el 31 de octubre de 2026</strong>, que
+      ya cumplieron sus 20 días de plazo, necesitamos cuántas cargaron documentos en cada
+      tramo: el mismo día, entre 1 y 3 días después, entre 4 y 7, entre 8 y 14, entre 15 y 20,
+      y cuántas no cargaron nunca.</p>
+    <p><strong>Por qué importa.</strong> Las plataformas de pauta atribuyen un resultado como
+      máximo hasta 7 días después del clic. Si la mayoría de las cargas ocurre dentro de esa
+      ventana, podemos orientar la inversión hacia la carga de documentos. Si se reparten a lo
+      largo de los 20 días, hay que diseñarlo de otra manera.</p>
+    <p>Son seis números y definen el resto del trabajo, por eso va primero.</p>
+    <div class="prueba"><b>Entregable</b> Una tabla con los seis conteos y el total de
+      solicitudes del periodo.</div>
+  </div>
+
+  <div class="req">
+    <div class="cab"><span class="id rojo">2</span><span class="tit">Guardar los identificadores de clic en la solicitud</span></div>
+    <p>Que <code>POST /api/loan-request/</code> almacene dentro del objeto
+      <code>attribution</code> los campos <code>gclid</code> y <code>fbclid</code>, junto a los
+      UTM que ya se están guardando hoy.</p>
+    <p>Esto se solicitó en octubre y quedó en curso. Ahora es bloqueante: sin esos dos
+      identificadores, ningún evento posterior puede atribuirse a la campaña que originó la
+      solicitud, y las entregas 3 y 4 pierden su propósito.</p>
+    <div class="prueba"><b>Cómo lo comprobamos</b> Crear una solicitud ingresando con
+      <code>?gclid=PRUEBA123</code> en la URL y verificar que el registro almacenado conserva
+      ese valor.</div>
+  </div>
+
+  <div class="caja alerta">
+    <div class="t">Orden de ejecución</div>
+    <p>Las entregas 1 y 2 condicionan a las demás. La 1 define el diseño y la 2 es un
+      prerrequisito técnico. Si hay que priorizar, son estas dos.</p>
+  </div>
+
+  <div class="pf"><span>Medición de la carga y firma de documentos</span><span>Página 3 de 6</span></div>
+</div>
+
+<!-- ============ 4 · PETICIÓN 3 ============ -->
+<div class="page">
+  <div class="ph"><span class="t">Requerimiento 001 · ALMI Financiera</span><span class="n">04</span></div>
+
+  <div class="req">
+    <div class="cab"><span class="id">3</span><span class="tit">Enviar dos eventos desde el servidor</span></div>
+    <p>Que el backend envíe un evento cuando una solicitud <strong>completa la carga de todos
+      los documentos requeridos</strong>, y otro cuando <strong>queden todos firmados</strong>,
+      es decir cuando <code>areAllDocumentsSigned</code> pase a verdadera. Destino: la API de
+      conversiones de Meta y la importación de conversiones de Google Ads.</p>
+
+    <h3 style="margin-top:4mm">Contenido de cada evento</h3>
+    <ul>
+      <li>Identificador de la solicitud.</li>
+      <li>Correo electrónico y teléfono, <strong>cifrados con SHA-256</strong>. Ningún dato
+        personal debe viajar en claro.</li>
+      <li>Los valores de <code>gclid</code> y <code>fbclid</code> guardados en esa solicitud.</li>
+      <li>Fecha y hora del hecho.</li>
+    </ul>
+
+    <h3>Reglas de comportamiento</h3>
+    <ul>
+      <li>Debe salir del <strong>servidor</strong>, no del navegador. Con 20 días de plazo, la
+        persona suele volver desde otro dispositivo y un evento de navegador no la reconocería.</li>
+      <li>Si la empresa <strong>no requiere documentos</strong>, no debe enviarse el evento de
+        carga. El de firma sí, cuando corresponda.</li>
+      <li><strong>Una sola vez por solicitud.</strong> Corregir y volver a subir un documento no
+        debe generar un segundo envío. Usar el identificador de la solicitud como clave.</li>
+      <li>Si el envío falla, reintentar hasta tres veces con espera creciente y dejar registro
+        del error con el identificador.</li>
+      <li>Un fallo del envío <strong>nunca</strong> puede bloquear ni demorar la carga de la
+        persona.</li>
+      <li>No se requiere tiempo real: basta con que salga dentro de los 15 minutos siguientes.</li>
+    </ul>
+
+    <div class="prueba"><b>Cómo lo comprobamos</b> Completar una carga de prueba y ver el
+      evento en el Administrador de eventos de Meta en menos de 15 minutos; repetir con la
+      firma y confirmar que llega como un evento distinto; volver a subir un documento y
+      confirmar que no se duplica.</div>
+  </div>
+
+  <div class="pf"><span>Medición de la carga y firma de documentos</span><span>Página 4 de 6</span></div>
+</div>
+
+<!-- ============ 5 · PETICIÓN 4 Y CONFIRMACIONES ============ -->
+<div class="page">
+  <div class="ph"><span class="t">Requerimiento 001 · ALMI Financiera</span><span class="n">05</span></div>
+
+  <div class="req">
+    <div class="cab"><span class="id">4</span><span class="tit">Etiqueta de medición en la plataforma</span></div>
+    <p>Agregar el contenedor de Google Tag Manager <code>GTM-5GSLND8N</code> al
+      <code>index.html</code> de <code>admin.almifinanciera.com</code>, y enviar a la capa de
+      datos un evento <code>documentos_cargados</code> cuando la carga responda con éxito,
+      incluyendo el identificador de la solicitud.</p>
+    <p>Es complementario a la entrega 3 y permite observar el comportamiento dentro de la
+      plataforma. Como la plataforma y el cotizador comparten el dominio
+      <code>almifinanciera.com</code>, no se requiere configuración de dominios cruzados.</p>
+    <div class="prueba"><b>Cómo lo comprobamos</b> Abrir la plataforma con la vista previa de
+      Tag Manager activa y ver el contenedor cargado y el evento en la capa de datos.</div>
+  </div>
+
+  <h2 style="margin-top:8mm"><span class="num">4.</span>Tres cosas que necesitamos confirmar</h2>
+  <p>No son desarrollo. Son respuestas que afectan el alcance o el plazo.</p>
+
+  <div class="req">
+    <div class="cab"><span class="id">A</span><span class="tit">¿Existe un estado de «documentos completos»?</span></div>
+    <p>Necesitamos saber si el backend tiene un estado explícito que indique que una solicitud
+      ya entregó todo lo requerido, o si hay que derivarlo comparando los documentos requeridos
+      contra los cargados. Cambia el tamaño de la entrega 3.</p>
+  </div>
+
+  <div class="req">
+    <div class="cab"><span class="id">B</span><span class="tit">Acceso al entorno de pruebas</span></div>
+    <p>Solicitamos acceso a <code>admin-test.almi.dev</code> para verificar todo el flujo sin
+      crear solicitudes reales. Cada solicitud de prueba en producción entra en los conteos
+      diarios del mes y distorsiona el seguimiento comercial.</p>
+  </div>
+
+  <div class="req">
+    <div class="cab"><span class="id">C</span><span class="tit">La página de carga abre sin iniciar sesión</span></div>
+    <p>El 20 de noviembre comprobamos que el enlace de carga de documentos responde
+      normalmente desde un navegador sin sesión iniciada: el identificador incluido en la URL
+      es la única llave para ver y subir documentos de una solicitud.</p>
+    <p>Puede ser una decisión intencional de producto. Lo señalamos porque se trata de un
+      flujo con documentos de identidad, y preferimos que el equipo lo valore explícitamente.</p>
+  </div>
+
+  <div class="pf"><span>Medición de la carga y firma de documentos</span><span>Página 5 de 6</span></div>
+</div>
+
+<!-- ============ 6 · CIERRE ============ -->
+<div class="page">
+  <div class="ph"><span class="t">Requerimiento 001 · ALMI Financiera</span><span class="n">06</span></div>
+
+  <h2><span class="num">5.</span>Cuándo lo damos por terminado</h2>
+  <p>El requerimiento se considera completo cuando se cumplan estas cuatro condiciones:</p>
+  <ul>
+    <li>Una solicitud de prueba recorrida de principio a fin, con sus dos eventos visibles en
+      Meta y en Google Ads, atribuidos a una campaña.</li>
+    <li>El evento de carga no se envía para una empresa que no requiere documentos.</li>
+    <li>Volver a subir un documento no genera un evento duplicado.</li>
+    <li>Entregada la consulta del rezago con sus seis conteos.</li>
+  </ul>
+
+  <h2 style="margin-top:9mm"><span class="num">6.</span>Lo que no se pide aquí</h2>
+  <ul>
+    <li>Medir el desembolso. Es el hito final del negocio y merece su propio requerimiento.</li>
+    <li>Cualquier cambio en la interfaz de carga de documentos.</li>
+    <li>Modificaciones al cotizador más allá de los dos campos de la entrega 2.</li>
+  </ul>
+
+  <div class="caja" style="margin-top:9mm">
+    <div class="t">Resumen del orden sugerido</div>
+    <p><strong>Primero</strong> la consulta del rezago, que es una tarea de análisis y
+      desbloquea la decisión de diseño.</p>
+    <p><strong>En paralelo</strong> los dos campos de identificadores de clic en la solicitud,
+      que ya estaban pedidos.</p>
+    <p><strong>Después</strong> los dos eventos desde el servidor, que es el grueso del
+      trabajo, y por último la etiqueta en la plataforma, que es menor.</p>
+  </div>
+
+  <p style="margin-top:10mm;color:var(--ink-2)">Quedamos atentos a cualquier duda sobre el
+    alcance o sobre las pruebas de verificación. Con gusto acompañamos la implementación y
+    validamos cada entrega a medida que esté disponible.</p>
+
+  <div class="pf"><span>Medición de la carga y firma de documentos</span><span>Página 6 de 6</span></div>
+</div>
+
+</body>
+</html>

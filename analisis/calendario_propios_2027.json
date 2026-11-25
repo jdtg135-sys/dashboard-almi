@@ -1,0 +1,122 @@
+[
+ {
+  "mes": "Nov",
+  "total": 195,
+  "pauta": 195,
+  "propios": 0,
+  "inv_pauta": 12.9,
+  "inv_prop": 0.0,
+  "inv_total": 12.9,
+  "solo_pauta": 12.9
+ },
+ {
+  "mes": "Dic",
+  "total": 230,
+  "pauta": 230,
+  "propios": 0,
+  "inv_pauta": 15.1,
+  "inv_prop": 0.0,
+  "inv_total": 15.1,
+  "solo_pauta": 15.1
+ },
+ {
+  "mes": "Ene",
+  "total": 300,
+  "pauta": 285,
+  "propios": 15,
+  "inv_pauta": 17.4,
+  "inv_prop": 0.4,
+  "inv_total": 17.8,
+  "solo_pauta": 18.5
+ },
+ {
+  "mes": "Feb",
+  "total": 380,
+  "pauta": 350,
+  "propios": 30,
+  "inv_pauta": 19.8,
+  "inv_prop": 0.7,
+  "inv_total": 20.6,
+  "solo_pauta": 21.9
+ },
+ {
+  "mes": "Mar",
+  "total": 470,
+  "pauta": 420,
+  "propios": 50,
+  "inv_pauta": 22.2,
+  "inv_prop": 1.2,
+  "inv_total": 23.5,
+  "solo_pauta": 25.5
+ },
+ {
+  "mes": "Abr",
+  "total": 560,
+  "pauta": 490,
+  "propios": 70,
+  "inv_pauta": 24.4,
+  "inv_prop": 1.7,
+  "inv_total": 26.1,
+  "solo_pauta": 28.7
+ },
+ {
+  "mes": "May",
+  "total": 650,
+  "pauta": 560,
+  "propios": 90,
+  "inv_pauta": 26.4,
+  "inv_prop": 2.2,
+  "inv_total": 28.6,
+  "solo_pauta": 32.5
+ },
+ {
+  "mes": "Jun",
+  "total": 740,
+  "pauta": 640,
+  "propios": 100,
+  "inv_pauta": 31.6,
+  "inv_prop": 2.5,
+  "inv_total": 34.1,
+  "solo_pauta": 39.1
+ },
+ {
+  "mes": "Jul",
+  "total": 830,
+  "pauta": 705,
+  "propios": 125,
+  "inv_pauta": 36.4,
+  "inv_prop": 3.6,
+  "inv_total": 40.0,
+  "solo_pauta": 46.2
+ },
+ {
+  "mes": "Ago",
+  "total": 900,
+  "pauta": 750,
+  "propios": 150,
+  "inv_pauta": 39.8,
+  "inv_prop": 4.7,
+  "inv_total": 44.6,
+  "solo_pauta": 52.0
+ },
+ {
+  "mes": "Sep",
+  "total": 960,
+  "pauta": 785,
+  "propios": 175,
+  "inv_pauta": 42.6,
+  "inv_prop": 5.9,
+  "inv_total": 48.5,
+  "solo_pauta": 57.2
+ },
+ {
+  "mes": "Oct",
+  "total": 1000,
+  "pauta": 800,
+  "propios": 200,
+  "inv_pauta": 43.8,
+  "inv_prop": 7.0,
+  "inv_total": 50.8,
+  "solo_pauta": 60.8
+ }
+]

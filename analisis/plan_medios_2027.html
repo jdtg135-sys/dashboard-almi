@@ -1,0 +1,370 @@
+<title>Plan de medios 2027</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;600;700&family=Figtree:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --navy:#051B3E; --cyan:#29C7F8; --ink:#0B2038; --ink-2:#44617D; --ink-3:#7A93AC;
+  --bg:#FFFFFF; --surface:#F2F7FC; --line:#DCE6F0; --alert:#C0462A; --ok:#1C7F5E;
+  --ff-head:"Host Grotesk","Segoe UI",system-ui,sans-serif;
+  --ff-body:"Figtree","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --navy:#09244C; --cyan:#45CEFA; --ink:#E8F0F8; --ink-2:#A3B8CD; --ink-3:#73889E;
+    --bg:#050E1C; --surface:#0C1B30; --line:#1B3150; --alert:#E4785A; --ok:#4FBF97;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --navy:#09244C; --cyan:#45CEFA; --ink:#E8F0F8; --ink-2:#A3B8CD; --ink-3:#73889E;
+  --bg:#050E1C; --surface:#0C1B30; --line:#1B3150; --alert:#E4785A; --ok:#4FBF97;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ff-body);
+     font-size:16px;line-height:1.68;-webkit-font-smoothing:antialiased}
+.wrap{max-width:900px;margin-inline:auto;
+      padding-left:max(16px,env(safe-area-inset-left,0px));
+      padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--ff-head);text-wrap:balance;margin:0}
+p{margin:0}
+strong{font-weight:600}
+.num{font-variant-numeric:tabular-nums}
+
+.hero{background:var(--navy)}
+.hero .wrap{padding-block:56px 46px;display:flex;flex-direction:column;gap:20px}
+.eyebrow{font-family:var(--ff-head);font-size:12px;font-weight:700;letter-spacing:.17em;
+         text-transform:uppercase;color:var(--cyan)}
+.hero h1{font-size:clamp(31px,5.8vw,47px);line-height:1.08;font-weight:700;color:#fff}
+.hero .lede{max-width:64ch;color:#C2D5E6;font-size:17px}
+.jump{display:flex;flex-wrap:wrap;gap:24px;padding-top:8px}
+.jump b{display:block;font-family:var(--ff-head);font-weight:700;font-size:26px;color:#fff;
+        line-height:1.15;font-variant-numeric:tabular-nums}
+.jump span{display:block;font-size:12.5px;color:#8FB0CC;line-height:1.4;margin-top:2px}
+
+section{border-top:1px solid var(--line)}
+section>.wrap{padding-block:46px}
+.shead{display:flex;gap:15px;align-items:baseline;margin-bottom:10px}
+.snum{font-family:var(--ff-head);font-weight:700;font-size:12.5px;color:var(--cyan);
+      padding-top:6px;flex:none}
+.shead h2{font-size:clamp(22px,3.6vw,29px);font-weight:700;line-height:1.2}
+.dek{color:var(--ink-2);max-width:66ch;margin:0 0 24px 35px}
+@media (max-width:560px){.dek{margin-left:0}}
+.stack{display:flex;flex-direction:column;gap:16px;max-width:68ch}
+
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin-block:6px 20px}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:14.5px}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{font-family:var(--ff-head);font-size:11px;font-weight:700;letter-spacing:.09em;
+         text-transform:uppercase;color:var(--ink-3);background:var(--surface)}
+tr:last-child td{border-bottom:0}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+tfoot td{font-weight:700;background:var(--surface);border-top:2px solid var(--line)}
+.tag-med{display:inline-block;font-size:10.5px;font-family:var(--ff-head);font-weight:700;
+         letter-spacing:.06em;padding:2px 7px;border-radius:4px;white-space:nowrap}
+.tag-med.si{background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok)}
+.tag-med.no{background:color-mix(in srgb,var(--alert) 14%,transparent);color:var(--alert)}
+
+.note{background:var(--surface);border-left:4px solid var(--cyan);
+      border-radius:0 12px 12px 0;padding:17px 21px;margin-block:4px 20px}
+.note.warn{border-left-color:var(--alert)}
+.note .tag{display:block;font-family:var(--ff-head);font-size:10.5px;font-weight:700;
+           letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:5px}
+.note.warn .tag{color:var(--alert)}
+.note p+p{margin-top:9px}
+
+.mix{display:flex;flex-direction:column;gap:7px;margin-block:8px 20px}
+.mrow{display:grid;grid-template-columns:200px minmax(0,1fr) 104px;gap:12px;align-items:center}
+@media (max-width:620px){.mrow{grid-template-columns:132px minmax(0,1fr) 92px}}
+.mrow .mn{font-size:13px;color:var(--ink-2);min-width:0}
+.mbar{height:26px;border-radius:0 4px 4px 0;background:var(--cyan);opacity:.9}
+.mrow.nuevo .mbar{opacity:.55}
+.mrow .mv{font-family:var(--ff-head);font-weight:700;font-size:13.5px;text-align:right;
+          font-variant-numeric:tabular-nums}
+
+.plat{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:18px}
+.plat>header{background:var(--surface);padding:16px 20px;border-bottom:1px solid var(--line);
+             display:flex;flex-wrap:wrap;gap:6px 14px;align-items:baseline}
+.plat>header h3{font-size:19px;font-weight:700;flex:1 1 auto;min-width:0}
+.plat>header .bud{font-family:var(--ff-head);font-weight:700;font-size:14px;color:var(--cyan);
+                  font-variant-numeric:tabular-nums}
+.plat .body{padding:18px 20px;display:flex;flex-direction:column;gap:14px}
+.kv{display:grid;grid-template-columns:142px minmax(0,1fr);gap:10px;font-size:14px}
+@media (max-width:560px){.kv{grid-template-columns:1fr}}
+.kv .k{font-family:var(--ff-head);font-size:10.5px;font-weight:700;letter-spacing:.1em;
+       text-transform:uppercase;color:var(--ink-3);padding-top:3px}
+.kv .v{color:var(--ink-2);min-width:0}
+.kv .v strong{color:var(--ink)}
+
+ul.plain{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px}
+ul.plain li::marker{color:var(--cyan)}
+ul.tight{margin:0;padding-left:18px}
+ul.tight li{margin-bottom:4px}
+
+footer{background:var(--navy);color:#90AECB}
+footer .wrap{padding-block:28px;font-size:12.5px;display:flex;flex-wrap:wrap;gap:6px 20px}
+</style>
+
+<div class="hero">
+  <div class="wrap">
+    <p class="eyebrow">ALMI Financiera · Plan de medios 2027</p>
+    <h1>Cinco canales pagados para 1.000 solicitudes diarias</h1>
+    <p class="lede">Reparto de presupuesto, objetivos de campaña y orden de implementación.
+      Solo medios pagados: sin CRM, sin correo, sin WhatsApp y sin referidos.</p>
+    <div class="jump">
+      <div><b class="num">1.000</b><span>solicitudes diarias</span></div>
+      <div><b class="num">3,93 M</b><span>inversión diaria</span></div>
+      <div><b class="num">118 M</b><span>mensuales</span></div>
+      <div><b class="num">3.934</b><span>costo por solicitud</span></div>
+      <div><b class="num">93%</b><span>del techo de estos cinco canales</span></div>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">01</div><h2>Lo primero: el margen es mínimo</h2></div>
+    <div class="stack">
+      <p>Sumando el techo realista de los cinco canales pagados se llega a unas <strong>1.080
+        solicitudes diarias</strong>. La meta de 1.000 está al 93% de ese techo.</p>
+      <p>Eso significa que el plan funciona solo si <strong>los cinco canales rinden cerca de
+        su máximo a la vez</strong>. Si TikTok o Demand Gen quedan por debajo de lo previsto,
+        no hay de dónde sacar el faltante: Meta y búsqueda ya estarían en su tope.</p>
+      <div class="note warn">
+        <span class="tag">Lo que cambió al dejar solo medios pagados</span>
+        <p>El CRM propio y los referidos eran los dos canales más baratos del conjunto, con
+          costos de 508 y 1.144 por solicitud, y aportaban 100 diarias de techo con menos del
+          3% del presupuesto.</p>
+        <p>Sin ellos, la misma meta pasa de <strong>100 a 118 millones mensuales</strong> y el
+          margen contra el techo cae del 15% al 7%. Son 18 millones más al mes, y menos
+          holgura.</p>
+      </div>
+      <p>Hay tres formas de recuperar margen, y conviene decidir cuál antes de comprometer el
+        último tramo: subir el techo de Meta con más volumen de creatividad, que es un supuesto
+        verificable; rehabilitar Performance Max con exclusiones bien montadas; o aceptar que
+        el plan de medios puro entrega del orden de <strong>850 a 900 diarias con holgura</strong>,
+        y que las últimas cien exigen un canal más.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">02</div><h2>Por qué cinco canales y no dos</h2></div>
+    <div class="stack">
+      <p>Cada canal tiene su propia curva de rendimientos decrecientes. En la cuenta de ALMI
+        medimos que <strong>al doblar la inversión diaria el costo por solicitud sube un
+        22%</strong>, y esa penalización se aplica por canal, no al total.</p>
+      <div class="note">
+        <span class="tag">El ahorro de repartir</span>
+        <p>Concentrado en Meta y búsqueda, como hoy: <strong>4,30 millones diarios</strong>.<br>
+           Repartido en los cinco canales: <strong>3,93 millones diarios</strong>.<br>
+           Diferencia: <strong>11 millones de pesos al mes</strong> por la misma meta.</p>
+      </div>
+      <p>El ahorro es menor que con los canales propios incluidos, porque los tres canales
+        nuevos arrancan con un costo más alto que Meta. Aun así, abrirlos es lo que hace la
+        diferencia entre una meta alcanzable y una que no lo es: sin ellos, Meta y búsqueda
+        topan en 610 diarias y no hay presupuesto que las pase.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">03</div><h2>El reparto</h2></div>
+    <p class="dek">Asignación óptima a régimen pleno, igualando el costo marginal entre
+      canales. Los porcentajes son de inversión, no de volumen.</p>
+
+    <div class="mix" role="img" aria-label="Reparto de la inversión diaria: Meta 1.321.616, TikTok 834.438, Demand Gen 655.026, Google búsqueda 628.208 y YouTube 494.809.">
+      <div class="mrow"><span class="mn">Meta · conversiones</span><div class="mbar" style="width:100%"></div><span class="mv">33,6%</span></div>
+      <div class="mrow nuevo"><span class="mn">TikTok · conversiones</span><div class="mbar" style="width:63.1%"></div><span class="mv">21,2%</span></div>
+      <div class="mrow nuevo"><span class="mn">Google · Demand Gen</span><div class="mbar" style="width:49.6%"></div><span class="mv">16,6%</span></div>
+      <div class="mrow"><span class="mn">Google · búsqueda</span><div class="mbar" style="width:47.5%"></div><span class="mv">16,0%</span></div>
+      <div class="mrow nuevo"><span class="mn">YouTube · acción en video</span><div class="mbar" style="width:37.4%"></div><span class="mv">12,6%</span></div>
+    </div>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>Canal</th><th class="n">Inversión / día</th><th class="n">Solicitudes / día</th><th class="n">Techo</th><th class="n">CPA</th><th>Costo de partida</th></tr></thead>
+        <tbody>
+          <tr><td>Meta · conversiones</td><td class="n">1.321.616</td><td class="n">450</td><td class="n">450</td><td class="n">2.936</td><td><span class="tag-med si">MEDIDO</span></td></tr>
+          <tr><td>TikTok · conversiones</td><td class="n">834.438</td><td class="n">164</td><td class="n">200</td><td class="n">5.087</td><td><span class="tag-med no">POR PROBAR</span></td></tr>
+          <tr><td>Google · Demand Gen</td><td class="n">655.026</td><td class="n">129</td><td class="n">150</td><td class="n">5.087</td><td><span class="tag-med no">POR PROBAR</span></td></tr>
+          <tr><td>Google · búsqueda</td><td class="n">628.208</td><td class="n">160</td><td class="n">160</td><td class="n">3.926</td><td><span class="tag-med si">MEDIDO</span></td></tr>
+          <tr><td>YouTube · acción en video</td><td class="n">494.809</td><td class="n">97</td><td class="n">120</td><td class="n">5.087</td><td><span class="tag-med no">POR PROBAR</span></td></tr>
+        </tbody>
+        <tfoot><tr><td>Total</td><td class="n">3.934.099</td><td class="n">1.000</td><td class="n">1.080</td><td class="n">3.934</td><td></td></tr></tfoot>
+      </table>
+    </div>
+
+    <div class="note warn">
+      <span class="tag">Lo que está medido y lo que no</span>
+      <p>Solo Meta y búsqueda tienen costo medido, contra el conteo real de ALMI y no el
+        atribuido, que subcuenta un 34%. Los otros tres parten de supuestos razonables para
+        crédito de consumo en Colombia, y cada uno lleva su prueba presupuestada en el primer
+        trimestre. Con tres de cinco canales sin medir y el margen en 7%, el riesgo del plan
+        está concentrado justo ahí.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">04</div><h2>Plataforma por plataforma</h2></div>
+
+    <article class="plat">
+      <header><h3>Meta · Facebook e Instagram</h3><span class="bud">1.321.616 / día · 33,6%</span></header>
+      <div class="body">
+        <div class="kv"><div class="k">Objetivo</div><div class="v"><strong>Ventas</strong>, optimizando por el evento <strong>Purchase</strong> del pixel, que es la solicitud creada. Nada de tráfico ni interacción: ya está probado que traen volumen que no solicita.</div></div>
+        <div class="kv"><div class="k">Estructura</div><div class="v">Cuatro campañas con presupuesto de campaña, separadas por audiencia y mensaje, no por formato:
+          <ul class="tight">
+            <li><strong>C1 Convenio.</strong> Empresas con convenio y sus similares. Mensaje: verifica si tu empresa tiene convenio.</li>
+            <li><strong>C2 Sector privado.</strong> Frío amplio con público ampliado. Mensaje: crédito por nómina sin fiador.</li>
+            <li><strong>C4 Retargeting.</strong> Quien entró al cotizador y no terminó, segmentado por el paso donde se cayó.</li>
+            <li><strong>C5 Ventas Advantage+.</strong> Campaña automatizada nueva, para absorber el escalado sin fragmentar las otras tres.</li>
+          </ul></div></div>
+        <div class="kv"><div class="k">Audiencias</div><div class="v">Base propia de 67.221 contactos cargada como público, segmentada en empresa identificada y otra empresa; similares sembrados en esa base; retargeting por evento del cotizador; exclusión de clientes vigentes en todas las de adquisición.</div></div>
+        <div class="kv"><div class="k">Creatividad</div><div class="v">Un lote por campaña en anuncio dinámico, con rotación cada cuatro a seis semanas: la fatiga medida en C4 aparece a las cuatro.</div></div>
+        <div class="kv"><div class="k">Techo</div><div class="v"><strong>450 diarias.</strong> Es el canal que llega primero a su límite, por eso toma un tercio del presupuesto y no más. Subir ese techo depende de producir más creatividad y más audiencias distintas, y es el supuesto que más conviene poner a prueba.</div></div>
+      </div>
+    </article>
+
+    <article class="plat">
+      <header><h3>Google · Búsqueda</h3><span class="bud">628.208 / día · 16,0%</span></header>
+      <div class="body">
+        <div class="kv"><div class="k">Objetivo</div><div class="v"><strong>Conversiones</strong> con CPA objetivo. Es el canal de intención: la persona ya está buscando crédito por libranza.</div></div>
+        <div class="kv"><div class="k">Por qué crece tanto</div><div class="v">Hoy aparecemos en el <strong>10% de las búsquedas relevantes</strong> y perdemos entre el 60% y el 70% de las impresiones por posición del anuncio. Aquí el presupuesto adicional compra inventario que hoy se nos escapa, no inventario peor, así que su costo sube mucho menos que en los demás canales.</div></div>
+        <div class="kv"><div class="k">Estructura</div><div class="v">Por intención, no por producto: libranza y descuento de nómina, crédito para reportados, retanqueo y ampliación de cupo, y marca. La de marca es defensiva y barata.</div></div>
+        <div class="kv"><div class="k">El trabajo real</div><div class="v">No es presupuesto, es <strong>posición</strong>: calidad del anuncio, concordancias, páginas de destino por intención y estructura de pujas. Sin eso, el dinero adicional se va en pagar más caro el mismo 10%.</div></div>
+        <div class="kv"><div class="k">Techo</div><div class="v">160 diarias, limitado por el volumen de búsqueda que existe en Colombia.</div></div>
+      </div>
+    </article>
+
+    <article class="plat">
+      <header><h3>TikTok Ads</h3><span class="bud">834.438 / día · 21,2%</span></header>
+      <div class="body">
+        <div class="kv"><div class="k">Objetivo</div><div class="v"><strong>Conversiones web</strong> con el pixel de TikTok sobre el cotizador. Nada de alcance ni reproducciones.</div></div>
+        <div class="kv"><div class="k">Por qué entra</div><div class="v">Las dos personas de ALMI, el operario de 35 a 48 y la administrativa de 28 a 42, están en TikTok en Colombia, y el costo por mil impresiones es bastante menor que en Meta. Es el canal nuevo con mayor techo de volumen, y por eso se lleva el segundo presupuesto del plan.</div></div>
+        <div class="kv"><div class="k">Creatividad</div><div class="v">Nativa, no reciclada de Meta. Spark Ads con creadores y formato de persona hablando a cámara. Los videos verticales que ya produjimos sirven de base, pero hay que rehacer el gancho de los primeros tres segundos.</div></div>
+        <div class="kv"><div class="k">Riesgo</div><div class="v">Es un canal de descubrimiento, no de intención: puede traer volumen que no califica. La prueba del primer trimestre tiene que medir la solicitud, no el clic. Al ser el segundo canal en tamaño, es también el que más puede desviar el plan si falla.</div></div>
+      </div>
+    </article>
+
+    <article class="plat">
+      <header><h3>Google · Demand Gen</h3><span class="bud">655.026 / día · 16,6%</span></header>
+      <div class="body">
+        <div class="kv"><div class="k">Objetivo</div><div class="v"><strong>Conversiones</strong>. Entrega en los feeds de YouTube, Discover y Gmail.</div></div>
+        <div class="kv"><div class="k">Por qué entra</div><div class="v">Da alcance fuera de la búsqueda con segmentación por audiencia, dentro de la cuenta y la medición de Google que ya existen. Es el reemplazo ordenado de lo que intentaba hacer Performance Max, pero con control sobre dónde aparece el anuncio.</div></div>
+        <div class="kv"><div class="k">Audiencias</div><div class="v">Segmentos personalizados por búsqueda, similares de la base propia y retargeting del cotizador.</div></div>
+      </div>
+    </article>
+
+    <article class="plat">
+      <header><h3>YouTube · Acción en video</h3><span class="bud">494.809 / día · 12,6%</span></header>
+      <div class="body">
+        <div class="kv"><div class="k">Objetivo</div><div class="v"><strong>Conversiones</strong> con campañas de acción en video.</div></div>
+        <div class="kv"><div class="k">Por qué entra</div><div class="v">Aprovecha el inventario de video que ya producimos para Meta y TikTok con un costo marginal de producción cercano a cero. En crédito de consumo el video explica mejor que la gráfica, y el dato de C4 lo confirma: el video cargaba el 80% de las solicitudes de la campaña.</div></div>
+        <div class="kv"><div class="k">Nota</div><div class="v">Es el más incierto de los tres nuevos. Entra último en la rampa y con el presupuesto más pequeño.</div></div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">05</div><h2>Canales evaluados que no entran</h2></div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Canal</th><th>Por qué no</th></tr></thead>
+        <tbody>
+          <tr><td>Google Performance Max</td><td>Se apagó el 11 de noviembre a 13.392 por conversión, contra 3.200 de búsqueda, con dos lecturas de atribución ya cerrada. Es el primer candidato a revisar si hace falta techo adicional, pero solo con exclusiones y señales bien montadas y nunca antes de que el resto esté estable.</td></tr>
+          <tr><td>LinkedIn Ads</td><td>Caro para público masivo. Sirve para conseguir convenios, hablándole a talento humano y a dirección administrativa, pero eso es un presupuesto B2B aparte y con otra meta.</td></tr>
+          <tr><td>Programática y native</td><td>Taboola, Outbrain y similares traen volumen barato de calidad baja. En crédito eso significa solicitudes que no califican y que ensucian el aprendizaje de las campañas que sí funcionan.</td></tr>
+          <tr><td>Radio y televisión</td><td>No hay forma de atribuir la solicitud al medio. Si la meta se mide en solicitudes diarias, un canal que no se puede medir no se puede gestionar.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">06</div><h2>La rampa</h2></div>
+    <p class="dek">Cuatro tramos. El primero es de aprendizaje: su objetivo no es volumen sino
+      reemplazar supuestos por mediciones.</p>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>Tramo</th><th class="n">Inversión / día</th><th class="n">Inversión / mes</th><th class="n">Solicitudes / día</th><th class="n">CPA</th></tr></thead>
+        <tbody>
+          <tr><td>Hoy</td><td class="n">430.000</td><td class="n">12.900.000</td><td class="n">195</td><td class="n">2.205</td></tr>
+          <tr><td>Q1 2027</td><td class="n">900.000</td><td class="n">27.000.000</td><td class="n">365</td><td class="n">2.463</td></tr>
+          <tr><td>Q2 2027</td><td class="n">1.600.000</td><td class="n">48.000.000</td><td class="n">554</td><td class="n">2.885</td></tr>
+          <tr><td>Q3 2027</td><td class="n">2.400.000</td><td class="n">72.000.000</td><td class="n">746</td><td class="n">3.216</td></tr>
+          <tr><td>Q4 2027</td><td class="n">3.934.099</td><td class="n">118.022.970</td><td class="n">1.000</td><td class="n">3.934</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>Inversión diaria por canal</th><th class="n">Q1</th><th class="n">Q2</th><th class="n">Q3</th><th class="n">Q4</th></tr></thead>
+        <tbody>
+          <tr><td>Meta</td><td class="n">688.773</td><td class="n">1.119.369</td><td class="n">1.321.616</td><td class="n">1.321.616</td></tr>
+          <tr><td>Google búsqueda</td><td class="n">86.000</td><td class="n">227.957</td><td class="n">628.208</td><td class="n">628.208</td></tr>
+          <tr><td>TikTok</td><td class="n">65.381</td><td class="n">106.255</td><td class="n">189.309</td><td class="n">834.438</td></tr>
+          <tr><td>Demand Gen</td><td class="n">51.323</td><td class="n">83.409</td><td class="n">148.606</td><td class="n">655.026</td></tr>
+          <tr><td>YouTube</td><td class="n">38.770</td><td class="n">63.008</td><td class="n">112.257</td><td class="n">494.809</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="stack">
+      <p><strong>Una corrección operativa al modelo.</strong> El reparto matemático le daba a
+        búsqueda solo 55.750 diarios en el primer trimestre, porque iguala costo marginal y en
+        presupuestos bajos prefiere canales más baratos. En la tabla la dejé en 86.000, el nivel
+        de hoy: búsqueda es el canal de mayor intención y el que alimenta de señales a los demás,
+        y recortarlo para financiar un canal sin probar sería un mal negocio.</p>
+      <p><strong>El ritmo lo manda el aprendizaje, no el calendario.</strong> Ningún presupuesto
+        sube más de un 25% por vez, con unos cuatro días entre pasos, que es el límite para no
+        reiniciar la fase de aprendizaje. De 430.000 a 3,93 millones son unos diez pasos: cabe
+        de sobra en el año.</p>
+      <div class="note">
+        <span class="tag">La regla de paso</span>
+        <p>Cada tramo cierra con revisión de costo por solicitud. Si no cumplió, no se sube el
+          presupuesto del siguiente: se corrige primero. Y ningún canal nuevo pasa de la fase de
+          prueba sin un CPA medido sobre al menos 50 solicitudes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">07</div><h2>Qué hace falta para arrancar</h2></div>
+    <ul class="plain" style="max-width:68ch">
+      <li><strong>Cuenta y pixel de TikTok.</strong> Es el segundo canal del plan y hoy no
+        existe. Montarlo y dejarlo midiendo es lo primero.</li>
+      <li><strong>Demand Gen y YouTube</strong> dentro de la cuenta de Google que ya opera, con
+        sus audiencias y conversiones heredadas.</li>
+      <li><strong>Trabajo de posición en búsqueda.</strong> Es la palanca de mayor retorno del
+        plan y no depende de presupuesto. Empieza ya, no en enero.</li>
+      <li><strong>Producción de creativos nativos para TikTok.</strong> Reciclar las piezas de
+        Meta es la forma más común de quemar el presupuesto de prueba.</li>
+      <li><strong>Decidir de dónde sale el margen.</strong> Con el techo en 1.080 y la meta en
+        1.000, hay que elegir entre subir el techo de Meta con más creatividad, rehabilitar
+        Performance Max, o fijar la meta en el rango de 850 a 900 que los cinco canales
+        entregan con holgura.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>ALMI Financiera · Plan de medios 2027 · solo medios pagados</span>
+    <span>Elasticidad y costos medidos del 9 de junio al 11 de noviembre de 2026</span>
+  </div>
+</footer>

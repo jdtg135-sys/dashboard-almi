@@ -1,0 +1,400 @@
+<title>Medir carga de documentos</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;600;700&family=Figtree:wght@400;500;600&display=swap">
+
+<style>
+:root{
+  --navy:#051B3E; --cyan:#29C7F8; --ink:#0B2038; --ink-2:#44617D; --ink-3:#7A93AC;
+  --bg:#FFFFFF; --surface:#F2F7FC; --line:#DCE6F0; --alert:#C0462A; --ok:#1C7F5E;
+  --code:#F5F8FC;
+  --ff-head:"Host Grotesk","Segoe UI",system-ui,sans-serif;
+  --ff-body:"Figtree","Segoe UI",system-ui,sans-serif;
+  --ff-mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --navy:#09244C; --cyan:#45CEFA; --ink:#E8F0F8; --ink-2:#A3B8CD; --ink-3:#73889E;
+    --bg:#050E1C; --surface:#0C1B30; --line:#1B3150; --alert:#E4785A; --ok:#4FBF97;
+    --code:#0A1727; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --navy:#09244C; --cyan:#45CEFA; --ink:#E8F0F8; --ink-2:#A3B8CD; --ink-3:#73889E;
+  --bg:#050E1C; --surface:#0C1B30; --line:#1B3150; --alert:#E4785A; --ok:#4FBF97;
+  --code:#0A1727; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ff-body);
+     font-size:16px;line-height:1.68;-webkit-font-smoothing:antialiased}
+.wrap{max-width:880px;margin-inline:auto;
+      padding-left:max(16px,env(safe-area-inset-left,0px));
+      padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--ff-head);text-wrap:balance;margin:0}
+p{margin:0}
+strong{font-weight:600}
+code{font-family:var(--ff-mono);font-size:.87em;background:var(--code);
+     border:1px solid var(--line);border-radius:4px;padding:.08em .36em;word-break:break-word}
+
+.hero{background:var(--navy)}
+.hero .wrap{padding-block:52px 42px;display:flex;flex-direction:column;gap:18px}
+.eyebrow{font-family:var(--ff-head);font-size:12px;font-weight:700;letter-spacing:.17em;
+         text-transform:uppercase;color:var(--cyan)}
+.hero h1{font-size:clamp(30px,5.6vw,44px);line-height:1.09;font-weight:700;color:#fff}
+.hero .lede{max-width:64ch;color:#C2D5E6;font-size:17px}
+.meta{display:flex;flex-wrap:wrap;gap:8px 10px;padding-top:6px}
+.meta span{font-family:var(--ff-head);font-size:11.5px;font-weight:500;color:#C2D5E6;
+           border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:4px 11px}
+
+section{border-top:1px solid var(--line)}
+section>.wrap{padding-block:42px}
+.shead{display:flex;gap:14px;align-items:baseline;margin-bottom:10px}
+.snum{font-family:var(--ff-head);font-weight:700;font-size:12.5px;color:var(--cyan);
+      padding-top:6px;flex:none}
+.shead h2{font-size:clamp(21px,3.4vw,28px);font-weight:700;line-height:1.2}
+.dek{color:var(--ink-2);max-width:66ch;margin:0 0 22px 34px}
+@media (max-width:560px){.dek{margin-left:0}}
+.stack{display:flex;flex-direction:column;gap:15px;max-width:68ch}
+
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin-block:6px 20px}
+table{border-collapse:collapse;width:100%;min-width:500px;font-size:14.5px}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{font-family:var(--ff-head);font-size:11px;font-weight:700;letter-spacing:.09em;
+         text-transform:uppercase;color:var(--ink-3);background:var(--surface)}
+tr:last-child td{border-bottom:0}
+
+/* Requisitos */
+.rf{border:1px solid var(--line);border-radius:10px;padding:14px 17px;margin-bottom:11px;
+    display:grid;grid-template-columns:62px minmax(0,1fr);gap:14px;align-items:start}
+@media (max-width:560px){.rf{grid-template-columns:1fr;gap:6px}}
+.rf .id{font-family:var(--ff-head);font-weight:700;font-size:13px;color:var(--cyan);padding-top:2px}
+.rf .tx{min-width:0;font-size:14.8px}
+.rf .tx em{font-style:normal;font-weight:600;color:var(--ink)}
+.rf .prueba{display:block;margin-top:9px;padding-top:9px;border-top:1px dashed var(--line);
+            font-size:13px;color:var(--ink-2)}
+.rf .prueba b{font-family:var(--ff-head);font-size:10.5px;font-weight:700;letter-spacing:.1em;
+              text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:2px}
+.rf.prereq{border-left:4px solid var(--alert)}
+
+.note{background:var(--surface);border-left:4px solid var(--cyan);
+      border-radius:0 12px 12px 0;padding:16px 20px;margin-block:4px 20px}
+.note.warn{border-left-color:var(--alert)}
+.note .tag{display:block;font-family:var(--ff-head);font-size:10.5px;font-weight:700;
+           letter-spacing:.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:5px}
+.note.warn .tag{color:var(--alert)}
+.note p+p{margin-top:9px}
+
+ul.plain{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:9px}
+ul.plain li::marker{color:var(--cyan)}
+ul.duda{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+ul.duda li{border:1px solid var(--line);border-left:4px solid var(--alert);
+           border-radius:0 10px 10px 0;padding:13px 17px;font-size:14.5px}
+ul.duda .q{font-family:var(--ff-head);font-weight:700;display:block;margin-bottom:4px}
+
+.flujo{display:flex;flex-direction:column;gap:3px;margin-block:6px 20px}
+.fp{display:grid;grid-template-columns:168px minmax(0,1fr);gap:12px;align-items:baseline;
+    padding:9px 0;border-bottom:1px solid var(--line);font-size:14px}
+@media (max-width:560px){.fp{grid-template-columns:1fr;gap:2px}}
+.fp:last-child{border-bottom:0}
+.fp .et{font-family:var(--ff-head);font-weight:600;font-size:13.5px}
+.fp .d{color:var(--ink-2);min-width:0}
+.fp.mide{background:color-mix(in srgb,var(--cyan) 8%,transparent);
+         border-radius:8px;padding-inline:12px}
+
+footer{background:var(--navy);color:#90AECB}
+footer .wrap{padding-block:26px;font-size:12.5px;display:flex;flex-wrap:wrap;gap:6px 20px}
+</style>
+
+<div class="hero">
+  <div class="wrap">
+    <p class="eyebrow">ALMI Financiera · Spec 001 · Borrador</p>
+    <h1>Medir la carga y la firma de documentos</h1>
+    <p class="lede">Hoy la solicitud se mide y lo que pasa después no. Esta spec define qué
+      debe emitir el sistema para cerrar ese tramo, y cómo se comprueba cada requisito.</p>
+    <div class="meta">
+      <span>Estado: borrador</span>
+      <span>Implementa: desarrollo de ALMI</span>
+      <span>20 de noviembre de 2026</span>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">01</div><h2>Contexto y objetivo</h2></div>
+    <div class="stack">
+      <p>El cotizador mide hasta la solicitud creada. A partir de ahí la persona pasa a
+        <code>admin.almifinanciera.com</code>, carga documentos y los firma, y nada de eso
+        llega a las plataformas de pauta ni a GA4.</p>
+      <p>El costo de no medirlo es concreto: del 1 al 10 de noviembre hubo <strong>2.424
+        solicitudes y 1.246 recepciones de documentos</strong>. Casi la mitad de la gente que
+        ya pagamos se cae en un tramo que no vemos, no podemos segmentar y no podemos
+        optimizar.</p>
+      <p><strong>Objetivo:</strong> que la carga y la firma de documentos lleguen a Meta, a
+        Google Ads y a GA4 como eventos atribuibles a la campaña que originó la solicitud.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">02</div><h2>El flujo real, verificado</h2></div>
+    <p class="dek">Tomado del código de la plataforma el 20 de noviembre. Las dos filas
+      resaltadas son las que hay que medir.</p>
+
+    <div class="flujo">
+      <div class="fp"><span class="et">Solicitud creada</span><span class="d">Fin del cotizador. Hoy se mide como <code>Purchase</code> en el pixel.</span></div>
+      <div class="fp"><span class="et">Entrega a la plataforma</span><span class="d">La persona recibe un enlace <code>admin.almifinanciera.com/upload-company-working-documents/&lt;uuid&gt;</code></span></div>
+      <div class="fp"><span class="et">Documentos requeridos</span><span class="d"><code>GET /loan-request/required-company-working-documents/{id}</code> — puede venir vacío</span></div>
+      <div class="fp mide"><span class="et">Carga de documentos</span><span class="d"><code>PUT /loan-request/upload-company-working-documents/{id}</code> y <code>manage-company-working-documents/{id}</code> · <strong>primer hito a medir</strong></span></div>
+      <div class="fp"><span class="et">Invitación a firmar</span><span class="d"><code>/electronic-signature/documents/invite-to-sign/{id}</code></span></div>
+      <div class="fp mide"><span class="et">Firma completa</span><span class="d"><code>/electronic-signature/documents/sign/{id}</code> y la bandera <code>areAllDocumentsSigned</code> · <strong>segundo hito a medir</strong></span></div>
+      <div class="fp"><span class="et">Desembolso</span><span class="d">Fuera del alcance de esta spec</span></div>
+    </div>
+
+    <div class="note">
+      <span class="tag">Tres hechos que condicionan el diseño</span>
+      <p><strong>El plazo es de 20 días.</strong> La carga casi nunca ocurre en la misma
+        sesión y muchas veces no ocurre en el mismo dispositivo. Un evento disparado solo
+        desde el navegador perdería la mayoría, y por eso el evento principal tiene que salir
+        del servidor.</p>
+      <p><strong>Hay empresas que no piden documentos.</strong> El código contiene el texto
+        «No se requiere ningún documento para esta empresa». Contarlas como carga completada
+        inflaría la métrica; ignorarlas la hundiría.</p>
+      <p><strong>Todo está bajo el mismo dominio raíz</strong> (<code>almifinanciera.com</code>),
+        así que GA4 puede seguir a la misma persona entre cotizador y plataforma sin
+        configuración de dominios cruzados.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">03</div><h2>Historias de usuario</h2></div>
+    <ul class="plain" style="max-width:68ch">
+      <li><strong>HU-1.</strong> Como responsable de pauta, quiero que la carga de documentos
+        llegue como conversión atribuida, para poder optimizar las campañas hacia la gente
+        que completa y no solo hacia la que solicita.</li>
+      <li><strong>HU-2.</strong> Como responsable de pauta, quiero un público de «solicitó y
+        no cargó», para dirigirle recordatorios dentro de los 20 días.</li>
+      <li><strong>HU-3.</strong> Como dirección, quiero ver en el tablero cuánta gente se cae
+        entre la solicitud y la firma, para saber si el problema está en la pauta o en el
+        proceso.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">04</div><h2>Requisitos funcionales</h2></div>
+    <p class="dek">Una frase, un comportamiento, una prueba. El prerrequisito en rojo
+      condiciona a todos los demás.</p>
+
+    <div class="rf prereq">
+      <div class="id">RF-0</div>
+      <div class="tx"><em>CUANDO</em> el cotizador envía <code>POST /api/loan-request/</code>,
+        <em>EL SISTEMA</em> guarda en la solicitud el objeto <code>attribution</code> con los
+        nueve campos, incluidos <code>gclid</code> y <code>fbclid</code>.
+        <span class="prueba"><b>Cómo se comprueba</b> Crear una solicitud entrando con
+          <code>?gclid=PRUEBA123</code> y verificar que el registro guardado contiene ese
+          valor. Sin esto, ningún evento posterior se puede atribuir a una campaña.</span></div>
+    </div>
+
+    <div class="rf">
+      <div class="id">RF-1</div>
+      <div class="tx"><em>CUANDO</em> una solicitud completa la carga de todos los documentos
+        requeridos, <em>EL SISTEMA</em> envía desde el servidor un evento
+        <code>DocumentsUploaded</code> a la API de conversiones de Meta y una conversión
+        equivalente a Google Ads.
+        <span class="prueba"><b>Cómo se comprueba</b> Completar una carga de prueba y ver el
+          evento en el Administrador de eventos de Meta en menos de 15 minutos.</span></div>
+    </div>
+
+    <div class="rf">
+      <div class="id">RF-2</div>
+      <div class="tx"><em>CUANDO</em> la bandera <code>areAllDocumentsSigned</code> pasa a
+        verdadera, <em>EL SISTEMA</em> envía un evento <code>DocumentsSigned</code> por la
+        misma vía.
+        <span class="prueba"><b>Cómo se comprueba</b> Firmar una solicitud de prueba y ver el
+          evento, distinto del anterior, en el Administrador de eventos.</span></div>
+    </div>
+
+    <div class="rf">
+      <div class="id">RF-3</div>
+      <div class="tx"><em>EL SISTEMA</em> incluye en cada evento el identificador de la
+        solicitud, el correo y el teléfono cifrados con SHA-256, y el <code>gclid</code> y
+        <code>fbclid</code> guardados en esa solicitud.
+        <span class="prueba"><b>Cómo se comprueba</b> Inspeccionar la carga enviada: ningún
+          dato personal viaja en claro y la tasa de coincidencia que reporta Meta supera el
+          70%.</span></div>
+    </div>
+
+    <div class="rf">
+      <div class="id">RF-4</div>
+      <div class="tx"><em>SI</em> la empresa de la solicitud no requiere ningún documento,
+        <em>ENTONCES EL SISTEMA</em> no envía <code>DocumentsUploaded</code> y sí envía
+        <code>DocumentsSigned</code> cuando corresponda.
+        <span class="prueba"><b>Cómo se comprueba</b> Tramitar una solicitud de una empresa
+          sin documentos requeridos y verificar que solo llega el segundo evento.</span></div>
+    </div>
+
+    <div class="rf">
+      <div class="id">RF-5</div>
+      <div class="tx"><em>EL SISTEMA</em> envía cada evento una sola vez por solicitud, usando
+        el identificador de la solicitud como clave de deduplicación.
+        <span class="prueba"><b>Cómo se comprueba</b> Cargar documentos, corregir uno y volver
+          a cargar: en el Administrador de eventos debe aparecer una sola vez.</span></div>
+    </div>
+
+    <div class="rf">
+      <div class="id">RF-6</div>
+      <div class="tx"><em>SI</em> el envío a Meta o a Google falla, <em>ENTONCES EL SISTEMA</em>
+        lo reintenta hasta tres veces con espera creciente y, si sigue fallando, lo deja
+        registrado con el identificador de la solicitud y el error.
+        <span class="prueba"><b>Cómo se comprueba</b> Forzar un fallo con una credencial
+          inválida y verificar los tres reintentos y el registro.</span></div>
+    </div>
+
+    <div class="rf">
+      <div class="id">RF-7</div>
+      <div class="tx"><em>CUANDO</em> el navegador recibe respuesta exitosa de la carga,
+        <em>EL SISTEMA</em> envía a la capa de datos un evento
+        <code>documentos_cargados</code> con el identificador de la solicitud.
+        <span class="prueba"><b>Cómo se comprueba</b> Con la vista previa de GTM abierta,
+          completar una carga y ver el evento en la capa de datos.</span></div>
+    </div>
+
+    <div class="rf">
+      <div class="id">RF-8</div>
+      <div class="tx"><em>EL SISTEMA</em> carga el contenedor <code>GTM-5GSLND8N</code> en
+        todas las páginas de <code>admin.almifinanciera.com</code>.
+        <span class="prueba"><b>Cómo se comprueba</b> Abrir la plataforma y confirmar que
+          <code>google_tag_manager</code> contiene ese contenedor.</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">05</div><h2>No funcionales y casos límite</h2></div>
+
+    <div class="stack" style="margin-bottom:22px">
+      <p><strong>Privacidad.</strong> Correo y teléfono se normalizan y se cifran con SHA-256
+        antes de salir del servidor. Nunca viajan en claro, ni siquiera a Meta o Google.</p>
+      <p><strong>Oportunidad.</strong> El evento sale dentro de los 15 minutos siguientes al
+        hecho. No se requiere tiempo real.</p>
+      <p><strong>Independencia.</strong> Un fallo del envío no puede bloquear ni demorar la
+        carga de documentos de la persona.</p>
+    </div>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>Caso límite</th><th>Qué debe pasar</th></tr></thead>
+        <tbody>
+          <tr><td>La empresa no requiere documentos</td><td>No se envía el evento de carga. Ver RF-4.</td></tr>
+          <tr><td>Carga parcial: sube dos de tres documentos</td><td>No se envía el evento. Solo cuenta cuando están todos los requeridos.</td></tr>
+          <tr><td>Rechazan un documento y lo vuelve a subir</td><td>El evento ya se envió. No se envía otro. Ver RF-5.</td></tr>
+          <tr><td>Carga desde otro dispositivo, 15 días después</td><td>Funciona igual: el evento sale del servidor, no del navegador.</td></tr>
+          <tr><td>La solicitud no tiene gclid ni fbclid</td><td>El evento se envía igual con el correo y el teléfono cifrados, y queda sin identificador de clic.</td></tr>
+          <tr><td>Firma sin que hubiera documentos que cargar</td><td>Llega solo <code>DocumentsSigned</code>.</td></tr>
+          <tr><td>La persona abandona y vence el plazo de 20 días</td><td>No se envía ningún evento. Es justamente la población del público de recordatorio.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">06</div><h2>Fuera de alcance</h2></div>
+    <ul class="plain" style="max-width:68ch">
+      <li>Medir el desembolso. Es el hito final del negocio y merece su propia spec.</li>
+      <li>El montaje de la campaña que optimizará por carga de documentos. La decisión ya está
+        tomada (ver sección 09), pero depende de que esta spec esté implementada y de la
+        consulta de rezago. Va en una spec aparte.</li>
+      <li>El entorno de pruebas <code>admin-test.almi.dev</code>.</li>
+      <li>Cualquier cambio en la interfaz de carga de documentos.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">07</div><h2>Criterios de finalización</h2></div>
+    <ul class="plain" style="max-width:68ch">
+      <li>Los ocho requisitos comprobados con su prueba, incluido el RF-0.</li>
+      <li>Una solicitud de prueba recorrida de punta a punta, con sus dos eventos visibles en
+        Meta y en Google Ads, atribuidos a una campaña.</li>
+      <li>El público «solicitó y no cargó» creado en Meta y con volumen mayor que cero.</li>
+      <li>Los dos hitos incorporados al embudo del tablero.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">08</div><h2>Dudas abiertas</h2></div>
+    <p class="dek">Cada una cambia el trabajo. Van dirigidas a quien decide, no a desarrollo.</p>
+    <ul class="duda">
+      <li><span class="q">¿Cómo se reparte el rezago entre la solicitud y la carga?</span>
+        <strong>Es la consulta que decide si la campaña de la sección 09 es viable.</strong>
+        Se necesita el conteo de solicitudes por tramo de días hasta la carga: mismo día,
+        1 a 3, 4 a 7, 8 a 14, y 15 a 20. Una consulta a la base de datos.</li>
+      <li><span class="q">¿Existe en el backend un estado explícito de «documentos completos»?</span>
+        Si no existe, hay que derivarlo comparando los documentos requeridos con los cargados,
+        y eso cambia el tamaño del trabajo.</li>
+      <li><span class="q">¿La página de carga sin inicio de sesión es intencional?</span>
+        Verificado el 20 de noviembre: el enlace con el identificador abre sin autenticación
+        desde cualquier navegador. Es una decisión de producto y seguridad que no me
+        corresponde, pero no puedo dejar de señalarla en un flujo con documentos de identidad.</li>
+      <li><span class="q">¿Quién implementa el envío desde el servidor?</span>
+        Puede ir en el servicio de préstamos o en una pieza aparte. Afecta plazos, no alcance.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="shead"><div class="snum">09</div><h2>Decisión: campaña que optimiza por carga</h2></div>
+    <p class="dek">Tomada el 20 de noviembre de 2026. Se monta una campaña nueva que optimiza
+      por <code>DocumentsUploaded</code> y las actuales siguen corriendo mientras aprende, para
+      no castigar el volumen. Lo que sigue son las condiciones para que funcione.</p>
+
+    <div class="note warn">
+      <span class="tag">El riesgo que puede hacerla inviable</span>
+      <p><strong>Meta atribuye como máximo 7 días después del clic.</strong> La persona tiene
+        20 días para cargar documentos. Las cargas que ocurran del día 8 en adelante no se
+        atribuyen a la campaña y no alimentan el aprendizaje: la campaña optimizaría solo
+        hacia quien carga rápido.</p>
+      <p>Por eso la consulta de rezago de la sección 08 va primero. Si la mayoría carga dentro
+        de los 7 días, el plan va tal cual. Si se reparte a lo largo de los 20, hay que
+        optimizar por un hito más temprano y dejar la carga como métrica de control.</p>
+    </div>
+
+    <div class="stack">
+      <p><strong>El orden es forzoso.</strong> No se puede optimizar por un evento que no
+        existe. Primero RF-0, luego los eventos corriendo y acumulando historial, y solo
+        entonces se crea la campaña.</p>
+      <p><strong>Piso de presupuesto.</strong> La campaña necesita unas 50 cargas semanales
+        para salir de aprendizaje. Con una tasa de carga cercana al 51% y la solicitud en unos
+        2.100, cada carga sale del orden de 4.100: el piso son unos <strong>30.000
+        diarios</strong> y lo razonable es arrancar en 50.000. Por debajo se queda aprendiendo
+        indefinidamente.</p>
+      <p><strong>Evitar la competencia entre campañas propias.</strong> La nueva y las actuales
+        hablarían a la misma gente en la misma subasta y se encarecerían entre sí. Hay que
+        excluir mutuamente los públicos o darle a la nueva un segmento propio.</p>
+      <p><strong>Qué se espera que pase.</strong> El volumen de solicitudes de esa campaña será
+        menor y su costo por solicitud más alto que el de las actuales. No es un fallo: está
+        comprando gente que completa en vez de gente que solicita. La comparación justa entre
+        las dos es el costo por documento cargado, no por solicitud.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span>ALMI Financiera · Spec 001 · Medición de documentos</span>
+    <span>Flujo verificado en producción el 20 de noviembre de 2026</span>
+  </div>
+</footer>
